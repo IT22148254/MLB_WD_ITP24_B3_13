@@ -30,55 +30,63 @@ router.route("/").get((req, res) => {
       res.status(200).json(products);
     })
     .catch((err) => {
-      res
-        .status(400)
-        .json({
-          err: `${err}Something went wrong while fetching all products`,
-        });
+      res.status(400).json({
+        message: `Something went wrong while fetching all products ${err}`,
+      });
     });
 });
 
-router.route("/:id").put((req, res) => {
-  const id = req.params.id;
-  const { Name, Price, Description } = req.body;
+router.route("/:id").put(async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { Name, Price, Description } = req.body;
 
-  Product.findByIdAndUpdate(id, { Name, Price, Description }, { new: true })
-    .then((result) => {
-      if (!result) {
-        res.status(404).json("Product not found");
-      }
+    const result = await Product.findByIdAndUpdate(
+      id,
+      { Name, Price, Description },
+      { new: true }
+    );
 
-      res.status(200).json("Product updated successfully");
-    })
-    .catch((err) => {
-      res.status(400).json(`${err} : Product update unsuccessful`);
-    });
+    if (!result) {
+      return res.status(404).json({message:"Product not found"});
+    }
+
+    return res.status(200).json({message:"Product updated successfully"});
+  } catch (error) {
+    return res.status(400).json({message:` Product update unsuccessful ${error}`});
+  }
 });
 
-router.route("/:id").delete((req, res) => {
-  const id = req.params.id;
-
-  Product.findByIdAndDelete(id)
-    .then((result) => {
-      if (!result) {
-        res.status(404).json("Product not found");
-      }
-      res.status(200).json("Prduct removed successfully");
-    })
-    .catch((err) => {
-      res.status(400).json(`${err} : Product removal unsuccessful`);
-    });
+router.route("/:id").delete(async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await Product.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    return res.status(200).json({ message: "Product removed successfully" });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: `product removal unsuccesfull ${error}` });
+  }
 });
 
 router.route("/get/:id").get(async (req, res) => {
-  let itemId = req.params.id;
-  const item = await Product.findById(itemId)
-    .then((item) => {
-      res.status(200).json({ message: " Data retreival successfull !!! ", item});
-    })
-    .catch((err) => {
-      res.status(400).json(`${err} : Data retreival unsuccessful !!! `);
-    });
+  try {
+    let itemId = req.params.id;
+    const item = await Product.findById(itemId);
+
+    if (!item) {
+      return res.status(404).json({ message: " Product not found " });
+    }
+
+    return res
+      .status(200)
+      .json({ message: " Data retreival successfull !!! ", Item: item });
+  } catch (error) {
+    return res.status(400).json({message:`Data retreival unsuccessful ${error} `});
+  }
 });
 
 module.exports = router;
