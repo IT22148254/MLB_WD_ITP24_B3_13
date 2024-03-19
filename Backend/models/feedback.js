@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const schema = mongoose.Schema();
+const schema = mongoose.Schema;
 
 const feedBackSchema = new schema({
   UserName: {
