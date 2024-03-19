@@ -24,6 +24,9 @@ connection.once("open", () => {
 const productRouter = require("./routs/products.js");
 app.use("/product", productRouter);
 
+const userRouter = require("./routs/users.js");
+app.use("/user",userRouter);
+
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);
 });
