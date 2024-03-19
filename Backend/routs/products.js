@@ -30,11 +30,9 @@ router.route("/").get((req, res) => {
       res.status(200).json(products);
     })
     .catch((err) => {
-      res
-        .status(400)
-        .json({
-          err: `${err}Something went wrong while fetching all products`,
-        });
+      res.status(400).json({
+        err: `${err}Something went wrong while fetching all products`,
+      });
     });
 });
 
@@ -74,7 +72,9 @@ router.route("/get/:id").get(async (req, res) => {
   let itemId = req.params.id;
   const item = await Product.findById(itemId)
     .then((item) => {
-      res.status(200).json({ message: " Data retreival successfull !!! ", item});
+      res
+        .status(200)
+        .json({ message: " Data retreival successfull !!! ", Item: item });
     })
     .catch((err) => {
       res.status(400).json(`${err} : Data retreival unsuccessful !!! `);

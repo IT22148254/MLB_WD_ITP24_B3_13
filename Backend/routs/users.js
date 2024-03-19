@@ -18,7 +18,32 @@ router.route("/add").post((req, res) => {
       res.status(200).json({ message: " User added successfully " });
     })
     .catch((err) => {
-      res.status(400).json({ message: " User adding unsuccessful !!! ", err });
+      res.status(400).json({ message: `User adding unsuccessful !!! ${err}` });
+    });
+});
+
+router.route("/").get((req, res) => {
+  User.find()
+    .then((users) => {
+      res.status(200).json(users);
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .json({ message: `Error while fetching all users ${err} ` });
+    });
+});
+
+router.route("/get/:id").get(async (req, res) => {
+  let userId = req.params.id;
+  const user = await User.findById(userId)
+    .then((user) => {
+      res
+        .status(200)
+        .json({ message: " User fetched successfully ", User: user });
+    })
+    .catch((err) => {
+      res.status(400).json({ message: ` User fetching unsuccessful ${err}` });
     });
 });
 
