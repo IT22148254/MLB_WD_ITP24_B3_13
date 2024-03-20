@@ -4,7 +4,9 @@
   "description": "Web store ",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "client": "npm start --prefix ../frontend",
+    "dev": "concurrently \"npm start\" \"npm run client\""
   },
   "author": "praboth",
   "license": "ISC",
@@ -15,6 +17,7 @@
     "mongoose": "^8.1.1"
   },
   "devDependencies": {
+    "concurrently": "^8.2.2",
     "nodemon": "^3.0.3"
   }
 }
