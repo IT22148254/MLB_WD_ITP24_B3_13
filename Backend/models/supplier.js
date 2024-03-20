@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
 const supplierSchema = new schema({
-    sName:{
+    Name:{
         type:String,
         required:true
     },
@@ -19,7 +19,7 @@ const supplierSchema = new schema({
         required:true
     },
     PurchasedAmnt:{
-        type:String,
+        type:Number,
         required:true
     }
 })

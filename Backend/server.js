@@ -33,6 +33,9 @@ app.use("/feedback", feedBackRouter);
 const packageRouter = require("./routs/packages.js");
 app.use("/package", packageRouter);
 
+const supplierRouter = require("./routs/suppliers.js");
+app.use("/supplier", supplierRouter);
+
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);
 });
