@@ -1,6 +1,6 @@
 const products = [
   {
-    _id: '1',
+    _id: '65fb70c04203dd0fd1ecd7c9',
     name: 'Fins',
     image: '/images/Fins.jfif',
     description:
@@ -15,7 +15,7 @@ const products = [
   {
     _id: '2',
     name: 'Pull Buoy',
-    image: '/images/pull buoy.jfif',
+    image: '/images/pullbuoy.jfif',
     description:
       'Introducing the iPhone 11 Pro. A transformative triple-camera system that adds tons of capability without complexity. An unprecedented leap in battery life',
     brand: 'Blue wave',
@@ -54,7 +54,7 @@ const products = [
   {
     _id: '5',
     name: 'Swim parachute',
-    image: '/images/Swim parachute.jfif',
+    image: '/images/Swimparachute.jfif',
     description:
       'Get a better handle on your games with this Logitech LIGHTSYNC gaming mouse. The six programmable buttons allow customization for a smooth playing experience',
     brand: 'Blue wave',
@@ -67,7 +67,7 @@ const products = [
   {
     _id: '6',
     name: 'Tempo trainer',
-    image: '/images/tempo trainer.jfif',
+    image: '/images/tempotrainer.jfif',
     description:
       'Meet Echo Dot - Our most popular smart speaker with a fabric design. It is our most compact smart speaker that fits perfectly into small space',
     brand: 'Blue wave',

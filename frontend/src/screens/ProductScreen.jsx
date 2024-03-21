@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {
@@ -10,15 +10,36 @@ import {
   Button,
   ListGroupItem,
 } from "react-bootstrap";
-import products from "../products";
+import axios from "axios";
 import Rating from "../content/rating";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
-  const product = products.find((p) => {
-    return p._id === productId;
-  });
+  const [product, setProduct] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
 
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        const { data } = await axios.get(`/product/get/${productId}`);
+        setProduct(data);
+        setLoading(false);
+      } catch (error) {
+        setError("Error fetching product data.");
+        setLoading(false);
+      }
+    };
+    fetchProduct();
+  }, [productId]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
@@ -66,7 +87,14 @@ const ProductScreen = () => {
                 </Row>
               </ListGroupItem>
               <ListGroupItem>
-                <Button className="btn-block" type="button" disabled = {product.countInStock === 0}> Add to cart</Button>
+                <Button
+                  className="btn-block"
+                  type="button"
+                  disabled={product.countInStock === 0}
+                >
+                  {" "}
+                  Add to cart
+                </Button>
               </ListGroupItem>
             </ListGroup>
           </Card>

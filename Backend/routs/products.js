@@ -2,14 +2,19 @@ const router = require("express").Router();
 let Product = require("../models/product");
 
 router.route("/add").post((req, res) => {
-  const { Name, Price, Description, Stock, Sold } = req.body;
+  const { name,image, price, description,brand,category, countInStock,numReviews,rating,reviews } = req.body;
 
   const newProduct = new Product({
-    Name,
-    Price,
-    Description,
-    Stock,
-    Sold,
+    name,
+    price,
+    description,
+    countInStock,
+    image,
+    brand,
+    category,
+    numReviews,
+    rating,
+    reviews
   });
 
   newProduct
@@ -39,11 +44,11 @@ router.route("/").get((req, res) => {
 router.route("/:id").put(async (req, res) => {
   try {
     const id = req.params.id;
-    const { Name, Price, Description } = req.body;
+    const { name,image, price, description,brand,category, countInStock,numReviews,rating,reviews } = req.body;
 
     const result = await Product.findByIdAndUpdate(
       id,
-      { Name, Price, Description },
+      { name,image, price, description,brand,category, countInStock,numReviews,rating,reviews },
       { new: true }
     );
 
@@ -83,7 +88,7 @@ router.route("/get/:id").get(async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: " Data retreival successfull !!! ", Item: item });
+      .json(item);
   } catch (error) {
     return res.status(400).json({message:`Data retreival unsuccessful ${error} `});
   }
