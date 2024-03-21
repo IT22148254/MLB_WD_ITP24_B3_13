@@ -16,30 +16,17 @@ import Rating from "../content/rating";
 const ProductScreen = () => {
   const { id: productId } = useParams();
   const [product, setProduct] = useState({});
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+
 
   useEffect(() => {
     const fetchProduct = async () => {
-      try {
         const { data } = await axios.get(`/product/get/${productId}`);
         setProduct(data);
-        setLoading(false);
-      } catch (error) {
-        setError("Error fetching product data.");
-        setLoading(false);
-      }
     };
     fetchProduct();
   }, [productId]);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
-  }
+  
   return (
     <>
       <Link className="btn btn-light my-3" to="/">
