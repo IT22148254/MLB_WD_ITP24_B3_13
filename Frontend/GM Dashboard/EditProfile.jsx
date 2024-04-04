@@ -10,7 +10,7 @@ const EditProfile = () => {
                 <div className="leftImage">
                         <img/>{/*Profie Img - add this*/}
                     </div>
-                    <div className="title">Edit Profile</div>
+                    <div className="title">Edit Profiles</div>
                     <form method="POST" className="add-promo" onSubmit={handleSubmit}>
                         <div className="add-promo-row">
                             <input
