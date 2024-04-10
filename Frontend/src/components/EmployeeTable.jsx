@@ -22,10 +22,10 @@ const EmployeeTable = () => {
     fetchEmployees();
   }, []);
 
-  useEffect(() => {
-    console.log("employees: ", employees);
-    // setData(employees);
-  }, [employees]);
+  // useEffect(() => {
+  //   console.log("employees: ", employees);
+  //   // setData(employees);
+  // }, [employees]);
 
   const handleEdit = (id) => {
     console.log(`Edit employee with id: ${id}`);
@@ -83,7 +83,7 @@ const EmployeeTable = () => {
         <div className="border-2 border-black p-3">NIC</div>
         <div className="border-2 border-black p-3">Gender</div>
         <div className="border-2 border-black p-3">Contact No</div>
-        <div className="border-2 bordnicer-black p-3">Email</div>
+        <div className="border-2 border-black p-3">Email</div>
         <div className="border-2 border-black p-3">Address</div>
         <div className="border-2 border-black p-3">Edit</div>
         <div className="border-2 border-black p-3">Delete</div>

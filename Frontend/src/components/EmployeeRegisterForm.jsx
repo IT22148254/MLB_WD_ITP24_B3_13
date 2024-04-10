@@ -32,7 +32,6 @@ const EmployeeRegisterForm = () => {
   };
 
   const handleDobChange = (value) => {
-    console.log(value);
     setDob(value);
   };
 
@@ -170,7 +169,10 @@ const EmployeeRegisterForm = () => {
       <div className={inputContainerStyle + " relative select-none"}>
         <p
           onClick={() => setIsDobSelected(!isDobSelected)}
-          className="flex items-center w-full bg-transparent h-14 rounded-xl text-black font-semibold text-lg pl-4"
+          className={
+            "flex items-center w-full bg-transparent h-14 rounded-xl text-black text-xl pl-5 " +
+            (dob ? "font-normal" : "font-semibold ")
+          }
         >
           {dob === null
             ? "Date of Birth"
