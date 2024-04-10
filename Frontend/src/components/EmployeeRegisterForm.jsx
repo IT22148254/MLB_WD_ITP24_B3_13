@@ -17,6 +17,15 @@ const EmployeeRegisterForm = () => {
   const [address, setAddress] = useState("");
   const [qualifications, setQualifications] = useState("");
 
+  const [fullNameError, setFullNameError] = useState("");
+  const [nicError, setNicError] = useState("");
+  const [genderError, setGenderError] = useState("");
+  const [dobError, setDobError] = useState("");
+  const [contactNoError, setContactNoError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [addressError, setAddressError] = useState("");
+  const [qualificationsError, setQualificationsError] = useState("");
+
   const [isDobSelected, setIsDobSelected] = useState(false);
 
   const handleFullNameChange = (e) => {
@@ -131,101 +140,160 @@ const EmployeeRegisterForm = () => {
     }
   };
 
-  const inputContainerStyle = "bg-white/70 h-14 rounded-xl";
+  const inputContainerStyle = "bg-white/70 rounded-xl";
   const inputStyle =
     "w-full bg-transparent h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl";
 
   return (
-    <div className="flex flex-col gap-y-4">
-      <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Fullname"
-          value={fullName}
-          onChange={handleFullNameChange}
-        />
+    <div
+      className="flex flex-col gap-y-4 overflow-auto max-h-[700px] p-5"
+      style={{
+        scrollbarWidth: "none",
+        msOverflowStyle: "none",
+      }}
+    >
+      <div className="flex flex-col gap-y-1">
+        <div className={inputContainerStyle}>
+          <input
+            className={
+              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+            }
+            placeholder="Fullname *"
+            value={fullName}
+            onChange={handleFullNameChange}
+          />
+        </div>
+        <p className="text-red-800 font-bold text-lg">Please enter a name</p>
       </div>
-      <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="NIC"
-          value={nic}
-          onChange={handleNicChange}
-        />
+      <div className="flex flex-col gap-y-1">
+        <div className={inputContainerStyle}>
+          <input
+            className={
+              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+            }
+            placeholder="NIC *"
+            value={nic}
+            onChange={handleNicChange}
+          />
+        </div>
+        <p className="text-red-800 font-bold text-lg">Please enter a NIC</p>
       </div>
-      <div className={inputContainerStyle}>
-        <select
-          className="w-full bg-transparent h-14 rounded-xl text-black font-semibold text-lg pl-4"
-          value={gender}
-          onChange={handleGenderChange}
-        >
-          <option value="" disabled>
-            Select Gender
-          </option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
-        </select>
+      <div className="flex flex-col gap-y-1">
+        <div className={inputContainerStyle}>
+          <select
+            className={
+              "w-full bg-transparent h-14 rounded-xl text-black font-semibold text-lg pl-4 " +
+              "outline outline-4 outline-red-800 outline-offset-1"
+            }
+            value={gender}
+            onChange={handleGenderChange}
+          >
+            <option value="" disabled>
+              Select Gender *
+            </option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+          </select>
+        </div>
+        <p className="text-red-800 font-bold text-lg">Please Select a Gender</p>
       </div>
-      <div className={inputContainerStyle + " relative select-none"}>
-        <p
-          onClick={() => setIsDobSelected(!isDobSelected)}
-          className={
-            "flex items-center w-full bg-transparent h-14 rounded-xl text-black text-xl pl-5 " +
-            (dob ? "font-normal" : "font-semibold ")
-          }
-        >
-          {dob === null
-            ? "Date of Birth"
-            : `${dob.getFullYear()} - ${
-                dob.getMonth() < 10
-                  ? "0" + dob.getMonth().toString()
-                  : dob.getMonth()
-              } - ${
-                dob.getDate() < 10
-                  ? "0" + dob.getDate().toString()
-                  : dob.getDate()
-              }`}
-        </p>
+      <div className="flex flex-col gap-y-1">
         <div
           className={
-            "absolute z-10 top-16 right-0 transition-opacity duration-150 ease-in-out  " +
-            (isDobSelected ? "opacity-100" : "opacity-0")
+            inputContainerStyle +
+            " relative select-none outline outline-4 outline-red-800 outline-offset-1"
           }
         >
-          <Calendar onChange={handleDobChange} value={dob} />
+          <p
+            onClick={() => setIsDobSelected(!isDobSelected)}
+            className={
+              "flex items-center w-full bg-transparent h-14 rounded-xl text-black text-xl pl-5 " +
+              (dob ? "font-normal" : "font-semibold ")
+            }
+          >
+            {dob === null
+              ? "Date of Birth *"
+              : `${dob.getFullYear()} - ${
+                  dob.getMonth() < 10
+                    ? "0" + dob.getMonth().toString()
+                    : dob.getMonth()
+                } - ${
+                  dob.getDate() < 10
+                    ? "0" + dob.getDate().toString()
+                    : dob.getDate()
+                }`}
+          </p>
+
+          <div
+            className={
+              "absolute z-10 top-16 right-0 transition-opacity duration-150 ease-in-out  " +
+              (isDobSelected ? "opacity-100" : "opacity-0")
+            }
+          >
+            <Calendar onChange={handleDobChange} value={dob} />
+          </div>
         </div>
+        <p className="text-red-800 font-bold text-lg">
+          Please Select Date of Birth
+        </p>
       </div>
-      <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Contact Number"
-          value={contactNo}
-          onChange={handleContactNoChange}
-        />
+      <div className="flex flex-col gap-y-1">
+        <div className={inputContainerStyle}>
+          <input
+            className={
+              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+            }
+            placeholder="Contact Number *"
+            value={contactNo}
+            onChange={handleContactNoChange}
+          />
+        </div>
+        <p className="text-red-800 font-bold text-lg">
+          Please enter a contact number
+        </p>
       </div>
-      <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Email"
-          value={email}
-          onChange={handleEmailChange}
-        />
+      <div className="flex flex-col gap-y-1">
+        <div className={inputContainerStyle}>
+          <input
+            className={
+              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+            }
+            placeholder="Email *"
+            value={email}
+            onChange={handleEmailChange}
+          />
+        </div>
+        <p className="text-red-800 font-bold text-lg">Please enter an email</p>
       </div>
-      <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Address"
-          value={address}
-          onChange={handleAddressChange}
-        />
+      <div className="flex flex-col gap-y-1">
+        <div className={inputContainerStyle}>
+          <input
+            className={
+              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+            }
+            placeholder="Address *"
+            value={address}
+            onChange={handleAddressChange}
+          />
+        </div>
+        <p className="text-red-800 font-bold text-lg">
+          Please enter an address
+        </p>
       </div>
-      <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Qualifications"
-          value={qualifications}
-          onChange={handleQualificationsChange}
-        />
+      <div className="flex flex-col gap-y-1">
+        <div className={inputContainerStyle}>
+          <input
+            className={
+              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+            }
+            placeholder="Qualifications *"
+            value={qualifications}
+            onChange={handleQualificationsChange}
+          />
+        </div>
+        <p className="text-red-800 font-bold text-lg">
+          Please enter qualifications
+        </p>
       </div>
       <div className="flex justify-between mt-5">
         <button

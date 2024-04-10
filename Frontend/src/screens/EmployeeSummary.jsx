@@ -46,7 +46,7 @@ const EmployeeSummary = () => {
           <div className="h-9 bg-white/70 w-1/2 rounded-lg">
             <input
               placeholder="Search (Name, NIC)"
-              className="bg-transparent pl-4 placeholder:text-gray-600 w-full h-full border-none active:border-none focus:border-none"
+              className="bg-transparent pl-4 placeholder:text-gray-600 w-full h-full border-none active:border-none focus:border-none focus:outline-none"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
             />
