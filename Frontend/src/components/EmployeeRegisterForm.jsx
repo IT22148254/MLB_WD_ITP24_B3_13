@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Calendar from "react-calendar";
+import "./calendar.css";
 
 const EmployeeRegisterForm = () => {
   let navigate = useNavigate();
@@ -9,11 +11,13 @@ const EmployeeRegisterForm = () => {
   const [fullName, setFullName] = useState("");
   const [nic, setNic] = useState("");
   const [gender, setGender] = useState("");
-  const [dob, setDob] = useState("");
+  const [dob, setDob] = useState(null);
   const [contactNo, setContactNo] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
   const [qualifications, setQualifications] = useState("");
+
+  const [isDobSelected, setIsDobSelected] = useState(false);
 
   const handleFullNameChange = (e) => {
     setFullName(e.target.value);
@@ -27,8 +31,9 @@ const EmployeeRegisterForm = () => {
     setGender(e.target.value);
   };
 
-  const handleDobChange = (e) => {
-    setDob(e.target.value);
+  const handleDobChange = (value) => {
+    console.log(value);
+    setDob(value);
   };
 
   const handleContactNoChange = (e) => {
@@ -150,20 +155,43 @@ const EmployeeRegisterForm = () => {
         />
       </div>
       <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Gender"
+        <select
+          className="w-full bg-transparent h-14 rounded-xl text-black font-semibold text-lg pl-4"
           value={gender}
           onChange={handleGenderChange}
-        />
+        >
+          <option value="" disabled>
+            Select Gender
+          </option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
       </div>
-      <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Date of Birth"
-          value={dob}
-          onChange={handleDobChange}
-        />
+      <div className={inputContainerStyle + " relative select-none"}>
+        <p
+          onClick={() => setIsDobSelected(!isDobSelected)}
+          className="flex items-center w-full bg-transparent h-14 rounded-xl text-black font-semibold text-lg pl-4"
+        >
+          {dob === null
+            ? "Date of Birth"
+            : `${dob.getFullYear()} - ${
+                dob.getMonth() < 10
+                  ? "0" + dob.getMonth().toString()
+                  : dob.getMonth()
+              } - ${
+                dob.getDate() < 10
+                  ? "0" + dob.getDate().toString()
+                  : dob.getDate()
+              }`}
+        </p>
+        <div
+          className={
+            "absolute z-10 top-16 right-0 transition-opacity duration-150 ease-in-out  " +
+            (isDobSelected ? "opacity-100" : "opacity-0")
+          }
+        >
+          <Calendar onChange={handleDobChange} value={dob} />
+        </div>
       </div>
       <div className={inputContainerStyle}>
         <input
