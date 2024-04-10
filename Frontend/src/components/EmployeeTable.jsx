@@ -3,29 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-const EmployeeTable = () => {
+const EmployeeTable = ({ employees }) => {
   let navigate = useNavigate();
-
-  const [employees, setEmployees] = useState([]);
-
-  useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/employee");
-        // console.log(response.data);
-        setEmployees(response.data);
-      } catch (error) {
-        console.error("Failed to fetch employees:", error);
-      }
-    };
-
-    fetchEmployees();
-  }, []);
-
-  // useEffect(() => {
-  //   console.log("employees: ", employees);
-  //   // setData(employees);
-  // }, [employees]);
 
   const handleEdit = (id) => {
     console.log(`Edit employee with id: ${id}`);
