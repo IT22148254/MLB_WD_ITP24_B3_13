@@ -30,39 +30,79 @@ const EmployeeRegisterForm = () => {
 
   const handleFullNameChange = (e) => {
     setFullName(e.target.value);
+    setFullNameError("");
   };
 
   const handleNicChange = (e) => {
     setNic(e.target.value);
+    setNicError("");
   };
 
   const handleGenderChange = (e) => {
     setGender(e.target.value);
+    setGenderError("");
   };
 
   const handleDobChange = (value) => {
     setDob(value);
+    setDobError("");
   };
 
   const handleContactNoChange = (e) => {
     setContactNo(e.target.value);
+    setContactNoError("");
   };
 
   const handleEmailChange = (e) => {
     setEmail(e.target.value);
+    setEmailError("");
   };
 
   const handleAddressChange = (e) => {
     setAddress(e.target.value);
+    setAddressError("");
   };
 
   const handleQualificationsChange = (e) => {
     setQualifications(e.target.value);
+    setQualificationsError("");
   };
 
   const handleAddClick = async () => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const contactNoRegex = /^\d{10}$/;
+
+    if (!fullName) {
+      setFullNameError("Please enter a name");
+    }
+
+    if (!nic) {
+      setNicError("Please enter a NIC");
+    }
+
+    if (!gender) {
+      setGenderError("Please select a gender");
+    }
+
+    if (!dob) {
+      setDobError("Please select a date of birth");
+    }
+
+    if (!contactNo) {
+      setContactNoError("Please enter a contact number");
+    }
+
+    if (!email) {
+      setEmailError("Please enter an email");
+    }
+
+    if (!address) {
+      setAddressError("Please enter an address");
+    }
+
+    if (!qualifications) {
+      setQualificationsError("Please enter qualifications");
+    }
 
     if (
       !fullName ||
@@ -156,34 +196,43 @@ const EmployeeRegisterForm = () => {
         <div className={inputContainerStyle}>
           <input
             className={
-              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+              inputStyle +
+              (fullNameError &&
+                " outline outline-4 outline-red-800 outline-offset-1")
             }
             placeholder="Fullname *"
             value={fullName}
             onChange={handleFullNameChange}
           />
         </div>
-        <p className="text-red-800 font-bold text-lg">Please enter a name</p>
+        {fullNameError && (
+          <p className="text-red-800 font-bold text-lg">{fullNameError}</p>
+        )}
       </div>
       <div className="flex flex-col gap-y-1">
         <div className={inputContainerStyle}>
           <input
             className={
-              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+              inputStyle +
+              (nicError &&
+                " outline outline-4 outline-red-800 outline-offset-1")
             }
             placeholder="NIC *"
             value={nic}
             onChange={handleNicChange}
           />
         </div>
-        <p className="text-red-800 font-bold text-lg">Please enter a NIC</p>
+        {nicError && (
+          <p className="text-red-800 font-bold text-lg">{nicError}</p>
+        )}
       </div>
       <div className="flex flex-col gap-y-1">
         <div className={inputContainerStyle}>
           <select
             className={
               "w-full bg-transparent h-14 rounded-xl text-black font-semibold text-lg pl-4 " +
-              "outline outline-4 outline-red-800 outline-offset-1"
+              (genderError &&
+                "outline outline-4 outline-red-800 outline-offset-1")
             }
             value={gender}
             onChange={handleGenderChange}
@@ -195,13 +244,16 @@ const EmployeeRegisterForm = () => {
             <option value="Female">Female</option>
           </select>
         </div>
-        <p className="text-red-800 font-bold text-lg">Please Select a Gender</p>
+        {genderError && (
+          <p className="text-red-800 font-bold text-lg">{genderError}</p>
+        )}
       </div>
       <div className="flex flex-col gap-y-1">
         <div
           className={
             inputContainerStyle +
-            " relative select-none outline outline-4 outline-red-800 outline-offset-1"
+            " relative select-none " +
+            (dobError && "outline outline-4 outline-red-800 outline-offset-1")
           }
         >
           <p
@@ -233,67 +285,79 @@ const EmployeeRegisterForm = () => {
             <Calendar onChange={handleDobChange} value={dob} />
           </div>
         </div>
-        <p className="text-red-800 font-bold text-lg">
-          Please Select Date of Birth
-        </p>
+        {dobError && (
+          <p className="text-red-800 font-bold text-lg">{dobError}</p>
+        )}
       </div>
       <div className="flex flex-col gap-y-1">
         <div className={inputContainerStyle}>
           <input
             className={
-              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+              inputStyle +
+              (contactNoError &&
+                " outline outline-4 outline-red-800 outline-offset-1")
             }
             placeholder="Contact Number *"
             value={contactNo}
             onChange={handleContactNoChange}
           />
         </div>
-        <p className="text-red-800 font-bold text-lg">
-          Please enter a contact number
-        </p>
+        {contactNoError && (
+          <p className="text-red-800 font-bold text-lg">{contactNoError}</p>
+        )}
       </div>
       <div className="flex flex-col gap-y-1">
         <div className={inputContainerStyle}>
           <input
             className={
-              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+              inputStyle +
+              (emailError &&
+                " outline outline-4 outline-red-800 outline-offset-1")
             }
             placeholder="Email *"
             value={email}
             onChange={handleEmailChange}
           />
         </div>
-        <p className="text-red-800 font-bold text-lg">Please enter an email</p>
+        {emailError && (
+          <p className="text-red-800 font-bold text-lg">{emailError}</p>
+        )}
       </div>
       <div className="flex flex-col gap-y-1">
         <div className={inputContainerStyle}>
           <input
             className={
-              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+              inputStyle +
+              (addressError &&
+                " outline outline-4 outline-red-800 outline-offset-1")
             }
             placeholder="Address *"
             value={address}
             onChange={handleAddressChange}
           />
         </div>
-        <p className="text-red-800 font-bold text-lg">
-          Please enter an address
-        </p>
+        {addressError && (
+          <p className="text-red-800 font-bold text-lg">{addressError}</p>
+        )}
       </div>
       <div className="flex flex-col gap-y-1">
         <div className={inputContainerStyle}>
           <input
             className={
-              inputStyle + " outline outline-4 outline-red-800 outline-offset-1"
+              inputStyle +
+              (qualificationsError &&
+                " outline outline-4 outline-red-800 outline-offset-1")
             }
             placeholder="Qualifications *"
             value={qualifications}
             onChange={handleQualificationsChange}
           />
         </div>
-        <p className="text-red-800 font-bold text-lg">
-          Please enter qualifications
-        </p>
+        {qualificationsError && (
+          <p className="text-red-800 font-bold text-lg">
+            {qualificationsError}
+          </p>
+        )}
       </div>
       <div className="flex justify-between mt-5">
         <button
