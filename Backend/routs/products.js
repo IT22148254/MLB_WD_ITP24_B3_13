@@ -25,7 +25,7 @@ router.route("/add").post((req, res) => {
     .catch((err) => {
       res
         .status(400)
-        .json({ message: "Something went wrong when adding the product" });
+        .json({ message: "Something went wrong when adding the product", err });
     });
 });
 
