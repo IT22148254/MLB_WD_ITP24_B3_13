@@ -24,7 +24,7 @@ const EmployeeEditForm = ({ id }) => {
     const fetchEmployee = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/employee/find/${id}`
+          `http://localhost:8070/employee/employee/find/${id}`
         );
         const employee = response.data;
 
@@ -133,7 +133,7 @@ const EmployeeEditForm = ({ id }) => {
       };
 
       const response = await axios.put(
-        "http://localhost:8000/employee/update",
+        "http://localhost:8070/employee/employee/update",
         employeeData
       );
 
@@ -166,7 +166,7 @@ const EmployeeEditForm = ({ id }) => {
   //   const fetchEmployee = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `http://localhost:8000/employee/${id}`
+  //         `http://localhost:8070/employee/employee/employee/${id}`
   //       );
   //       const employee = response.data;
 

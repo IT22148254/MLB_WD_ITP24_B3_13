@@ -163,7 +163,7 @@ const EmployeeRegisterForm = () => {
       };
 
       const response = await axios.post(
-        "http://localhost:8000/employee/create",
+        "http://localhost:8070/employee/employee/create",
         employeeData
       );
 

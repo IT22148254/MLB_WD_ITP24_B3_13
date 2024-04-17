@@ -19,7 +19,9 @@ const EmployeeSummary = () => {
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/employee");
+        const response = await axios.get(
+          "http://localhost:8070/employee/employee"
+        );
         // console.log(response.data);
         setEmployees(response.data);
       } catch (error) {

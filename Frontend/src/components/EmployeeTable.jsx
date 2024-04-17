@@ -25,7 +25,7 @@ const EmployeeTable = ({ employees }) => {
         try {
           const response = await axios({
             method: "delete",
-            url: `http://localhost:8000/employee/delete`,
+            url: `http://localhost:8070/employee/employee/delete`,
             data: {
               _id: id,
               employeeId: empId,

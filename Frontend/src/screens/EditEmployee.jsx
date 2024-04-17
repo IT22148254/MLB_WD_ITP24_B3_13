@@ -20,7 +20,7 @@ const EditEmployee = () => {
     const fetchEmployee = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/employee/find/${id}`
+          `http://localhost:8070/employee/employee/find/${id}`
         );
         const employee = response.data;
 
