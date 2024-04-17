@@ -49,13 +49,25 @@ const EmployeeRegisterForm = () => {
   };
 
   const handleContactNoChange = (e) => {
+    const contactNoRegex = /^\d{10}$/;
+    if (!contactNoRegex.test(e.target.value)) {
+      setContactNoError(
+        "Contact number should include 10 numbers and contain only digits"
+      );
+    } else {
+      setContactNoError("");
+    }
     setContactNo(e.target.value);
-    setContactNoError("");
   };
 
   const handleEmailChange = (e) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(e.target.value)) {
+      setEmailError("Please enter a valid email address");
+    } else {
+      setEmailError("");
+    }
     setEmail(e.target.value);
-    setEmailError("");
   };
 
   const handleAddressChange = (e) => {
@@ -69,9 +81,6 @@ const EmployeeRegisterForm = () => {
   };
 
   const handleAddClick = async () => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const contactNoRegex = /^\d{10}$/;
-
     if (!fullName) {
       setFullNameError("Please enter a name");
     }
@@ -122,23 +131,23 @@ const EmployeeRegisterForm = () => {
       return;
     }
 
-    if (!emailRegex.test(email)) {
-      Swal.fire({
-        title: "Invalid email",
-        text: "Please enter a valid email address",
-        icon: "error",
-      });
-      return;
-    }
+    // if (!emailRegex.test(email)) {
+    //   // Swal.fire({
+    //   //   title: "Invalid email",
+    //   //   text: "Please enter a valid email address",
+    //   //   icon: "error",
+    //   // });
+    //   // return;
+    // }
 
-    if (!contactNoRegex.test(contactNo)) {
-      Swal.fire({
-        title: "Invalid contact number",
-        text: "Contact number should include 10 numbers and contain only digits",
-        icon: "error",
-      });
-      return;
-    }
+    // if (!contactNoRegex.test(contactNo)) {
+    //   Swal.fire({
+    //     title: "Invalid contact number",
+    //     text: "Contact number should include 10 numbers and contain only digits",
+    //     icon: "error",
+    //   });
+    //   return;
+    // }
 
     try {
       const employeeData = {
@@ -259,7 +268,7 @@ const EmployeeRegisterForm = () => {
           <p
             onClick={() => setIsDobSelected(!isDobSelected)}
             className={
-              "flex items-center w-full bg-transparent h-14 rounded-xl text-black text-xl pl-5 " +
+              "flex items-center w-full bg-transparent h-14 rounded-xl text-black text-lg pl-5 " +
               (dob ? "font-normal" : "font-semibold ")
             }
           >
