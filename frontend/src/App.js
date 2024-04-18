@@ -7,11 +7,11 @@ import { Outlet } from "react-router-dom";
 const App = () => {
   return (
     <>
-      <Header />
-      <main className="py-3">
-        <Container>
+      <Header/>
+      <main>
+        <div style={{height:"auto",width:"auto"}}>
           <Outlet/>
-        </Container>
+        </div>
       </main>
       <Footer />
     </>
