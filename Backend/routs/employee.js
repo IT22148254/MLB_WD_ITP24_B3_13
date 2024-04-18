@@ -44,7 +44,7 @@ router.route("/employee/create").post(async (req, res) => {
       contactNo,
       email,
       address,
-      qualifications,
+      role,
     } = req.body;
 
     const employee = await Employee.create({
@@ -56,7 +56,7 @@ router.route("/employee/create").post(async (req, res) => {
       contactNo,
       email,
       address,
-      qualifications,
+      role,
     });
     res.status(200).json({ msg: "Successfully created" });
   } catch (error) {
@@ -96,7 +96,7 @@ router.route("/employee/update").put(async (req, res) => {
     contactNo,
     email,
     address,
-    qualifications,
+    role,
   } = req.body;
 
   try {
@@ -111,7 +111,7 @@ router.route("/employee/update").put(async (req, res) => {
         contactNo,
         email,
         address,
-        qualifications,
+        role,
       }
     );
     res.status(200).json({ msg: "Employee updated", employee: result });

@@ -15,7 +15,7 @@ const EmployeeEditForm = ({ id }) => {
   const [contactNo, setContactNo] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [qualifications, setQualifications] = useState("");
+  const [role, setRole] = useState("");
 
   const [isDobSelected, setIsDobSelected] = useState(false);
 
@@ -37,7 +37,7 @@ const EmployeeEditForm = ({ id }) => {
         setContactNo(employee.contactNo);
         setEmail(employee.email);
         setAddress(employee.address);
-        setQualifications(employee.qualifications);
+        setRole(employee.role);
       } catch (error) {
         console.error("Error fetching employee:", error);
       }
@@ -74,8 +74,8 @@ const EmployeeEditForm = ({ id }) => {
     setAddress(e.target.value);
   };
 
-  const handleQualificationsChange = (e) => {
-    setQualifications(e.target.value);
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
   };
 
   const handleAddClick = async () => {
@@ -90,7 +90,7 @@ const EmployeeEditForm = ({ id }) => {
       !contactNo ||
       !email ||
       !address ||
-      !qualifications
+      !role
     ) {
       Swal.fire({
         title: "Missing fields",
@@ -129,7 +129,7 @@ const EmployeeEditForm = ({ id }) => {
         contactNo,
         email,
         address,
-        qualifications,
+        role,
       };
 
       const response = await axios.put(
@@ -151,7 +151,7 @@ const EmployeeEditForm = ({ id }) => {
         setContactNo("");
         setEmail("");
         setAddress("");
-        setQualifications("");
+        setRole("");
       }
 
       // Navigate away
@@ -277,9 +277,9 @@ const EmployeeEditForm = ({ id }) => {
       <div className={inputContainerStyle}>
         <input
           className={inputStyle}
-          placeholder="Qualifications"
-          value={qualifications}
-          onChange={handleQualificationsChange}
+          placeholder="Role"
+          value={role}
+          onChange={handleRoleChange}
         />
       </div>
       <div className="flex justify-between mt-5">
@@ -300,7 +300,7 @@ const EmployeeEditForm = ({ id }) => {
             setContactNo("");
             setEmail("");
             setAddress("");
-            setQualifications("");
+            setRole("");
 
             // Navigate away
             navigate("/");

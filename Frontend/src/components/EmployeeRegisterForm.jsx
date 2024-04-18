@@ -15,7 +15,7 @@ const EmployeeRegisterForm = () => {
   const [contactNo, setContactNo] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [qualifications, setQualifications] = useState("");
+  const [role, setRole] = useState("");
 
   const [fullNameError, setFullNameError] = useState("");
   const [nicError, setNicError] = useState("");
@@ -24,7 +24,7 @@ const EmployeeRegisterForm = () => {
   const [contactNoError, setContactNoError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [addressError, setAddressError] = useState("");
-  const [qualificationsError, setQualificationsError] = useState("");
+  const [roleError, setRoleError] = useState("");
 
   const [isDobSelected, setIsDobSelected] = useState(false);
 
@@ -75,9 +75,9 @@ const EmployeeRegisterForm = () => {
     setAddressError("");
   };
 
-  const handleQualificationsChange = (e) => {
-    setQualifications(e.target.value);
-    setQualificationsError("");
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
+    setRoleError("");
   };
 
   const handleAddClick = async () => {
@@ -109,8 +109,8 @@ const EmployeeRegisterForm = () => {
       setAddressError("Please enter an address");
     }
 
-    if (!qualifications) {
-      setQualificationsError("Please enter qualifications");
+    if (!role) {
+      setRole("Please enter role");
     }
 
     if (
@@ -121,7 +121,7 @@ const EmployeeRegisterForm = () => {
       !contactNo ||
       !email ||
       !address ||
-      !qualifications
+      !role
     ) {
       Swal.fire({
         title: "Missing fields",
@@ -159,7 +159,7 @@ const EmployeeRegisterForm = () => {
         contactNo,
         email,
         address,
-        qualifications,
+        role,
       };
 
       const response = await axios.post(
@@ -181,7 +181,7 @@ const EmployeeRegisterForm = () => {
         setContactNo("");
         setEmail("");
         setAddress("");
-        setQualifications("");
+        setRole("");
         navigate("/");
       }
     } catch (error) {
@@ -354,17 +354,17 @@ const EmployeeRegisterForm = () => {
           <input
             className={
               inputStyle +
-              (qualificationsError &&
+              (roleError &&
                 " outline outline-4 outline-red-800 outline-offset-1")
             }
-            placeholder="Qualifications *"
-            value={qualifications}
-            onChange={handleQualificationsChange}
+            placeholder="Role *"
+            value={role}
+            onChange={handleRoleChange}
           />
         </div>
-        {qualificationsError && (
+        {roleError && (
           <p className="text-red-800 font-bold text-lg">
-            {qualificationsError}
+            {roleError}
           </p>
         )}
       </div>
@@ -386,7 +386,7 @@ const EmployeeRegisterForm = () => {
             setContactNo("");
             setEmail("");
             setAddress("");
-            setQualifications("");
+            setRole("");
 
             // Navigate away
             navigate("/");
