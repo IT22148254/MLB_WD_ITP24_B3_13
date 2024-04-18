@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const feedBackSchema = new schema({
+const serviceFeedBackSchema = new schema({
   UserName: {
     type: String,
     required: true,
@@ -14,7 +14,39 @@ const feedBackSchema = new schema({
     type: Number,
     required: true,
   },
+  Email: {
+    type: String,
+    required: true,
+  },
 });
 
-const FeedBack = mongoose.model("FeedBack", feedBackSchema);
-module.exports = FeedBack;
+const coachFeedBackSchema = new schema({
+  UserName: {
+    type: String,
+    required: true,
+  },
+  Coach: {
+    type: String,
+    required: true,
+  },
+  Comment: {
+    type: String,
+    required: true,
+  },
+  Rating: {
+    type: Number,
+    required: true,
+  },
+  Email: {
+    type: String,
+    required: true,
+  },
+});
+
+const ServiceFeedBack = mongoose.model(
+  "ServiceFeedBack",
+  serviceFeedBackSchema
+);
+const CoachFeedBack = mongoose.model("CoachFeedBack", coachFeedBackSchema);
+
+module.exports = { ServiceFeedBack, CoachFeedBack };
