@@ -10,11 +10,13 @@ const AddSupplier = () => {
     const [supAddress, setSupAddress] = useState('')
     const [error, setError] = useState(null)
 
-    const handleEmail = (e)=>{
-        var value = e.target.value;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const handleSubmit = async (e) => {
+        e.preventDefault()
 
-        if (!emailRegex.test(value)) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const contactNoRegex = /^\d{10}$/;
+
+        if (!emailRegex.test(supEmail)) {
             Swal.fire({
               title: "Invalid email",
               text: "Please enter a valid email address",
@@ -22,16 +24,8 @@ const AddSupplier = () => {
             });
             return;
           }
-         else{
-            setSupEmail(value)
-         } 
-    }
-
-    const handlePhone = (e)=>{
-        var value = e.target.value;
-        const contactNoRegex = /^\d{10}$/;
-
-        if (!contactNoRegex.test(value)) {
+      
+          if (!contactNoRegex.test(supPhone)) {
             Swal.fire({
               title: "Invalid contact number",
               text: "Contact number should include 10 numbers and contain only digits",
@@ -39,15 +33,6 @@ const AddSupplier = () => {
             });
             return;
           }
-        else{
-            setSupPhone(value)
-        }
-    }
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-       
         const supplier = {supName,supEmail, supPhone,supAddress}
 
                 const response = await fetch('http://localhost:8000/Suppliers', {
@@ -113,7 +98,7 @@ const AddSupplier = () => {
                                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                                 pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                 value={supEmail}
-                                onChange={handleEmail}
+                                onChange={(e) => setSupEmail(e.target.value)}
                                 required />
                         </div>
                         <div className="flex justify-between items-center">
@@ -123,7 +108,7 @@ const AddSupplier = () => {
                                 id="supPhone"
                                 name="supPhone"
                                 value={supPhone}
-                                onChange={handlePhone}
+                                onChange={(e)=>setSupPhone(e.target.value)}
                                 className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                                 pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                 required />
