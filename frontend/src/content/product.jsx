@@ -1,27 +1,32 @@
-import { Card} from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import Rating from "./rating";
-import React from 'react'
+import React from "react";
 
-function product({product}) {
+function product({ product }) {
   return (
-    <Card className="my-3 p-3 rounded">
-        <Link to={`/product/${product._id}`}>
-            <Card.Img src={product.image} variant="top"/>
-        </Link>
+    <Link
+      to={`store/product/${product._id}`}
+      style={{ textDecoration: "none" }}
+    >
+      <Card border="light" bg="info" text="light" className="my-3 p-3 rounded">
+        <Card.Header as="div" className="product-title" style={{margin:"auto"}}>
+          <h3>{product.name}</h3>
+        </Card.Header>
+
         <Card.Body>
-            <Link to={`/product/${product._id}`}>
-                <Card.Title as="div" className="product-title">
-                    <strong>{product.name}</strong>
-                </Card.Title>
-            </Link>
-            <Card.Text as='div'>
-                <Rating value ={product.rating} text={`${product.numReviews} reviews`}/>
-            </Card.Text>
-            <Card.Text as="h3">LKR : {product.price}</Card.Text>
+          <Card.Img src={product.image} style={{ height: "50vh" }} />
+          <Card.Text as="div">
+            <Rating
+              value={product.rating}
+              text={`${product.numReviews} reviews`}
+            />
+          </Card.Text>
+          <Card.Text as="h3">LKR : {product.price}</Card.Text>
         </Card.Body>
-    </Card>
-  )
+      </Card>
+    </Link>
+  );
 }
 
-export default product
+export default product;

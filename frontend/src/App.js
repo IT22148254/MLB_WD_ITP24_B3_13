@@ -1,5 +1,4 @@
 import React from "react";
-import { Container } from "react-bootstrap";
 import Header from "./content/header";
 import Footer from "./content/Footer";
 import { Outlet } from "react-router-dom";
