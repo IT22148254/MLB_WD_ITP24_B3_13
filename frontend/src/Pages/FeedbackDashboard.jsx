@@ -1,29 +1,25 @@
 import React from 'react'
 import { Container, Row, Col, Table } from 'reactstrap'
+const FeedbackDashboard = () => {
 
-const SupplierDashboard = () => {
-
-    return (
+    return (  
         <Container>
-                <div className="title code">Supplier Manager Dashboard</div>
-                <Row>
-                    <img src={image} alt="" className='' />
-                </Row>
+                <div className="title code">Feedback Manager Dashboard</div>
                 <br />
                 <Row className='om_btn'>
                     <Col>
                         <Container >
-                            <a><p id='ed'>Orders</p></a>
+                            <a><p id='ed'>Feedback handling</p></a>
                         </Container>
                     </Col>
                     <Col>
                         <Container>
-                            <a><p id='ed'>Inventory</p></a>
+                            <a><p id='ed'>Inquiry Handling</p></a>
                         </Container>
                     </Col>
                 </Row>
             </Container>
-      );
+    );
 }
  
-export default SupplierDashboard;
+export default FeedbackDashboard;
