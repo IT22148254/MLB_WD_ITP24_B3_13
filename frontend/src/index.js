@@ -17,10 +17,10 @@ import store from "./store";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/store" element={<App />}>
+    <Route path="/" element={<App />}>
       <Route index={true} path="/store" element={<HomeScreen />} />
 
-      <Route path="store/product/:id" element={<ProductScreen />} />
+      <Route path="/product/:id" element={<ProductScreen />} />
     </Route>
   )
 );

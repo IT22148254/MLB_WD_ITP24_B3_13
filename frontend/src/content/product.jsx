@@ -6,7 +6,7 @@ import React from "react";
 function product({ product }) {
   return (
     <Link
-      to={`store/product/${product._id}`}
+      to={`/product/${product._id}`}
       style={{ textDecoration: "none" }}
     >
       <Card border="light" bg="info" text="light" className="my-3 p-3 rounded">
