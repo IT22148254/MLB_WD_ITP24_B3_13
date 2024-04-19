@@ -39,11 +39,11 @@ const ProductScreen = () => {
       ) : (
         <Row>
           <Col md={5} sm={12}>
-            <div>
+            <div style={{maxWidth:"100%",overflow:"hidden"}}>
               <Image
                 src={product.image}
                 alt={product.name}
-                style={{ height: "55vh",width:"auto"}}
+                style={{ height: "55vh",width:"100%"}}
               />
             </div>
           </Col>
