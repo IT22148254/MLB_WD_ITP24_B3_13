@@ -28,7 +28,7 @@ const ProductScreen = () => {
 
   
   return (
-    <>
+    <div style={{margin:"20px",padding:"20px"}}>
       <Link className="btn btn-light my-3" to="/">
         Go back
       </Link>
@@ -87,7 +87,7 @@ const ProductScreen = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </div>
   );
 };
 
