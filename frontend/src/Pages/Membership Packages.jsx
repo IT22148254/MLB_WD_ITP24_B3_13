@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Container } from 'reactstrap'
 import { AiOutlineSearch} from "react-icons/ai"
 import StandardDetails_user from "./StandardDetails_User"
-import PromoDetails_user from "./PromoDetails_User"
+import PromoDetails_user from "../Components/PromoDetails_User"
 //import PromoGraph from "../../Components/Membership/PromoGraph"
 
 
