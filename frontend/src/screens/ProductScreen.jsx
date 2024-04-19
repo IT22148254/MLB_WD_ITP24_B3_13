@@ -43,7 +43,7 @@ const ProductScreen = () => {
               <Image
                 src={product.image}
                 alt={product.name}
-                style={{ height: "55vh" }}
+                style={{ height: "55vh",width:"auto"}}
               />
             </div>
           </Col>
