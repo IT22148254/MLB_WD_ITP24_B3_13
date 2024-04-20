@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import jsPDF from 'jspdf';
+import 'jspdf-autotable';
 
 const EmployeeTable = ({ employees }) => {
   let navigate = useNavigate();
@@ -55,6 +57,33 @@ const EmployeeTable = ({ employees }) => {
     });
   };
 
+  const handleCreateReport = () => {
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text('Employee Report', 14, 22);
+
+    const columns = [
+      { header: 'Full Name', dataKey: 'fullName' },
+      { header: 'NIC', dataKey: 'nic' },
+      { header: 'Gender', dataKey: 'gender' },
+      { header: 'Contact No', dataKey: 'contactNo' },
+      { header: 'Email', dataKey: 'email' },
+      { header: 'Address', dataKey: 'address' }
+    ];
+
+    const rows = employees.map(employee => ({
+      fullName: employee.fullName,
+      nic: employee.nic,
+      gender: employee.gender,
+      contactNo: employee.contactNo,
+      email: employee.email,
+      address: employee.address
+    }));
+
+    doc.autoTable(columns, rows);
+    doc.save('Employee Report.pdf');
+  };
+
   return (
     <div className="w-full">
       <div className="grid grid-cols-8 bg-cyan-400">
@@ -67,54 +96,30 @@ const EmployeeTable = ({ employees }) => {
         <div className="border-2 border-black p-3">Edit</div>
         <div className="border-2 border-black p-3">Delete</div>
       </div>
-      <div
-        className="w-full overflow-auto "
-        style={{
-          maxHeight: "450px",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
-      >
+      <div className="w-full overflow-auto" style={{ maxHeight: "450px", scrollbarWidth: "none", msOverflowStyle: "none" }}>
         {employees &&
           employees.map((employee, index) => (
-            <div
-              className={`grid grid-cols-8 ${
-                index % 2 == 0 ? "bg-cyan-200 " : "bg-cyan-400 "
-              }`}
-              key={employee.id}
-            >
-              <div className="border-2 border-black p-2">
-                {employee.fullName}
-              </div>
+            <div className={`grid grid-cols-8 ${index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "}`} key={employee.id}>
+              <div className="border-2 border-black p-2">{employee.fullName}</div>
               <div className="border-2 border-black p-2">{employee.nic}</div>
               <div className="border-2 border-black p-2">{employee.gender}</div>
-              <div className="border-2 border-black p-2">
-                {employee.contactNo}
-              </div>
+              <div className="border-2 border-black p-2">{employee.contactNo}</div>
               <div className="border-2 border-black p-2">{employee.email}</div>
+              <div className="border-2 border-black p-2">{employee.address}</div>
               <div className="border-2 border-black p-2">
-                {employee.address}
+                <button className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold" onClick={() => handleEdit(employee._id)}>Edit</button>
               </div>
               <div className="border-2 border-black p-2">
-                <button
-                  className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                  onClick={() => handleEdit(employee._id)}
-                >
-                  Edit
-                </button>
-              </div>
-              <div className="border-2 border-black p-2">
-                <button
-                  className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                  onClick={() =>
-                    handleDelete(employee._id, employee.employeeId)
-                  }
-                >
-                  Delete
-                </button>
+                <button className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold" onClick={() => handleDelete(employee._id, employee.employeeId)}>Delete</button>
               </div>
             </div>
           ))}
+      </div>
+      {/* Generate PDF Report Button */}
+      <div className="text-center mt-4">
+        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleCreateReport}>
+          Generate Report
+        </button>
       </div>
     </div>
   );
