@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const PromoDetails = ({ promo }) => {
 
-    const handleDelete = async () => {
+    const handleDelete =  () => {
 
         Swal.fire({
             title: "Are you sure?",
@@ -14,7 +14,7 @@ const PromoDetails = ({ promo }) => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!",
-          }).then(async (result) => {
+          }).then((result) => {
             if (result.isConfirmed) {
                 axios.delete(`http://localhost:8000/PromoPackages/${promo.id}`)
             .then(response => {

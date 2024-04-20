@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams} from "react-router-dom"
 import { Container } from 'reactstrap'
+import CurrencyInput from 'react-currency-input-field'
 import axios from 'axios'
 
 
@@ -10,7 +11,25 @@ const EditStandardForm = () => {
     const { id } = useParams();
     const [stPackageName, setStPackageName] = useState("")
     const [stPackageDescription, setStPackageDescription] = useState("")
-    const [stPackagePrice, setStPackagePrice] = useState("")
+    const [stPackagePrice, setStPackagePrice] = useState(0)
+
+    const handleCurrency = (value)=>{
+        var inputvalue = value
+    
+        if(inputvalue<0){
+            value=0;
+    
+            Swal.fire({
+                title: "Error",
+                text: "Cannot input below zero",
+                icon: "error",
+              }).then(()=>{
+                console.log('Cannot input below zero')
+              })   
+        }else{
+            setStPackagePrice(inputvalue)
+        }
+    }
 
     useEffect(() => {
         const fetchPackage = async () => {
@@ -100,15 +119,19 @@ const EditStandardForm = () => {
                                 <label htmlFor="Price" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>
                                     Package Price:
                                 </label>
-                                <input
-                                    type="text"
+                                <CurrencyInput
                                     id="Price"
                                     name="Price"
-                                    value={stPackagePrice}
-                                    onChange={(e)=>setStPackagePrice(e.target.value)}
-                                    className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                                    required
+                                    className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 
+                                    text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                                    placeholder="Enter amount"
+                                    allowDecimals={true}
+                                    decimalsLimit={2}
+                                    prefix="LKR "
+                                    value={prPackagePrice}
+                                    onValueChange={(value)=>handleCurrency(value)}
                                 />
+
                             </div>
                             {/* <div className="flex justify-between items-center">
                                 <label htmlFor="Date" className="text-white flex items-center pl-5 font-bold text-2xl font-size" style={{ WebkitTextStroke: '1px black' }}>

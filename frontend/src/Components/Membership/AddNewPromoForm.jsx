@@ -3,6 +3,8 @@ import { Container } from 'reactstrap'
 import { useNavigate } from "react-router-dom"
 import CurrencyInput from 'react-currency-input-field'
 import Swal from "sweetalert2";
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const AddNewPromoForm = () => {
@@ -23,16 +25,25 @@ const AddNewPromoForm = () => {
         if(inputvalue<0){
             value=0;
     
-            Swal.fire({
-                title: "Error",
-                text: "Cannot input below zero",
-                icon: "error",
-              }).then(()=>{
-                console.log('Cannot input below zero')
-              })   
+            toast.error('Cannot input below Zero')
+            
         }else{
             setPromoPrice(inputvalue)
         }
+    }
+
+    const handlePromoName =(e)=>{
+        const value = e.target.value
+        const newValue = value.replace(/[^a-zA-Z\s]/g, '');
+
+        setPromoName(newValue)
+    }
+
+    const handlePromoDesc = (e)=>{
+        const value = e.target.value
+        const newValue = value.replace(/[^a-zA-Z\s]/g, '');
+
+        setPromoDetails(newValue)
     }
 
     const handleSubmit = async (e) => {
@@ -104,7 +115,7 @@ const AddNewPromoForm = () => {
                                     id="Name"
                                     name="name"
                                     value={prPackageName}
-                                    onChange={(e)=>setPromoName(e.target.value)}
+                                    onChange={handlePromoName}
                                     required
                                 />
                             </div>
@@ -118,7 +129,7 @@ const AddNewPromoForm = () => {
                                     name="Details"
                                     className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                     value={prPackageDescription}
-                                    onChange={(e)=>setPromoDetails(e.target.value)}
+                                    onChange={handlePromoDesc}
                                     required
                                 />
                             </div>
