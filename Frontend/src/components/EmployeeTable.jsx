@@ -116,11 +116,14 @@ const EmployeeTable = ({ employees }) => {
           ))}
       </div>
       {/* Generate PDF Report Button */}
-      <div className="text-center mt-4">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleCreateReport}>
-          Generate Report
-        </button>
-      </div>
+      <div className="flex justify-between mt-5 ">
+      <button className="ml-20 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" >
+        Calculate Salary
+      </button>
+      <button className="mr-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleCreateReport}>
+        Generate Report
+      </button>
+    </div>
     </div>
   );
 };
