@@ -10,13 +10,14 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 // import ScheduleTable from '../pages/schedule/ScheduleTable'
 // import InstructorConfirmOM from '../pages/schedule/InstructorConfirmOM'
 
-import StandardPackages from '../pages/Membership/StandardPackages'
+import StandardPackages from '../Pages/extra/StandardPackages'
 import EditStandard from '../pages/Membership/EditStandard'
 import PromoPackages from '../pages/Membership/PromoPackages'
 import AddNewPromo from '../pages/Membership/AddNewPromo'
 import PromoApproval from '../pages/Membership/PromoApproval'
 import MMdashboard from '../pages/Membership/MMdashboard'
 import MembershipPackages from '../pages/Membership/MembershipPackages'
+import CreatedPromos from '../Pages/Manager/CreatedPromos'
 
 const Router = () => {
     return (
@@ -41,6 +42,7 @@ const Router = () => {
             <Route path="/promoapproval" element={<PromoApproval />} />
             <Route path="/mmdashboard" element={<MMdashboard />} />
             <Route path="/membershippackages" element={<MembershipPackages />} />
+            <Route path="/createdpromos" element={<CreatedPromos/>} />
 
         </Routes>
     )

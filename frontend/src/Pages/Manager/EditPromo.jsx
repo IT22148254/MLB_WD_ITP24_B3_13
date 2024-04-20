@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import EditPromoform from '../Components/Membership/EditPromoform'
+import EditPromoform from '../../Components/Membership/Manager/EditPromoform'
 
 const EditPromo = () => {
 

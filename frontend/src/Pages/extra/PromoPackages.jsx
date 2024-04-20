@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from 'react-router-dom'
 import { Container} from 'reactstrap'
-import PromoDetails from '../Components/Membership/PromoDetails'
+import PromoDetails from '../../Components/Membership/Manager/PromoDetails'
 
 const PromoPackages = () => {
     const [promos, setPromos] = useState([])

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { Container } from 'reactstrap'
-import StandardDetails from '../Components/Membership/Standard_Details'
+import StandardDetails from '../../Components/Membership/Manager/Standard_Details'
 
 const StandardPackages = () => {
     const [stPackages, setStPackages] = useState([])
