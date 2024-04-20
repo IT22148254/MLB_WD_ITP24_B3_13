@@ -6,7 +6,7 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
 const EmployeeTable = ({ employees }) => {
-  let navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleEdit = (id) => {
     console.log(`Edit employee with id: ${id}`);
@@ -117,7 +117,7 @@ const EmployeeTable = ({ employees }) => {
       </div>
       {/* Generate PDF Report Button */}
       <div className="flex justify-between mt-5 ">
-      <button className="ml-20 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" >
+      <button className="ml-20 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => navigate('/calculator')}>
         Calculate Salary
       </button>
       <button className="mr-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleCreateReport}>
