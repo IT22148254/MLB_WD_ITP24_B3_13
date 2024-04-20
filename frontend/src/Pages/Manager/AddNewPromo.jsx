@@ -1,4 +1,4 @@
-import Addnewpromoform from '../Components/Membership/AddNewPromoForm';
+import Addnewpromoform from '../../Components/Membership/Manager/AddNewPromoForm';
 
 const AddnewPromo = () => {
     return (  

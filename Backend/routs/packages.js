@@ -33,7 +33,7 @@ router.route("/package/add").post((req, res) => {
 router.route("/package/").get((req, res) => {
   Package.find()
     .then((result) => {
-      res.status(200).json({ result });
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(400).json({ message: `Packages fetching went wrong ${err}` });

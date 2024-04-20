@@ -1,4 +1,4 @@
-import Package from  '../../Pages/AddNewPromo'
+import Package from  '../../Pages/Manager/AddNewPromo'
 const Layout = () => {
     return (  
         <Package/>

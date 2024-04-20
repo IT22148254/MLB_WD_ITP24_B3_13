@@ -16,11 +16,13 @@ const CreatedPromosTable = () => {
 
     useEffect(()=>{
 
+
         const fetchPromo = async () => {
 
             try {
-                const response = await axios.get("http://localhost:8000/PromoPackages");
+                const response = await axios.get("/PromoPackages");
                 setPromos(response.data);
+                console.log(response);
             } catch (error) {
                 console.log('Error fetching Promo Packages:', error);
             }
@@ -190,6 +192,9 @@ const CreatedPromosTable = () => {
                             </th>
                             <th>
                                 Validity
+                            </th>
+                            <th>
+                                Edit
                             </th>
                             <th>
                                 Send

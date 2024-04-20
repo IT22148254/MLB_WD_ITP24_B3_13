@@ -3,11 +3,11 @@ import EditPromoform from '../../Components/Membership/Manager/EditPromoform'
 
 const EditPromo = () => {
 
-    const {id} = useParams();
+    const { id } = useParams();
 
-    return (  
-        <EditPromoform id={id}/>
+    return (
+        <EditPromoform id={id} />
     );
 }
- 
+
 export default EditPromo;
