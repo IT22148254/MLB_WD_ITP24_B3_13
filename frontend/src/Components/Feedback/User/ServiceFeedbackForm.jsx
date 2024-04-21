@@ -6,17 +6,17 @@ import Swal from "sweetalert2";
 
 const ServiceFeedbackForm = () => {
 
-    const [name,setName] = useState('');
-    const [email,setEmail] = useState('');
-    const [rating,setRating] = useState(0);
-    const [feedback,setFeedback] = useState('');
+    const [Name,setName] = useState('');
+    const [Email,setEmail] = useState('');
+    const [Rating,setRating] = useState(0);
+    const [Feedback,setFeedback] = useState('');
     const [error, setError] = useState(null)
      {/*const navigate =useNavigate()*/}
 
     const handleSubmit = async (e)=>{
         e.preventDefault();
 
-        const ServiceFeedback = {name, email, rating, feedback, error}
+        const ServiceFeedback = {Name, Email, Rating, Feedback, error}
 
         const response = await fetch('http://localhost:8000/serviceFeedbacks', {
             method: 'POST',
@@ -41,7 +41,6 @@ const ServiceFeedbackForm = () => {
         }
 
         if (response.ok) {
-            setfeedbackID('')
             setName('')
             setEmail('')
             setRating('')
@@ -72,7 +71,7 @@ const ServiceFeedbackForm = () => {
                                 id="Name"
                                 name="name"
                                 className="promoInput"
-                                value={name}
+                                value={Name}
                                 onChange={(e)=>setName(e.target.value)}
                                 required />
                         </div>
@@ -82,7 +81,7 @@ const ServiceFeedbackForm = () => {
                                 type="Email"
                                 id="Email"
                                 name="Email"
-                                value={email}
+                                value={Email}
                                 onChange={(e)=>
                                     setEmail(e.target.value)
                                 }
@@ -94,12 +93,12 @@ const ServiceFeedbackForm = () => {
                         <div>
                         <label class="servicerate">Rate Our service</label>
                         {Array(5).fill().map((_,index)=>
-                        rating >= index + 1 ?
+                        Rating >= index + 1 ?
                         (<AiFillStar style={{color:'orange'}} onClick={()=>setRating(index + 1)} class="FillStar" />
                         ):(<AiOutlineStar style={{color:'orange'}} onClick={()=>setRating(index + 1)} class="OutlineStar"/>))}
                         </div>
                         <div className="add-promo-row">
-                            <textarea id="inquiry" name="inquiry" placeholder="Enter your opinion here" value={feedback} onChange={(e)=>setFeedback(e.target.value)}></textarea>
+                            <textarea id="inquiry" name="inquiry" placeholder="Enter your opinion here" value={Feedback} onChange={(e)=>setFeedback(e.target.value)}></textarea>
                         <div class="add-promo-row">
                                     <div className="add-promo-btns">
                                         <div>

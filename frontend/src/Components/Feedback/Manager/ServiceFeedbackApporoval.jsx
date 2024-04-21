@@ -78,16 +78,16 @@ const ServiceFeedbackApproval = () => {
       
         // define the table columns
         const columns = [     
-            { header: 'Customer Name', dataKey: 'custName' },    
-            { header: 'Email', dataKey: 'custEmail' },    
+            { header: 'Customer Name', dataKey: 'UserName' },    
+            { header: 'Email', dataKey: 'Email' },    
             { header: 'Rating', dataKey: 'servicerating' },    
             { header: 'Feedback', dataKey: 'service_feedback' }  
         ];
         
         // define the table rows
         const rows = servicefeedbacks.map(servicefeedback => ({
-          custName: servicefeedback.custName,
-          custEmail: servicefeedback.custEmail,
+          UserName: servicefeedback.UserName,
+          Email: servicefeedback.Email,
           servicerating: servicefeedback.servicerating,
           service_feedback: servicefeedback.service_feedback
         }));
@@ -139,8 +139,8 @@ const ServiceFeedbackApproval = () => {
                         <tbody>
                             {servicefeedbacks.map((sf) => (//map is a function which can loop through one by one
                                 <tr key={sf.id}>
-                                <td>{sf.custName}</td>
-                                <td>{sf.custEmail}</td>
+                                <td>{sf.UserName}</td>
+                                <td>{sf.Email}</td>
                                 <td >{sf.servicerating}</td>
                                 <td >{sf.service_feedback}</td>
                                 <td><button className='accept_btn 'onClick={handleAccept}>Accept</button></td>

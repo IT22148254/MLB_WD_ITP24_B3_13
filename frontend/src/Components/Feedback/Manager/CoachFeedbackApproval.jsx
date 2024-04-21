@@ -60,20 +60,20 @@ const CoachFeedbackApproval = () => {
       
         // define the table columns
         const columns = [    
-            { header: 'Customer Name', dataKey: 'custName' },    
-            { header: 'Email', dataKey: 'custEmail' },
-            { header: 'Coach Name', dataKey: 'coachName' },    
-            { header: 'Rating', dataKey: 'coachRating' },    
+            { header: 'Customer Name', dataKey: 'UserName' },    
+            { header: 'Email', dataKey: 'Email' },
+            { header: 'Coach Name', dataKey: 'Coach' },    
+            { header: 'Rating', dataKey: 'Rating' },    
             { header: 'Feedback', dataKey: 'coachfeedback' }  
         ];
         
         // define the table rows
         const rows = coachfeedbacks.map(coachfeedback => ({
     
-          custName: coachfeedback.custName,
-          custEmail: coachfeedback.custEmail,
-          coachName: coachfeedback.coachName,
-          coachRating: coachfeedback.coachRating,
+          UserName: coachfeedback.UserName,
+          Email: coachfeedback.Email,
+          Coach: coachfeedback.Coach,
+          Rating: coachfeedback.Rating,
           coachfeedback: coachfeedback.coachfeedback
         }));
         
@@ -136,10 +136,10 @@ function handleClick() {
                         <tbody>
                             {coachfeedbacks.map((row) => (
                                 <tr key={row.id}>
-                                <td>{row.custName}</td>
-                                <td>{row.custEmail}</td>
-                                <td >{row.coachName}</td>
-                                <td >{row.coachRating}</td>
+                                <td>{row.UserName}</td>
+                                <td>{row.Email}</td>
+                                <td >{row.Coach}</td>
+                                <td >{row.Rating}</td>
                                 <td >{row.coachfeedback}</td>
                                 <td><button className='accept_btn 'onClick={handleClick}>Accept</button></td>
                                 <td><button className='reject_btn ' onClick={() => handleInstructorFeedbackDelete(row.id)}>Reject</button></td>

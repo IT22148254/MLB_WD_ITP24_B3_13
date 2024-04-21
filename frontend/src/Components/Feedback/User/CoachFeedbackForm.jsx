@@ -6,11 +6,11 @@ import Swal from "sweetalert2";
 
 const Coachfeedback = () => {
 
-    const [UserName,setCustName] = useState('')
-    const [Email,setCustEmail] = useState('')
-    const [coach,setcoachName] = useState('')
-    const [rating,setcoachRating] = useState(0)
-    const [comment,setcoachFeedback] = useState('')
+    const [UserName,setUserName] = useState('')
+    const [Email,setEmail] = useState('')
+    const [Coach,setCoach] = useState('')
+    const [Rating,setRating] = useState(0)
+    const [Comment,setComment] = useState('')
     const [error, setError] = useState(null)
     const [fetcherror, setFetchError] = useState(null)
     const [coaches, setCoaches] = useState([])
@@ -20,7 +20,7 @@ const Coachfeedback = () => {
     const handleSubmit = async (e)=>{
         e.preventDefault();
 
-        const CoachFeedback = {custName, custEmail, coachName,coachRating, coachFeedback}
+        const CoachFeedback = {UserName, Email, Coach,Rating, Comment}
 
                 const response = await fetch('localhost:8070/feedback/coach/add', {
                     method: 'POST',
@@ -38,11 +38,11 @@ const Coachfeedback = () => {
         
                 if (response.ok) {
 
-                        setCustName('')
-                        setCustEmail('')
-                        setcoachRating('')
+                        setUserName('')
+                        setEmail('')
+                        setRating('')
                         setcoachFeedback('')
-                        setcoachName('')
+                        setCoach('')
                         setError(null)
                         window.reload()
                     
@@ -91,8 +91,8 @@ const Coachfeedback = () => {
                                 type="text"
                                 id="Name"
                                 name="name"
-                                value={custName}
-                                onChange={(e)=>setCustName(e.target.value)}
+                                value={UserName}
+                                onChange={(e)=>setUserName(e.target.value)}
                                 className="promoInput"
                                 required />
                         </div>
@@ -102,14 +102,14 @@ const Coachfeedback = () => {
                                 type="Email"
                                 id="Email"
                                 name="Email"
-                                value={custEmail}
-                                onChange={(e)=>setCustEmail(e.target.value)}
+                                value={Email}
+                                onChange={(e)=>setEmail(e.target.value)}
                                 className="promoInput"
                                 required />
                         </div>
                         <div>
                         <label class="ftIns">Select Your Coach</label>
-                        <select class="insSelect" onChange={(e) => setcoachName(e.target.value)} value={coachName} required>
+                        <select class="insSelect" onChange={(e) => setCoach(e.target.value)} value={Coach} required>
                             <option selected disabled >Select</option>
                             <option value="Dinith">Dinith</option>
                             <option value="Buddhina">Buddhina</option>
@@ -125,18 +125,18 @@ const Coachfeedback = () => {
   {Array(5)
     .fill()
     .map((_, index) =>
-      coachRating >= index + 1 ? (
+      Rating >= index + 1 ? (
         <AiFillStar
           key={index}
           style={{ color: 'orange', cursor: 'pointer' }}
-          onClick={() => setcoachRating(index + 1)}
+          onClick={() => setRating(index + 1)}
           className="FillStar"
         />
       ) : (
         <AiOutlineStar
           key={index}
           style={{ color: 'orange', cursor: 'pointer' }}
-          onClick={() => setcoachRating(index + 1)}
+          onClick={() => setRating(index + 1)}
           className="OutlineStar"
         />
       )
@@ -145,7 +145,7 @@ const Coachfeedback = () => {
 
                         </div>
                         <div className="add-promo-row">
-                            <textarea id="inquiry" name="inquiry" placeholder="Enter your opinion here" value={coachFeedback} onChange={(e)=>setcoachFeedback
+                            <textarea id="inquiry" name="inquiry" placeholder="Enter your opinion here" value={Comment} onChange={(e)=>setComment
                             (e.target.value)}></textarea>
                         <div class="add-promo-row">
                                     <div className="add-promo-btns">
