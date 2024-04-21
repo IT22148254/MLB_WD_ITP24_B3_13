@@ -70,6 +70,7 @@ const SupplierTable = () => {
         <section>
             <Container>
                 <div className="w-full">
+                <p className="text-4xl text-white font-bold">Suppliers</p>
                     <div className="grid grid-cols-8 bg-cyan-400">
                     <div className="border-2 border-black p-3">Name</div>
                     <div className="border-2 border-black p-3">Email</div>
@@ -112,7 +113,7 @@ const SupplierTable = () => {
                 <button
                   className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
                   onClick={() =>
-                    handleDelete(employee._id, employee.employeeId)
+                    handleDelete(sup._id)
                   }
                 >
                   Delete

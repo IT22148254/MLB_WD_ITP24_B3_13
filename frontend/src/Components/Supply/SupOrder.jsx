@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { Container } from 'reactstrap'
 //import bg from "../Images/bg_main.jpg";
 import Swal from "sweetalert2";
-const SupOrder = () => {
+const SupOrderForm = () => {
 
     const[orderID, setorderID] = useState('')
     const[supName, setSupName] = useState('')
@@ -12,33 +12,33 @@ const SupOrder = () => {
     const[size, setSize] = useState('')
     const [error, setError] = useState(null)
 
-    const handleQuantity = (e)=>{
-        var inputValue = e.target.value;
-    // Ensure the input value is a valid integer
-    if (/^-?\d*$/.test(inputValue)) {
-        if (inputValue < 0) {
-            //ensure the input value is not less than 0
-            inputValue = 0;
-            Swal.fire({
-                title: "Error",
-                text: "Cannot input below zero",
-                icon: "error",
-              }).then(()=>{
-                console.log('Cannot input below zero')
-              })
-          }else{
-            setQuantity(inputValue);
-          }
-    }else{
-        Swal.fire({
-            title: "Error",
-            text: "Only integers allowed",
-            icon: "error",
-          }).then(()=>{
-            console.log('Only integers allowed')
-          })
+    // const handleQuantity = (e)=>{
+    //     var inputValue = e.target.value;
+    // // Ensure the input value is a valid integer
+    // if (/^-?\d*$/.test(inputValue)) {
+    //     if (inputValue < 0) {
+    //         //ensure the input value is not less than 0
+    //         inputValue = 0;
+    //         Swal.fire({
+    //             title: "Error",
+    //             text: "Cannot input below zero",
+    //             icon: "error",
+    //           }).then(()=>{
+    //             console.log('Cannot input below zero')
+    //           })
+    //       }else{
+    //         setQuantity(inputValue);
+    //       }
+    // }else{
+    //     Swal.fire({
+    //         title: "Error",
+    //         text: "Only integers allowed",
+    //         icon: "error",
+    //       }).then(()=>{
+    //         console.log('Only integers allowed')
+    //       })
 
-    }}
+    // }}
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -68,13 +68,13 @@ const SupOrder = () => {
                     setSize('')
                     setError(null)
 
-                    Swal.fire({
-                        title: "Success",
-                        text: "new Order added successfully",
-                        icon: "success",
-                      }).then(()=>{
-                        console.log('new Order added', json)
-                      })
+                    // Swal.fire({
+                    //     title: "Success",
+                    //     text: "new Order added successfully",
+                    //     icon: "success",
+                    //   }).then(()=>{
+                    //     console.log('new Order added', json)
+                    //   })
                       
                     {/*navigate('/promoPackages')*/}
             }}
@@ -169,4 +169,4 @@ const SupOrder = () => {
      );
 }
  
-export default SupOrder;
+export default SupOrderForm;
