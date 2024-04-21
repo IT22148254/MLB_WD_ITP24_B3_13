@@ -4,9 +4,8 @@ import { Container } from 'reactstrap'
 import {AiFillStar,AiOutlineStar} from 'react-icons/ai'
 import Swal from "sweetalert2";
 
-const ServiceFeedback = () => {
+const ServiceFeedbackForm = () => {
 
-    const [feedbackID,setfeedbackID] = useState('');
     const [name,setName] = useState('');
     const [email,setEmail] = useState('');
     const [rating,setRating] = useState(0);
@@ -17,7 +16,7 @@ const ServiceFeedback = () => {
     const handleSubmit = async (e)=>{
         e.preventDefault();
 
-        const ServiceFeedback = {feedbackID, name, email, rating, feedback, error}
+        const ServiceFeedback = {name, email, rating, feedback, error}
 
         const response = await fetch('http://localhost:8000/serviceFeedbacks', {
             method: 'POST',
@@ -120,4 +119,4 @@ const ServiceFeedback = () => {
      );
 }
  
-export default ServiceFeedback;
+export default ServiceFeedbackForm;

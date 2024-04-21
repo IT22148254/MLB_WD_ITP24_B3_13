@@ -4,7 +4,7 @@ import {AiFillStar,AiOutlineStar} from 'react-icons/ai'
 import { useParams } from "react-router-dom"
 import Swal from "sweetalert2";
 
-const EditCoachFeedback = () => {
+const EditCoachFeedbackForm = () => {
 
     const { id } = useParams();
     const [custName,setCustName] = useState('');
@@ -104,4 +104,4 @@ const EditCoachFeedback = () => {
     );
 }
  
-export default EditCoachFeedback;
+export default EditCoachFeedbackForm;

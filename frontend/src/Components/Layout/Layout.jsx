@@ -1,8 +1,15 @@
 // import Package from  '../Supplier Management/Pages/ADd'
-import Package from  '../../Pages/AddSupplier'
+import AddCoachFeedback from  '../../Pages/CoachFeedback'
+import  { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
+
 const Layout = () => {
     return (  
-        <Package/>
+    <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<AddCoachFeedback/>}/>
+        </Routes>
+    </BrowserRouter>
+
     );
 }
 

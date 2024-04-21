@@ -6,13 +6,11 @@ import Swal from "sweetalert2";
 
 const Coachfeedback = () => {
 
-    const [feedbackID,setfeedbackId] = useState('')
-    const [custName,setCustName] = useState('')
-    const [custEmail,setCustEmail] = useState('')
-    const [coachName,setcoachName] = useState('')
-    const [coachRating,setcoachRating] = useState(0)
-    const [coachFeedback,setcoachFeedback] = useState('')
-    const [approved,setApproved] = useState(false)
+    const [UserName,setCustName] = useState('')
+    const [Email,setCustEmail] = useState('')
+    const [coach,setcoachName] = useState('')
+    const [rating,setcoachRating] = useState(0)
+    const [comment,setcoachFeedback] = useState('')
     const [error, setError] = useState(null)
     const [fetcherror, setFetchError] = useState(null)
     const [coaches, setCoaches] = useState([])
@@ -22,9 +20,9 @@ const Coachfeedback = () => {
     const handleSubmit = async (e)=>{
         e.preventDefault();
 
-        const CoachFeedback = {feedbackID, custName, custEmail, coachName,coachRating, coachFeedback, approved}
+        const CoachFeedback = {custName, custEmail, coachName,coachRating, coachFeedback}
 
-                const response = await fetch('http://localhost:8000/coachFeedbacks', {
+                const response = await fetch('localhost:8070/feedback/coach/add', {
                     method: 'POST',
                     body: JSON.stringify(CoachFeedback),
                     headers: {
@@ -40,14 +38,13 @@ const Coachfeedback = () => {
         
                 if (response.ok) {
 
-                        setfeedbackId('')
                         setCustName('')
                         setCustEmail('')
                         setcoachRating('')
                         setcoachFeedback('')
                         setcoachName('')
-                        setApproved(false)
                         setError(null)
+                        window.reload()
                     
                     Swal.fire({
                         title: "Success",
@@ -61,26 +58,26 @@ const Coachfeedback = () => {
                 }
             }
 
-    useEffect(()=>{
+    // useEffect(()=>{
 
-        const fetchCoaches = async ()=>{
+    //     const fetchCoaches = async ()=>{
 
-            const response = await fetch('http://localhost:8000/coaches')
-            const json = await response.json()
-            if(response.ok){
-                setCoaches(json)
-            }
+    //         const response = await fetch('http://localhost:8000/coaches')
+    //         const json = await response.json()
+    //         if(response.ok){
+    //             setCoaches(json)
+    //         }
     
-            else{
-                setFetchError(json.error)
-                console.log('fetcherror', fetcherror)
-            }     
+    //         else{
+    //             setFetchError(json.error)
+    //             console.log('fetcherror', fetcherror)
+    //         }     
     
-        }
+    //     }
 
-        fetchCoaches()
+    //     fetchCoaches()
 
-    },[])
+    // },[])
 
     return ( 
         <body>
@@ -114,18 +111,38 @@ const Coachfeedback = () => {
                         <label class="ftIns">Select Your Coach</label>
                         <select class="insSelect" onChange={(e) => setcoachName(e.target.value)} value={coachName} required>
                             <option selected disabled >Select</option>
-                            {coaches && coaches.map((coach)=>(
+                            <option value="Dinith">Dinith</option>
+                            <option value="Buddhina">Buddhina</option>
+                            {/* {coaches && coaches.map((coach)=>(
                                 <option key={coach.id}>{coach.coach_name}</option>
-                            ))}
+                            ))} */}
                         </select>
                         </div>
                         {/*Enter rating*/}
                         <div>
                         <label class="servicerate">Rate Coaches service</label>
-                        {Array(5).fill().map((_,index)=>
-                        coachRating >= index + 1 ?
-                        (<AiFillStar style={{color:'orange'}} onClick={()=>setcoachRating(index + 1)} class="FillStar" />
-                        ):(<AiOutlineStar style={{color:'orange'}} onClick={()=>setcoachRating(index + 1)} class="OutlineStar"/>))}
+                        <div style={{ display: 'inline-block' }}>
+  {Array(5)
+    .fill()
+    .map((_, index) =>
+      coachRating >= index + 1 ? (
+        <AiFillStar
+          key={index}
+          style={{ color: 'orange', cursor: 'pointer' }}
+          onClick={() => setcoachRating(index + 1)}
+          className="FillStar"
+        />
+      ) : (
+        <AiOutlineStar
+          key={index}
+          style={{ color: 'orange', cursor: 'pointer' }}
+          onClick={() => setcoachRating(index + 1)}
+          className="OutlineStar"
+        />
+      )
+    )}
+</div>
+
                         </div>
                         <div className="add-promo-row">
                             <textarea id="inquiry" name="inquiry" placeholder="Enter your opinion here" value={coachFeedback} onChange={(e)=>setcoachFeedback
