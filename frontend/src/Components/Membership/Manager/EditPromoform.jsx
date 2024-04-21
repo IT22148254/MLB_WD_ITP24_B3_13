@@ -7,20 +7,20 @@ import axios from "axios";
 const EditPromoForm = () => {
 
     const { id } = useParams();
-    const [prPackageName, setprPackageName] = useState("")
-    const [prPackageDescription, setprPackageDescription] = useState("")
-    const [prPackagePrice, setprPackagePrice] = useState("")
-    const [prPackageValidity, setprPackageValidity] = useState('')
+    const [Name, setName] = useState("")
+    const [Discription, setDiscription] = useState("")
+    const [Price, setPrice] = useState("")
+    const [Duration, setDuration] = useState('')
     const [error, setError] = useState(null)
 
     useEffect(() => {
         const fetchprPackage = async () => {
             try {
                 const response = await axios.get(`http://localhost:8000/PromoPackages/${id}`);
-                setprPackageName(response.data.prPackageName);
-                setprPackageDescription(response.data.prPackageDescription);
-                setprPackagePrice(response.data.prPackagePrice);
-                setprPackageValidity(response.data.prPackageValidity)
+                setName(response.data.Name);
+                setDiscription(response.data.Discription);
+                setPrice(response.data.Price);
+                setDuration(response.data.Duration)
             } catch (error) {
                 setError(error)
                 console.log('Error fetching package: ', error);
@@ -35,10 +35,10 @@ const EditPromoForm = () => {
         e.preventDefault()
     
         axios.patch(`http://localhost:8000/PromoPackages/${id}`, {
-            prPackageName: prPackageName,
-            prPackagePrice: prPackagePrice,
-            prPackageDescription: prPackageDescription,
-            prPackageValidity:prPackageValidity
+            Name: Name,
+            Price: Price,
+            Discription: Discription,
+            Duration:Duration
         })
             .then(response => {
                 Swal.fire({
@@ -82,8 +82,8 @@ const EditPromoForm = () => {
                                     type="text"
                                     id="Name"
                                     name="name"
-                                    value={prPackageName}
-                                    onChange={(e)=>setprPackageName(e.target.value)}
+                                    value={Name}
+                                    onChange={(e)=>setName(e.target.value)}
                                     
                                 />
                             </div>
@@ -95,8 +95,8 @@ const EditPromoForm = () => {
                                     type="text"
                                     id="Details"
                                     name="Details"
-                                    value={prPackageDescription}
-                                    onChange={(e)=>setprPackageDescription(e.target.value)}
+                                    value={Discription}
+                                    onChange={(e)=>setDiscription(e.target.value)}
                                     className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                 />
                             </div>
@@ -113,8 +113,8 @@ const EditPromoForm = () => {
                                     allowDecimals={true}
                                     decimalsLimit={2}
                                     prefix="LKR"
-                                    value={prPackagePrice}
-                                    onValueChange={(value) => setprPackagePrice(value)}
+                                    value={Price}
+                                    onValueChange={(value) => setPrice(value)}
                                 />
                             </div>
                             <div className="flex justify-between items-center">
@@ -126,8 +126,8 @@ const EditPromoForm = () => {
                                     id="Date"
                                     name="Date"
                                     className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                                    value={prPackageValidity}
-                                    onChange={(e)=>setprPackageValidity(e.target.value)}
+                                    value={Duration}
+                                    onChange={(e)=>setDuration(e.target.value)}
                                 />
                             </div>
                             <div className="flex justify-between">

@@ -118,18 +118,18 @@ const CreatedPromosTable = () => {
       
         // define the table columns
         const columns = [     
-            { header: 'Package Name', dataKey: 'prPackageName' },    
-            { header: 'Description', dataKey: 'prPackageDescription' },    
-            { header: 'Price', dataKey: 'prPackagePrice' },    
-            { header: 'Valid Until', dataKey: 'prPackageValidity' }  
+            { header: 'Package Name', dataKey: 'Name' },    
+            { header: 'Description', dataKey: 'Discription' },    
+            { header: 'Price', dataKey: 'Price' },    
+            { header: 'Valid Until', dataKey: 'Duration' }  
         ];
         
         // define the table rows
         const rows = promos.map(promo => ({
-            prPackageName: promo.prPackageName,
-            prPackageDescription:promo.prPackageDescription,
-            prPackagePrice:promo.prPackagePrice,
-            prPackageValidity:promo.prPackageValidity
+            Name: promo.Name,
+            Discription:promo.Discription,
+            Price:promo.Price,
+            Duration:promo.Duration
         }));
         
         // add the table to the PDF document
@@ -191,7 +191,7 @@ const CreatedPromosTable = () => {
                                 Price
                             </th>
                             <th>
-                                Validity
+                                Duration
                             </th>
                             <th>
                                 Edit
@@ -205,11 +205,11 @@ const CreatedPromosTable = () => {
                         </thead>
                         <tbody>
                         {promos && promos.map((prm) => (//map is a function which can loop through one by one
-                                <tr key={prm.id}>
-                                <td>{prm.prPackageName}</td>
-                                <td >{prm.prPackageDescription}</td>
-                                <td >{prm.prPackagePrice}</td>
-                                <td >{prm.prPackageValidity}</td>
+                                <tr key={prm._id}>
+                                <td>{prm.Name}</td>
+                                <td >{prm.Discription}</td>
+                                <td >{prm.Price}</td>
+                                <td >{prm.Duration}</td>
                                 <td><button className='reject_btn 'onClick={() => handleEdit()}>Edit</button></td>
                                 <td><button className='reject_btn 'onClick={() => handleDelete(prm.id)}>Delete</button></td>
                                 <td><button className='accept_btn 'onClick={handleSend}>Send</button></td>

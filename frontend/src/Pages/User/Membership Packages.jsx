@@ -67,7 +67,7 @@ const MembershipPackages = () => {
                                         .includes(searchTerm.toLowerCase())
                                     ) ||
                                     prPackages.find((promo) =>
-                                      promo.prPackageName.toLowerCase().includes(searchTerm.toLowerCase())
+                                      promo.Name.toLowerCase().includes(searchTerm.toLowerCase())
                                     );
                                   setFilteredPackage(packageToFiltered);
                                 }
@@ -103,7 +103,7 @@ const MembershipPackages = () => {
                         <div className="promo-left">
                             {prPackages && prPackages
                                 .filter((promo) =>
-                                    promo.prPackageName.toLowerCase().includes(searchTerm.toLowerCase())
+                                    promo.Name.toLowerCase().includes(searchTerm.toLowerCase())
                                 ) 
                                 .map((promo) => (
                                     <PromoDetails_user 

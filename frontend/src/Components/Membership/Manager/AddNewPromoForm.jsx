@@ -10,12 +10,12 @@ import 'react-toastify/dist/ReactToastify.css';
 const AddNewPromoForm = () => {
     
     //Rk - functions(line 7 - line 56)
-    const [prPackageId, setPromoId] = useState('')
-    const [prPackageName, setPromoName] = useState('')
-    const [prPackagePrice, setPromoPrice] = useState(0)
-    const [prPackageDescription, setPromoDetails] = useState('')
-    const [prPackageValidity, setPromoValidity] = useState('')
+    const [Name, setName] = useState('')
+    const [Price, setPrice] = useState(0)
+    const [Discription, setDiscription] = useState('')
+    const [Duration, setDuration] = useState('')
     const [error, setError] = useState(null)
+    const maxWords = 100;
 
     {/*const navigate = useNavigate()*/}
 
@@ -28,7 +28,7 @@ const AddNewPromoForm = () => {
             toast.error('Cannot input below Zero')
             
         }else{
-            setPromoPrice(inputvalue)
+            setPrice(inputvalue)
         }
     }
 
@@ -36,22 +36,23 @@ const AddNewPromoForm = () => {
         const value = e.target.value
         const newValue = value.replace(/[^a-zA-Z\s]/g, '');
 
-        setPromoName(newValue)
+        setName(newValue)
     }
 
-    const handlePromoDesc = (e)=>{
-        const value = e.target.value
-        const newValue = value.replace(/[^a-zA-Z\s]/g, '');
-
-        setPromoDetails(newValue)
+    const handlePromoDesc =(e)=>{
+        const textValue = e.target.value;
+        const wordCount = textValue.split(/\s+/).filter(Boolean).length; // Counting words
+        if (wordCount <= maxWords) {
+          setDiscription(textValue);
+        }
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const promoPk = {prPackageId, prPackageName, prPackagePrice, prPackageDescription, prPackageValidity}
+        const promoPk = {Name,Price, Discription, Duration}
 
-                const response = await fetch('http://localhost:8000/PromoPackages', {
+                const response = await fetch('', {
                     method: 'POST',
                     body: JSON.stringify(promoPk),
                     headers: {
@@ -67,12 +68,10 @@ const AddNewPromoForm = () => {
 
                 if(response.ok){
 
-                    
-                    setPromoId('')
-                    setPromoName('')
-                    setPromoPrice('')
-                    setPromoDetails('')
-                    setPromoValidity('')
+                    setName('')
+                    setPrice('')
+                    setDiscription('')
+                    setDuration('')
                     setError(null)
 
                     Swal.fire({
@@ -114,7 +113,7 @@ const AddNewPromoForm = () => {
                                     type="text"
                                     id="Name"
                                     name="name"
-                                    value={prPackageName}
+                                    value={Name}
                                     onChange={handlePromoName}
                                     required
                                 />
@@ -128,7 +127,7 @@ const AddNewPromoForm = () => {
                                     id="Details"
                                     name="Details"
                                     className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                                    value={prPackageDescription}
+                                    value={Discription}
                                     onChange={handlePromoDesc}
                                     required
                                 />
@@ -146,7 +145,7 @@ const AddNewPromoForm = () => {
                                     allowDecimals={true}
                                     decimalsLimit={2}
                                     prefix="LKR "
-                                    value={prPackagePrice}
+                                    value={Price}
                                     onValueChange={(value)=>handleCurrency(value)}
                                 />
 
@@ -161,8 +160,8 @@ const AddNewPromoForm = () => {
                                     id="Date"
                                     name="Date"
                                     className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                                    value={prPackageValidity}
-                                    onChange={(e)=>setPromoValidity(e.target.value)}
+                                    value={Duration}
+                                    onChange={(e)=>setDuration(e.target.value)}
                                     required
                                 />
                             </div>

@@ -57,10 +57,10 @@ const handleEdit =() => {
         <div class="prm-packages">
             <br />
             {/*<img src={image} alt="" className='prm-image' /> <br /><br />*/}
-            <h2 class="prm-name">{promo.prPackageName}</h2>
-            <p class="prm-price">LKR {promo.prPackagePrice}</p>
-            <p class="prm-description">{promo.prPackageDescription}</p>
-            <p class="prm-validity">Valid Until {promo.prPackageValidity}</p>
+            <h2 class="prm-name">{promo.Name}</h2>
+            <p class="prm-price">LKR {promo.Price}</p>
+            <p class="prm-description">{promo.Discription}</p>
+            <p class="prm-validity">Valid Until {promo.Duration}</p>
             <p><button class="prm-edit-btn" onClick={handleEdit}>Edit</button></p>
             <p><button class="prm-edit-btn" onClick={handleDelete}>Delete</button></p>
         </div>

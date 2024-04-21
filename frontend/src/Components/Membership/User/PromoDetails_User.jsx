@@ -2,7 +2,7 @@ import React from "react";
 import Swal from "sweetalert2"
 
 const PromoDetails_user = ({ promo, filteredPackage }) => {
-    const isFiltered = filteredPackage?.prPackageName === promo.prPackageName
+    const isFiltered = filteredPackage?.Name === promo.Name
 
     const handleSelect = ()=>{
 
@@ -25,10 +25,10 @@ const PromoDetails_user = ({ promo, filteredPackage }) => {
         <div className='promo-packages'>
             <br />
             {/*<img src={image} alt="" className='promo-image' /> <br /><br />*/}
-            <h2 class="promo-name">{promo.prPackageName}</h2>
-            <p class="promo-price">LKR {promo.prPackagePrice}</p>
-            <p class="promo-description">{promo.prPackageDescription}</p>
-            <p class="promo-validity">Valid Until {promo.prPackageValidity}</p>
+            <h2 class="promo-name">{promo.Name}</h2>
+            <p class="promo-price">LKR {promo.Price}</p>
+            <p class="promo-description">{promo.Discription}</p>
+            <p class="promo-validity">Valid Until {promo.Duration}</p>
             <p><button class="promo-select-btn" onClick={handleSelect}>Select</button></p>
         </div>
     )
