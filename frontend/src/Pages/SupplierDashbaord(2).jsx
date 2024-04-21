@@ -8,27 +8,17 @@ const SupplierDashboard = () => {
                 <div className="title code">Supplier Manager Dashboard</div>
                 {/* <Row>
                     <img src={image} alt="" className='' />
-                </Row>
-                <br /> */}
+                </Row> */}
+                <br />
                 <Row className='om_btn'>
                     <Col>
                         <Container >
-                            <a><p id='ed'>Supplier</p></a>
+                            <a><p id='ed'>Add Supplier</p></a>
                         </Container>
                     </Col>
                     <Col>
                         <Container>
-                            <a><p id='ed'>Orders</p></a>
-                        </Container>
-                    </Col>
-                    <Col>
-                        <Container>
-                            <a><p id='ed'>Inventory</p></a>
-                        </Container>
-                    </Col>
-                    <Col>
-                        <Container>
-                            <a><p id='ed'>Invoices</p></a>
+                            <a><p id='ed'>Sup List</p></a>
                         </Container>
                     </Col>
                 </Row>

@@ -104,7 +104,7 @@ const AddSupplierForm = () => {
                         <div className="flex justify-between items-center">
                             <label htmlFor="supPhone" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>Contact No:</label>
                             <input
-                                type="text"
+                                type="number"
                                 id="supPhone"
                                 name="supPhone"
                                 value={supPhone}

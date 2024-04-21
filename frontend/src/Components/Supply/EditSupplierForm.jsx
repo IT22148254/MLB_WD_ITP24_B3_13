@@ -58,7 +58,7 @@ const EditSupplierForm = ({ id }) => {
       if (response.status === 200) {
         Swal.fire({
           title: "Success",
-          text: "Successfully created",
+          text: "Successfully Edited",
           icon: "success",
         });
         // Clear all the text fields
