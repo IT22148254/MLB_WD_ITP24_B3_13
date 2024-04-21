@@ -5,6 +5,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 require("dotenv").config();
 const app = express();
+const cookieParser = require("cookie-parser");
 
 //body parser and url enc
 app.use(express.json());
@@ -14,6 +15,7 @@ const PORT = process.env.PORT || 8070;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 const URL = process.env.MONGODB_URL_STORE;
 
