@@ -6,6 +6,10 @@ const dotenv = require("dotenv");
 require("dotenv").config();
 const app = express();
 
+//body parser and url enc
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 const PORT = process.env.PORT || 8070;
 
 app.use(cors());

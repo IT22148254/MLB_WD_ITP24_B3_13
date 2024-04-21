@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcrypt");
 const schema = mongoose.Schema;
 
 const userSchema = new schema({
@@ -29,6 +30,11 @@ const userSchema = new schema({
   Email: {
     type: String,
     required: true,
+    unique: true,
+  },
+  Password: {
+    type: String,
+    required: true,
   },
   Dob: {
     type: Date,
@@ -38,6 +44,16 @@ const userSchema = new schema({
     required: true,
     default: "customer",
   },
+});
+
+userSchema.methods.matchPassWord = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.Password);
+};
+
+userSchema.pre("save", async function (next) {
+  const salt = await bcrypt.genSalt();
+  this.Password = await bcrypt.hash(this.Password, salt);
+  next();
 });
 
 const User = mongoose.model("User", userSchema);

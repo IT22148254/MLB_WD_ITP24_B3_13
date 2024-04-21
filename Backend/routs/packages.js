@@ -113,7 +113,6 @@ router.route("/propackage/add").post((req, res) => {
     Duration,
     Discription,
   });
-
   newPackage
     .save()
     .then(() => {

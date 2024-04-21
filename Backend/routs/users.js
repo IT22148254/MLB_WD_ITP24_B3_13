@@ -5,13 +5,21 @@ let User = require("../models/user");
 //=================================================================user============================================================================
 // ================================================================================================================================================
 
-
-
 //adding user
 
 router.route("/add").post((req, res) => {
-  const { Fname, Lname, Address, Gender, NIC, Phone, Email, Dob, AccLevel } =
-    req.body;
+  const {
+    Fname,
+    Lname,
+    Address,
+    Gender,
+    NIC,
+    Phone,
+    Email,
+    Password,
+    Dob,
+    AccLevel,
+  } = req.body;
 
   const newUser = new User({
     Fname,
@@ -21,6 +29,7 @@ router.route("/add").post((req, res) => {
     NIC,
     Phone,
     Email,
+    Password,
     Dob,
     AccLevel,
   });
@@ -35,8 +44,6 @@ router.route("/add").post((req, res) => {
     });
 });
 
-
-
 //get all user
 
 router.route("/").get((req, res) => {
@@ -50,8 +57,6 @@ router.route("/").get((req, res) => {
         .json({ message: `Error while fetching all users ${err} ` });
     });
 });
-
-
 
 //get one user
 
@@ -74,15 +79,23 @@ router.route("/get/:id").get(async (req, res) => {
   }
 });
 
-
-
 //update user
 
 router.route("/:id").put(async (req, res) => {
   try {
     const uid = req.params.id;
-    const { Fname, Lname, Address, Gender, NIC, Phone, Email, Dob, AccLevel } =
-      req.body;
+    const {
+      Fname,
+      Lname,
+      Address,
+      Gender,
+      NIC,
+      Phone,
+      Email,
+      Password,
+      Dob,
+      AccLevel,
+    } = req.body;
 
     const result = await User.findByIdAndUpdate(
       uid,
@@ -94,6 +107,7 @@ router.route("/:id").put(async (req, res) => {
         NIC,
         Phone,
         Email,
+        Password,
         Dob,
         AccLevel,
       },
@@ -108,7 +122,6 @@ router.route("/:id").put(async (req, res) => {
     return res.status(400).json({ message: `User update unsuccessful ${err}` });
   }
 });
-
 
 //delete user
 
@@ -126,6 +139,25 @@ router.route("/:id").delete(async (req, res) => {
     return res
       .status(400)
       .json({ message: ` User deleted unsuccessfully ${error}` });
+  }
+});
+
+//utility routs
+
+router.route("/login").post(async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ Email: email });
+
+  if (user && (await user.matchPassWord(password))) {
+    return res.status(200).json({
+      _id: user._id,
+      Name: user.Name,
+      Email: user.Email,
+      AccLevel: user.AccLevel,
+    });
+  } else {
+    return res.status(401).json({ message: "Unauthorised access" });
   }
 });
 
