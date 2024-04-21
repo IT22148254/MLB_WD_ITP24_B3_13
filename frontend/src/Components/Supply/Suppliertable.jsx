@@ -93,13 +93,13 @@ const SupplierTable = () => {
                     }`}
                     key={sup.id}
                     >
-                    <div className="border-2 border-black p-2">{sup.supName}</div>
-                    <div className="border-2 border-black p-2">{sup.supEmail}</div>
+                    <div className="border-2 border-black p-2">{sup.Name}</div>
+                    <div className="border-2 border-black p-2">{sup.Email}</div>
                     <div className="border-2 border-black p-2">
-                        {sup.supPhone}
+                        {sup.Phone}
                     </div>  
                     <div className="border-2 border-black p-2">
-                        {sup.supAddress}
+                        {sup.Address}
                     </div>
                     <div className="border-2 border-black p-2">
                 <button

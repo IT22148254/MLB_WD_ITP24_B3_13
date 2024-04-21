@@ -6,10 +6,10 @@ import axios from "axios";
 const EditSupplierForm = ({ id }) => {
   //let navigate = useNavigate();
 
-  const [supName, setSupName] = useState('')
-  const [supEmail, setSupEmail] = useState('')
-  const [supPhone, setSupPhone] = useState('')
-  const [supAddress, setSupAddress] = useState('')
+  const [Name, setName] = useState('')
+  const [Email, setEmail] = useState('')
+  const [Phone, setPhone] = useState('')
+  const [Address, setAddress] = useState('')
   const [error, setError] = useState(null)
 
   useEffect(() => {
@@ -21,10 +21,10 @@ const EditSupplierForm = ({ id }) => {
         );
         const supplier = response.data;
 
-        setSupName(supplier.supName);
-        setSupEmail(supplier.supEmail);
-        setSupPhone(supplier.supPhone);
-        setSupAddress(supplier.supAddress);
+        setName(supplier.Name);
+        setEmail(supplier.Email);
+        setPhone(supplier.Phone);
+        setAddress(supplier.Address);
         // setContactNo(employee.contactNo);
         // setEmail(employee.email);
         // setAddress(employee.address);
@@ -44,10 +44,10 @@ const EditSupplierForm = ({ id }) => {
     try {
       const supplierData = {
         //employeeId: "EMP000",
-        supName,
-        supEmail,
-        supPhone,
-        supAddress,
+        Name,
+        Email,
+        Phone,
+        Address,
       };
 
       const response = await axios.post(
@@ -62,10 +62,10 @@ const EditSupplierForm = ({ id }) => {
           icon: "success",
         });
         // Clear all the text fields
-        setSupName("");
-        setSupEmail("");
-        setSupPhone("");
-        setSupAddress("");
+        setName("");
+        setEmail("");
+        setPhone("");
+        setAddress("");
         setError(null)
       }
     } catch (error) {
@@ -109,48 +109,48 @@ const EditSupplierForm = ({ id }) => {
                 <div className="flex flex-col gap-y-4">
 
                    <div className="flex justify-between items-center">   {/* check this here */}
-                    <label  htmlFor="supName" className="text-white rounded-xl flex items-center pl-5 font-bold text-2xl"  style={{ WebkitTextStroke: '1px black' }}>Supplier Name:</label>
+                    <label  htmlFor="Name" className="text-white rounded-xl flex items-center pl-5 font-bold text-2xl"  style={{ WebkitTextStroke: '1px black' }}>Supplier Name:</label>
                     <input
                         type="text"
-                        id="supName"
-                        name="supName"
-                        value={supName}
-                        onChange={(e) => setSupName(e.target.value)}
+                        id="Name"
+                        name="Name"
+                        value={Name}
+                        onChange={(e) => setName(e.target.value)}
                         className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                         pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                         />
                     </div>
                 </div>
                 <div className="flex justify-between items-center">                       
-                    <label htmlFor="supEmail" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>Email:</label>
+                    <label htmlFor="Email" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>Email:</label>
                     <input
                         type="email"
-                        id="supEmail"
-                        name="supEmail"
+                        id="Email"
+                        name="Email"
                         className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                         pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                        value={supEmail}
-                        onChange={(e) => setSupEmail(e.target.value)}
+                        value={Email}
+                        onChange={(e) => setEmail(e.target.value)}
                         required />
                 </div>
                 <div className="flex justify-between items-center">
-                    <label htmlFor="supPhone" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>Contact No:</label>
+                    <label htmlFor="Phone" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>Contact No:</label>
                     <input
                         type="text"
-                        id="supPhone"
-                        name="supPhone"
-                        value={supPhone}
-                        onChange={(e)=>setSupPhone(e.target.value)}
+                        id="Phone"
+                        name="Phone"
+                        value={Phone}
+                        onChange={(e)=>setPhone(e.target.value)}
                         className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                         pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                         required />
                 </div>
                 <div className="flex justify-between items-center">  
-                    <label htmlFor="supAddress" className="text-white flex items-center pl-5 font-bold text-2xl font-size" style={{ WebkitTextStroke: '1px black' }}>Address:</label>
-                    <textarea id="supAddress" name="supAddress" className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                    <label htmlFor="Address" className="text-white flex items-center pl-5 font-bold text-2xl font-size" style={{ WebkitTextStroke: '1px black' }}>Address:</label>
+                    <textarea id="Address" name="Address" className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                         pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500" 
-                        value={supAddress}
-                        onChange={(e)=>setSupAddress(e.target.value)}></textarea>
+                        value={Address}
+                        onChange={(e)=>setAddress(e.target.value)}></textarea>
                 </div>
                 <div className="add-promo-btns">    
                                 <div className="flex justify-center mt-9">

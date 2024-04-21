@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const SupOrderForm = () => {
 
     const[orderID, setorderID] = useState('')
-    const[supName, setSupName] = useState('')
+    const[Name, setName] = useState('')
     const[prName, setPrName] = useState('')
     const[quantity, setQuantity] = useState(0) 
     const[size, setSize] = useState('')
@@ -43,7 +43,7 @@ const SupOrderForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const supOrder = {supName, prName, quantity, size}
+        const supOrder = {Name, prName, quantity, size}
 
                 const response = await fetch('http://localhost:8000/Orders', {
                     method: 'POST',
@@ -62,7 +62,7 @@ const SupOrderForm = () => {
                 if(response.ok){
 
                     
-                    setSupName('')
+                    setName('')
                     setPrName('')
                     setQuantity(0)
                     setSize('')
@@ -106,9 +106,9 @@ const SupOrderForm = () => {
                            <div className="flex justify-between items-center">   {/* check this here */}
 
                             <label htmlFor="Name" className="text-white rounded-xl flex items-center pl-5 font-bold text-2xl"  style={{ WebkitTextStroke: '1px black' }}>Supplier Name:</label>
-                            <select name="Supname" id="Name" /*className="dropdown"*/ className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 
-                            text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500" value={supName} 
-                            onChange={(e)=>setSupName(e.target.value)}>
+                            <select name="Name" id="Name" /*className="dropdown"*/ className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 
+                            text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500" value={Name} 
+                            onChange={(e)=>setName(e.target.value)}>
                                 <option value="Senura Nawanjana" selected>Senura Nawanjana</option>
                                 <option value="Senura Nawanjana"  selected>Will Smith</option>
                                 <option value="Senura Nawanjana"  selected>Johnny Depp</option>
@@ -142,7 +142,7 @@ const SupOrderForm = () => {
                                 </div>
                         <div className="flex justify-between items-center">  
                             <label for="Size" className="text-white flex items-center pl-5 font-bold text-2xl font-size" style={{ WebkitTextStroke: '1px black' }}>Size:</label>
-                            <select name="Supname" id="Name" className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold 
+                            <select name="Name" id="Name" className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold 
                             placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500" value={size} onChange={(e)=>setSize(e.target.value)}>
                                 <option value="Small" selected>Small</option>                 
                                 <option value="Medium" selected>Medium</option>
