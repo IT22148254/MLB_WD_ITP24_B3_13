@@ -10,6 +10,11 @@ const supplierSchema = new schema({
     type: String,
     required: true,
   },
+  Email: {
+    type: String,
+    required: true,
+  },
+  
 });
 
 const orderSchema = new schema({
