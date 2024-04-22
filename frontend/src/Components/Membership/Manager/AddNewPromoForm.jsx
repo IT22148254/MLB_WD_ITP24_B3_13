@@ -5,7 +5,7 @@ import CurrencyInput from 'react-currency-input-field'
 import Swal from "sweetalert2";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import axios from "axios";
 
 const AddNewPromoForm = () => {
     
@@ -50,40 +50,42 @@ const AddNewPromoForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const promoPk = {Name,Price, Discription, Duration}
+        
 
-                const response = await fetch('', {
-                    method: 'POST',
-                    body: JSON.stringify(promoPk),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                })
+        try {
+            const promoPk = {Name,Price, Discription, Duration}
+            const response = await axios.post('http://localhost:8070/package/propackage/add', promoPk)
+            
+            if(response.status=200){
 
-                const json = await response.json()
+                setName('')
+                setPrice('')
+                setDiscription('')
+                setDuration('')
+                setError(null)
 
-                if (!response.ok) {
-                    setError(json.error)
-                }
+                Swal.fire({
+                    title: "Success",
+                    text: "new promo added successfully",
+                    icon: "success",
+                  }).then(()=>{
+                    console.log('new promo added', response.data)
+                  })
+                  
+                {/*navigate('/promoPackages')*/}
+        }
+            
+        } catch (error) {
+            console.error('Error creating promo', error)
+        }
+                
 
-                if(response.ok){
+                // if (!response.ok) {
+                //     setError(json.error)
+                // }
 
-                    setName('')
-                    setPrice('')
-                    setDiscription('')
-                    setDuration('')
-                    setError(null)
-
-                    Swal.fire({
-                        title: "Success",
-                        text: "new promo added successfully",
-                        icon: "success",
-                      }).then(()=>{
-                        console.log('new promo added', json)
-                      })
-                      
-                    {/*navigate('/promoPackages')*/}
-            }}
+                
+        }
             
      
     //Rk-functions
@@ -156,11 +158,12 @@ const AddNewPromoForm = () => {
                                     Package Validity:
                                 </label>
                                 <input
-                                    type="date"
+                                    type="text"
                                     id="Date"
                                     name="Date"
                                     className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                     value={Duration}
+                                    prefix="Days"
                                     onChange={(e)=>setDuration(e.target.value)}
                                     required
                                 />

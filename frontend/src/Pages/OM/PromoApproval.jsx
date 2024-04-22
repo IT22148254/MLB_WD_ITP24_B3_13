@@ -1,4 +1,4 @@
-import PromoApprovalTable from "../Components/Membership/PromoApprovaltable";
+import PromoApprovalTable from "../../Components/Membership/PromoApprovaltable";
 
 const PromoApproval = () => {
     return (  

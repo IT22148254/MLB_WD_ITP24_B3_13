@@ -129,7 +129,7 @@ router.route("/propackage/add").post((req, res) => {
 router.route("/propackage/").get((req, res) => {
   PromoPackage.find()
     .then((result) => {
-      res.status(200).json({ result });
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(400).json({ message: `Packages fetching went wrong ${err}` });
@@ -145,7 +145,7 @@ router.route("/propackage/get/:id").get(async (req, res) => {
     if (!pkg) {
       return res.status(404).json({ message: "Package not found" });
     }
-    return res.status(200).json({ pkg });
+    return res.status(200).json(pkg);
   } catch (error) {
     return res
       .status(400)

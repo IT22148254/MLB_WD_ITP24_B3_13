@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 // "proxy": "http://localhost:8070",
 
 const TestScreen = () => {
     const [pkgs, setPkgs] = useState([]);
+    const {id} = useParams();
 
     useEffect(() => {
         const fetchPkgs = async () => {
             try {
-                const { data } = await axios.get('http://localhost:8070/package/package');
-                setPkgs(data);
-                console.log(data);
+                const res = await axios.get(`http://localhost:8070/package/propackage/get/${id}`);
+                setPkgs(res.data);
+                console.log(res.data);
             } catch (error) {
                 console.error("Error fetching packages:", error);
             }
@@ -23,9 +25,10 @@ const TestScreen = () => {
         <div>
             <h2>TestScreen</h2>
             <ul>
-                {pkgs.map( (pkg) => (
+            <li key={pkgs._id}>{pkgs.Name}</li>
+                {/* {pkgs.map( (pkg) => (
                     <li key={pkg._id}>{pkg.Name}</li>
-                ))}
+                ))} */}
             </ul>
         </div>
     );

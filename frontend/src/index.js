@@ -6,8 +6,8 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import MMDashboard from './Pages/Manager/MMDashboard';
 import AddNewPromoForm from './Components/Membership/Manager/AddNewPromoForm'
-import CreatedPromos from './Pages/Manager/CreatedPromos'
-import EditPromo from './Pages/Manager/EditPromo';
+import CreatedPromos from './Components/Membership/Manager/CreatedPromosTable'
+import EditPromoForm from './Components/Membership/Manager/EditPromoform';
 import EditStandard from './Components/Membership/Manager/EditStandardform'
 import TestScreen from './Components/Membership/Manager/TestScreen';
 import { ToastContainer } from 'react-toastify';
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
         <Route path='mmdashboard/' element={<MMDashboard />} />
         <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
-        <Route path='editpromo/:id' element={<EditPromo />} />
+        <Route path='editpromo/:id' element={<TestScreen />} />
         <Route path="editstandard/:id" element={<EditStandard />} />
         <Route path="testscreen/" element={<TestScreen />} />
       </Route>
