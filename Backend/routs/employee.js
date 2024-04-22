@@ -34,6 +34,7 @@ router.route("/employee/find/:id").get(async (req, res) => {
 
 // Create a new employee
 router.route("/employee/create").post(async (req, res) => {
+  // const data = req.body;
   try {
     const {
       employeeId,
@@ -47,17 +48,7 @@ router.route("/employee/create").post(async (req, res) => {
       role,
     } = req.body;
 
-    const employee = await Employee.create({
-      employeeId,
-      fullName,
-      nic,
-      gender,
-      dob,
-      contactNo,
-      email,
-      address,
-      role,
-    });
+    const employee = await Employee.create(req.body);
     res.status(200).json({ msg: "Successfully created" });
   } catch (error) {
     res.status(400).json({ error: error });
