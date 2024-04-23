@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Container} from 'reactstrap'
 
 const SupplierTable = () => {
 
     const[suppliers,setSuppliers] = useState([])
+    const {id} = useParams();
+    let navigate = useNavigate();
 
     useEffect(()=>{
 
@@ -15,6 +17,7 @@ const SupplierTable = () => {
             try {
                 const {data} =  await axios.get("http://localhost:8070/supplier")
                 setSuppliers(data.result)
+                console.log(data)
                 
             } catch (error) {
                 console.error("Failed to fetch Items", error);
@@ -24,8 +27,7 @@ const SupplierTable = () => {
     }, [])
 
     const handleEdit = (id) => {
-        console.log(`Edit sup with id: ${id}`);
-        //navigate(`/edit/${id}`);
+        navigate(`/sup/editsup/${id}`);
       };
 
       const handleDelete = (id) => {
@@ -40,7 +42,7 @@ const SupplierTable = () => {
         }).then(async (result) => {
           if (result.isConfirmed) {
             try {
-              const response = await axios.delete(`http://localhost:8000/Suppliers/${id}`);
+              const response = await axios.delete(`http://localhost:8070/supplier/${id}`);
     
               if (response.status === 200) {
                 Swal.fire({
@@ -89,7 +91,7 @@ const SupplierTable = () => {
                 suppliers.map((sup, index) => (
                     <div
                     className={`grid grid-cols-8 ${
-                        index % 2 == 0 ? "bg-cyan-200 " : "bg-cyan-400 "
+                        index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
                     }`}
                     key={sup.id}
                     >
@@ -104,7 +106,7 @@ const SupplierTable = () => {
                     <div className="border-2 border-black p-2">
                 <button
                   className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                  onClick={() => handleEdit(sup.id)}
+                  onClick={() => handleEdit(sup._id)}
                 >
                   Edit
                 </button>

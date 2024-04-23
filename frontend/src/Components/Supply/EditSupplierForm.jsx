@@ -1,25 +1,26 @@
 import React, { useState } from "react";
-//import Swal from "sweetalert2";
+import Swal from "sweetalert2";
 import axios from "axios";
-//import { useNavigate } from "react-router-dom";
-
-const EditSupplierForm = ({ id }) => {
-  //let navigate = useNavigate();
+import { useParams } from "react-router-dom";
+import { Container } from "reactstrap";
+import { useEffect } from "react";
+const EditSupplierForm = () => {
 
   const [Name, setName] = useState('')
   const [Email, setEmail] = useState('')
   const [Phone, setPhone] = useState('')
   const [Address, setAddress] = useState('')
   const [error, setError] = useState(null)
+  const {id} = useParams();
 
   useEffect(() => {
     console.log("id: ", id);
     const fetchSupplier = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/employee/find/${id}`
+          `http://localhost:8070/supplier/get/${id}`
         );
-        const supplier = response.data;
+        const supplier = response.data.supplier;
 
         setName(supplier.Name);
         setEmail(supplier.Email);
@@ -35,42 +36,43 @@ const EditSupplierForm = ({ id }) => {
     };
 
     fetchSupplier();
-  }, []);
+  }, [id]);
 
   
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
    
-    try {
-      const supplierData = {
-        //employeeId: "EMP000",
-        Name,
-        Email,
-        Phone,
-        Address,
-      };
+    e.preventDefault()
 
-      const response = await axios.post(
-        "http://localhost:8000/employee/create",
-        supplierData
-      );
+    axios.put(`http://localhost:8070/supplier/${id}`, {
+        Name: Name,
+        Email: Email,
+        Phone: Phone,
+        Address: Address
+    })
+        .then(response => {
+            Swal.fire({
+                title: "Success",
+                text: " Supplier updated successfully",
+                icon: "success",
+            }).then(() => {
+                console.log('Supplier updated successfully', response.data)
+                setError(null)
+            })
+            //window.location = "http://localhost:3000/standardpackages";
+        })
+        .catch(error => {
 
-      if (response.status === 200) {
-        Swal.fire({
-          title: "Success",
-          text: "Successfully Edited",
-          icon: "success",
+            Swal.fire({
+                title: "Error",
+                text: " Cannot update Supplier",
+                icon: "error",
+            }).then(() => {
+                console.log('Cannot update Supplier', error)
+            })
+
+
         });
-        // Clear all the text fields
-        setName("");
-        setEmail("");
-        setPhone("");
-        setAddress("");
-        setError(null)
-      }
-    } catch (error) {
-      console.error("Error creating Supplier:", error);
-    }
   };
 
   // useEffect(() => {

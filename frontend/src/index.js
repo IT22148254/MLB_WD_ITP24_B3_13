@@ -6,13 +6,17 @@ import reportWebVitals from './reportWebVitals';
 import AddSupplierForm from './Components/Supply/AddSupplierForm';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import TestScreen from './Components/Supply/TestScreen';
+import SupplierTable from './Components/Supply/Suppliertable';
+import EditSupplierForm from './Components/Supply/EditSupplierForm';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App/>}>
       <Route path="/sup">
         <Route path="addSupplier/" element={<AddSupplierForm/>} />
-        <Route path="testscreen/" element={<TestScreen/>} />
+        <Route path="testscreen/:id" element={<TestScreen/>} />
+        <Route path="suppliertable/" element={<SupplierTable/>}/>
+        <Route path="editsup/:id" element= {<EditSupplierForm/>}/>
       </Route>
     </Route>
   )
