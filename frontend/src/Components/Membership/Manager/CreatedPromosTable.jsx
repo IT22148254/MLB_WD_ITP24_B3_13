@@ -25,7 +25,7 @@ const CreatedPromosTable = () => {
     useEffect(() => {
         const fetchPkgs = async () => {
             try {
-                const { data } = await axios.get('http://localhost:8070/package/propackage');
+                const {data} = await axios.get('http://localhost:8070/package/propackage');
                 setPromos(data);
                 console.log(data);
             } catch (error) {
