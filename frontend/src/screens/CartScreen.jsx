@@ -21,6 +21,8 @@ const CartScreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const { cartItems } = cart;
+  const auth = useSelector((state) => state.auth);
+  const { userInfo } = auth;
 
   const addToCartHandler = async (itm, quantity) => {
     dispatch(addToCart({ ...itm, quantity }));
@@ -31,8 +33,8 @@ const CartScreen = () => {
   };
 
   const checkoutHandler = () => {
-    navigate('/login?redirect=/shipping')
-  }
+    navigate("/login?redirect=/shipping");
+  };
 
   return (
     <Container className="py-5">
@@ -113,6 +115,21 @@ const CartScreen = () => {
                   {" "}
                   Proceed to checkout{" "}
                 </Button>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                {userInfo !== null ? (
+                  <Button
+                    type="button"
+                    variant="success"
+                    disabled={userInfo === null}
+                    onClick={(e) => navigate(`/orderst/myorders/${userInfo._id}`)}
+                  >
+                    {" "}
+                    My orders{" "}
+                  </Button>
+                ) : (
+                  <Message> Log in to view all orders </Message>
+                )}
               </ListGroup.Item>
             </ListGroup>
           </Card>

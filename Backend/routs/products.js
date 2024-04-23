@@ -169,8 +169,8 @@ router.route("/orderst/").get(protect, admin, async (req, res) => {
 });
 
 
-router.route("/orderst/get/:id").get(protect, admin, async (req, res) => {
-  const order = Order.findById(req.params.id).populate("user", "Fname Email");
+router.route("/orderst/get/:id").get(protect, async (req, res) => {
+  const order = await OrderSt.findById(req.params.id).populate("user", "Fname Email");
   if (order) {
     return res.status(200).json(order);
   } else {
@@ -179,8 +179,8 @@ router.route("/orderst/get/:id").get(protect, admin, async (req, res) => {
 });
 
 
-router.route("/orderst/myorders").get(protect, async (req, res) => {
-  const orders = await OrderSt.find({ user: req.user._id });
+router.route("/orderst/myorders/:id").get(protect, async (req, res) => {
+  const orders = await OrderSt.find( {user: req.params.id });
   return res.status(200).json(orders);
 });
 
