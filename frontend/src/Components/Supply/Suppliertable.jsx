@@ -9,6 +9,7 @@ import 'jspdf-autotable'
 const SupplierTable = () => {
 
   const [suppliers, setSuppliers] = useState([])
+  const { id } = useParams();
   let navigate = useNavigate();
 
   useEffect(() => {
