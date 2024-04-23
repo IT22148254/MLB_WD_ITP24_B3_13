@@ -27,6 +27,9 @@ app.use("/product", productRouter);
 const userRouter = require("./routs/users.js");
 app.use("/user",userRouter);
 
+// const emailrouter = require("./routs/email.js")
+// app.use("/email", emailrouter)
+
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);
 });
