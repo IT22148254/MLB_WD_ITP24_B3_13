@@ -1,8 +1,21 @@
 const router = require("express").Router();
-let Product = require("../models/product");
+let { Product, OrderSt } = require("../models/product");
+const { admin, protect } = require("../Middleware/authMiddleware");
+const { Order } = require("../models/supplier");
 
 router.route("/add").post((req, res) => {
-  const { name,image, price, description,brand,category, countInStock,numReviews,rating,reviews } = req.body;
+  const {
+    name,
+    image,
+    price,
+    description,
+    brand,
+    category,
+    countInStock,
+    numReviews,
+    rating,
+    reviews,
+  } = req.body;
 
   const newProduct = new Product({
     name,
@@ -14,7 +27,7 @@ router.route("/add").post((req, res) => {
     category,
     numReviews,
     rating,
-    reviews
+    reviews,
   });
 
   newProduct
@@ -44,21 +57,45 @@ router.route("/").get((req, res) => {
 router.route("/:id").put(async (req, res) => {
   try {
     const id = req.params.id;
-    const { name,image, price, description,brand,category, countInStock,numReviews,rating,reviews } = req.body;
+    const {
+      name,
+      image,
+      price,
+      description,
+      brand,
+      category,
+      countInStock,
+      numReviews,
+      rating,
+      reviews,
+    } = req.body;
 
     const result = await Product.findByIdAndUpdate(
       id,
-      { name,image, price, description,brand,category, countInStock,numReviews,rating,reviews },
+      {
+        name,
+        image,
+        price,
+        description,
+        brand,
+        category,
+        countInStock,
+        numReviews,
+        rating,
+        reviews,
+      },
       { new: true }
     );
 
     if (!result) {
-      return res.status(404).json({message:"Product not found"});
+      return res.status(404).json({ message: "Product not found" });
     }
 
-    return res.status(200).json({message:"Product updated successfully"});
+    return res.status(200).json({ message: "Product updated successfully" });
   } catch (error) {
-    return res.status(400).json({message:` Product update unsuccessful ${error}`});
+    return res
+      .status(400)
+      .json({ message: ` Product update unsuccessful ${error}` });
   }
 });
 
@@ -86,12 +123,75 @@ router.route("/get/:id").get(async (req, res) => {
       return res.status(404).json({ message: " Product not found " });
     }
 
-    return res
-      .status(200)
-      .json(item);
+    return res.status(200).json(item);
   } catch (error) {
-    return res.status(400).json({message:`Data retreival unsuccessful ${error} `});
+    return res
+      .status(400)
+      .json({ message: `Data retreival unsuccessful ${error} ` });
   }
+});
+
+router.route("/orderst/add").post(protect, async (req, res) => {
+  const {
+    orderItems,
+    shippingAddress,
+    paymentMethod,
+    itemPrice,
+    shippingPrice,
+    totalPrice,
+  } = req.body;
+
+  if (orderItems && orderItems.length === 0) {
+    return res.status(400).json({ message: "orderItems are empty" });
+  } else {
+    const newOrder = new OrderSt({
+      orderItems: orderItems.map((x) => ({
+        ...x,
+        product: x._id,
+        _id: undefined,
+      })),
+      user: req.user._id,
+      shippingAddress,
+      paymentMethod,
+      itemPrice,
+      shippingPrice,
+      totalPrice,
+    });
+
+    await newOrder.save();
+    return res.status(200).json({ message: "order is saved" });
+  }
+});
+
+
+router.route("/orderst/").get(protect, admin, async (req, res) => {
+  res.send("get all orders");
+});
+
+
+router.route("/orderst/get/:id").get(protect, admin, async (req, res) => {
+  const order = Order.findById(req.params.id).populate("user", "Fname Email");
+  if (order) {
+    return res.status(200).json(order);
+  } else {
+    return res.status(404).json({ message: "error -> cannot get order by id" });
+  }
+});
+
+
+router.route("/orderst/myorders").get(protect, async (req, res) => {
+  const orders = await OrderSt.find({ user: req.user._id });
+  return res.status(200).json(orders);
+});
+
+
+router.route("/orderst/:id/pay").put(protect, async (req, res) => {
+  res.send("update is paid");
+});
+
+
+router.route("/orderst/:id/deliver").put(protect, admin, async (req, res) => {
+  res.send("update is delivered");
 });
 
 module.exports = router;

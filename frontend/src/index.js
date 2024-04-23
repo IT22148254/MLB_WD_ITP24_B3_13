@@ -18,7 +18,8 @@ import store from "./store";
 import LoginScreen from "./screens/LoginScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import { ProtectedRoute } from "./content/ProtectedRoute";
-import PaymentScreen from "./content/PaymentScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
       <Route path="" element={<ProtectedRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />
         <Route path="store/payment" element={<PaymentScreen/>}/>
+        <Route path="/store/placeorder" element={<PlaceOrderScreen/>}/>
       </Route>
     </Route>
   )
