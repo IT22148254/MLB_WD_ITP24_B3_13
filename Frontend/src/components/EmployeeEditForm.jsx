@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Calendar from "react-calendar";
+import "./calendar.css";
 
 const EmployeeEditForm = ({ id }) => {
   let navigate = useNavigate();
@@ -9,29 +11,33 @@ const EmployeeEditForm = ({ id }) => {
   const [fullName, setFullName] = useState("");
   const [nic, setNic] = useState("");
   const [gender, setGender] = useState("");
-  const [dob, setDob] = useState("");
+  const [dob, setDob] = useState(null);
   const [contactNo, setContactNo] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
-  const [qualifications, setQualifications] = useState("");
+  const [role, setRole] = useState("");
+
+  const [isDobSelected, setIsDobSelected] = useState(false);
 
   useEffect(() => {
     console.log("id: ", id);
     const fetchEmployee = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8000/employee/find/${id}`
+          `http://localhost:8070/employee/employee/find/${id}`
         );
         const employee = response.data;
+
+        console.log("DOB: ", employee.dob);
 
         setFullName(employee.fullName);
         setNic(employee.nic);
         setGender(employee.gender);
-        setDob(employee.dob);
+        setDob(new Date(employee.dob));
         setContactNo(employee.contactNo);
         setEmail(employee.email);
         setAddress(employee.address);
-        setQualifications(employee.qualifications);
+        setRole(employee.role);
       } catch (error) {
         console.error("Error fetching employee:", error);
       }
@@ -52,8 +58,8 @@ const EmployeeEditForm = ({ id }) => {
     setGender(e.target.value);
   };
 
-  const handleDobChange = (e) => {
-    setDob(e.target.value);
+  const handleDobChange = (value) => {
+    setDob(value);
   };
 
   const handleContactNoChange = (e) => {
@@ -68,8 +74,8 @@ const EmployeeEditForm = ({ id }) => {
     setAddress(e.target.value);
   };
 
-  const handleQualificationsChange = (e) => {
-    setQualifications(e.target.value);
+  const handleRoleChange = (e) => {
+    setRole(e.target.value);
   };
 
   const handleAddClick = async () => {
@@ -84,7 +90,7 @@ const EmployeeEditForm = ({ id }) => {
       !contactNo ||
       !email ||
       !address ||
-      !qualifications
+      !role
     ) {
       Swal.fire({
         title: "Missing fields",
@@ -123,11 +129,11 @@ const EmployeeEditForm = ({ id }) => {
         contactNo,
         email,
         address,
-        qualifications,
+        role,
       };
 
       const response = await axios.put(
-        "http://localhost:8000/employee/update",
+        "http://localhost:8070/employee/employee/update",
         employeeData
       );
 
@@ -145,7 +151,7 @@ const EmployeeEditForm = ({ id }) => {
         setContactNo("");
         setEmail("");
         setAddress("");
-        setQualifications("");
+        setRole("");
       }
 
       // Navigate away
@@ -160,7 +166,7 @@ const EmployeeEditForm = ({ id }) => {
   //   const fetchEmployee = async () => {
   //     try {
   //       const response = await axios.get(
-  //         `http://localhost:8000/employee/${id}`
+  //         `http://localhost:8070/employee/employee/employee/${id}`
   //       );
   //       const employee = response.data;
 
@@ -203,20 +209,46 @@ const EmployeeEditForm = ({ id }) => {
         />
       </div>
       <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Gender"
+        <select
+          className="w-full bg-transparent h-14 rounded-xl text-black font-semibold text-lg pl-4"
           value={gender}
           onChange={handleGenderChange}
-        />
+        >
+          <option value="" disabled>
+            Select Gender
+          </option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
       </div>
-      <div className={inputContainerStyle}>
-        <input
-          className={inputStyle}
-          placeholder="Date of Birth"
-          value={dob}
-          onChange={handleDobChange}
-        />
+      <div className={inputContainerStyle + " relative select-none"}>
+        <p
+          onClick={() => setIsDobSelected(!isDobSelected)}
+          className={
+            "flex items-center w-full bg-transparent h-14 rounded-xl text-black pl-5 " +
+            (dob ? "font-normal text-lg" : "font-semibold text-lg")
+          }
+        >
+          {dob === null
+            ? "Date of Birth"
+            : `${dob.getFullYear()} - ${
+                dob.getMonth() < 10
+                  ? "0" + dob.getMonth().toString()
+                  : dob.getMonth()
+              } - ${
+                dob.getDate() < 10
+                  ? "0" + dob.getDate().toString()
+                  : dob.getDate()
+              }`}
+        </p>
+        <div
+          className={
+            "absolute z-10 top-16 right-0 transition-opacity duration-150 ease-in-out  " +
+            (isDobSelected ? "opacity-100" : "opacity-0")
+          }
+        >
+          <Calendar onChange={handleDobChange} value={dob} />
+        </div>
       </div>
       <div className={inputContainerStyle}>
         <input
@@ -245,9 +277,9 @@ const EmployeeEditForm = ({ id }) => {
       <div className={inputContainerStyle}>
         <input
           className={inputStyle}
-          placeholder="Qualifications"
-          value={qualifications}
-          onChange={handleQualificationsChange}
+          placeholder="Role"
+          value={role}
+          onChange={handleRoleChange}
         />
       </div>
       <div className="flex justify-between mt-5">
@@ -268,7 +300,7 @@ const EmployeeEditForm = ({ id }) => {
             setContactNo("");
             setEmail("");
             setAddress("");
-            setQualifications("");
+            setRole("");
 
             // Navigate away
             navigate("/");
