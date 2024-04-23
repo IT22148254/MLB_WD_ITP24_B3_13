@@ -3,6 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
+import jsPDF from 'jspdf'
+import 'jspdf-autotable'
 const ServiceFeedbackTable = () => {
   let navigate = useNavigate();
 
@@ -65,6 +67,38 @@ const ServiceFeedbackTable = () => {
     });
   };
 
+  const handleCreateReport = () => {
+    // initialize the PDF document
+    const doc = new jsPDF();
+
+    // add title to the PDF document
+    doc.setFontSize(16);
+    doc.text('Service Feedback Report', 14, 22);
+    
+  
+    // define the table columns
+    const columns = [     
+        { header: 'Customer Name', dataKey: 'UserName' },    
+        { header: 'Email', dataKey: 'Email' },    
+        { header: 'Rating', dataKey: 'Rating' },    
+        { header: 'Feedback', dataKey: 'Comment' }  
+    ];
+    
+    // define the table rows
+    const rows = feedbacks.map(feedback => ({
+      UserName: feedback.UserName,
+      Email: feedback.Email,
+      Rating: feedback.Rating,
+      Comment: feedback.Comment
+    }));
+    
+    // add the table to the PDF document
+    doc.autoTable(columns, rows);
+    
+    // save the PDF file
+    doc.save('ServiceFeedbackReport.pdf');
+}
+
   return (
     <div className="w-full">
         <div className="title">Service Feedback list</div>
@@ -88,7 +122,7 @@ const ServiceFeedbackTable = () => {
           feedbacks.map((feedback, index) => (
             <div
               className={`grid grid-cols-8 ${
-                index % 2 == 0 ? "bg-cyan-200 " : "bg-cyan-400 "
+                index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
               }`}
               key={feedback._id}
             >
@@ -120,6 +154,7 @@ const ServiceFeedbackTable = () => {
               </div>
             </div>
           ))}
+          <button class="secondary__btn" id="btn_position" onClick={handleCreateReport}>Generate Feedback Report</button>
       </div>
     </div>
   );
