@@ -40,7 +40,7 @@ router.route("/add").post((req, res) => {
 router.route("/").get((req, res) => {
   Supplier.find()
     .then((result) => {
-      res.status(200).json({ result });
+      res.status(200).json({result});
     })
     .catch((err) => {
       res.status(200).json({ message: "Sppliers fetching unsuccessful" });

@@ -13,8 +13,8 @@ const SupplierTable = () => {
         const fetchSuppliers = async ()=>{
 
             try {
-                const response =  await axios.get("http://localhost:8000/Suppliers")
-                setSuppliers(response.data)
+                const {data} =  await axios.get("http://localhost:8070/supplier")
+                setSuppliers(data.result)
                 
             } catch (error) {
                 console.error("Failed to fetch Items", error);

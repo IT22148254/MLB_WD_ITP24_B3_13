@@ -6,13 +6,14 @@ import axios from "axios";
 
 const TestScreen = () => {
     const [sups, setSups] = useState([]);
+    const {id} = useParams();
 
     useEffect(() => {
         const fetchPkgs = async () => {
             try {
-                const {data} = await axios.get('http://localhost:8070/supplier');
-                setSups(data);
-                console.log(data);
+                const res = await axios.get(`http://localhost:8070/supplier/get/${id}`);
+                setSups(res.data);
+                console.log(res);
             } catch (error) {
                 console.error("Error fetching suppliers:", error);
             }
@@ -25,8 +26,8 @@ const TestScreen = () => {
             <h2>TestScreen</h2>
             <ul>
             <li key={sups._id}>{sups.Name}</li>
-                {/* {pkgs.map( (pkg) => (
-                    <li key={pkg._id}>{pkg.Name}</li>
+                {/* {sups && sups.map( (sup) => (
+                    <li key={sup._id}>{sup.Name}</li>
                 ))} */}
             </ul>
         </div>

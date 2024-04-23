@@ -35,7 +35,7 @@ const AddSupplierForm = () => {
         //   }
         const supplier = {Name,Email, Phone,Address}
 
-                const response = await fetch('http://localhost:8000/Suppliers', {
+                const response = await fetch('http://localhost:8070/supplier/add', {
                     method: 'POST',
                     body: JSON.stringify(supplier),
                     headers: {
