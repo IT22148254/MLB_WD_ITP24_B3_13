@@ -12,7 +12,7 @@ const {Supplier,Order,Report} = require("../models/supplier");
 //add new supplier
 
 router.route("/add").post((req, res) => {
-  const { Name, NIC, Email, Address} = req.body;
+  const { Name, Email, Phone, Address} = req.body;
 
   const newSupplier = Supplier({
     Name,
