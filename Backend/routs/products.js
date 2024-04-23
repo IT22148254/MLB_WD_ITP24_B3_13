@@ -142,7 +142,7 @@ router.route("/orderst/add").post(protect, async (req, res) => {
   } = req.body;
 
   if (orderItems && orderItems.length === 0) {
-    return res.status(400).json({ message: "orderItems are empty" });
+    return res.status(400);
   } else {
     const newOrder = new OrderSt({
       orderItems: orderItems.map((x) => ({
@@ -159,7 +159,7 @@ router.route("/orderst/add").post(protect, async (req, res) => {
     });
 
     await newOrder.save();
-    return res.status(200).json({ message: "order is saved" });
+    return res.status(200).json(newOrder);
   }
 });
 
