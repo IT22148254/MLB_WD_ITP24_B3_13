@@ -15,7 +15,7 @@ const EditPromoForm = () => {
     const [Duration, setDuration] = useState('')
     const [error, setError] = useState(null)
     const maxWords = 100;
-    const id = useParams();
+    const {id} = useParams();
 
     const handleCurrency = (value) => {
         var inputvalue = value
@@ -61,12 +61,12 @@ const EditPromoForm = () => {
             }
         };
         fetchprPackage();
-    }, []);
+    }, [id]);
 
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        axios.patch(`http://localhost:8070/package/propackage/${id}`, {
+        axios.put(`http://localhost:8070/package/propackage/${id}`, {
             Name: Name,
             Price: Price,
             Discription: Discription,
@@ -103,7 +103,7 @@ const EditPromoForm = () => {
                 <div>
                     <div className="flex h-full justify-center items-center ">
                         <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 flex flex-col gap-y-4">
-                            <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Edit Standard Package</p> {/* Moved "Edit Standard" text above the black box */}
+                            <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Edit Promo Package</p> {/* Moved "Edit Standard" text above the black box */}
                             <form onSubmit={handleSubmit} className="space-y-4">
                                 <div className="flex flex-col gap-y-4">
                                     <div className="flex justify-between items-center">

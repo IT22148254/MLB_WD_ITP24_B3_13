@@ -18,7 +18,7 @@ const router = createBrowserRouter(
         <Route path='mmdashboard/' element={<MMDashboard />} />
         <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
-        <Route path='editpromo/:id' element={<TestScreen />} />
+        <Route path='editpromo/:id' element={<EditPromoForm/>} />
         <Route path="editstandard/:id" element={<EditStandard />} />
         <Route path="testscreen/" element={<TestScreen />} />
       </Route>

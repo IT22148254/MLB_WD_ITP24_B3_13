@@ -188,29 +188,6 @@ const CreatedPromosTable = () => {
                                 <Col lg="12">
                                     <div className="flex justify-between items-center">
                                         <div>
-                                            <label htmlFor="from" className="text-2xl text-white font-bold align-top mb-15">From : </label>
-                                            <input
-                                                type="date"
-                                                id="from"
-                                                name="from"
-                                                className="bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl focus:outline-none focus:border-green-500"
-                                                required
-                                            />
-                                        </div>
-                                        <div>
-                                            <label htmlFor="to" className="text-2xl text-white font-bold align-top mb-15 ml-10">To : </label>
-
-                                            <input
-                                                type="date"
-                                                id="to"
-                                                name="to"
-                                                className="bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl focus:outline-none focus:border-green-500"
-                                                required
-                                            />
-
-
-                                        </div>
-                                        <div>
                                             <label htmlFor="search" className="text-2xl text-white font-bold align-top mb-15 ml-10">Search : </label>
 
                                             <input
