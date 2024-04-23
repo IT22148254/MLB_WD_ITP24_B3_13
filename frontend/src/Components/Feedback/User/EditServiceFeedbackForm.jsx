@@ -1,69 +1,84 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { Container } from 'reactstrap'
+import React, { useState,useEffect } from "react"
+import axios from 'axios'
 import {AiFillStar,AiOutlineStar} from 'react-icons/ai'
+import { useParams } from "react-router-dom"
 import Swal from "sweetalert2";
 
-const ServiceFeedbackForm = () => {
+const EditServiceFeedbackForm = () => {
 
+    const { id } = useParams();
     const [UserName,setName] = useState('');
     const [Email,setEmail] = useState('');
     const [Rating,setRating] = useState(0);
     const [Comment,setComment] = useState('');
     const [error, setError] = useState(null)
-     {/*const navigate =useNavigate()*/}
 
-    const handleSubmit = async (e)=>{
-        e.preventDefault();
-
-        const ServiceFeedback = {UserName, Email, Rating, Comment}
-
-        const response = await fetch('http://localhost:8070/feedback/service/add', {
-            method: 'POST',
-            body: JSON.stringify(ServiceFeedback),
-            headers: {
-                'Content-Type': 'application/json'
+    useEffect(() => {
+        
+        const fetchServiceFeedback = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8070/feedback/service/get/${id}`);
+                const feedback = response.data.ServiceFeedBack;
+                setName(feedback.UserName);
+                setEmail(feedback.Email);
+                setRating(feedback.Rating);
+                setComment(feedback.Comment);
+                console.log(response.data);
+            } catch (error) {
+                console.log('Error fetching instructor feedback:', error);
             }
-        })
-        const json = await response.json()
+        };
+        fetchServiceFeedback();
+      }, [id]);
 
-        if (!response.ok) {
-
-            setError(json.error)
+      const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log({
+          UserName,
+          Email,
+          Rating,
+          Comment,
+        }); // Log the form data
+      axios.put(`http://localhost:8070/feedback/service/${id}`, {
+            UserName,
+            Email,
+            Rating,
+            Comment,
+          })
+          .then((res) => {
+            console.log(res);
             Swal.fire({
-                title: "Error",
-                text: "Cannot add the feedback",
-                icon: "Error",
-              }).then(()=>{
-                console.log('Cannot add the feedback', error)
-              })
-            
-        }
+              title: "Success",
+              text: "Feedback updated successfully",
+              icon: "success",
+            }).then(()=>{
+              console.log('feedback updated', res.data)
+              setError(null)
+            })
+            //window.location = "http://localhost:3000/InstructorProfile";
+            window.location.reload();
+            console.log("Successfully updated list");
+          })
+          .catch((error) => {
 
-        if (response.ok) {
-            setName('')
-            setEmail('')
-            setRating('')
-            setComment('')
-            setError(null)
             Swal.fire({
-                title: "Success",
-                text: "Feedback added successfully",
-                icon: "success",
-              }).then(()=>{
-                console.log('new feedback added', json)
-              })
+              title: "Error",
+              text: "Cannot update the feedback",
+              icon: "error",
+            }).then(()=>{
+              console.log('Cannot update the feedback', error)
+            })
+            window.location.reload();
+          });
+      }
 
-             {/*navigate ('/promoPackages')*/}
-        }
-    }
-
-    return ( 
-        <body>
-            <section>
-                <Container>
-                    <div className="title">Give your feedback</div>
-                    <form method="POST" className="add-promo" onSubmit={handleSubmit}>
+    return (  
+        <body class="bgimg">
+        
+        <section class="feedbacksection">
+        
+            <h1 class="title">Edit Your Feedback</h1>
+            <form method="POST" className="add-promo" onSubmit={handleSubmit}>
                         <div className="add-promo-row">
                             <label for="Name" className="promo-lbl">Full Name:</label>
                             <input
@@ -72,8 +87,7 @@ const ServiceFeedbackForm = () => {
                                 name="name"
                                 className="promoInput"
                                 value={UserName}
-                                onChange={(e)=>setName(e.target.value)}
-                                required />
+                                onChange={(e)=>setName(e.target.value)} />
                         </div>
                         <div className="add-promo-row">
                             <label for="Email" className="promo-lbl">Email Address:</label>
@@ -85,8 +99,7 @@ const ServiceFeedbackForm = () => {
                                 onChange={(e)=>
                                     setEmail(e.target.value)
                                 }
-                                className="promoInput"
-                                required />
+                                className="promoInput"/>
                         </div>
                         
                         {/*Enter rating*/}
@@ -112,10 +125,11 @@ const ServiceFeedbackForm = () => {
                                 </div>
                         </div>
                     </form>
-                </Container>
-            </section>
-        </body>
-     );
+        </section>
+        
+        
+</body>
+    );
 }
  
-export default ServiceFeedbackForm;
+export default EditServiceFeedbackForm;

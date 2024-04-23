@@ -3,11 +3,31 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import ServiceFeedbackForm from './Components/Feedback/User/ServiceFeedbackForm';
+import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements, } from 'react-router-dom';
+import TestScreen from './Components/Feedback/TestScreen';
+import ServiceFeedbackTable from './Components/Feedback/User/ServiceFeedbackTable';
+import EditServiceFeedbackForm from './Components/Feedback/User/EditServiceFeedbackForm';
+
+const router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route path="/" element={<App />}>
+      <Route path='fbk/'>
+        <Route path='addservice/' element={<ServiceFeedbackForm/>} />
+        <Route path ="testscreen/:id" element = {<TestScreen/>}/>
+        <Route path="servicetable/" element={<ServiceFeedbackTable/>}/>
+        <Route path="editservice/:id" element={<EditServiceFeedbackForm/>}/>
+      </Route>
+    </Route>
+
+
+  )
+)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+     <RouterProvider router={router} />
   </React.StrictMode>
 );
 
