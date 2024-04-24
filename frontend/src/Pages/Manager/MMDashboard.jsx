@@ -11,7 +11,7 @@ const MMDashboard = () => {
                 <Row className='om_btn'>
                     <Col>
                         <Container >
-                            <a><p id='ed'>Standard Packages</p></a>
+                            <button><a><p id='ed'>Standard Packages</p></a></button>
                         </Container>
                     </Col>
                     <Col>
