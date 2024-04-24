@@ -73,11 +73,17 @@ router.route("/get/:id").get(async (req, res) => {
 
 router.route("/:id").put(async (req, res) => {
   try {
-    const { Name, NIC } = req.body;
+    const { Name, Email, Phone, Address } = req.body;
+    const {id} = req.params;
     const supplier = await Supplier.findByIdAndUpdate(
-      req.params.id,
-      { Name, NIC },
-      { new: true }
+      {_id: id},
+      {
+        Name,
+        Email,
+        Phone,
+        Address
+      }
+
     );
 
     if (!supplier) {

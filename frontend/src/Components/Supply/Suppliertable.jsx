@@ -121,7 +121,7 @@ const SupplierTable = () => {
               suppliers.map((sup, index) => (
                 <div
                   className={`grid grid-cols-6 ${index % 2 === 0 ? 'bg-cyan-200' : 'bg-cyan-400'}`}
-                  key={sup.id}
+                  key={sup._id}
                 >
                   <div className="border-2 border-black p-2 text-black">{sup.Name}</div>
                   <div className="border-2 border-black p-2 text-black ">{sup.Email}</div>
