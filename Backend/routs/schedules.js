@@ -1,14 +1,19 @@
 const router = require("express").Router();
-const Schedule = require("../models/schedule");
+const { CoachSchedule, CustomerSchedule } = require("../models/schedule");
 
+// ================================================================================================================================================
+//=================================================================Coach Schedule==================================================================
+// ================================================================================================================================================
 
-router.route("/add").post((req, res) => {
+//add new Coach Schedule
+
+router.route("/coachSchedule/add").post((req, res) => {
   const { TimeSlot, Day, Trainer } = req.body;
 
-  const newSchedule = new Schedule({
+  const newSchedule = new CoachSchedule({
     TimeSlot,
     Day,
-    Trainer
+    Trainer,
   });
 
   newSchedule
@@ -19,12 +24,17 @@ router.route("/add").post((req, res) => {
     .catch((err) => {
       res
         .status(400)
-        .json({ message: "Something went wrong when adding the Schedule", err });
+        .json({
+          message: "Something went wrong when adding the Schedule",
+          err,
+        });
     });
 });
 
-router.route("/").get((req, res) => {
-    Schedule.find()
+//get all Coach Schedules
+
+router.route("/coachSchedule/").get((req, res) => {
+  CoachSchedule.find()
     .then((products) => {
       res.status(200).json(products);
     })
@@ -35,31 +45,37 @@ router.route("/").get((req, res) => {
     });
 });
 
-router.route("/:id").put(async (req, res) => {
+//update Coach Schedule
+
+router.route("/coachSchedule/:id").put(async (req, res) => {
   try {
     const id = req.params.id;
     const { TimeSlot, Day, Trainer } = req.body;
 
-    const result = await Schedule.findByIdAndUpdate(
+    const result = await CoachSchedule.findByIdAndUpdate(
       id,
       { TimeSlot, Day, Trainer },
       { new: true }
     );
 
     if (!result) {
-      return res.status(404).json({message:"Schedule not found"});
+      return res.status(404).json({ message: "Schedule not found" });
     }
 
-    return res.status(200).json({message:"Schedule updated successfully"});
+    return res.status(200).json({ message: "Schedule updated successfully" });
   } catch (error) {
-    return res.status(400).json({message:` Schedule update unsuccessful ${error}`});
+    return res
+      .status(400)
+      .json({ message: ` Schedule update unsuccessful ${error}` });
   }
 });
 
-router.route("/:id").delete(async (req, res) => {
+//delete Coach Schedule
+
+router.route("/coachSchedule/:id").delete(async (req, res) => {
   try {
     const id = req.params.id;
-    const result = await Schedule.findByIdAndDelete(id);
+    const result = await CoachSchedule.findByIdAndDelete(id);
     if (!result) {
       return res.status(404).json({ message: "Schedule not found" });
     }
@@ -71,12 +87,14 @@ router.route("/:id").delete(async (req, res) => {
   }
 });
 
-router.route("/get/:id").get(async (req, res) => {
+//get one Coach Schedule
+
+router.route("/coachSchedule/get/:id").get(async (req, res) => {
   try {
     let itemId = req.params.id;
-    const item = await Schedule.findById(itemId);
+    const result = await CoachSchedule.findById(itemId);
 
-    if (!item) {
+    if (!result) {
       return res.status(404).json({ message: " Schedule not found " });
     }
 
@@ -84,8 +102,120 @@ router.route("/get/:id").get(async (req, res) => {
       .status(200)
       .json({ message: " Data retreival successfull !!! ", Item: item });
   } catch (error) {
-    return res.status(400).json({message:`Data retreival unsuccessful ${error} `});
+    return res
+      .status(400)
+      .json({ message: `Data retreival unsuccessful ${error} ` });
   }
 });
+
+
+// ================================================================================================================================================
+//=================================================================Customer Schedule===============================================================
+// ================================================================================================================================================
+
+//add new customer Schedule
+
+router.route("/customerSchedule/add").post((req, res) => {
+  const { Date,TimeSlot,Section } = req.body;
+
+  const newSchedule = new CustomerSchedule({
+    Date,
+    TimeSlot,
+    Section,
+  });
+
+  newSchedule
+    .save()
+    .then(() => {
+      res.status(200).json({ message: "Schedule added successfully" });
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .json({
+          message: "Something went wrong when adding the Schedule",
+          err,
+        });
+    });
+});
+
+//get all customer Schedules
+
+router.route("/customerSchedule/").get((req, res) => {
+  CustomerSchedule.find()
+    .then((products) => {
+      res.status(200).json(products);
+    })
+    .catch((err) => {
+      res.status(400).json({
+        message: `Something went wrong while fetching all schedules ${err}`,
+      });
+    });
+});
+
+//update customer Schedule
+
+router.route("/customerSchedule/:id").put(async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { Date,TimeSlot, Section } = req.body;
+
+    const result = await CustomerSchedule.findByIdAndUpdate(
+      id,
+      { Date,TimeSlot,Section},
+      { new: true }
+    );
+
+    if (!result) {
+      return res.status(404).json({ message: "Schedule not found" });
+    }
+
+    return res.status(200).json({ message: "Schedule updated successfully" });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: ` Schedule update unsuccessful ${error}` });
+  }
+});
+
+//delete customer Schedule
+
+router.route("/customerSchedule/:id").delete(async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await CustomerSchedule.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({ message: "Schedule not found" });
+    }
+    return res.status(200).json({ message: "Schedule removed successfully" });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: `Schedule removal unsuccesfull ${error}` });
+  }
+});
+
+//get one customer Schedule
+
+router.route("/customerSchedule/get/:id").get(async (req, res) => {
+  try {
+    let itemId = req.params.id;
+    const result = await CustomerSchedule.findById(itemId);
+
+    if (!result) {
+      return res.status(404).json({ message: " Schedule not found " });
+    }
+
+    return res
+      .status(200)
+      .json({ message: " Data retreival successfull !!! ", Item: item });
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: `Data retreival unsuccessful ${error} ` });
+  }
+});
+
+
 
 module.exports = router;

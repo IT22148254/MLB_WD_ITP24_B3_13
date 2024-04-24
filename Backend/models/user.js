@@ -10,6 +10,18 @@ const userSchema = new schema({
     type: String,
     required: true,
   },
+  Address: {
+    type: String,
+    required: true,
+  },
+  Gender: {
+    type: String,
+    required: true,
+  },
+  NIC: {
+    type: String,
+    required: true,
+  },
   Phone: {
     type: Number,
     required: true,
@@ -20,6 +32,11 @@ const userSchema = new schema({
   },
   Dob: {
     type: Date,
+  },
+  AccLevel: {
+    type: String,
+    required: true,
+    default: "customer",
   },
 });
 

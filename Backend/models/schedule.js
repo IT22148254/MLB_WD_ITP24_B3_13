@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
-const scheduleSchema = new schema({
+const coachScheduleSchema = new schema({
   TimeSlot: {
     type: String,
     required: true,
@@ -20,5 +20,21 @@ const scheduleSchema = new schema({
   },
 });
 
-const Schedule = mongoose.model("Schedule", scheduleSchema);
-module.exports = Schedule;
+const customerScheduleSchema = new schema({
+  Date: {
+    type: String,
+    required: true,
+  },
+  TimeSlot: {
+    type: String,
+    required: true,
+  },
+  Section: {
+    type: String,
+    required: true,
+  },
+});
+
+const CoachSchedule = mongoose.model("CoachSchedule", coachScheduleSchema);
+const CustomerSchedule = mongoose.model("CustomerSchedule",customerScheduleSchema);
+module.exports = { CoachSchedule, CustomerSchedule };
