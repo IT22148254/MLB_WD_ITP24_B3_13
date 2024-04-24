@@ -11,16 +11,22 @@ import EditPromoForm from './Components/Membership/Manager/EditPromoform';
 import EditStandard from './Components/Membership/Manager/EditStandardform'
 import TestScreen from './Components/Membership/Manager/TestScreen';
 import { ToastContainer } from 'react-toastify';
+import EmailForm from './Components/Membership/Manager/EmailForm';
+import EmailTable from './Components/Membership/Manager/EmailTable';
+import EditEmail from './Components/Membership/Manager/EditEmail';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path='pkg/'>
-        <Route path='mmdashboard/' element={<MMDashboard />} />
-        <Route path='addnewpr/' element={<AddNewPromoForm />} />
+      <Route path='/'>
+        <Route index element={<EmailForm/>}/>
+        <Route path="emailtable/" element={<EmailTable/>}/>
+        {/* <Route path='mmdashboard/' element={<MMDashboard />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
         <Route path='editpromo/:id' element={<EditPromoForm/>} />
-        <Route path="editstandard/:id" element={<EditStandard />} />
-        <Route path="testscreen/" element={<TestScreen />} />
+        <Route path="editstandard/:id" element={<EditStandard />} /> */}
+        {/* <Route path="testscreen/" element={<TestScreen />} /> */}
+        <Route path="testscreen/:id" element={<TestScreen/>}/>
+        <Route path="editemail/:id" element={<EditEmail/>}/>
       </Route>
     </Route>
 

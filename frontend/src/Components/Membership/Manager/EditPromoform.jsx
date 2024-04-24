@@ -6,6 +6,8 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import bg from "../../../Images/package_bg.jpg";
+
 
 const EditPromoForm = () => {
 
