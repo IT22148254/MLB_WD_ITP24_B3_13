@@ -6,7 +6,15 @@ import { useParams } from "react-router-dom";
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
 import { Container } from "reactstrap";
+import bg from "../../../Images/feedback.jpeg"
+
 const ServiceFeedbackTable = () => {
+
+  const bgStyle = {
+    backgroundImage: `url(${bg})`,
+    backgroundSize: "cover",
+    height: "100vh",
+  };
   let navigate = useNavigate();
 
   const {id} = useParams();
@@ -98,11 +106,14 @@ const ServiceFeedbackTable = () => {
     
     // save the PDF file
     doc.save('ServiceFeedbackReport.pdf');
+
+    
 }
 
+
   return (
-    <Container>
-      <div className="flex flex-col justify-center items-center h-screen">
+   
+    <div className="flex h-full justify-center items-center" style={bgStyle}>
           <div className="bg-black/45 w-4/5 rounded-[50px] py-12 px-12 gap -inset-y-8">
     <div className="w-full">
     <div className="text-4xl text-white font-bold align-top mb-6" style={{ WebkitTextStroke: '1px black' }}>
@@ -165,7 +176,7 @@ const ServiceFeedbackTable = () => {
     </div>
     </div>
     </div>
-    </Container>
+    
   );
 };
 
