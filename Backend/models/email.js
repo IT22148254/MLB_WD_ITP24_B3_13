@@ -11,7 +11,7 @@ const emailSchema = new schema({
     required: true,
   },
   content: {
-    type: Number,
+    type: String,
     required: true,
   },
 });
