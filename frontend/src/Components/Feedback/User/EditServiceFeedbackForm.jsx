@@ -4,6 +4,7 @@ import {AiFillStar,AiOutlineStar} from 'react-icons/ai'
 import { useParams } from "react-router-dom"
 import Swal from "sweetalert2";
 import bg from "../../../Images/feedback.jpeg"
+import { useNavigate } from "react-router-dom";
 
 const EditServiceFeedbackForm = () => {
 
@@ -13,7 +14,7 @@ const EditServiceFeedbackForm = () => {
     const [Rating,setRating] = useState(0);
     const [Comment,setComment] = useState('');
     const [error, setError] = useState(null)
-
+    const navigate = useNavigate(); 
     useEffect(() => {
         
       console.log(UserName + " " + Email + " "+ Rating + " " + Comment );
@@ -72,6 +73,7 @@ const EditServiceFeedbackForm = () => {
             })
             window.location.reload();
           });
+          navigate('/fbk/servicetable');
       }
 
 

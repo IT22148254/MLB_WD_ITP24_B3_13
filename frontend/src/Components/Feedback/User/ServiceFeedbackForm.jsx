@@ -3,14 +3,14 @@ import Swal from "sweetalert2";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import { Container } from "reactstrap";
 import bg from "../../../Images/feedback.jpeg"
-
+import { useNavigate } from "react-router-dom";
 const ServiceFeedbackForm = () => {
   const [UserName, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Rating, setRating] = useState(0);
   const [Comment, setComment] = useState("");
   const [error, setError] = useState(null);
-
+  const navigate = useNavigate(); 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,9 +49,12 @@ const ServiceFeedbackForm = () => {
       }).then(() => {
         console.log("new feedback added", json);
       });
+      navigate('/fbk/servicetable');
     }
+    
   };
 
+ 
 
   const bgStyle = {
     backgroundImage: `url(${bg})`,
