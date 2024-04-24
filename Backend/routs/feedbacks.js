@@ -71,11 +71,12 @@ router.route("/service/get/:id").get(async (req, res) => {
 router.route("/:id").put(async (req, res) => {
   try {
     const { UserName, Comment, Rating, Email } = req.body;
+  
 
     const servicefeedback = await ServiceFeedBack.findByIdAndUpdate(
-      req.params.id,
+      {_id: req.params.id},
       { UserName, Comment, Rating, Email },
-      { new: true }
+    
     );
 
     if (!servicefeedback) {

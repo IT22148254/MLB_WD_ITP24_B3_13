@@ -3,6 +3,7 @@ import axios from 'axios'
 import {AiFillStar,AiOutlineStar} from 'react-icons/ai'
 import { useParams } from "react-router-dom"
 import Swal from "sweetalert2";
+import bg from "../../../Images/feedback.jpeg"
 
 const EditServiceFeedbackForm = () => {
 
@@ -15,6 +16,7 @@ const EditServiceFeedbackForm = () => {
 
     useEffect(() => {
         
+      console.log(UserName + " " + Email + " "+ Rating + " " + Comment );
         const fetchServiceFeedback = async () => {
             try {
                 const response = await axios.get(`http://localhost:8070/feedback/service/get/${id}`);
@@ -56,7 +58,7 @@ const EditServiceFeedbackForm = () => {
               setError(null)
             })
             //window.location = "http://localhost:3000/InstructorProfile";
-            window.location.reload();
+            //window.location.reload();
             console.log("Successfully updated list");
           })
           .catch((error) => {
@@ -73,11 +75,15 @@ const EditServiceFeedbackForm = () => {
       }
 
     return (  
-        <body class="bgimg">
+        <body className="bgimg">
         
-        <section class="feedbacksection">
+        <section className="bg-gray-100 min-h-screen">
         
-            <h1 class="title">Edit Your Feedback</h1>
+        <div className="flex flex-col justify-center items-center h-screen">
+          <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
+          <div className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>
+            <h1 className="title">Edit Your Feedback</h1>
+            </div>
             <form method="POST" className="add-promo" onSubmit={handleSubmit}>
                         <div className="add-promo-row">
                             <label for="Name" className="promo-lbl">Full Name:</label>
@@ -104,15 +110,15 @@ const EditServiceFeedbackForm = () => {
                         
                         {/*Enter rating*/}
                         <div>
-                        <label class="servicerate">Rate Our service</label>
-                        {Array(5).fill().map((_,index)=>
+                        <label className="servicerate">Rate Our service</label>
+                        {Array(5).fill().map((_id,index)=>
                         Rating >= index + 1 ?
-                        (<AiFillStar style={{color:'orange'}} onClick={()=>setRating(index + 1)} class="FillStar" />
-                        ):(<AiOutlineStar style={{color:'orange'}} onClick={()=>setRating(index + 1)} class="OutlineStar"/>))}
+                        (<AiFillStar style={{color:'orange'}} onClick={()=>setRating(index + 1)} className="FillStar" />
+                        ):(<AiOutlineStar style={{color:'orange'}} onClick={()=>setRating(index + 1)} className="OutlineStar"/>))}
                         </div>
                         <div className="add-promo-row">
                             <textarea id="inquiry" name="inquiry" placeholder="Enter your opinion here" value={Comment} onChange={(e)=>setComment(e.target.value)}></textarea>
-                        <div class="add-promo-row">
+                        <div className="add-promo-row">
                                     <div className="add-promo-btns">
                                         <div>
                                             <button type='reset' className='secondary__btn' style={{marginRight: '10px'}}>Cancel</button>
@@ -126,6 +132,9 @@ const EditServiceFeedbackForm = () => {
                         </div>
                     </form>
                     <button>Add new feedback</button>
+
+                    </div>
+                    </div>
         </section>
         
         
