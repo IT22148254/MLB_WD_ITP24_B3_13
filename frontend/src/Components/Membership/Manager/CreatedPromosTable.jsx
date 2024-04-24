@@ -29,7 +29,7 @@ const CreatedPromosTable = () => {
 
     const handleDelete = (id) => {
         Swal.fire({
-            title: "Are you sure?",
+            title: " sure?",
             text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
