@@ -144,7 +144,7 @@ const ServiceFeedbackForm = () => {
               </div>
             </form>
           </div>
-          <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9">Edit Feedbacks</button>
+          <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9">Add Feedbacks</button>
 
         </div>
     //     </div>

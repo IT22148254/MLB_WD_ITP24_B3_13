@@ -9,7 +9,6 @@ import { Container } from "reactstrap";
 import bg from "../../../Images/feedback.jpeg"
 
 const ServiceFeedbackTable = () => {
-
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
@@ -20,6 +19,7 @@ const ServiceFeedbackTable = () => {
   const {id} = useParams();
 
   const [feedbacks, setFeedbacks] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -106,10 +106,19 @@ const ServiceFeedbackTable = () => {
     
     // save the PDF file
     doc.save('ServiceFeedbackReport.pdf');
+  };
 
-    
-}
+  const filterFeedbacks = (feedbacks, searchText) => {
+    return feedbacks.filter(
+      (feedback) =>
+        feedback.UserName.toLowerCase().includes(searchText.toLowerCase())
+    );
+  };
 
+  const handleSearch = () => {
+    const filteredFeedbacks = filterFeedbacks(feedbacks, searchInput);
+    setFeedbacks(filteredFeedbacks);
+  };
 
   return (
    
@@ -118,6 +127,22 @@ const ServiceFeedbackTable = () => {
     <div className="w-full">
     <div className="text-4xl text-white font-bold align-top mb-6" style={{ WebkitTextStroke: '1px black' }}>
         Service Feedback list
+      </div>
+      <div className="flex justify-between mb-4">
+        <div className="h-9 bg-white/70 w-1/2 rounded-lg">
+          <input
+            placeholder="Search by Name"
+            className="bg-transparent pl-4 placeholder:text-gray-600 w-full h-full border-none active:border-none focus:border-none focus:outline-none"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+        </div>
+        <button
+          className="bg-cyan-400 rounded-lg p-2 font-bold"
+          onClick={handleSearch}
+        >
+          Search
+        </button>
       </div>
       <div className="grid grid-cols-6 bg-cyan-400">
         <div className="border-2 border-black p-3">Name</div>
@@ -171,7 +196,7 @@ const ServiceFeedbackTable = () => {
               </div>
             </div>
           ))}
-          <button class="secondary__btn" id="btn_position" onClick={handleCreateReport}>Generate Feedback Report</button>
+          <button className="secondary__btn" id="btn_position" onClick={handleCreateReport}>Generate Feedback Report</button>
       </div>
     </div>
     </div>
