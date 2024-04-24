@@ -125,6 +125,7 @@ const EditServiceFeedbackForm = () => {
                                 </div>
                         </div>
                     </form>
+                    <button>Add new feedback</button>
         </section>
         
         

@@ -112,6 +112,7 @@ const ServiceFeedbackForm = () => {
                                 </div>
                         </div>
                     </form>
+                    <button>View Feedbacks</button>
                 </Container>
             </section>
         </body>
