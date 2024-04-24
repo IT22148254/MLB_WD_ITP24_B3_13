@@ -15,7 +15,6 @@ const coachScheduleSchema = new schema({
   Trainer: {
     type: String,
     required: true,
-
     
   },
 });

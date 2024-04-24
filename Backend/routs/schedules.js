@@ -100,7 +100,7 @@ router.route("/coachSchedule/get/:id").get(async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: " Data retreival successfull !!! ", Item: item });
+      .json({ message: " Data retreival successfull !!! ", result });
   } catch (error) {
     return res
       .status(400)

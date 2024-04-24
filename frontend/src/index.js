@@ -10,17 +10,21 @@ import CreatedPromos from './Components/Membership/Manager/CreatedPromosTable'
 import EditPromoForm from './Components/Membership/Manager/EditPromoform';
 import EditStandard from './Components/Membership/Manager/EditStandardform'
 import TestScreen from './Components/Membership/Manager/TestScreen';
+import ChangeTimeOnDy from './Pages/Manager/ChangeOnetimeForm';
+import ChngTimeOndy from './Pages/Manager/Chngtmeondy';
 import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path='pkg/'>
-        <Route path='mmdashboard/' element={<MMDashboard />} />
-        <Route path='addnewpr/' element={<AddNewPromoForm />} />
+      <Route path='sch/'>
+        {/* <Route path='mmdashboard/' element={<MMDashboard />} /> */}
+        <Route path='chngtimeondy/' element={<ChangeTimeOnDy />} />
+        <Route path='chngtimeondytbl/' element={<ChngTimeOndy/>}/>
+        {/* <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
         <Route path='editpromo/:id' element={<EditPromoForm/>} />
         <Route path="editstandard/:id" element={<EditStandard />} />
-        <Route path="testscreen/" element={<TestScreen />} />
+        <Route path="testscreen/" element={<TestScreen />} /> */}
       </Route>
     </Route>
 
