@@ -13,9 +13,8 @@ import SupplierDashboard from './Pages/SupplierDashboard';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App/>}>
-      <Route path="/sup">
+      <Route path="/" element={<SupplierDashboard/>}>
         <Route path="addSupplier/" element={<AddSupplierForm/>} />
-
         {/* <Route path="testscreen/:id" element={<TestScreen/>} /> */}
         <Route path="suppliertable/" element={<SupplierTable/>}/>
         <Route path="editsup/:id" element= {<EditSupplierForm/>}/>
