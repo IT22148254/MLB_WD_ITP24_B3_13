@@ -74,13 +74,20 @@ const EditServiceFeedbackForm = () => {
           });
       }
 
+
+      const bgStyle = {
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        height: "100vh",
+      };
+
     return (  
         /*<body className="bgimg">*/
         
-        <section className="bg-gray-100 min-h-screen">
+        // <section className="bg-gray-100 min-h-screen">
           
         
-        <div className="flex flex-col justify-center items-center h-screen">
+        <div className="flex h-full justify-center items-center" style={bgStyle}>
           <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
           <div className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>
             <h1 className="title">Edit Your Feedback</h1>
@@ -159,12 +166,11 @@ const EditServiceFeedbackForm = () => {
                         </div>
                     </form>
                     </div>
-
-                    <button className="flex justify-center bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mr-4">View Feedbacks</button>
+                    <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9">Edit Feedbacks</button>
 
                     </div>
                     
-        </section>
+        // </section>
         
         
 /*</body>*/
