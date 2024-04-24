@@ -103,7 +103,7 @@ const ServiceFeedbackTable = () => {
   return (
     <Container>
       <div className="flex flex-col justify-center items-center h-screen">
-          <div className="bg-black/45 w-7/8 rounded-[50px] py-12 px-14 gap -inset-y-8">
+          <div className="bg-black/45 w-4/5 rounded-[50px] py-12 px-12 gap -inset-y-8">
     <div className="w-full">
     <div className="text-4xl text-white font-bold align-top mb-6" style={{ WebkitTextStroke: '1px black' }}>
         Service Feedback list
