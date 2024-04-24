@@ -13,9 +13,10 @@ const scheduleSchema = new schema({
   },
 
   Trainer: {
-    type: schema.Types.ObjectId,
+    type: String,
     required: true,
-    ref: "User",
+
+    
   },
 });
 
