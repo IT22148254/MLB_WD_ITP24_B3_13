@@ -20,6 +20,7 @@ const ServiceFeedbackTable = () => {
 
   const [feedbacks, setFeedbacks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [filteredFeedbacks, setFilteredFeedbacks] = useState([]);
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -27,6 +28,7 @@ const ServiceFeedbackTable = () => {
         const response = await axios.get("http://localhost:8070/feedback/service");
         console.log(response);
         setFeedbacks(response.data.result);
+        setFilteredFeedbacks(response.data.result);
       } catch (error) {
         console.error("Failed to fetch employees:", error);
       }
@@ -34,6 +36,11 @@ const ServiceFeedbackTable = () => {
 
     fetchFeedbacks();
   }, []);
+
+  useEffect(() => {
+    const filtered = filterFeedbacks(feedbacks, searchInput);
+    setFilteredFeedbacks(filtered);
+  }, [searchInput, feedbacks]);
 
   const handleEdit = (id) => {
     navigate(`/fbk/editservice/${id}`);
@@ -94,7 +101,7 @@ const ServiceFeedbackTable = () => {
     ];
     
     // define the table rows
-    const rows = feedbacks.map(feedback => ({
+    const rows = filteredFeedbacks.map(feedback => ({
       UserName: feedback.UserName,
       Email: feedback.Email,
       Rating: feedback.Rating,
@@ -115,11 +122,6 @@ const ServiceFeedbackTable = () => {
     );
   };
 
-  const handleSearch = () => {
-    const filteredFeedbacks = filterFeedbacks(feedbacks, searchInput);
-    setFeedbacks(filteredFeedbacks);
-  };
-
   return (
    
     <div className="flex h-full justify-center items-center" style={bgStyle}>
@@ -128,7 +130,7 @@ const ServiceFeedbackTable = () => {
     <div className="text-4xl text-white font-bold align-top mb-6" style={{ WebkitTextStroke: '1px black' }}>
         Service Feedback list
       </div>
-      <div className="flex justify-between mb-4">
+      <div className="mb-4">
         <div className="h-9 bg-white/70 w-1/2 rounded-lg">
           <input
             placeholder="Search by Name"
@@ -137,12 +139,6 @@ const ServiceFeedbackTable = () => {
             onChange={(e) => setSearchInput(e.target.value)}
           />
         </div>
-        <button
-          className="bg-cyan-400 rounded-lg p-2 font-bold"
-          onClick={handleSearch}
-        >
-          Search
-        </button>
       </div>
       <div className="grid grid-cols-6 bg-cyan-400">
         <div className="border-2 border-black p-3">Name</div>
@@ -160,8 +156,8 @@ const ServiceFeedbackTable = () => {
           msOverflowStyle: "none",
         }}
       >
-        {feedbacks &&
-          feedbacks.map((feedback, index) => (
+        {filteredFeedbacks &&
+          filteredFeedbacks.map((feedback, index) => (
             <div
               className={`grid grid-cols-6 ${
                 index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
@@ -196,11 +192,10 @@ const ServiceFeedbackTable = () => {
               </div>
             </div>
           ))}
-         
+          <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9" id="btn_position" onClick={handleCreateReport}>Generate Feedback Report</button>
       </div>
     </div>
     </div>
-    <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9" id="btn_position" onClick={handleCreateReport}>Generate Feedback Report</button>
     </div>
     
   );
