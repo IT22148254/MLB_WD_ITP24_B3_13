@@ -131,6 +131,7 @@ const AddSupplierForm = () => {
                     </form>
                     </div>
                     </div>
+                    <button>view Suppliers</button>
             </Container>
         </section>
      );

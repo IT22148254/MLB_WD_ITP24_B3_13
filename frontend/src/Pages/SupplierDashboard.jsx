@@ -13,22 +13,22 @@ const SupplierDashboard = () => {
                 <Row className='om_btn'>
                     <Col>
                         <Container >
-                            <a><p id='ed'>Supplier</p></a>
+                            <button><a><p id='ed'>Supplier</p></a></button>
                         </Container>
                     </Col>
                     <Col>
                         <Container>
-                            <a><p id='ed'>Orders</p></a>
+                            <button><a><p id='ed'>Orders</p></a></button>
                         </Container>
                     </Col>
                     <Col>
                         <Container>
-                            <a><p id='ed'>Inventory</p></a>
+                            <button><a><p id='ed'>Inventory</p></a></button>
                         </Container>
                     </Col>
                     <Col>
                         <Container>
-                            <a><p id='ed'>Invoices</p></a>
+                            <button><a><p id='ed'>Invoices</p></a></button>
                         </Container>
                     </Col>
                 </Row>

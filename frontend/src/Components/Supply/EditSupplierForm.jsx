@@ -165,6 +165,7 @@ const EditSupplierForm = () => {
             </form>
             </div>
             </div>
+            <button>Add Supplier</button>
     </Container>
 </section>
   );
