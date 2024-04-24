@@ -16,6 +16,8 @@ const AddNewPromoForm = () => {
     const [Duration, setDuration] = useState('')
     const [error, setError] = useState(null)
     const maxWords = 100;
+    const navigate = useNavigate();
+
 
     {/*const navigate = useNavigate()*/}
 
@@ -71,8 +73,8 @@ const AddNewPromoForm = () => {
                   }).then(()=>{
                     console.log('new promo added', response.data)
                   })
-                  
-                {/*navigate('/promoPackages')*/}
+                 
+             navigate('/pkg/createdpromos');
         }
             
         } catch (error) {

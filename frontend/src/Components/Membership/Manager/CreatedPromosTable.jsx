@@ -86,6 +86,8 @@ const CreatedPromosTable = () => {
 
     const handleEdit = (id) => {
         navigate(`/pkg/editpromo/${id}`);
+
+        
     };
 
     const handleCreateReport = () => { const doc = new jsPDF();
