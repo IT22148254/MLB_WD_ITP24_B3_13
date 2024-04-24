@@ -3,37 +3,37 @@ let { Product, OrderSt } = require("../models/product");
 const { admin, protect } = require("../Middleware/authMiddleware");
 const { Order } = require("../models/supplier");
 
-router.route("/add").post((req, res) => {
-  const {
-    name,
-    image,
-    price,
-    description,
-    brand,
-    category,
-    countInStock,
-    numReviews,
-    rating,
-    reviews,
-  } = req.body;
-
-  const newProduct = new Product({
-    name,
-    price,
-    description,
-    countInStock,
-    image,
-    brand,
-    category,
-    numReviews,
-    rating,
-    reviews,
+router.route("/add").post(async (req, res) => {
+  const product = new Product({
+    name: "sample name",
+    image: "/images/sample.jpg",
+    price: 0,
+    description: "sample description",
+    brand: "Sample brand",
+    category: "sample category",
+    countInStock: 0,
+    numReviews: 0,
+    rating: 0,
   });
+  // } = req.body;
 
-  newProduct
+  // const newProduct = new Product({
+  //   name,
+  //   price,
+  //   description,
+  //   countInStock,
+  //   image,
+  //   brand,
+  //   category,
+  //   numReviews,
+  //   rating,
+  //   reviews,
+  // });
+
+  await product
     .save()
     .then(() => {
-      res.status(200).json({ message: "Product added successfully" });
+      res.status(200).json(product);
     })
     .catch((err) => {
       res
@@ -91,7 +91,7 @@ router.route("/:id").put(async (req, res) => {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    return res.status(200).json({ message: "Product updated successfully" });
+    return res.status(200).json(result);
   } catch (error) {
     return res
       .status(400)
@@ -163,14 +163,15 @@ router.route("/orderst/add").post(protect, async (req, res) => {
   }
 });
 
-
 router.route("/orderst/").get(protect, admin, async (req, res) => {
   res.send("get all orders");
 });
 
-
 router.route("/orderst/get/:id").get(protect, async (req, res) => {
-  const order = await OrderSt.findById(req.params.id).populate("user", "Fname Email");
+  const order = await OrderSt.findById(req.params.id).populate(
+    "user",
+    "Fname Email"
+  );
   if (order) {
     return res.status(200).json(order);
   } else {
@@ -178,17 +179,14 @@ router.route("/orderst/get/:id").get(protect, async (req, res) => {
   }
 });
 
-
 router.route("/orderst/myorders/:id").get(protect, async (req, res) => {
-  const orders = await OrderSt.find( {user: req.params.id });
+  const orders = await OrderSt.find({ user: req.params.id });
   return res.status(200).json(orders);
 });
-
 
 router.route("/orderst/:id/pay").put(protect, async (req, res) => {
   res.send("update is paid");
 });
-
 
 router.route("/orderst/:id/deliver").put(protect, admin, async (req, res) => {
   res.send("update is delivered");

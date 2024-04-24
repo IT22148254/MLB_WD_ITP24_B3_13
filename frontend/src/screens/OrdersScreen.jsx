@@ -59,7 +59,7 @@ const OrdersScreen = () => {
               </td>
               <td>
                 {order.orderItems.map((item) => (
-                  <div key={item._id}>${item.price}</div>
+                  <div key={item._id}>{item.price} LKR</div>
                 ))}
               </td>
               <td>{order.paymentMethod}</td>

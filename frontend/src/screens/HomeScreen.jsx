@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import Product from "../content/product";
 // import axios from "axios";
 // import { useState, useEffect } from "react";
@@ -8,6 +8,8 @@ import "../index.css";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 import Loader from "../content/Loader";
 import Message from "../content/Message";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const HomeScreen = () => {
   // const [products, setProducts] = useState([]);
@@ -21,6 +23,8 @@ const HomeScreen = () => {
   // }, []);
 
   const { data: products, isLoading, isError } = useGetProductsQuery();
+  const user = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -38,7 +42,25 @@ const HomeScreen = () => {
             backgroundPosition: "center",
           }}
         >
-          <h1>Latest products</h1>
+          <Row>
+            <Col md={9}></Col>
+            {user.userInfo === null ? (
+              <></>
+            ) : (
+              <Col md={3}>
+                {user.userInfo.AccLevel !== "customer" ? (
+                  <center>
+                    <Button variant="warning" className="mt-3" onClick={(e) => navigate('/store/admin')}>
+                      {" "}
+                      Admin portal
+                    </Button>
+                  </center>
+                ) : (
+                  <></>
+                )}
+              </Col>
+            )}
+          </Row>
           <Row style={{ margin: "10px" }}>
             {products.map((products) => (
               <Col key={products._id} sm={12} md={6} lg={4} xl={3}>
