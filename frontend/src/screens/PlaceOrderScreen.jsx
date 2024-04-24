@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import Message from "../content/Message";
 import Loader from "../content/Loader";
 import { useCreateOrderMutation } from "../slices/ordersApiSlice";
+import { useUpdateProductMutation } from "../slices/productsApiSlice";
 import { clearCartItems } from "../slices/cartSlice";
 
 const PlaceOrderScreen = () => {
@@ -14,7 +15,9 @@ const PlaceOrderScreen = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-  const [createOrder,{isLoading,error}] = useCreateOrderMutation();
+  const [createOrder, { isLoading, error }] = useCreateOrderMutation();
+  const [updateProduct, { isLoading: loadingUpdate }] =
+    useUpdateProductMutation();
 
   useEffect(() => {
     if (!cart.shippingAddress.address) {
@@ -24,25 +27,34 @@ const PlaceOrderScreen = () => {
     }
   }, [cart.shippingAddress.address, cart.paymentMethod, navigate]);
 
-  const placeOrderHandler = async() => {
+  const placeOrderHandler = async () => {
     try {
-        console.log(cart.cartItems)
-        const res = await createOrder({
-            orderItems:cart.cartItems,
-            shippingAddress:cart.shippingAddress,
-            paymentMethod:cart.paymentMethod,
-            itemsPrice:cart.itemsPrice,
-            shippingPrice:cart.delPrice,
-            totalPrice:cart.totPrice
+      console.log(cart.cartItems);
+      const res = await createOrder({
+        orderItems: cart.cartItems,
+        shippingAddress: cart.shippingAddress,
+        paymentMethod: cart.paymentMethod,
+        itemsPrice: cart.itemsPrice,
+        shippingPrice: cart.delPrice,
+        totalPrice: cart.totPrice,
+      }).unwrap();
+      console.log(res);
+      dispatch(clearCartItems());
+      navigate(`/store/orderst/${res._id}`);
 
-        }).unwrap();
-        console.log(res)
-        dispatch(clearCartItems())
-        navigate(`/store/orderst/${res._id}`)
-
+      cart.cartItems.map((item) =>
+        updateProduct({
+          ...item,
+          countInStock: item.countInStock - item.quantity,
+        })
+      );
     } catch (error) {
-        toast.error(error)
+      toast.error(error);
     }
+  };
+
+  if (loadingUpdate) {
+    return <Loader />;
   }
 
   return (
@@ -120,7 +132,7 @@ const PlaceOrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                {error && <Message varient='danger'>{error}</Message>}
+                {error && <Message varient="danger">{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button
@@ -128,8 +140,10 @@ const PlaceOrderScreen = () => {
                   className="btn-block"
                   disabled={cart.cartItems.length === 0}
                   onClick={placeOrderHandler}
-                >Place order</Button>
-                {isLoading && <Loader/>}
+                >
+                  Place order
+                </Button>
+                {isLoading && <Loader />}
               </ListGroup.Item>
             </ListGroup>
           </Card>

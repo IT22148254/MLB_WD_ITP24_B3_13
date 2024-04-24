@@ -1,7 +1,11 @@
 import React from "react";
 import { FaTrash, FaEdit } from "react-icons/fa";
 import { MdNoteAdd, MdCreateNewFolder } from "react-icons/md";
-import { useGetProductsQuery,useCreateProductMutation } from "../slices/productsApiSlice";
+import {
+  useGetProductsQuery,
+  useCreateProductMutation,
+  useRemoveProductMutation,
+} from "../slices/productsApiSlice";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Loader from "../content/Loader";
@@ -9,29 +13,41 @@ import { ListGroup, Row, Image, Button, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
 
 const AdminItemsScreen = () => {
-  const { data: products, isLoading, isError,refetch } = useGetProductsQuery();
+  const { data: products, isLoading, isError, refetch } = useGetProductsQuery();
   const user = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
-  const [createProduct,{isLoading:crLoading}] = useCreateProductMutation();
+  const [createProduct, { isLoading: crLoading }] = useCreateProductMutation();
+
+  const [removeProduct, { isLoading: rmLoading }] = useRemoveProductMutation();
 
   const editHandler = (id) => {
     console.log("edited - ", id);
-    navigate(`/store/admin/item/${id}/edit`)
+    navigate(`/store/admin/item/${id}/edit`);
   };
 
-  const deleteHandler = (id) => {
+  const deleteHandler = async(id) => {
+
+    if (window.confirm("Are you sure you want to delete the product ?")) {
+      try {
+        await removeProduct(id);
+        refetch();
+      } catch (error) {
+        toast.error(error);
+      }
+    }
     console.log("deleted - ", id);
+    
   };
 
   const createHandler = async () => {
-    if(window.confirm('Are you sure you want to create a new product ?')){
-        try {
-            await createProduct();
-            refetch();
-        } catch (error) {
-            toast.error(error)
-        }
+    if (window.confirm("Are you sure you want to create a new product ?")) {
+      try {
+        await createProduct();
+        refetch();
+      } catch (error) {
+        toast.error(error);
+      }
     }
     console.log("created ");
   };
@@ -46,8 +62,12 @@ const AdminItemsScreen = () => {
     return console.log(Error);
   }
 
-  if(crLoading){
-    return <Loader/>
+  if (crLoading) {
+    return <Loader />;
+  }
+
+  if (rmLoading) {
+    return <Loader />;
   }
 
   return (
@@ -56,7 +76,7 @@ const AdminItemsScreen = () => {
         <Col md={8}></Col>
         <Col md={2}>
           <center>
-            <Button variant="success" onClick={(e) => createHandler()} >
+            <Button variant="success" onClick={(e) => createHandler()}>
               <MdCreateNewFolder />
             </Button>
           </center>
@@ -83,12 +103,18 @@ const AdminItemsScreen = () => {
 
               <Col md={1}> </Col>
               <Col md={2}>
-                <Button variant="warning" onClick={(e) => editHandler(product._id)}>
+                <Button
+                  variant="warning"
+                  onClick={(e) => editHandler(product._id)}
+                >
                   <FaEdit />
                 </Button>{" "}
               </Col>
               <Col md={2}>
-                <Button variant="danger" onClick={(e) => deleteHandler(product._id)} >
+                <Button
+                  variant="danger"
+                  onClick={(e) => deleteHandler(product._id)}
+                >
                   <FaTrash />
                 </Button>
               </Col>

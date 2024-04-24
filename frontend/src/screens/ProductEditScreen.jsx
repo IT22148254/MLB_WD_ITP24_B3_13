@@ -11,7 +11,6 @@ import {
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
-
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
@@ -110,7 +109,7 @@ const ProductEditScreen = () => {
           <Form.Group controlId="image">
             <Form.Label>Image</Form.Label>
             <Form.Control
-              type="file"
+              type="text"
               placeholder="Enter image"
               onChange={(e) => setImage(e.target.value)}
             ></Form.Control>
