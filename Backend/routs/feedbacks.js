@@ -68,7 +68,7 @@ router.route("/service/get/:id").get(async (req, res) => {
 
 //Update Service Feedback
 
-router.route("/:id").put(async (req, res) => {
+router.route("/service/:id").put(async (req, res) => {
   try {
     const { UserName, Comment, Rating, Email } = req.body;
   
