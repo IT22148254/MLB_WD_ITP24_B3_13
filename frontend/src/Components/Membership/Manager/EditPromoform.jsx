@@ -7,8 +7,8 @@ import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import image from "../../../Images/package_bg.jpg"
-import "./styles/editPromos.css";
-
+// import "./styles/editPromos.css";
+import bg from "../../../Images/package_bg.jpg";
 const EditPromoForm = () => {
 
 
@@ -99,12 +99,17 @@ const EditPromoForm = () => {
             });
     };
 
-
+    const bgStyle = {
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        height: "100vh",
+      };
+    
     return (
-        <section className="section" style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}> {/* Apply background image */}
-            <Container>
-                <div>
-                    <div className="flex h-full justify-center items-center ">
+        // <section className="section" style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}> {/* Apply background image */}
+        //     <Container>
+                // <div>
+                    <div className="flex h-full justify-center items-center" style={bgStyle} >
                         <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 flex flex-col gap-y-4">
                             <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Edit Promo Package</p> {/* Moved "Edit Standard" text above the black box */}
                             <form onSubmit={handleSubmit} className="space-y-4">
@@ -179,9 +184,9 @@ const EditPromoForm = () => {
                             </form>
                         </div>
                     </div>
-                </div>
-            </Container>
-        </section>
+        //         </div>
+        //     </Container>
+        // </section>
     );
 }
 
