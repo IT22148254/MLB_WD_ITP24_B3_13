@@ -1,15 +1,28 @@
 const router = require("express").Router();
 let User = require("../models/user");
 
+// ================================================================================================================================================
+//=================================================================user============================================================================
+// ================================================================================================================================================
+
+
+
+//adding user
+
 router.route("/add").post((req, res) => {
-  const { Fname, Lname, Phone, Email, Dob } = req.body;
+  const { Fname, Lname, Address, Gender, NIC, Phone, Email, Dob, AccLevel } =
+    req.body;
 
   const newUser = new User({
     Fname,
     Lname,
+    Address,
+    Gender,
+    NIC,
     Phone,
     Email,
     Dob,
+    AccLevel,
   });
 
   newUser
@@ -22,6 +35,10 @@ router.route("/add").post((req, res) => {
     });
 });
 
+
+
+//get all user
+
 router.route("/").get((req, res) => {
   User.find()
     .then((users) => {
@@ -33,6 +50,10 @@ router.route("/").get((req, res) => {
         .json({ message: `Error while fetching all users ${err} ` });
     });
 });
+
+
+
+//get one user
 
 router.route("/get/:id").get(async (req, res) => {
   try {
@@ -53,18 +74,31 @@ router.route("/get/:id").get(async (req, res) => {
   }
 });
 
+
+
+//update user
+
 router.route("/:id").put(async (req, res) => {
   try {
     const uid = req.params.id;
-    const { Fname, Lname, Phone, Email, Dob } = req.body;
+    const { Fname, Lname, Address, Gender, NIC, Phone, Email, Dob, AccLevel } =
+      req.body;
 
-    const result = await User.findByIdAndUpdate(uid, {
-      Fname,
-      Lname,
-      Phone,
-      Email,
-      Dob,
-    });
+    const result = await User.findByIdAndUpdate(
+      uid,
+      {
+        Fname,
+        Lname,
+        Address,
+        Gender,
+        NIC,
+        Phone,
+        Email,
+        Dob,
+        AccLevel,
+      },
+      { new: true }
+    );
 
     if (!result) {
       return res.status(404).json({ message: " User not found " });
@@ -74,6 +108,9 @@ router.route("/:id").put(async (req, res) => {
     return res.status(400).json({ message: `User update unsuccessful ${err}` });
   }
 });
+
+
+//delete user
 
 router.route("/:id").delete(async (req, res) => {
   try {

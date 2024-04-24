@@ -25,7 +25,19 @@ const productRouter = require("./routs/products.js");
 app.use("/product", productRouter);
 
 const userRouter = require("./routs/users.js");
-app.use("/user",userRouter);
+app.use("/user", userRouter);
+
+const feedBackRouter = require("./routs/feedbacks.js");
+app.use("/feedback", feedBackRouter);
+
+const packageRouter = require("./routs/packages.js");
+app.use("/package", packageRouter);
+
+const scheduleRouter = require("./routs/schedules.js");
+app.use("/schedule", scheduleRouter);
+
+const supplierRouter = require("./routs/suppliers.js");
+app.use("/supplier", supplierRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);
