@@ -6,16 +6,10 @@ import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 import bg from "../../Images/bg_main.jpg";
 
-
 const SupplierTable = () => {
-  // const bgStyle = {
-  //   backgroundImage: `url(${bg})`, 
-  //   backgroundSize: "cover",
-  //   height: "100%",
-    
-  // };
-
   const [suppliers, setSuppliers] = useState([]);
+  const [searchInput, setSearchInput] = useState('');
+  const [filteredSuppliers, setFilteredSuppliers] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -23,12 +17,24 @@ const SupplierTable = () => {
       try {
         const { data } = await axios.get('http://localhost:8070/supplier');
         setSuppliers(data.result);
+        setFilteredSuppliers(data.result);
       } catch (error) {
         console.error('Failed to fetch Suppliers', error);
       }
     };
     fetchSuppliers();
   }, []);
+
+  useEffect(() => {
+    const filtered = filterSuppliers(suppliers, searchInput);
+    setFilteredSuppliers(filtered);
+  }, [searchInput, suppliers]);
+
+  const filterSuppliers = (suppliers, searchText) => {
+    return suppliers.filter((supplier) =>
+      supplier.Name.toLowerCase().startsWith(searchText.toLowerCase())
+    );
+  };
 
   const handleEdit = (id) => {
     navigate(`/sup/editsup/${id}`);
@@ -80,7 +86,7 @@ const SupplierTable = () => {
       { header: 'Address', dataKey: 'Address' },
     ];
 
-    const rows = suppliers.map((sup) => ({
+    const rows = filteredSuppliers.map((sup) => ({
       Name: sup.Name,
       Email: sup.Email,
       Phone: sup.Phone,
@@ -92,19 +98,27 @@ const SupplierTable = () => {
   };
 
   return (
-   
-      <div
-        className="h-screen flex justify-center items-center"
-        style={{
-          backgroundImage: `url(${bg})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center center',
-        }}
-      >
-    
+    <div
+      className="h-screen flex justify-center items-center"
+      style={{
+        backgroundImage: `url(${bg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center center',
+      }}
+    >
       <div className="flex flex-col justify-center items-center h-screen mt-10 mb-10">
         <div className="bg-black/45 h-auto w-4/5 rounded-[50px] py-12 px-14 gap -inset-y-8">
           <p className="text-4xl text-white font-bold mb-4">Suppliers Table</p>
+          <div className="mb-4">
+            <div className="h-9 bg-white/70 w-1/2 rounded-lg">
+              <input
+                placeholder="Search by Name"
+                className="bg-transparent pl-4 placeholder:text-gray-600 w-full h-full border-none active:border-none focus:border-none focus:outline-none"
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+              />
+            </div>
+          </div>
           <div className="grid grid-cols-6 bg-cyan-400 text-white">
             <div className="border-2 border-black p-3">Name</div>
             <div className="border-2 border-black p-3 ">Email</div>
@@ -117,8 +131,8 @@ const SupplierTable = () => {
             className="w-full overflow-auto"
             style={{ maxHeight: '450px', scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {suppliers &&
-              suppliers.map((sup, index) => (
+            {filteredSuppliers &&
+              filteredSuppliers.map((sup, index) => (
                 <div
                   className={`grid grid-cols-6 ${index % 2 === 0 ? 'bg-cyan-200' : 'bg-cyan-400'}`}
                   key={sup._id}
@@ -155,7 +169,6 @@ const SupplierTable = () => {
         </div>
       </div>
     </div>
-    
   );
 };
 
