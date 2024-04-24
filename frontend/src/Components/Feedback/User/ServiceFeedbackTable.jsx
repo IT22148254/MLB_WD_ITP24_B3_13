@@ -196,10 +196,11 @@ const ServiceFeedbackTable = () => {
               </div>
             </div>
           ))}
-          <button className="secondary__btn" id="btn_position" onClick={handleCreateReport}>Generate Feedback Report</button>
+         
       </div>
     </div>
     </div>
+    <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9" id="btn_position" onClick={handleCreateReport}>Generate Feedback Report</button>
     </div>
     
   );
