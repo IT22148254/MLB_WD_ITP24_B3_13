@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col, Button, Form, InputGroup } from "react-bootstrap";
 import Product from "../content/product";
 // import axios from "axios";
@@ -13,6 +13,7 @@ import { useNavigate } from "react-router-dom";
 import FormContainer from "../content/FormContainer";
 
 const HomeScreen = () => {
+  const [search, setSearch] = useState("");
   // const [products, setProducts] = useState([]);
 
   // useEffect(() => {
@@ -48,7 +49,11 @@ const HomeScreen = () => {
               <FormContainer>
                 <Form>
                   <InputGroup>
-                    <Form.Control placeholder="Enter an item" className="mt-3" />
+                    <Form.Control
+                      onChange={(e) => setSearch(e.target.value)}
+                      placeholder="Enter an item"
+                      className="mt-3"
+                    />
                   </InputGroup>
                 </Form>
               </FormContainer>
@@ -75,7 +80,7 @@ const HomeScreen = () => {
             )}
           </Row>
           <Row style={{ margin: "10px" }}>
-            {products.map((products) => (
+            {products.filter((item) => { return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search)}).map((products) => (
               <Col key={products._id} sm={12} md={6} lg={4} xl={3}>
                 <Product product={products} />
               </Col>
