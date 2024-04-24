@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Form, InputGroup } from "react-bootstrap";
 import Product from "../content/product";
 // import axios from "axios";
 // import { useState, useEffect } from "react";
@@ -10,6 +10,7 @@ import Loader from "../content/Loader";
 import Message from "../content/Message";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import FormContainer from "../content/FormContainer";
 
 const HomeScreen = () => {
   // const [products, setProducts] = useState([]);
@@ -43,14 +44,26 @@ const HomeScreen = () => {
           }}
         >
           <Row>
-            <Col md={9}></Col>
+            <Col>
+              <FormContainer>
+                <Form>
+                  <InputGroup>
+                    <Form.Control placeholder="Enter an item" className="mt-3" />
+                  </InputGroup>
+                </Form>
+              </FormContainer>
+            </Col>
             {user.userInfo === null ? (
               <></>
             ) : (
               <Col md={3}>
                 {user.userInfo.AccLevel !== "customer" ? (
                   <center>
-                    <Button variant="warning" className="mt-3" onClick={(e) => navigate('/store/admin')}>
+                    <Button
+                      variant="warning"
+                      className="mt-3"
+                      onClick={(e) => navigate("/store/admin")}
+                    >
                       {" "}
                       Admin portal
                     </Button>
