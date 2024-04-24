@@ -1,11 +1,11 @@
 
 import React from 'react'
-import { Container, Row, Col, Table } from 'reactstrap'
+import { Container, Row, Col, Table, Button } from 'reactstrap'
 
-function MMdashboard() {
-    return (
-        <>
-            <Container>
+const MMDashboard = () => {
+
+    return (  
+        <Container>
                 <div className="title code">Membership Manager Dashboard</div>
                 <br />
                 <Row className='om_btn'>
@@ -16,13 +16,13 @@ function MMdashboard() {
                     </Col>
                     <Col>
                         <Container>
-                            <a><p id='ed'>Promo Packages</p></a>
+                            <button><a><p id='ed'>Promo Packages</p></a></button>
                         </Container>
                     </Col>
                 </Row>
             </Container>
-        </>
-    )
+    );
 }
+ 
+export default MMDashboard;
 
-export default MMdashboard;

@@ -145,6 +145,7 @@ const CreatedPromosTable = () => {
         <section>
             <Container>
                 <div>
+                    <button>Add new promos</button>
                     <div className="flex h-full justify-center items-center ">
                         <div className="bg-black/45 w-5/8 h-auto rounded-[50px] py-12 px-14 flex flex-col gap-y-8">
                             <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>Created Promos</p>

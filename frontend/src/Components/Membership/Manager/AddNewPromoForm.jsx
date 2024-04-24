@@ -181,7 +181,8 @@ const AddNewPromoForm = () => {
                     </form> 
                 </div>
             </div>
-        </div>  
+        </div> 
+        <button>View created promos</button> 
         </Container>     
      );
 }
