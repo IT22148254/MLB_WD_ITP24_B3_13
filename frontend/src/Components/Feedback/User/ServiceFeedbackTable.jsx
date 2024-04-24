@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
 import jsPDF from 'jspdf'
 import 'jspdf-autotable'
+import { Container } from "reactstrap";
 const ServiceFeedbackTable = () => {
   let navigate = useNavigate();
 
@@ -100,9 +101,14 @@ const ServiceFeedbackTable = () => {
 }
 
   return (
+    <Container>
+      <div className="flex flex-col justify-center items-center h-screen">
+          <div className="bg-black/45 w-7/8 rounded-[50px] py-12 px-14 gap -inset-y-8">
     <div className="w-full">
-        <div className="title">Service Feedback list</div>
-      <div className="grid grid-cols-8 bg-cyan-400">
+    <div className="text-4xl text-white font-bold align-top mb-6" style={{ WebkitTextStroke: '1px black' }}>
+        Service Feedback list
+      </div>
+      <div className="grid grid-cols-6 bg-cyan-400">
         <div className="border-2 border-black p-3">Name</div>
         <div className="border-2 border-black p-3">Email</div>
         <div className="border-2 border-black p-3">Rating</div>
@@ -121,7 +127,7 @@ const ServiceFeedbackTable = () => {
         {feedbacks &&
           feedbacks.map((feedback, index) => (
             <div
-              className={`grid grid-cols-8 ${
+              className={`grid grid-cols-6 ${
                 index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
               }`}
               key={feedback._id}
@@ -157,6 +163,9 @@ const ServiceFeedbackTable = () => {
           <button class="secondary__btn" id="btn_position" onClick={handleCreateReport}>Generate Feedback Report</button>
       </div>
     </div>
+    </div>
+    </div>
+    </Container>
   );
 };
 
