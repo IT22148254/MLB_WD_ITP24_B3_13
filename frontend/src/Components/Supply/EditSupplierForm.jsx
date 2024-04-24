@@ -4,7 +4,14 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Container } from "reactstrap";
 import { useEffect } from "react";
+import bg from "../../Images/bg_main.jpg";
+
 const EditSupplierForm = () => {
+  const bgStyle = {
+    backgroundImage: `url(${bg})`, 
+    backgroundSize: "cover",
+    height: "100vh",
+  };
 
   const [Name, setName] = useState('')
   const [Email, setEmail] = useState('')
@@ -102,7 +109,7 @@ const EditSupplierForm = () => {
 
 
   return (
-    <section>
+    <section className="h-screen flex justify-center items-center" style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover" }}>
     <Container>
     <div className="flex flex-col justify-center items-center h-screen">
          <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">

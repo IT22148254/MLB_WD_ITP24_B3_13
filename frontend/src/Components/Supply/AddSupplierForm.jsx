@@ -2,7 +2,13 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container } from 'reactstrap'
 import Swal from "sweetalert2";
+import bg from "../../Images/bg_main.jpg";
 const AddSupplierForm = () => {
+    const bgStyle = {
+        backgroundImage: `url(${bg})`, 
+        backgroundSize: "cover",
+        height: "100vh",
+      };
 
     const [Name,setName] = useState('')
     const [Email,setEmail] = useState('')
@@ -68,10 +74,11 @@ const AddSupplierForm = () => {
                     {/*navigate('/promoPackages')*/}
             }}
     return ( 
-        <section>
-            <Container>
-            <div className="flex flex-col justify-center items-center h-screen">
-                 <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
+         <section className="h-screen flex justify-center items-center" style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover" }}>
+            <Container className="w-full">
+               
+            <div className="flex flex-col justify-center items-center h-screen" style={bgStyle}>
+                 <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8" >
                     <div /*className="title" */ className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Add Supplier</div>
                     <form method="POST" /*className="add-promo" */ className="space-y-4" onSubmit={handleSubmit}>
                         <div className="flex flex-col gap-y-4">
@@ -132,6 +139,8 @@ const AddSupplierForm = () => {
                     </div>
                     </div>
                     <button>view Suppliers</button>
+                    {/* </div>
+                    </div> */}
             </Container>
         </section>
      );
