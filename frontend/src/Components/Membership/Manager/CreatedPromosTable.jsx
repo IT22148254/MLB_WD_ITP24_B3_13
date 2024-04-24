@@ -7,6 +7,7 @@ import 'jspdf-autotable'
 import Swal from "sweetalert2"
 import axios from 'axios'
 import { useNavigate, useParams } from "react-router-dom"
+import "./styles/editPromos.css";
 
 const CreatedPromosTable = () => {
     
@@ -109,7 +110,7 @@ const CreatedPromosTable = () => {
     }
 
     return (
-        <div className="flex h-screen justify-center items-center bg-gray-100">
+        <div className=" createpromo flex h-screen justify-center items-center bg-gray-100">
             <div className="bg-black/45 h-3/4 w-3/4 rounded-[50px] py-10 px-14 flex flex-col gap-y-8">
                 <p className="text-4xl font-bold text-white">Created Promos</p>
                 <div className="flex justify-between items-center">

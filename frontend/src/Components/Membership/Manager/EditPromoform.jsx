@@ -6,8 +6,11 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import image from "../../../Images/package_bg.jpg"
+import "./styles/editPromos.css";
 
 const EditPromoForm = () => {
+
 
     const [Name, setName] = useState("")
     const [Discription, setDiscription] = useState("")
@@ -98,7 +101,7 @@ const EditPromoForm = () => {
 
 
     return (
-        <section>
+        <section className="section" style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}> {/* Apply background image */}
             <Container>
                 <div>
                     <div className="flex h-full justify-center items-center ">
