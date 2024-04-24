@@ -84,37 +84,58 @@ const EditServiceFeedbackForm = () => {
           <div className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>
             <h1 className="title">Edit Your Feedback</h1>
             </div>
-            <form method="POST" className="add-promo" onSubmit={handleSubmit}>
-                        <div className="add-promo-row">
-                            <label for="Name" className="promo-lbl">Full Name:</label>
+            <form className="space-y-4" onSubmit={handleSubmit}>
+                        <div className="flex flex-col gap-y-4">
+                        <div className="flex justify-between items-center">
+                            <label htmlFor="Name" className="text-white rounded-xl flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>
+                    Full Name:</label>
                             <input
                                 type="text"
                                 id="Name"
                                 name="name"
-                                className="promoInput"
                                 value={UserName}
-                                onChange={(e)=>setName(e.target.value)} />
+                                onChange={(e) => setName(e.target.value)}
+                                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg 
+                                pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                                required />
                         </div>
-                        <div className="add-promo-row">
-                            <label for="Email" className="promo-lbl">Email Address:</label>
+                        </div>
+                        <div className="flex justify-between items-center">
+                            <label htmlFor="Email" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>
+                    Email Address:</label>
                             <input
                                 type="Email"
                                 id="Email"
                                 name="Email"
                                 value={Email}
-                                onChange={(e)=>
-                                    setEmail(e.target.value)
-                                }
-                                className="promoInput"/>
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg 
+                                pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                                required/>
                         </div>
                         
                         {/*Enter rating*/}
-                        <div>
-                        <label className="servicerate">Rate Our service</label>
-                        {Array(5).fill().map((_id,index)=>
-                        Rating >= index + 1 ?
-                        (<AiFillStar style={{color:'orange'}} onClick={()=>setRating(index + 1)} className="FillStar" />
-                        ):(<AiOutlineStar style={{color:'orange'}} onClick={()=>setRating(index + 1)} className="OutlineStar"/>))}
+                        <div  className="flex justify-between items-center">
+                        <label htmlFor="rating" className="text-white rounded-xl flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>
+                    Rate Our service:
+                    </label>
+                    {Array(5).fill().map((_, index) => 
+                    Rating >= index + 1 ? (
+                      <AiFillStar
+                      key={index}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                      className="FillStar cursor-pointer"
+                    />
+                  ) : (
+                    <AiOutlineStar
+                        key={index}
+                        style={{ color: "orange" }}
+                        onClick={() => setRating(index + 1)}
+                        className="OutlineStar cursor-pointer"
+                      />
+                    )
+                  )}
                         </div>
                         <div className="add-promo-row">
                             <textarea id="inquiry" name="inquiry" placeholder="Enter your opinion here" value={Comment} onChange={(e)=>setComment(e.target.value)}></textarea>
