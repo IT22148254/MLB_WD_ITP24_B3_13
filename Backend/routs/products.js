@@ -1,7 +1,8 @@
 const router = require("express").Router();
 let { Product, OrderSt } = require("../models/product");
+const multer = require('multer');
+const path = require('path');
 const { admin, protect } = require("../Middleware/authMiddleware");
-const { Order } = require("../models/supplier");
 
 router.route("/add").post(async (req, res) => {
   const product = new Product({
@@ -191,5 +192,9 @@ router.route("/orderst/:id/pay").put(protect, async (req, res) => {
 router.route("/orderst/:id/deliver").put(protect, admin, async (req, res) => {
   res.send("update is delivered");
 });
+
+//===========================================================================================================================================
+
+
 
 module.exports = router;

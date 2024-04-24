@@ -107,15 +107,14 @@ const ProductEditScreen = () => {
             ></Form.Control>
           </Form.Group>
 
-          {/* <Form.Group controlId="image">
+          <Form.Group controlId="image">
             <Form.Label>Image</Form.Label>
             <Form.Control
-              type="image"
+              type="file"
               placeholder="Enter image"
-              value={image}
               onChange={(e) => setImage(e.target.value)}
             ></Form.Control>
-          </Form.Group> */}
+          </Form.Group>
 
           <Form.Group controlId="brand">
             <Form.Label>Brand</Form.Label>
