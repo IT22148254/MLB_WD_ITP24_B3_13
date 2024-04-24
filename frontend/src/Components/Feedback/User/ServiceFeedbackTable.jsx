@@ -118,7 +118,7 @@ const ServiceFeedbackTable = () => {
   const filterFeedbacks = (feedbacks, searchText) => {
     return feedbacks.filter(
       (feedback) =>
-        feedback.UserName.toLowerCase().includes(searchText.toLowerCase())
+        feedback.UserName.toLowerCase().startsWith(searchText.toLowerCase())
     );
   };
 
