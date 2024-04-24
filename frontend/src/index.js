@@ -13,8 +13,9 @@ import SupplierDashboard from './Pages/SupplierDashboard';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App/>}>
-      <Route path="/" element={<SupplierDashboard/>}>
+      <Route path="/sup">
         <Route path="addSupplier/" element={<AddSupplierForm/>} />
+
         {/* <Route path="testscreen/:id" element={<TestScreen/>} /> */}
         <Route path="suppliertable/" element={<SupplierTable/>}/>
         <Route path="editsup/:id" element= {<EditSupplierForm/>}/>
@@ -34,4 +35,3 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
-
