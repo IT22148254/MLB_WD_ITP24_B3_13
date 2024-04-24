@@ -1,0 +1,37 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+		<style>
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 50vh;
+}
+
+		</style>
+	</head>
+<title>Stripe Payment Demo</title> 
+<body> 
+	
+	<center><h2>Welcome to Payment Gateway</h2></center>
+	 
+	<form action="payment" method="POST"> 
+		
+	<script
+		src="//checkout.stripe.com/v2/checkout.js"
+		class="stripe-button"
+		data-key="<%= key %>" 
+		data-amount="" 
+		data-currency="usd" 
+		data-name="Buddhina" 
+		data-description="Stripe Payment Gateway" 
+		data-locale="auto"> 
+		</script> 
+		
+		  
+	</form> 
+</body> 
+</html> 

@@ -1,0 +1,23 @@
+
+.pay-button {
+  background-color: #0496C7;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.pay-button:hover {
+  background-color: #006CA5;
+}
+
+/* Center the button in its container */
+button.pay-button {
+  display: block;
+  margin: 200px 300px 200px 300px;
+}
+
+
