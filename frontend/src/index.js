@@ -10,16 +10,20 @@ import CreatedPromos from './Components/Membership/Manager/CreatedPromosTable'
 import EditPromoForm from './Components/Membership/Manager/EditPromoform';
 import EditStandard from './Components/Membership/Manager/EditStandardform'
 import TestScreen from './Components/Membership/Manager/TestScreen';
-import ChangeTimeOnDy from './Pages/Manager/ChangeOnetimeForm';
-import ChngTimeOndy from './Pages/Manager/Chngtmeondy';
+import ChangeTimeOnDayForm from './Components/Membership/Manager/ChangeOnetimeForm';
+import OnetimeChangeTable from './Components/Membership/Manager/OnetimeChangeTable';
+import ChangeOnetimeEdit from './Components/Membership/Manager/ChangeOnetimeEdit';
 import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path='sch/'>
+      <Route path='/'>
         {/* <Route path='mmdashboard/' element={<MMDashboard />} /> */}
-        <Route path='chngtimeondy/' element={<ChangeTimeOnDy />} />
-        <Route path='chngtimeondytbl/' element={<ChngTimeOndy/>}/>
+        <Route index element={<ChangeTimeOnDayForm/>} />
+        {/* <Route path='chngtimeondy/' element={<ChangeTimeOnDy />} /> */}
+        <Route path='chngtimeondytbl/' element={<OnetimeChangeTable/>}/>
+        <Route path='
+        ' element={<ChangeOnetimeEdit/>}/>
         {/* <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
         <Route path='editpromo/:id' element={<EditPromoForm/>} />

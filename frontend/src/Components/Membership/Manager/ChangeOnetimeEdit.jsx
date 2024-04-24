@@ -1,55 +1,69 @@
-import { useState } from 'react';
-import { Container } from 'reactstrap'
+import { useParams } from "react-router-dom"
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-
-const ChangeTimeOnDy = () => {
+import { Container} from 'reactstrap'
+import { useState, useEffect } from "react";
+const ChangeOnetimeEdit = () => {
 
     const [TimeSlot, setTimeSlot] = useState('')
     const [Day, setDay] = useState('')
     const [Trainer, setTrainer] = useState('')
     const [error, setError] = useState(null)
 
-    const handleSubmit = async (e) => {
+    const {id} = useParams();
+
+    useEffect(() => {
+        const fetchonetimes = async () => {
+            try {
+                const result = await axios.get(`http://localhost:8070/schedule/coachSchedule/get/${id}`);
+                setTimeSlot(result.TimeSlot);
+                setDay(result.Day);
+                setTrainer(result.Trainer);
+                console.log(result);
+            } catch (error) {
+                setError(error);
+                console.log('Error fetching package: ', error);
+            }
+        };
+        fetchonetimes();
+    }, [id]);
+
+    const handleSubmit = (e) => {
         e.preventDefault()
 
-        const chngTimeOndy = { TimeSlot, Day, Trainer }
-
-        const response = await fetch('http://localhost:8070/schedule/coachSchedule/add', {
-            method: 'POST',
-            body: JSON.stringify(chngTimeOndy),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        const json = await response.json()
-
-        if (!response.ok) {
-            setError(json.error)
-            console.log('error', error)
+        const scheduleDate = {
+            TimeSlot: TimeSlot,
+            Day: Day,
+            Trainer: Trainer,
         }
 
-        if (response.ok) {
-
-            setDay('')
-            setTimeSlot('')
-            setTrainer('')
-            setError(null)
-
-            Swal.fire({
-                title: "Success",
-                text: "new slot added successfully",
-                icon: "success",
-            }).then(() => {
-                console.log('new slot added', json)
+        axios.put(`http://localhost:8070/schedule/coachSchedule/${id}`, scheduleDate)
+            .then(response => {
+                Swal.fire({
+                    title: "Success",
+                    text: " schedule updated successfully",
+                    icon: "success",
+                }).then(() => {
+                    console.log('promo updated successfully', response.data)
+                })
+                //window.location = "http://localhost:3000/standardpackages";
             })
+            .catch(error => {
 
-            {/*navigate ('/promoPackages')*/ }
-        }
+                Swal.fire({
+                    title: "Error",
+                    text: " schedule update Promo",
+                    icon: "error",
+                }).then(() => {
+                    console.log('Cannot update Promo', error)
+                })
 
-    }
 
+            });
+    };
 
-    return (
+    return ( 
         <body>
             <section>
                 <Container>
@@ -62,7 +76,7 @@ const ChangeTimeOnDy = () => {
                         <div className="add-promo-row mb-2">
                             <label htmlFor="currentslot" className="promo-lbl block font-medium mb-1">Time Slot</label>
                             <select name="TimeSlot" id="TimeSlot" className="dropdown border border-gray-300 rounded-md px-3 py-2 w-full" value={TimeSlot} onChange={(e) => setTimeSlot(e.target.value)}>
-                                <option value="8.30-10.30" selected>8.30 - 11:30 AM</option>
+                                <option value="8.30-10.30" selected disabled>8.30 - 11:30 AM</option>
                                 <option value="10.30-12.30">10.30 AM - 12.30 PM</option>
                                 <option value="1.30-3.30">1.30 - 3.30 PM</option>
                                 <option value="3.30-5.30">3.30 - 5.30 PM</option>
@@ -71,7 +85,7 @@ const ChangeTimeOnDy = () => {
                         <div className="add-promo-row mb-2">
                             <label htmlFor="Price" className="promo-lbl block font-medium mb-1">New Time Slot</label>
                             <select name="TimeSlot" id="TimeSlot" className="dropdown border border-gray-300 rounded-md px-3 py-2 w-full" value={Trainer} onChange={(e) => setTrainer(e.target.value)}>
-                                <option value="1.30-2.30">Senura </option>
+                                <option value="1.30-2.30" selected disabled>Senura </option>
                                 <option value="2.30-3.30">Dinitha</option>
                                 <option value="3.30-4.30">Pubudu</option>
                                 <option value="4.30-5.30">Sahan</option>
@@ -88,7 +102,7 @@ const ChangeTimeOnDy = () => {
                 </Container>
             </section>
         </body>
-    );
+     );
 }
-
-export default ChangeTimeOnDy;
+ 
+export default ChangeOnetimeEdit;
