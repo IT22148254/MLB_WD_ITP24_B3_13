@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button,Alert } from "react-bootstrap";
 import FormContainer from "../content/FormContainer";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -14,12 +14,21 @@ const ShippingScreen = () => {
   const [street, setStreet] = useState(shippingAddress?.street || "");
   const [city, setCity] = useState(shippingAddress?.city || "");
   const [district, setDistrict] = useState(shippingAddress?.district || "");
+  const [showError,setShowError] = useState(false)
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
     e.preventDefault();
+
+    if (!address || !street || !city || !district) {
+      setShowError(true);
+      return;
+    }
+
+    setShowError(false);
+
     dispatch(saveShippingAddress({ address, street, city, district }));
     navigate("/store/payment");
   };
@@ -32,6 +41,10 @@ const ShippingScreen = () => {
 
         <h1>Shipping</h1>
 
+        {showError && (
+          <Alert variant="danger">Please fill in all fields.</Alert>
+        )}
+
         <Form.Group controlId="address" className="my-3">
           <Form.Label>Address</Form.Label>
           <Form.Control
@@ -39,6 +52,7 @@ const ShippingScreen = () => {
             value={address}
             placeholder="Enter address"
             onChange={(e) => setAddress(e.target.value)}
+            isInvalid={!address && showError}
           ></Form.Control>
         </Form.Group>
 
@@ -49,6 +63,7 @@ const ShippingScreen = () => {
             value={street}
             placeholder="Enter street"
             onChange={(e) => setStreet(e.target.value)}
+            isInvalid={!street && showError}
           ></Form.Control>
         </Form.Group>
 
@@ -59,6 +74,7 @@ const ShippingScreen = () => {
             value={city}
             placeholder="Enter city"
             onChange={(e) => setCity(e.target.value)}
+            isInvalid={!city && showError}
           ></Form.Control>
         </Form.Group>
 
@@ -69,6 +85,7 @@ const ShippingScreen = () => {
             value={district}
             placeholder="Enter district"
             onChange={(e) => setDistrict(e.target.value)}
+            isInvalid={!district && showError}
           ></Form.Control>
         </Form.Group>
 
