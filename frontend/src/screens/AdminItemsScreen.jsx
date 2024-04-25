@@ -26,8 +26,7 @@ const AdminItemsScreen = () => {
     navigate(`/store/admin/item/${id}/edit`);
   };
 
-  const deleteHandler = async(id) => {
-
+  const deleteHandler = async (id) => {
     if (window.confirm("Are you sure you want to delete the product ?")) {
       try {
         await removeProduct(id);
@@ -37,7 +36,6 @@ const AdminItemsScreen = () => {
       }
     }
     console.log("deleted - ", id);
-    
   };
 
   const createHandler = async () => {
@@ -52,7 +50,29 @@ const AdminItemsScreen = () => {
     console.log("created ");
   };
 
+  function convertToCSV(reportData) {
+    const headers = Object.keys(reportData[0]).join(",");
+    const rows = reportData
+      .map((item) => Object.values(item).join(","))
+      .join("\n");
+    return `${headers}\n${rows}`;
+  }
+
   const reportHandler = () => {
+    
+    const csvContent = convertToCSV(products);
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'report.csv';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
     console.log("generated report");
   };
 
