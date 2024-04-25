@@ -1,28 +1,51 @@
 import { useParams } from "react-router-dom";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Card,
-  Alert,
-} from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Card, Alert, Button } from "react-bootstrap";
 import Message from "../content/Message";
 import Loader from "../content/Loader";
 import { useGetOrderDetailsQuery } from "../slices/ordersApiSlice";
-
+import "jspdf-autotable";
+import {jsPDF} from "jspdf";
 import React from "react";
 
 const OrderScreen = () => {
   const { id: orderId } = useParams();
 
-  const {
-    data: order,
-    isLoading,
-    error,
-  } = useGetOrderDetailsQuery(orderId);
+  const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId);
 
   console.log(order);
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    const companyName = "WaveSync";
+    const today = new Date();
+    const date = today.toLocaleDateString();
+    const time = today.toLocaleTimeString();
+
+    doc.text(
+      `${companyName} \nReceipt generated on : ${date} at ${time}`,
+      14,
+      20
+    );
+
+    doc.text(
+      `Delivary price : ${Number(order.shippingPrice).toFixed(2)} LKR  Total price : ${Number(order.totalPrice).toFixed(2)} LKR`,
+      19,
+      39
+    );
+
+    doc.autoTable({
+      startY: 50,
+      head: [["Name", "Price", "Quantity"]],
+      body: order.orderItems.map((item) => [
+        item.name,
+        item.price,
+        item.quantity,
+      ]),
+    });
+
+    doc.save(`Receipt ${order._id}.pdf`);
+  };
 
   return isLoading ? (
     <Loader />
@@ -110,9 +133,7 @@ const OrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                <Row>
-                  {/* <Col>//download as a pdf</Col> */}
-                </Row>
+                <Row><Button onClick={() => generatePDF()}>Generate receipt</Button></Row>
               </ListGroup.Item>
             </ListGroup>
           </Card>
