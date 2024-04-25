@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Form, Button,Alert } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import Loader from "../content/Loader";
 import FormContainer from "../content/FormContainer";
 import { toast } from "react-toastify";
@@ -8,6 +8,7 @@ import {
   useUpdateProductMutation,
   useGetOneProductQuery,
 } from "../slices/productsApiSlice";
+import CurrencyInput from "react-currency-input-field";
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
@@ -20,11 +21,7 @@ const ProductEditScreen = () => {
   const [description, setDescription] = useState("");
   const [err, setErr] = useState("");
 
-  const {
-    data: product,
-    isLoading,
-    error,
-  } = useGetOneProductQuery(productId);
+  const { data: product, isLoading, error } = useGetOneProductQuery(productId);
 
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
@@ -45,21 +42,28 @@ const ProductEditScreen = () => {
 
   const validatePrice = (value) => {
     const regex = /^\d+(\.\d{1,2})?$/;
-    return regex.test(value) || value === "" ;
+    return regex.test(value) || value === "";
   };
 
   const handlePriceChange = (e) => {
-    const newValue = e.target.value;
+    let newValue = e.target.value;
     if (!validatePrice(newValue)) {
       setErr("Please enter a valid price (e.g., 10 or 10.99)");
     } else {
       setErr("");
-      setPrice(newValue);
+    setPrice(newValue);
     }
   };
 
   const validateForm = () => {
-    if (!name || !price || !brand || !category || !countInStock || !description) {
+    if (
+      !name ||
+      !price ||
+      !brand ||
+      !category ||
+      !countInStock ||
+      !description
+    ) {
       setErr("Please fill in all fields.");
       return false;
     }
@@ -88,13 +92,13 @@ const ProductEditScreen = () => {
       description,
     };
 
-    const result = await updateProduct(updatedProduct)
-    if(result.error){
-        console.log(error)
-    }else{
-        toast.success("Succesfully updated the product ")
-        console.log('Successfully updated')
-        navigate('/store/admin/items')
+    const result = await updateProduct(updatedProduct);
+    if (result.error) {
+      console.log(error);
+    } else {
+      toast.success("Succesfully updated the product ");
+      console.log("Successfully updated");
+      navigate("/store/admin/items");
     }
   };
 
@@ -102,7 +106,7 @@ const ProductEditScreen = () => {
     return <Loader />;
   } else if (error) {
     console.log(error);
-    toast.error("Something went wrong")
+    toast.error("Something went wrong");
   } else if (loadingUpdate) {
     return <Loader />;
   }
@@ -134,12 +138,14 @@ const ProductEditScreen = () => {
 
           <Form.Group controlId="price">
             <Form.Label>Price</Form.Label>
+
             <Form.Control
-              type="price"
+              type="text"
               placeholder="Enter price"
               value={price}
               onChange={handlePriceChange}
-            ></Form.Control>
+            >
+            </Form.Control>
           </Form.Group>
 
           <Form.Group controlId="image">
