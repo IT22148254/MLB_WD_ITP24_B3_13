@@ -1,6 +1,5 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Container } from 'reactstrap';
 import Swal from "sweetalert2";
 import bg from "../../Images/bg_main.jpg";
 
@@ -15,6 +14,7 @@ const AddSupplierForm = () => {
     const [emailError, setEmailError] = useState('');
     const [phoneError, setPhoneError] = useState('');
     const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -49,38 +49,42 @@ const AddSupplierForm = () => {
 
         const supplier = { Name, Email, Phone, Address };
 
-        const response = await fetch('http://localhost:8070/supplier/add', {
-            method: 'POST',
-            body: JSON.stringify(supplier),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const json = await response.json();
-
-        if (!response.ok) {
-            setError(json.error);
-        }
-
-        if (response.ok) {
-            Swal.fire({
-                title: "Success",
-                text: "New Supplier added successfully",
-                icon: "success",
-            }).then(() => {
-                console.log('new Supplier added', json);
+        try {
+            const response = await fetch('http://localhost:8070/supplier/add', {
+                method: 'POST',
+                body: JSON.stringify(supplier),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             });
 
-            setName('');
-            setEmail('');
-            setPhone('');
-            setAddress('');
-            setError(null);
-            setNameError('');
-            setEmailError('');
-            setPhoneError('');
-            navigate("/sup/suppliertable");
+            const json = await response.json();
+
+            if (!response.ok) {
+                setError(json.error);
+            }
+
+            if (response.ok) {
+                Swal.fire({
+                    title: "Success",
+                    text: "New Supplier added successfully",
+                    icon: "success",
+                }).then(() => {
+                    console.log('new Supplier added', json);
+                    setName('');
+                    setEmail('');
+                    setPhone('');
+                    setAddress('');
+                    setError(null);
+                    setNameError('');
+                    setEmailError('');
+                    setPhoneError('');
+                    navigate("/sup/suppliertable");
+                });
+            }
+        } catch (error) {
+            console.error('Error adding Supplier:', error);
+            setError("Failed to add Supplier");
         }
     };
 
@@ -100,6 +104,21 @@ const AddSupplierForm = () => {
         setName(e.target.value);
     };
 
+    const handleEmailChange = (e) => {
+        setEmail(e.target.value);
+        setEmailError('');
+    };
+
+    const handlePhoneChange = (e) => {
+        const input = e.target.value;
+        if (/^\d*$/.test(input) && input.length <= 10) {
+            setPhone(e.target.value);
+            setPhoneError('');
+        } else {
+            setPhoneError("Contact number should include 10 numbers and contain only digits");
+        }
+    };
+
     return (
         <div className="flex h-full justify-center items-center" style={bgStyle}>
             <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
@@ -114,8 +133,7 @@ const AddSupplierForm = () => {
                                 name="Name"
                                 value={Name}
                                 onChange={handleNameChange}
-                                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
-                                pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             />
                             {nameError && <span className="text-red-500">{nameError}</span>}
                         </div>
@@ -126,10 +144,9 @@ const AddSupplierForm = () => {
                             type="email"
                             id="Email"
                             name="Email"
-                            className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
-                                pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                            className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             value={Email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleEmailChange}
                             required
                         />
                         {emailError && <span className="text-red-500">{emailError}</span>}
@@ -141,9 +158,8 @@ const AddSupplierForm = () => {
                             id="Phone"
                             name="Phone"
                             value={Phone}
-                            onChange={(e) => setPhone(e.target.value)}
-                            className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
-                                pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                            onChange={handlePhoneChange}
+                            className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             required
                         />
                         {phoneError && <span className="text-red-500">{phoneError}</span>}
@@ -153,8 +169,7 @@ const AddSupplierForm = () => {
                         <textarea
                             id="Address"
                             name="Address"
-                            className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
-                                pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                            className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             value={Address}
                             onChange={(e) => setAddress(e.target.value)}
                         ></textarea>
