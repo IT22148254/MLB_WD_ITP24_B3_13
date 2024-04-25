@@ -26,6 +26,7 @@ import AdminPortalScreen from "./screens/AdminPortalScreen";
 import AdminOrdersScreen from "./screens/AdminOrdersScreen";
 import AdminItemsScreen from "./screens/AdminItemsScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
+import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(

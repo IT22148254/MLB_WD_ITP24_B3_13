@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Form, Button, Row, Col, FormGroup } from "react-bootstrap";
+import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import FormContainer from "../content/FormContainer";
 import Loader from "../content/Loader";
 import { useLoginMutation } from "../slices/usersApiSlice";
@@ -11,13 +11,14 @@ import { toast } from "react-toastify";
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const {userInfo} = useSelector((state) => state.auth);
+  const { userInfo } = useSelector((state) => state.auth);
 
   const { search } = useLocation();
   const sparam = new URLSearchParams(search);
@@ -29,6 +30,21 @@ const LoginScreen = () => {
     }
   }, [userInfo, navigate, redirect]);
 
+  const validateEmail = (value) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(value);
+  };
+
+  const handleEmailChange = (e) => {
+    const newValue = e.target.value;
+    setEmail(newValue);
+    if (!validateEmail(newValue)) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError("");
+    }
+  };
+
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
@@ -36,13 +52,22 @@ const LoginScreen = () => {
       dispatch(setCredentials({ ...res }));
       navigate(redirect);
     } catch (error) {
-      toast.error(error);
+      toast.error("Wrong email address or password")
     }
   };
 
   return (
     <FormContainer>
       <h1>Sign in</h1>
+
+      {email === "" ? (
+        <Alert varient="info"> Please enter the email </Alert>
+      ) : emailError ? (
+        <Alert variant="warning"> Invalid email address {emailError} </Alert>
+      ) : (
+        <></>
+      )}
+
       <Form onSubmit={submitHandler}>
         <Form.Group controlId="email" className="my-3">
           <Form.Label>Email address</Form.Label>
@@ -50,9 +75,7 @@ const LoginScreen = () => {
             type="email"
             placeholder="Enter email"
             value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            onChange={handleEmailChange}
           ></Form.Control>
         </Form.Group>
 
@@ -71,7 +94,7 @@ const LoginScreen = () => {
           type="submit"
           variant="primary"
           className="mt-2"
-          disabled={isLoading}
+          disabled={isLoading || !!emailError}
         >
           Sign in
         </Button>
