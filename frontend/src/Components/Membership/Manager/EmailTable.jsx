@@ -49,40 +49,44 @@ const EmailTable = () => {
     navigate(`/editemail/${id}`);
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
-      });
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const response = await axios.delete(
+            `http://localhost:8070/email/${id}`
+          );
 
-      const response = await axios.delete(`http://localhost:8070/email/${id}`);
-
-      if (response.status === 200) {
-        Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
-        }).then(() => {
-          window.location.reload();
-        });
-      } else {
-        Swal.fire({
-          title: 'Error!',
-          text: 'Failed to delete the Supplier.',
-          icon: 'error',
-        });
+          if (response.status === 200) {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            }).then(() => {
+              // Refresh the page
+              window.location.reload();
+            });
+          } else {
+            Swal.fire({
+              title: "Error!",
+              text: "Failed to delete the feedback.",
+              icon: "error",
+            });
+          }
+        } catch (error) {
+          console.error("Error deleting feeddback:", error);
+        }
       }
-    } catch (error) {
-      console.error('Error deleting Supplier:', error);
-    }
+    });
   };
-
   const handleCreateReport = () => {
     const doc = new jsPDF();
     doc.setFontSize(16);
@@ -128,7 +132,7 @@ const EmailTable = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-6 bg-cyan-400 text-white">
+          <div className="grid grid-cols-5 bg-cyan-400 text-white">
             <div className="border-2 border-black p-3">Title</div>
             <div className="border-2 border-black p-3 ">Subject</div>
             <div className="border-2 border-black p-3">Content</div>
@@ -142,7 +146,7 @@ const EmailTable = () => {
             {filteredEmails&&
               filteredEmails.map((em, index) => (
                 <div
-                  className={`grid grid-cols-6 ${index % 2 === 0 ? 'bg-cyan-200' : 'bg-cyan-400'}`}
+                  className={`grid grid-cols-5 ${index % 2 === 0 ? 'bg-cyan-200' : 'bg-cyan-400'}`}
                   key={em._id}
                 >
                   <div className="border-2 border-black p-2 text-black">{em.title}</div>
