@@ -34,8 +34,13 @@ const EmployeeRegisterForm = () => {
   };
 
   const handleNicChange = (e) => {
+    const nicRegex = /^(\d{12}|(\d{11}v?))$/i;
+    if (!nicRegex.test(e.target.value)) {
+      setNicError("Please enter a valid NIC");
+    } else {
+      setNicError("");
+    }
     setNic(e.target.value);
-    setNicError("");
   };
 
   const handleGenderChange = (e) => {
@@ -130,24 +135,6 @@ const EmployeeRegisterForm = () => {
       });
       return;
     }
-
-    // if (!emailRegex.test(email)) {
-    //   // Swal.fire({
-    //   //   title: "Invalid email",
-    //   //   text: "Please enter a valid email address",
-    //   //   icon: "error",
-    //   // });
-    //   // return;
-    // }
-
-    // if (!contactNoRegex.test(contactNo)) {
-    //   Swal.fire({
-    //     title: "Invalid contact number",
-    //     text: "Contact number should include 10 numbers and contain only digits",
-    //     icon: "error",
-    //   });
-    //   return;
-    // }
 
     try {
       const employeeData = {
@@ -262,141 +249,140 @@ const EmployeeRegisterForm = () => {
           className={
             inputContainerStyle +
             " relative select-none " +
-            (dobError && "outline outline-4 outline-red-800 outline-offset-1")
-          }
-        >
-          <p
-            onClick={() => setIsDobSelected(!isDobSelected)}
-            className={
-              "flex items-center w-full bg-transparent h-14 rounded-xl text-black text-lg pl-5 " +
-              (dob ? "font-normal" : "font-semibold ")
-            }
-          >
-            {dob === null
-              ? "Date of Birth *"
-              : `${dob.getFullYear()} - ${
-                  dob.getMonth() < 10
-                    ? "0" + dob.getMonth().toString()
-                    : dob.getMonth()
-                } - ${
-                  dob.getDate() < 10
-                    ? "0" + dob.getDate().toString()
-                    : dob.getDate()
-                }`}
-          </p>
-
-          <div
-            className={
-              "absolute z-10 top-16 right-0 transition-opacity duration-150 ease-in-out  " +
-              (isDobSelected ? "opacity-100" : "opacity-0")
-            }
-          >
-            <Calendar onChange={handleDobChange} value={dob} />
+            (dobError && "outline outline-4 outline-red-800 outline-offset-1")}
+            >
+              <p
+                onClick={() => setIsDobSelected(!isDobSelected)}
+                className={
+                  "flex items-center w-full bg-transparent h-14 rounded-xl text-black text-lg pl-5 " +
+                  (dob ? "font-normal" : "font-semibold ")
+                }
+              >
+                {dob === null
+                  ? "Date of Birth *"
+                  : `${dob.getFullYear()} - ${
+                      dob.getMonth() < 10
+                        ? "0" + dob.getMonth().toString()
+                        : dob.getMonth()
+                    } - ${
+                      dob.getDate() < 10
+                        ? "0" + dob.getDate().toString()
+                        : dob.getDate()
+                    }`}
+              </p>
+     
+              <div
+                className={
+                  "absolute z-10 top-16 right-0 transition-opacity duration-150 ease-in-out  " +
+                  (isDobSelected ? "opacity-100" : "opacity-0")
+                }
+              >
+                <Calendar onChange={handleDobChange} value={dob} />
+              </div>
+            </div>
+            {dobError && (
+              <p className="text-red-800 font-bold text-lg">{dobError}</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-y-1">
+            <div className={inputContainerStyle}>
+              <input
+                className={
+                  inputStyle +
+                  (contactNoError &&
+                    " outline outline-4 outline-red-800 outline-offset-1")
+                }
+                placeholder="Contact Number *"
+                value={contactNo}
+                onChange={handleContactNoChange}
+              />
+            </div>
+            {contactNoError && (
+              <p className="text-red-800 font-bold text-lg">{contactNoError}</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-y-1">
+            <div className={inputContainerStyle}>
+              <input
+                className={
+                  inputStyle +
+                  (emailError &&
+                    " outline outline-4 outline-red-800 outline-offset-1")
+                }
+                placeholder="Email *"
+                value={email}
+                onChange={handleEmailChange}
+              />
+            </div>
+            {emailError && (
+              <p className="text-red-800 font-bold text-lg">{emailError}</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-y-1">
+            <div className={inputContainerStyle}>
+              <input
+                className={
+                  inputStyle +
+                  (addressError &&
+                    " outline outline-4 outline-red-800 outline-offset-1")
+                }
+                placeholder="Address *"
+                value={address}
+                onChange={handleAddressChange}
+              />
+            </div>
+            {addressError && (
+              <p className="text-red-800 font-bold text-lg">{addressError}</p>
+            )}
+          </div>
+          <div className="flex flex-col gap-y-1">
+            <div className={inputContainerStyle}>
+              <input
+                className={
+                  inputStyle +
+                  (roleError &&
+                    " outline outline-4 outline-red-800 outline-offset-1")
+                }
+                placeholder="Role *"
+                value={role}
+                onChange={handleRoleChange}
+              />
+            </div>
+            {roleError && (
+              <p className="text-red-800 font-bold text-lg">
+                {roleError}
+              </p>
+            )}
+          </div>
+          <div className="flex justify-between mt-5">
+            <button
+              className="bg-cyan-400 py-3 px-8 rounded-lg text-lg font-bold"
+              onClick={handleAddClick}
+            >
+              Add
+            </button>
+            <button
+              className="bg-red-500 py-3 px-8 rounded-lg text-lg font-bold"
+              onClick={() => {
+                // Clear all the text fields
+                setFullName("");
+                setNic("");
+                setGender("");
+                setDob("");
+                setContactNo("");
+                setEmail("");
+                setAddress("");
+                setRole("");
+     
+                // Navigate away
+                navigate("/");
+              }}
+            >
+              Cancel
+            </button>
           </div>
         </div>
-        {dobError && (
-          <p className="text-red-800 font-bold text-lg">{dobError}</p>
-        )}
-      </div>
-      <div className="flex flex-col gap-y-1">
-        <div className={inputContainerStyle}>
-          <input
-            className={
-              inputStyle +
-              (contactNoError &&
-                " outline outline-4 outline-red-800 outline-offset-1")
-            }
-            placeholder="Contact Number *"
-            value={contactNo}
-            onChange={handleContactNoChange}
-          />
-        </div>
-        {contactNoError && (
-          <p className="text-red-800 font-bold text-lg">{contactNoError}</p>
-        )}
-      </div>
-      <div className="flex flex-col gap-y-1">
-        <div className={inputContainerStyle}>
-          <input
-            className={
-              inputStyle +
-              (emailError &&
-                " outline outline-4 outline-red-800 outline-offset-1")
-            }
-            placeholder="Email *"
-            value={email}
-            onChange={handleEmailChange}
-          />
-        </div>
-        {emailError && (
-          <p className="text-red-800 font-bold text-lg">{emailError}</p>
-        )}
-      </div>
-      <div className="flex flex-col gap-y-1">
-        <div className={inputContainerStyle}>
-          <input
-            className={
-              inputStyle +
-              (addressError &&
-                " outline outline-4 outline-red-800 outline-offset-1")
-            }
-            placeholder="Address *"
-            value={address}
-            onChange={handleAddressChange}
-          />
-        </div>
-        {addressError && (
-          <p className="text-red-800 font-bold text-lg">{addressError}</p>
-        )}
-      </div>
-      <div className="flex flex-col gap-y-1">
-        <div className={inputContainerStyle}>
-          <input
-            className={
-              inputStyle +
-              (roleError &&
-                " outline outline-4 outline-red-800 outline-offset-1")
-            }
-            placeholder="Role *"
-            value={role}
-            onChange={handleRoleChange}
-          />
-        </div>
-        {roleError && (
-          <p className="text-red-800 font-bold text-lg">
-            {roleError}
-          </p>
-        )}
-      </div>
-      <div className="flex justify-between mt-5">
-        <button
-          className="bg-cyan-400 py-3 px-8 rounded-lg text-lg font-bold"
-          onClick={handleAddClick}
-        >
-          Add
-        </button>
-        <button
-          className="bg-red-500 py-3 px-8 rounded-lg text-lg font-bold"
-          onClick={() => {
-            // Clear all the text fields
-            setFullName("");
-            setNic("");
-            setGender("");
-            setDob("");
-            setContactNo("");
-            setEmail("");
-            setAddress("");
-            setRole("");
-
-            // Navigate away
-            navigate("/");
-          }}
-        >
-          Cancel
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default EmployeeRegisterForm;
+      );
+     };
+     
+     export default EmployeeRegisterForm;

@@ -42,7 +42,7 @@ const Calculator = () => {
 
   const handleOtHoursChange = (e) => {
     setOtHours(e.target.value);
-    if (parseInt(e.target.value) > 24) {
+    if (parseInt(e.target.value) > 12) {
       setOtHoursError("OT Hours must be less than 24 hours");
       return;
     }
