@@ -20,6 +20,9 @@ const AddNewPromoForm = () => {
 
     const handleCurrency = (value) => {
         var inputvalue = value;
+
+       //inputvalue 
+
         if (inputvalue < 0) {
             value = 0;
             toast.error('Cannot input below Zero');
@@ -27,6 +30,10 @@ const AddNewPromoForm = () => {
             setPrice(inputvalue);
         }
     };
+    
+    
+
+    
 
     const handlePromoName = (e) => {
         const value = e.target.value;
@@ -93,7 +100,7 @@ const AddNewPromoForm = () => {
                                 id="Name"
                                 name="name"
                                 value={Name}
-                                onChange={handlePromoName}
+                                onChange={handlePromoName}      //onChange={(e) => sethandlePromoName.target.value}
                                 required
                             />
                         </div>
@@ -108,7 +115,7 @@ const AddNewPromoForm = () => {
                                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                 value={Discription}
                                 onChange={handlePromoDesc}
-                                required
+                                required  //required
                             />
                         </div>
                         <div className="flex justify-between items-center">
