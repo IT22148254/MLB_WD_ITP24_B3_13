@@ -4,6 +4,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { Container } from "reactstrap";
 import bg from "../../Images/bg_main.jpg";
+import { useNavigate } from "react-router-dom";
+
 
 const EditSupplierForm = () => {
     const bgStyle = {
@@ -20,6 +22,7 @@ const EditSupplierForm = () => {
     const [nameError, setNameError] = useState('');
     const [emailError, setEmailError] = useState('');
     const [phoneError, setPhoneError] = useState('');
+    const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
@@ -87,6 +90,7 @@ const EditSupplierForm = () => {
             }).then(() => {
                 console.log('Supplier updated successfully', response.data);
                 setError(null);
+                navigate("/sup/suppliertable");
             });
         })
         .catch(error => {
