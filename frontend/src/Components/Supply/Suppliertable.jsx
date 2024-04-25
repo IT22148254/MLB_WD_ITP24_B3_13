@@ -40,39 +40,42 @@ const SupplierTable = () => {
     navigate(`/sup/editsup/${id}`);
   };
 
-  const handleDelete = async (id) => {
-    try {
-      await Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!',
-      });
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
 
       const response = await axios.delete(`http://localhost:8070/supplier/${id}`);
-
       if (response.status === 200) {
         Swal.fire({
-          title: 'Deleted!',
-          text: 'Your file has been deleted.',
-          icon: 'success',
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
         }).then(() => {
+          // Refresh the page
           window.location.reload();
         });
       } else {
         Swal.fire({
-          title: 'Error!',
-          text: 'Failed to delete the Supplier.',
-          icon: 'error',
+          title: "Error!",
+          text: "Failed to delete the feedback.",
+          icon: "error",
         });
       }
     } catch (error) {
-      console.error('Error deleting Supplier:', error);
+      console.error("Error deleting feeddback:", error);
     }
-  };
+  }
+});
+};
 
   const handleCreateReport = () => {
     const doc = new jsPDF();
