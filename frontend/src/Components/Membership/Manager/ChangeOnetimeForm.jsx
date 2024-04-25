@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Container } from 'reactstrap'
 import Swal from "sweetalert2";
 import { useNavigate } from 'react-router-dom';
-
+import bg from "../../../Images/package_bg.jpg";
 const ChangeTimeOnDayForm = () => {
 
     const [TimeSlot, setTimeSlot] = useState('')
@@ -54,16 +54,23 @@ const ChangeTimeOnDayForm = () => {
     const handlelist = ()=>{
         navigate('/chngtimeondytbl')
     }
+    const bgStyle = {
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        height: "100vh",
+      };
    
     
       // Get today's date in the format yyyy-mm-dd
       const today = new Date().toISOString().split('T')[0];
 
     return (
-        <body>
-            <section>
-                <Container>
-                    <div className="title text-xl font-bold mb-4">Change Time Slot For Oneday</div>
+        
+                <div className="flex h-full justify-center items-center" style={bgStyle}>
+      <div className="bg-black/45 w-4/5 rounded-[50px] py-12 px-12 gap -inset-y-8">
+                <div className="flex h-full justify-center items-center" style={bgStyle}>
+      <div className="bg-black/45 w-4/5 rounded-[50px] py-12 px-12 gap -inset-y-8">
+                    <div className=" text-white title text-xl font-bold mb-4">Change Time Slot For Oneday</div>
                     <form method="POST" className="add-promo" onSubmit={handleSubmit}>
                         <div className="add-promo-row mb-2">
                             <label htmlFor="Date" className="promo-lbl block font-medium mb-1">Date</label>
@@ -96,9 +103,11 @@ const ChangeTimeOnDayForm = () => {
                         {error && <div className="error text-red-500 mt-2">{error}</div>}
                         <button onClick={handlelist} className='secondary__btn mr-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md'>view schedules</button>
                     </form>
-                </Container>
-            </section>
-        </body>
+                    </div>
+                    </div>
+                    </div>
+                    </div>
+
     );
 }
 

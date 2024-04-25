@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Container} from 'reactstrap'
 import { useState, useEffect } from "react";
+import bg from "../../../Images/package_bg.jpg";
 const ChangeOnetimeEdit = () => {
+    
 
     const [TimeSlot, setTimeSlot] = useState('')
     const [Day, setDay] = useState('')
@@ -62,12 +64,18 @@ const ChangeOnetimeEdit = () => {
 
             });
     };
+    
+    const bgStyle = {
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        height: "100vh",
+      };
 
     return ( 
-        <body>
-            <section>
-                <Container>
-                    <div className="title text-xl font-bold mb-4">Change Time Slot For Oneday</div>
+       
+        <div className="flex h-full justify-center items-center" style={bgStyle}>
+        <div className="bg-black/45 w-4/5 rounded-[50px] py-12 px-12 gap -inset-y-8">
+                    <div className=" text-white title text-xl font-bold mb-4">Change Time Slot For Oneday</div>
                     <form method="POST" className="add-promo" onSubmit={handleSubmit}>
                         <div className="add-promo-row mb-2">
                             <label htmlFor="Date" className="promo-lbl block font-medium mb-1">Date</label>
@@ -85,10 +93,10 @@ const ChangeOnetimeEdit = () => {
                         <div className="add-promo-row mb-2">
                             <label htmlFor="Price" className="promo-lbl block font-medium mb-1">New Time Slot</label>
                             <select name="TimeSlot" id="TimeSlot" className="dropdown border border-gray-300 rounded-md px-3 py-2 w-full" value={Trainer} onChange={(e) => setTrainer(e.target.value)}>
-                                <option value="1.30-2.30" selected disabled>Senura </option>
-                                <option value="2.30-3.30">Dinitha</option>
-                                <option value="3.30-4.30">Pubudu</option>
-                                <option value="4.30-5.30">Sahan</option>
+                                <option value="Senura" selected >Senura </option>
+                                <option value="Dinitha">Dinitha</option>
+                                <option value="Pubudu">Pubudu</option>
+                                <option value="Sahan">Sahan</option>
                             </select>
                         </div>
                         <div className="add-promo-row flex justify-end mt-4">
@@ -99,9 +107,10 @@ const ChangeOnetimeEdit = () => {
                         </div>
                         {error && <div className="error text-red-500 mt-2">{error}</div>}
                     </form>
-                </Container>
-            </section>
-        </body>
+                    </div>
+                    </div>
+               
+       
      );
 }
  
