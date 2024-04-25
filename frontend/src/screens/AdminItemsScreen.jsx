@@ -7,7 +7,7 @@ import {
   useRemoveProductMutation,
 } from "../slices/productsApiSlice";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import Loader from "../content/Loader";
 import { ListGroup, Row, Image, Button, Col } from "react-bootstrap";
 import { toast } from "react-toastify";
