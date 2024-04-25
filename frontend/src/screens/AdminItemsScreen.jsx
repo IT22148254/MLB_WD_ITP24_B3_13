@@ -14,7 +14,7 @@ import { toast } from "react-toastify";
 
 const AdminItemsScreen = () => {
   const { data: products, isLoading, isError, refetch } = useGetProductsQuery();
-  const user = useSelector((state) => state.auth);
+  //const user = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const [createProduct, { isLoading: crLoading }] = useCreateProductMutation();
@@ -32,10 +32,10 @@ const AdminItemsScreen = () => {
         await removeProduct(id);
         refetch();
       } catch (error) {
-        toast.error(error);
+        toast.error("Delete unsuccessful");
       }
     }
-    console.log("deleted - ", id);
+    toast.success("Deleted succesfully")
   };
 
   const createHandler = async () => {
@@ -44,10 +44,10 @@ const AdminItemsScreen = () => {
         await createProduct();
         refetch();
       } catch (error) {
-        toast.error(error);
+        toast.error("Could not add the product");
       }
     }
-    console.log("created ");
+    toast.success("Product added succesfully")
   };
 
   function convertToCSV(reportData) {
@@ -59,7 +59,7 @@ const AdminItemsScreen = () => {
   }
 
   const reportHandler = () => {
-    
+
     const csvContent = convertToCSV(products);
     
     const blob = new Blob([csvContent], { type: 'text/csv' });

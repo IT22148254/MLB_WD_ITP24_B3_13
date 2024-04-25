@@ -23,7 +23,6 @@ const ProductEditScreen = () => {
   const {
     data: product,
     isLoading,
-    refetch,
     error,
   } = useGetOneProductQuery(productId);
 
@@ -93,6 +92,7 @@ const ProductEditScreen = () => {
     if(result.error){
         console.log(error)
     }else{
+        toast.success("Succesfully updated the product ")
         console.log('Successfully updated')
         navigate('/store/admin/items')
     }
@@ -102,6 +102,7 @@ const ProductEditScreen = () => {
     return <Loader />;
   } else if (error) {
     console.log(error);
+    toast.error("Something went wrong")
   } else if (loadingUpdate) {
     return <Loader />;
   }

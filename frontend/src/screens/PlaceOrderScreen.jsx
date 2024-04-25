@@ -48,8 +48,11 @@ const PlaceOrderScreen = () => {
           countInStock: item.countInStock - item.quantity,
         })
       );
+
+      toast.success("Placed order succesfully")
+
     } catch (error) {
-      toast.error(error);
+      toast.error("Something went wrong while placing the order");
     }
   };
 
