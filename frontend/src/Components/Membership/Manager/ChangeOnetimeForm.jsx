@@ -54,7 +54,10 @@ const ChangeTimeOnDayForm = () => {
     const handlelist = ()=>{
         navigate('/chngtimeondytbl')
     }
-
+   
+    
+      // Get today's date in the format yyyy-mm-dd
+      const today = new Date().toISOString().split('T')[0];
 
     return (
         <body>
@@ -64,7 +67,7 @@ const ChangeTimeOnDayForm = () => {
                     <form method="POST" className="add-promo" onSubmit={handleSubmit}>
                         <div className="add-promo-row mb-2">
                             <label htmlFor="Date" className="promo-lbl block font-medium mb-1">Date</label>
-                            <input type="date" dateFormat="dd/MM/yyyy" id="Date" name="Details" value={Day} onChange={(e) => setDay(e.target.value)} className="promoInput border border-gray-300 rounded-md px-3 py-2 w-full" required />
+                            <input type="date" dateFormat="dd/MM/yyyy" id="Date" name="Details" value={Day} onChange={(e)=>setDay(e.target.value)} className="promoInput border border-gray-300 rounded-md px-3 py-2 w-full" min={today}  required />
                         </div>
                         <div className="add-promo-row mb-2">
                             <label htmlFor="currentslot" className="promo-lbl block font-medium mb-1">Time Slot</label>
@@ -78,7 +81,7 @@ const ChangeTimeOnDayForm = () => {
                         <div className="add-promo-row mb-2">
                             <label htmlFor="Price" className="promo-lbl block font-medium mb-1">New Time Slot</label>
                             <select name="TimeSlot" id="TimeSlot" className="dropdown border border-gray-300 rounded-md px-3 py-2 w-full" value={Trainer} onChange={(e) => setTrainer(e.target.value)}>
-                                <option value="Senura"  >Senura </option>
+                                <option value="Senura" >Senura </option>
                                 <option value="Dinitha">Dinitha</option>
                                 <option value="Pubudu">Pubudu</option>
                                 <option value="Sahan">Sahan</option>

@@ -22,8 +22,7 @@ const router = createBrowserRouter(
         <Route index element={<ChangeTimeOnDayForm/>} />
         {/* <Route path='chngtimeondy/' element={<ChangeTimeOnDy />} /> */}
         <Route path='chngtimeondytbl/' element={<OnetimeChangeTable/>}/>
-        <Route path='
-        ' element={<ChangeOnetimeEdit/>}/>
+        <Route path='chngtimeondytbl/:id'element={<ChangeOnetimeEdit/>}/>
         {/* <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
         <Route path='editpromo/:id' element={<EditPromoForm/>} />

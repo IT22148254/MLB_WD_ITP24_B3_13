@@ -148,7 +148,7 @@ const OnetimeChangeTable = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-6 bg-cyan-400">
+          <div className="grid grid-cols-5 bg-cyan-400">
             <div className="border-2 border-black p-3">Day</div>
             <div className="border-2 border-black p-3">Time Slot</div>
             <div className="border-2 border-black p-3">Trainer</div>
@@ -166,7 +166,7 @@ const OnetimeChangeTable = () => {
             {filteredOnetimes &&
               filteredOnetimes.map((ont, index) => (
                 <div
-                  className={`grid grid-cols-6 ${
+                  className={`grid grid-cols-5 ${
                     index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
                   }`}
                   key={ont._id}
@@ -212,7 +212,7 @@ const OnetimeChangeTable = () => {
             className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
             onClick={handleAddSchedule}
           >
-            Add Feedback
+            Add Schedule
           </button>
         </div>
       </div>
