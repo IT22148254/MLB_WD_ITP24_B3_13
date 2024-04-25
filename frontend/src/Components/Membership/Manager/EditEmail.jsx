@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Container } from 'reactstrap';
 import Swal from "sweetalert2";
 import bg from "../../../Images/package_bg.jpg";
+import { toast } from 'react-toastify';
 
 const EditEmail = () => {
     const [title, setTitle] = useState('');
@@ -11,6 +12,45 @@ const EditEmail = () => {
     const [content, setContent] = useState('');
     const [error, setError] = useState(null);
     const { id } = useParams();
+
+    const bgStyle ={
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        height: "100vh",
+        
+    }
+
+    const titleMaxLength = 10;
+    const contentMaxlenght =15;
+
+    const handleTitleChange = (e) => {
+        const newValue = e.target.value;
+        setTitle(newValue);
+
+        if (newValue.length === titleMaxLength) {
+            toast.error("Title cannot be more than 10 characters");
+        }
+    };
+
+    const handleSubjectChange = (e)=>{
+        const newValue = e.target.value;
+        setSubject(newValue)
+
+        if (newValue.length === titleMaxLength) {
+            toast.error("Subject cannot be more than 10 characters");
+        }
+    }
+
+    const handleContentChange = (e)=>{
+        const newValue = e.target.value;
+        setContent(newValue)
+
+        if (newValue.length === contentMaxlenght) {
+            toast.error("Subject cannot be more than 15 characters");
+        }
+    }
+
+
 
     useEffect(() => {
         const fetchEmail = async () => {
@@ -61,11 +101,9 @@ const EditEmail = () => {
     };
 
     return (
-        <section>
-            <Container>
-                <div>
-                    <div className="flex h-full justify-center items-center ">
-                        <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 flex flex-col gap-y-8">
+      
+        <div className="flex h-full justify-center items-center" style={bgStyle}>
+        <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
                             <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>Update Email</p>
                             <form className="space-y-4" onSubmit={handleSubmit}>
                                 <div className="flex flex-col gap-y-4">
@@ -75,7 +113,7 @@ const EditEmail = () => {
                                             id="Name"
                                             name="Email"
                                             value={title}
-                                            onChange={(e) => setTitle(e.target.value)}
+                                            onChange={handleTitleChange}
                                             className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                                             pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                             placeholder="Title"
@@ -87,7 +125,7 @@ const EditEmail = () => {
                                             id="subject"
                                             name="subject"
                                             value={subject}
-                                            onChange={(e) => setSubject(e.target.value)}
+                                            onChange={handleSubjectChange}
                                             className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                                             pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                             placeholder="Subject"
@@ -96,7 +134,7 @@ const EditEmail = () => {
                                     <div className="add-promo-row">
                                         <textarea
                                             value={content}
-                                            onChange={(e) => setContent(e.target.value)}
+                                            onChange={handleContentChange}
                                             placeholder="Content"
                                             className="w-full max-w-full min-w-full"></textarea>
                                     </div>
@@ -112,9 +150,7 @@ const EditEmail = () => {
                             </form>
                         </div>
                     </div>
-                </div>
-            </Container>
-        </section>
+               
     );
 }
 

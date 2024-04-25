@@ -6,12 +6,23 @@ import { toast } from 'react-toastify';
 import Swal from "sweetalert2";
 
 const EmailForm = () => {
+    const bgStyle ={
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        height: "100vh",
+        
+    }
+
+
+
+
     const [title, setTitle] = useState('')
     const [subject, setSubject] = useState("")
     const [content, setContent] = useState("")
     const [error, setError] = useState(null)
 
     const titleMaxLength = 10;
+    const contentMaxlenght =15;
     let navigate = useNavigate();
 
     const handleTitleChange = (e) => {
@@ -31,6 +42,16 @@ const EmailForm = () => {
             toast.error("Subject cannot be more than 10 characters");
         }
     }
+
+    const handleContentChange = (e)=>{
+        const newValue = e.target.value;
+        setContent(newValue)
+
+        if (newValue.length === contentMaxlenght) {
+            toast.error("Subject cannot be more than 15 characters");
+        }
+    }
+
 
     const viewEmail = () => {
         navigate('/emailtable')
@@ -76,11 +97,9 @@ const EmailForm = () => {
 
 
     return (
-        <section>
-            <Container>
-                <div>
-                    <div className="flex h-full justify-center items-center ">
-                        <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 flex flex-col gap-y-8">
+       
+        <div className="flex h-full justify-center items-center" style={bgStyle}>
+        <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
                             <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Add Email</p>
                             <form className="space-y-4" onSubmit={handleSubmit}>
                                 <div className="flex flex-col gap-y-4">
@@ -109,15 +128,16 @@ const EmailForm = () => {
                                             placeholder="Subject"
                                             required />
                                     </div>
-                                    <div className="add-promo-row">
-                                        <textarea value={content} onChange={(e)=>setContent(e.target.value)} placeholder="Content" className="w-full max-w-full min-w-full"></textarea>
+                                    <div className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                            pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500">
+                                        <textarea value={content} onChange={handleContentChange} placeholder="Content" className="w-full max-w-full min-w-full"></textarea>
                                     </div>
                                     <div class="add-promo-row">
                                         <div className="add-promo-btns">
                                             <div>
                                                 {/* <button type='submit' className='primary__btn submit create-btn'>Create</button> */}
-                                                <button type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Save</button>
-                                                <button type='reset' className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4">Cancel</button>
+                                                <button type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mr-10">Save</button>
+                                                <button type='reset' className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 ml-10 ">Cancel</button>
                                             </div>
                                         </div>
                                         {error && <div className="error">{error}</div>}
@@ -127,9 +147,8 @@ const EmailForm = () => {
                             </form>
                         </div>
                     </div>
-                </div>
-            </Container>
-        </section>
+               
+        
     );
 }
 
