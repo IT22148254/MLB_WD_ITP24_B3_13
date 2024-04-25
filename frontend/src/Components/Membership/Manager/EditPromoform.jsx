@@ -6,7 +6,7 @@ import axios from "axios";
 import { toast } from 'react-toastify'; // Import toast
 import { useParams } from "react-router-dom";
 import bg from "../../../Images/package_bg.jpg";
-
+import { useNavigate } from "react-router-dom";
 const EditPromoForm = () => {
     const [Name, setName] = useState("");
     const [Discription, setDiscription] = useState("");
@@ -15,7 +15,7 @@ const EditPromoForm = () => {
     const [error, setError] = useState(null);
     const maxWords = 100;
     const { id } = useParams();
-
+    const navigate = useNavigate();
     const handleCurrency = (value) => {
         var inputvalue = value;
         if (inputvalue < 0) {
@@ -77,7 +77,10 @@ const EditPromoForm = () => {
                 icon: "success",
             }).then(() => {
                 console.log('Promo updated successfully', response.data);
+
+                navigate('/pkg/createdpromos');
             });
+
         })
         .catch(error => {
             Swal.fire({
