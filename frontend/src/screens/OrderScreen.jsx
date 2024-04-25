@@ -1,11 +1,9 @@
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   Row,
   Col,
   ListGroup,
   Image,
-  Button,
-  Form,
   Card,
   Alert,
 } from "react-bootstrap";
@@ -20,7 +18,6 @@ const OrderScreen = () => {
 
   const {
     data: order,
-    refetch,
     isLoading,
     error,
   } = useGetOrderDetailsQuery(orderId);
@@ -110,6 +107,11 @@ const OrderScreen = () => {
                 <Row>
                   <Col>Total price</Col>
                   <Col>{Number(order.totalPrice).toFixed(2)} LKR </Col>
+                </Row>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <Row>
+                  {/* <Col>//download as a pdf</Col> */}
                 </Row>
               </ListGroup.Item>
             </ListGroup>

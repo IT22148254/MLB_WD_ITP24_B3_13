@@ -26,11 +26,13 @@ import AdminPortalScreen from "./screens/AdminPortalScreen";
 import AdminOrdersScreen from "./screens/AdminOrdersScreen";
 import AdminItemsScreen from "./screens/AdminItemsScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
+import DefaultScreen from "./screens/DefaultScreen";
 import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      <Route path="/" element={<DefaultScreen/>}  />
       <Route index={true} path="/store" element={<HomeScreen />} />
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />
