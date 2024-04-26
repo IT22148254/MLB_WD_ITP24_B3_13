@@ -21,35 +21,38 @@ const EmailForm = () => {
     const [content, setContent] = useState("")
     const [error, setError] = useState(null)
 
-    const titleMaxLength = 10;
-    const contentMaxlenght =15;
+    // const titleMaxLength = 10;
+    // const contentMaxlenght =15;
     let navigate = useNavigate();
 
     const handleTitleChange = (e) => {
         const newValue = e.target.value;
-        setTitle(newValue);
+        const cleanvalue = newValue.replace(/[^a-zA-Z]/g, '')
+        setTitle(cleanvalue)
 
-        if (newValue.length === titleMaxLength) {
-            toast.error("Title cannot be more than 10 characters");
-        }
+        // if (newValue.length === titleMaxLength) {
+        //     toast.error("Title cannot be more than 10 characters");
+        // }
     };
 
     const handleSubjectChange = (e)=>{
         const newValue = e.target.value;
-        setSubject(newValue)
+        const cleanvalue = newValue.replace(/[^a-zA-Z]/g, '')
+        setSubject(cleanvalue)
 
-        if (newValue.length === titleMaxLength) {
-            toast.error("Subject cannot be more than 10 characters");
-        }
+        // if (newValue.length === titleMaxLength) {
+        //     toast.error("Subject cannot be more than 10 characters");
+        // }
     }
 
     const handleContentChange = (e)=>{
         const newValue = e.target.value;
-        setContent(newValue)
+        const cleanvalue = newValue.replace(/[^a-zA-Z]/g, '')
+        setContent(cleanvalue)
 
-        if (newValue.length === contentMaxlenght) {
-            toast.error("Subject cannot be more than 15 characters");
-        }
+        // if (newValue.length === contentMaxlenght) {
+        //     toast.error("Subject cannot be more than 15 characters");
+        // }
     }
 
 
@@ -113,7 +116,6 @@ const EmailForm = () => {
                                             className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                             pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                             placeholder="Title"
-                                            maxLength={titleMaxLength}
                                             required />
                                     </div>
                                     <div className="add-promo-row">
