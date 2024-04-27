@@ -29,8 +29,8 @@ const EmployeeRegisterForm = () => {
   const [isDobSelected, setIsDobSelected] = useState(false);
 
   const handleFullNameChange = (e) => {
-    setFullName(e.target.value);
-    setFullNameError("");
+    const filteredName = e.target.value.replace(/[^a-zA-Z\s]/g, "");
+    setFullName(filteredName);
   };
 
   const handleNicChange = (e) => {
@@ -49,8 +49,13 @@ const EmployeeRegisterForm = () => {
   };
 
   const handleDobChange = (value) => {
+    const today = new Date();
+    if (value > today) {
+      setDobError("Date of birth cannot be a future date");
+    } else {
+      setDobError("");
+    }
     setDob(value);
-    setDobError("");
   };
 
   const handleContactNoChange = (e) => {
@@ -277,7 +282,12 @@ const EmployeeRegisterForm = () => {
                   (isDobSelected ? "opacity-100" : "opacity-0")
                 }
               >
-                <Calendar onChange={handleDobChange} value={dob} />
+                <Calendar
+  onChange={handleDobChange}
+  value={dob}
+  minDate={null} // Allow selection of past dates
+  maxDate={new Date(new Date().setDate(new Date().getDate() - 1))} // Restrict selection to yesterday
+/>
               </div>
             </div>
             {dobError && (
