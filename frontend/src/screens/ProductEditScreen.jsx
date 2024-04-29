@@ -13,7 +13,7 @@ import CurrencyInput from "react-currency-input-field";
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
   const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState('');
   const [image, setImage] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
@@ -45,14 +45,24 @@ const ProductEditScreen = () => {
     return regex.test(value) || value === "";
   };
 
-  const handlePriceChange = (e) => {
-    let newValue = e.target.value;
+  // const handlePriceChange = (value) => {
+  //   //const numericValue = value.replace(/\D/g, '');
+  //   setPrice(value);
+  // };
+
+  const handlePriceChange = (newValue) => {
+    //let newValue = e.target.value;
+    if(newValue === ''){
+      newValue = 0
+    }
     if (!validatePrice(newValue)) {
       setErr("Please enter a valid price (e.g., 10 or 10.99)");
     } else {
       setErr("");
-    setPrice(newValue);
+      setPrice(newValue);
     }
+    console.log(newValue);
+    setPrice(newValue);
   };
 
   const validateForm = () => {
@@ -136,16 +146,35 @@ const ProductEditScreen = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="price">
+          <Form.Group controlId="price" className="mt-4">
             <Form.Label>Price</Form.Label>
 
-            <Form.Control
+            {/* <Form.Control
               type="text"
               placeholder="Enter price"
               value={price}
               onChange={handlePriceChange}
-            >
-            </Form.Control>
+             
+            ></Form.Control> */}
+
+            {/* <CurrencyInput
+              className="mx-3"
+              //onChange={(e) => handlePriceChange(e.target.value)}
+              onValueChange={handlePriceChange}
+              val
+              decimalScale={2}
+              allowDecimals={true}
+              suffix=" LKR"
+            /> */}
+
+            <CurrencyInput
+              className="form-control"
+              allowDecimals={true}
+              decimalScale={2}
+              prefix="LKR "
+              value={price}
+              onValueChange={handlePriceChange}
+            />
           </Form.Group>
 
           <Form.Group controlId="image">
