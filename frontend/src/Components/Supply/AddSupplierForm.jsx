@@ -94,15 +94,19 @@ const AddSupplierForm = () => {
         height: "100vh",
     };
 
+    
     const handleNameChange = (e) => {
-        const nameRegex = /^[a-zA-Z\s]*$/;
-        if (!nameRegex.test(e.target.value)) {
-            setNameError("Supplier name should not contain numbers");
+        const input = e.target.value;
+        const nameRegex = /^[a-zA-Z\s]*$/; // Regular expression for alphabetic characters and spaces
+    
+        if (!nameRegex.test(input)) {
+            setNameError("Supplier name should not contain special characters");
         } else {
             setNameError('');
+            setName(input); // Set the state only if the input is valid
         }
-        setName(e.target.value);
     };
+    
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -132,6 +136,7 @@ const AddSupplierForm = () => {
                                 id="Name"
                                 name="Name"
                                 value={Name}
+                                // onChange={handleSupplierName}
                                 onChange={handleNameChange}
                                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             />
@@ -147,6 +152,7 @@ const AddSupplierForm = () => {
                             className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             value={Email}
                             onChange={handleEmailChange}
+                            // onChange={(e)=>setEmail(e.target.value)}
                             required
                         />
                         {emailError && <span className="text-red-500">{emailError}</span>}
