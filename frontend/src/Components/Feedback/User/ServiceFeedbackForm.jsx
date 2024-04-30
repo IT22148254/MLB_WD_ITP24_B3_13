@@ -76,24 +76,6 @@ const ServiceFeedbackForm = () => {
     }
   };
 
-  const validateName = (name) => {
-    const nameRegex = /^[a-zA-Z ]+$/;
-    if (!nameRegex.test(name)) {
-      setNameError("Name should contain only letters and spaces");
-    } else {
-      setNameError("");
-    }
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Invalid email format");
-    } else {
-      setEmailError("");
-    }
-  };
-
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
@@ -125,8 +107,8 @@ const ServiceFeedbackForm = () => {
                 name="name"
                 value={UserName}
                 onChange={(e) => {
-                  setName(e.target.value);
-                  validateName(e.target.value);
+                  const value = e.target.value.replace(/[^a-zA-Z\s]/g, ''); // Allow only letters and spaces
+                  setName(value);
                 }}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                 required
@@ -146,10 +128,7 @@ const ServiceFeedbackForm = () => {
                 id="Email"
                 name="Email"
                 value={Email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  validateEmail(e.target.value);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                 required
               />
@@ -213,11 +192,9 @@ const ServiceFeedbackForm = () => {
           </div>
         </form>
       </div>
-      {/* <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-16">
-        Add Feedbacks
-      </button> */}
     </div>
   );
 };
+
 
 export default ServiceFeedbackForm;
