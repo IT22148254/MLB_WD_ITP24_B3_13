@@ -6,8 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css'
 import Swal from "sweetalert2";
 
 const ApplyLeave = () => {
-    const [startDate, setStartDate] = useState(new Date())
-    const [endDate, setEndDate] = useState(null)
+    const [startDate, setStartDate] = useState('')
+    const [endDate, setEndDate] = useState('')
     const [reason, setReason] = useState('')
     const [error, setError] = useState(null)
 
