@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Container } from 'reactstrap'
-import SupOrderForm from  '../Components/Supply/SupOrder'
+import AddOrderForm from  '../Components/Supply/SupOrder'
 
 
 
@@ -9,7 +9,7 @@ const PlaceOrderSup = () => {
     
     return (  
 
-     <SupOrderForm/>
+     <AddOrderForm/>
 
     );
 }

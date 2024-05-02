@@ -9,12 +9,13 @@ import TestScreen from './Components/Supply/TestScreen';
 import SupplierTable from './Components/Supply/Suppliertable';
 import EditSupplierForm from './Components/Supply/EditSupplierForm';
 import SupplierDashboard from './Pages/SupplierDashboard';
+import Inventory from './Pages/Inventory';
 
 //i change from here
-// import OrderTable from './Components/Supply/Ordertable';
 import Itemtable from './Components/Supply/Itemtable'; 
 import  ReceievedOrders from './Pages/RecievedOrders'; // Adjust the path as necessary
-import PlaceOrderSup from './Pages/PlaceOrder';
+import AddOrderForm from './Pages/PlaceOrder';
+import EditOrderForm from './Pages/EditOrders'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,14 +26,16 @@ const router = createBrowserRouter(
         {/* <Route path="testscreen/:id" element={<TestScreen/>} /> */}
         <Route path="suppliertable/" element={<SupplierTable/>}/>
         <Route path="editsup/:id" element= {<EditSupplierForm/>}/>
+        
         {/* i change from here */}
 
-        {/* <Route path="placeOrder/" element={<OrderTable/>}/> */}
         {/* <Route path="Inventory/" element={<Itemtable/>}/> */}
         <Route path="orders/" element= {<ReceievedOrders/>}/>
-        <Route path="ordersform/" element= {<PlaceOrderSup/>}/>
+        <Route path="ordersform/" element= {<AddOrderForm/>}/>
+        <Route path="Inventory/" element= {<Inventory/>}/>
 
-
+        <Route path="EditOrderForm/:id" element= {<EditOrderForm/>}/>
+        
 
 
       </Route>
