@@ -14,7 +14,7 @@ import SupplierDashboard from './Pages/SupplierDashboard';
 // import OrderTable from './Components/Supply/Ordertable';
 import Itemtable from './Components/Supply/Itemtable'; 
 import  ReceievedOrders from './Pages/RecievedOrders'; // Adjust the path as necessary
-
+import PlaceOrderSup from './Pages/PlaceOrder';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +30,7 @@ const router = createBrowserRouter(
         {/* <Route path="placeOrder/" element={<OrderTable/>}/> */}
         {/* <Route path="Inventory/" element={<Itemtable/>}/> */}
         <Route path="orders/" element= {<ReceievedOrders/>}/>
+        <Route path="ordersform/" element= {<PlaceOrderSup/>}/>
 
 
 

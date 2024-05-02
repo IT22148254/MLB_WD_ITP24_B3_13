@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom"
 import { Container } from 'reactstrap'
 //import bg from "../Images/bg_main.jpg";
 import Swal from "sweetalert2";
+import bg from "../../Images/bg_main.jpg";
+
 const SupOrderForm = () => {
 
     const[orderID, setorderID] = useState('')
@@ -85,6 +87,12 @@ const SupOrderForm = () => {
         height: "100%",
       };*/}
 
+      const bgStyle = {
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        height: "100vh",
+    };
+
 
 
     return ( 
@@ -96,8 +104,8 @@ const SupOrderForm = () => {
         
         <body>
             <section>
-                <Container>
-               <div className="flex flex-col justify-center items-center h-screen">
+                
+                <div className="flex h-full justify-center items-center" style={bgStyle}>
                  <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
                     <div /*className="title" */ className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Place Orders</div>
                     <form method="POST" /*className="add-promo" */ className="space-y-4" onSubmit={handleSubmit}>
@@ -131,14 +139,14 @@ const SupOrderForm = () => {
                         <div className="flex justify-between items-center">
                             <label for="Price" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>Quantity:</label>
                             <input
-                                type="number"
-                                id="Price"
-                                name="Price"
-                                className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold 
-                                placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                                value={quantity}
-                                onChange={handleQuantity}
-                                required />
+    type="number"
+    id="Price"
+    name="Price"
+    className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+    value={quantity}
+    onChange={(e) => setQuantity(e.target.value)}
+    required
+/>
                                 </div>
                         <div className="flex justify-between items-center">  
                             <label for="Size" className="text-white flex items-center pl-5 font-bold text-2xl font-size" style={{ WebkitTextStroke: '1px black' }}>Size:</label>
@@ -161,7 +169,7 @@ const SupOrderForm = () => {
                     </form>
                     </div>
                     </div>
-                </Container>
+                
             </section>
         </body>
         
