@@ -15,6 +15,9 @@ const AdminPortalScreen = () => {
         <ListGroup.Item>
           <Button onClick={(e)=> navigate('/store/admin/orders')} >Orders</Button>
         </ListGroup.Item>
+        <ListGroup.Item>
+          <Button onClick={(e)=> navigate('/emp/')} >Employees</Button>
+        </ListGroup.Item>
       </ListGroup>
     </center>
   );
