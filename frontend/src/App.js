@@ -1,22 +1,22 @@
 import React from "react";
-import Header from "./content/header";
-import Footer from "./content/Footer";
-import { Outlet } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import EmployeeSummary from "./screens/EmployeeSummary";
+import AddEmployee from "./screens/AddEmployee";
+import EditEmployee from "./screens/EditEmployee";
+import SalaryCalculator from "./screens/SalaryCalculator.jsx";
 
 const App = () => {
   return (
-    <>
-      <Header />
-      <main>
-      <ToastContainer />
-        <div style={{ height: "auto", width: "auto" }}>
-          <Outlet />
-        </div>
-      </main>
-      <Footer />
-    </>
+    <div className="h-screen">
+      <Router>
+        <Routes>
+          <Route path="/" element={<EmployeeSummary />} />
+          <Route path="/add" element={<AddEmployee />} />
+          <Route path="/edit/:id" element={<EditEmployee />} />
+          <Route path="/calculator" element={<SalaryCalculator />} />
+        </Routes>
+      </Router>
+    </div>
   );
 };
 

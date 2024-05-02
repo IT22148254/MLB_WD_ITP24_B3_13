@@ -11,13 +11,17 @@ const cookieParser = require("cookie-parser");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
+
 const PORT = process.env.PORT || 8070;
 
+// use middleware
 app.use(cors());
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-const URL = process.env.MONGODB_URL_STORE;
+//const URL = process.env.MONGO_DB_URL;
+const URL = process.env.MONGO_DB_URL;
 
 mongoose.connect(URL, {});
 
@@ -26,6 +30,7 @@ const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("Mongodb connection successful");
 });
+// routes
 
 const productRouter = require("./routs/products.js");
 app.use("/product", productRouter);
@@ -44,6 +49,9 @@ app.use("/schedule", scheduleRouter);
 
 const supplierRouter = require("./routs/suppliers.js");
 app.use("/supplier", supplierRouter);
+
+const employeeRoutes = require("./routs/employee.js");
+app.use("/employee", employeeRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);

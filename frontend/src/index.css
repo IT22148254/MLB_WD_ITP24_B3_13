@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .full_pg_bgImg{
   background-image: url("./img/wavesyncBG.jpg");
   background-size: cover;
