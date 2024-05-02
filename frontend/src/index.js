@@ -27,6 +27,10 @@ import AdminOrdersScreen from "./screens/AdminOrdersScreen";
 import AdminItemsScreen from "./screens/AdminItemsScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import DefaultScreen from "./screens/DefaultScreen";
+import EmployeeSummary from "./screens/EmployeeSummary";
+import AddEmployee from "./screens/AddEmployee";
+import EditEmployee from "./screens/EditEmployee";
+import SalaryCalculator from "./screens/SalaryCalculator.jsx";
 import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter(
@@ -37,6 +41,13 @@ const router = createBrowserRouter(
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />
       <Route path="/login" element={<LoginScreen />} />
+
+      {/* employee */}
+
+      <Route path="/emp/" element={<EmployeeSummary />} />
+      <Route path="/emp/add" element={<AddEmployee />} />
+      <Route path="/emp/edit/:id" element={<EditEmployee />} />
+      <Route path="/emp/calculator" element={<SalaryCalculator />} />
 
       <Route path="" element={<ProtectedRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />

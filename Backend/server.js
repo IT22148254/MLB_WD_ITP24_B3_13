@@ -21,7 +21,9 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 //const URL = process.env.MONGO_DB_URL;
-const URL = process.env.MONGO_DB_URL;
+//const URL = process.env.MONGO_DB_URL;
+
+const URL = process.env.MONGODB_URL_STORE
 
 mongoose.connect(URL, {});
 
