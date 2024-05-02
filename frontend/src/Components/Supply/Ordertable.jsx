@@ -70,11 +70,12 @@ const OrderTable = () => {
     return ( 
 
         <div className="w-full">
-      <div className="grid grid-cols-8 bg-cyan-400">
+      <div className="grid grid-cols-6 bg-cyan-400">
         <div className="border-2 border-black p-3">Supplier Name</div>
         <div className="border-2 border-black p-3">Product Name</div>
         <div className="border-2 border-black p-3">Quantity</div>
         <div className="border-2 border-black p-3">Size</div>
+        <div className="border-2 border-black p-3">Edit</div>
         <div className="border-2 border-black p-3">Delete</div>
       </div>
       <div
@@ -88,7 +89,7 @@ const OrderTable = () => {
         {orders &&
           orders.map((order, index) => (
             <div
-              className={`grid grid-cols-8 ${
+              className={`grid grid-cols-6 ${
                 index % 2 == 0 ? "bg-cyan-200 " : "bg-cyan-400 "
               }`}
               key={order.id}

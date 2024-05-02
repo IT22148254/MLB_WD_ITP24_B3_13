@@ -136,7 +136,6 @@ const AddSupplierForm = () => {
                                 id="Name"
                                 name="Name"
                                 value={Name}
-                                // onChange={handleSupplierName}
                                 onChange={handleNameChange}
                                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             />
