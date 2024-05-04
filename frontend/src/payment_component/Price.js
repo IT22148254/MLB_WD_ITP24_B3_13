@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Payment from  '../../../backend/server' // assuming the payment component file is called Payment.js
 
 class Price extends Component {
   constructor(props) {

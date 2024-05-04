@@ -7,7 +7,7 @@ export default function View() {
     console.log(id);
 
     const getstuddata = async () => {
-        const res = await fetch(`http://localhost:5000/getstud/${id}`, {
+        const res = await fetch(`http://localhost:8070/payment/getstud/${id}`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"

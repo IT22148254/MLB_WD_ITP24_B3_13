@@ -74,7 +74,7 @@ export default function Add() {
             });
             return;
         }
-        const res = await fetch("http://localhost:5000/addstud", {
+        const res = await fetch("http://localhost:8070/payment/addstud", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

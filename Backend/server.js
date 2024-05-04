@@ -11,8 +11,6 @@ const cookieParser = require("cookie-parser");
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-
-
 const PORT = process.env.PORT || 8070;
 
 // use middleware
@@ -25,11 +23,41 @@ app.use(cookieParser());
 
 const URL = process.env.MONGODB_URL_STORE
 
+mongoose.connect(URL, {});
+const connection = mongoose.connection;
+
+app.listen(PORT, () => {
+	console.log(`Server is up and running on port : ${PORT}`);
+  });
+
+connection.once("open", () => {
+  console.log("Mongodb connection successful");
+});
 
 // routes
+const productRouter = require("./routs/products.js");
+app.use("/product", productRouter);
 
+const userRouter = require("./routs/users.js");
+app.use("/user", userRouter);
 
+const feedBackRouter = require("./routs/feedbacks.js");
+app.use("/feedback", feedBackRouter);
 
+const packageRouter = require("./routs/packages.js");
+app.use("/package", packageRouter);
+
+const scheduleRouter = require("./routs/schedules.js");
+app.use("/schedule", scheduleRouter);
+
+const supplierRouter = require("./routs/suppliers.js");
+app.use("/supplier", supplierRouter);
+
+const employeeRoutes = require("./routs/employee.js");
+app.use("/employee", employeeRoutes);
+
+const paymentRouter = require("./routes/PaymentRouter.js");
+app.use("/payment", paymentRouter);
 
 //payment method
 const path = require('path') 
