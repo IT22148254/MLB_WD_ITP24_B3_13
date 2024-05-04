@@ -30,6 +30,13 @@ import DefaultScreen from "./screens/DefaultScreen";
 import EmployeeSummary from "./screens/EmployeeSummary";
 import AddEmployee from "./screens/AddEmployee";
 import EditEmployee from "./screens/EditEmployee";
+import View from "./payment_component/View.js";
+import Add from "./payment_component/Add.js";
+import Edit from "./payment_component/Edit.js";
+import Allpayments from "./payment_component/Allpayments.js";
+import Success from "./payment_component/Success.js";
+import Report_generate from "./payment_component/Report_generate.js";
+//import './App.css';
 import SalaryCalculator from "./screens/SalaryCalculator.jsx";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -48,6 +55,18 @@ const router = createBrowserRouter(
       <Route path="/emp/add" element={<AddEmployee />} />
       <Route path="/emp/edit/:id" element={<EditEmployee />} />
       <Route path="/emp/calculator" element={<SalaryCalculator />} />
+
+      {/* payment */}
+
+      <Route path="/payment/view/:id" element={<View />} />
+      <Route path="/payment/add" element={<Add />} />
+      <Route path="/payment/edit/:id" element={<Edit />} />
+      <Route path="/payment/all" element={<Allpayments />} />
+      <Route path="/success" element={<Success/>}/>
+      <Route path="/payment/check" element={<Report_generate/>}/>
+
+
+      {/* protcted */}
 
       <Route path="" element={<ProtectedRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />
