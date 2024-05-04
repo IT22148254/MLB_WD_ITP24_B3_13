@@ -4,6 +4,7 @@ import { Container } from 'reactstrap'
 import CurrencyInput from 'react-currency-input-field'
 import axios from 'axios'
 import Swal from "sweetalert2";
+import bg from "../../../Images/package_bg.jpg"
 
 const EditStandardForm = () => {
 
@@ -72,17 +73,19 @@ const EditStandardForm = () => {
             });
     };
 
-    // const bgStyle = {
-    //     backgroundImage: `url(${bg})`, 
-    //     backgroundSize: "cover",
-    //     height: "100vh",
-    // };
+     const bgStyle = {
+         backgroundImage: `url(${bg})`, 
+         backgroundSize: "cover",
+         height: "100vh",
+     };
+
+    
 
     //value and onChanges are mine -Rk
 
     return ( 
-        <div>
-            <div className="flex h-full justify-center items-center ">
+        
+            <div className="flex h-full justify-center items-center" style={bgStyle}>
                 <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 flex flex-col gap-y-4">
                     <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Edit Standard Package</p> {/* Moved "Edit Standard" text above the black box */}
                      <form onSubmit={handleSubmit} className="space-y-4">
@@ -157,7 +160,7 @@ const EditStandardForm = () => {
                     </form> 
                 </div>
             </div>
-        </div>      
+              
      );
 }
  
