@@ -16,7 +16,7 @@ const Selectoption = () => {
             <h1 class="title">Select the option you wish to proceed</h1>
             <div class="Optionscontainer">
                 
-                <button class="primary__btn" onClick={handleCoachFeedback}>Fitness Instructor Feedback</button>
+                <button class="primary__btn" onClick={handleCoachFeedback}>Coach Feedback</button>
                 <button class="primary__btn" id="servicebutton" onClick={handleServiceFeedback}>Service Feedback</button>
                 
             </div>
