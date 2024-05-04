@@ -1,7 +1,6 @@
-<<<<<<< HEAD
 const express = require("express");
 const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
+const bodyparser = require('body-parser') 
 const cors = require("cors");
 const dotenv = require("dotenv");
 require("dotenv").config();
@@ -18,42 +17,22 @@ const PORT = process.env.PORT || 8070;
 
 // use middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(bodyparser.json());
 app.use(cookieParser());
 
 //const URL = process.env.MONGO_DB_URL;
 //const URL = process.env.MONGO_DB_URL;
 
 const URL = process.env.MONGODB_URL_STORE
-=======
-const express=require("express");
-const mongoose= require("mongoose");
-const app=express();
-const router = require("./routes/router");
 
-var cors=require("cors");
-app.use(cors());
-app.use(express.json());
-app.use(router);
 
-// const url="mongodb+srv://admin:4LPZudtJGHHLK2Xx@cluster0.5qu8lrg.mongodb.net/?retryWrites=true&w=majority"
-const url2="mongodb://127.0.0.1:27017"
->>>>>>> buddhina
-
-mongoose.connect(url2).then(()=>{
-    console.log("Database connection successful")
-}).catch((err)=>{
-    console.log(err)
-});
 // routes
 
 
 
 
 //payment method
-const bodyparser = require('body-parser') 
 const path = require('path') 
-
 
 var Publishable_Key = "pk_test_51MjWJsHqyuBHx39JVGag9na7VxAeKr77ZNOz82EaXCsF4Zbtpubm6EXH0wanjMNHS0z22sKmO6WggvN8IwEL6k4a00qvEsEBXf"
 var Secret_Key = "sk_test_51MjWJsHqyuBHx39JbjE5xUsiXJR4P6D5ICQXsKvtbUvCYuWAPgie21j28ztOz2JLRCIPzY1sa5zZk6G6vsYI2ett00byGHI1vK"
@@ -114,14 +93,3 @@ app.listen(port, function(error){
 }) 
 
 
-app.listen(5000);
-
-<<<<<<< HEAD
-const employeeRoutes = require("./routs/employee.js");
-app.use("/employee", employeeRoutes);
-
-app.listen(PORT, () => {
-  console.log(`Server is up and running on port : ${PORT}`);
-});
-=======
->>>>>>> buddhina
