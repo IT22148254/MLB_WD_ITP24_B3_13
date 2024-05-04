@@ -122,6 +122,7 @@ const ProductScreen = () => {
                 <ListGroupItem>
                   <Button
                     className="btn-block"
+                    style={{backgroundColor:"blue",borderWidth:"2px"}}
                     type="button"
                     disabled={product.countInStock === 0}
                     onClick={addToCartHandler}

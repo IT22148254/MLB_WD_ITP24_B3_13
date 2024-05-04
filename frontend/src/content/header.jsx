@@ -1,4 +1,4 @@
-import { Badge, Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
+import { Badge, Navbar, Nav, Container, NavDropdown, Button } from "react-bootstrap";
 import { FaShoppingCart, FaUser } from "react-icons/fa";
 import React from "react";
 import { LinkContainer } from "react-router-bootstrap";
@@ -57,12 +57,12 @@ const Header = () => {
                   </NavDropdown.Item>
                 </NavDropdown>
               ) : (
-                <LinkContainer to="/login">
+                <Button to="/login" >
                   <Nav.Link href="/login">
                     <FaUser />
                     Log In
                   </Nav.Link>
-                </LinkContainer>
+                </Button>
               )}
             </Nav>
           </Navbar.Collapse>

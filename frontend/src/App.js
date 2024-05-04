@@ -12,9 +12,9 @@ const App = () => {
       <Header/>
         <main>
           <ToastContainer/>
-          <dev style={{height:"auto",width:"auto"}}>
+          <div style={{height:"auto",width:"auto"}}>
             <Outlet/>
-          </dev>
+          </div>
         </main>
       <Footer/>
     </>

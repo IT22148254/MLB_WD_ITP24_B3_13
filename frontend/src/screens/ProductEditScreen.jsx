@@ -225,7 +225,7 @@ const ProductEditScreen = () => {
               onChange={(e) => setDescription(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type="submit" variant="primary" className="my-2">
+          <Button type="submit" style={{backgroundColor:"blue",borderWidth:"2px"}} className="my-2">
             Update
           </Button>
         </Form>

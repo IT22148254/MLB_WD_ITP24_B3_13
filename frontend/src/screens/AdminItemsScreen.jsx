@@ -96,14 +96,14 @@ const AdminItemsScreen = () => {
         <Col md={8}></Col>
         <Col md={2}>
           <center>
-            <Button variant="success" onClick={(e) => createHandler()}>
+            <Button variant="success" onClick={(e) => createHandler()} style={{backgroundColor:"lightgreen",borderWidth:"2px"}}>
               <MdCreateNewFolder />
             </Button>
           </center>
         </Col>
         <Col md={2}>
           <center>
-            <Button variant="info" onClick={(e) => reportHandler()}>
+            <Button variant="info" style={{backgroundColor:"blue",borderWidth:"2px"}} onClick={(e) => reportHandler()}>
               <MdNoteAdd />
             </Button>
           </center>
@@ -126,6 +126,7 @@ const AdminItemsScreen = () => {
                 <Button
                   variant="warning"
                   onClick={(e) => editHandler(product._id)}
+                  style={{backgroundColor:"#f0ad4e",borderWidth:"2px"}}
                 >
                   <FaEdit />
                 </Button>{" "}
@@ -134,6 +135,7 @@ const AdminItemsScreen = () => {
                 <Button
                   variant="danger"
                   onClick={(e) => deleteHandler(product._id)}
+                  style={{backgroundColor:"red",borderWidth:"2px"}}
                 >
                   <FaTrash />
                 </Button>

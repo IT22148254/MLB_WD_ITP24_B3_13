@@ -67,9 +67,9 @@ const HomeScreen = () => {
                     <Button
                       variant="warning"
                       className="mt-3"
+                      style={{backgroundColor:"#f0ad4e",borderWidth:"2px"}}
                       onClick={(e) => navigate("/store/admin")}
                     >
-                      {" "}
                       Admin portal
                     </Button>
                   </center>

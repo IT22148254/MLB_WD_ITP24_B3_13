@@ -93,6 +93,7 @@ const LoginScreen = () => {
         <Button
           type="submit"
           variant="primary"
+          style={{backgroundColor:"blue",borderWidth:"2px"}}
           className="mt-2"
           disabled={isLoading || !!emailError}
         >
