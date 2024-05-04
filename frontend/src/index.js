@@ -19,7 +19,7 @@ import EditOrderForm from './Pages/EditOrders';
 import Supplierhandling from './Pages/SupplierDashbaord(2)'
 import PlacedOrdersView from './Pages/placedOrders';
 import OrderHandling from './Pages/OrderHandling'
-
+import Invoice from './Pages/Invoice'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -43,6 +43,7 @@ const router = createBrowserRouter(
         <Route path="supDashboard2" element= {<Supplierhandling/>}/>
         <Route path="placedOrders" element= {<PlacedOrdersView/>}/> 
         <Route path="Orderhandling" element= {<OrderHandling/>}/>
+        <Route path="Invoice" element= {<Invoice/>}/>
 
 
       
