@@ -24,7 +24,7 @@ const SupplierDashboard = () => {
                 <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/supDashboard2")} >
                   Supplier
                 </button>
-                <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/ordersform")}>
+                <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/OrderHandling")}>
                   <a><p id='ed'>Order</p></a>
                 </button>
               </Container>
