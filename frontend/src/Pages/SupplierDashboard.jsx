@@ -1,8 +1,12 @@
 import React from 'react'
 import { Container, Row, Col, Table } from 'reactstrap'
+import { useNavigate } from 'react-router-dom';   //importing navigation
 import bg from "../Images/bg_main.jpg";
 
 const SupplierDashboard = () => {
+
+  const navigate=useNavigate();
+
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
@@ -17,16 +21,16 @@ const SupplierDashboard = () => {
           <Row className='om_btn'>
             <Col>
               <Container className="flex justify-between" >
-                <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300">
-                  <a><p id='ed'>Supplier</p></a>
+                <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/supDashboard2")} >
+                  Supplier
                 </button>
-                <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300">
+                <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/ordersform")}>
                   <a><p id='ed'>Order</p></a>
                 </button>
               </Container>
               <br />
               <Container className="flex justify-between" >
-                <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300">
+                <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/Inventory")}>
                   <a><p id='ed'>Inventory</p></a>
                 </button>
                 <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300">

@@ -108,8 +108,8 @@ const OrderTable = () => {
       }}
     >
       <div className="flex flex-col justify-center items-center h-screen mt-10 mb-10">
-        <div className="bg-black/45 h-auto w-4/5 rounded-[50px] py-12 px-14 gap -inset-y-8">
-          <p className="text-4xl text-white font-bold mb-4">Orders Table</p>
+        <div className="bg-black/45 h-auto w-5/8 rounded-[50px] py-12 px-14 gap -inset-y-8">
+          <p className="text-4xl text-white font-bold mb-4">Recieved Orders</p>
           <div className="mb-4">
             <div className="h-9 bg-white/70 w-1/2 rounded-lg">
               <input
@@ -120,10 +120,11 @@ const OrderTable = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-5 bg-cyan-400 text-white">
-            <div className="border-2 border-black p-3">Order Name</div>
-            <div className="border-2 border-black p-3">Order Date</div>
-            <div className="border-2 border-black p-3">Supplier</div>
+          <div className="grid grid-cols-6 bg-cyan-400 text-white">
+            <div className="border-2 border-black p-3">Supplier Name</div>
+            <div className="border-2 border-black p-3">Product Name</div>
+            <div className="border-2 border-black p-3">Quantity</div>
+            <div className="border-2 border-black p-3">Size</div>
             <div className="border-2 border-black p-3">Edit</div>
             <div className="border-2 border-black p-3">Delete</div>
           </div>
@@ -134,7 +135,7 @@ const OrderTable = () => {
             {filteredOrders &&
               filteredOrders.map((order, index) => (
                 <div
-                  className={`grid grid-cols-5 ${index % 2 === 0 ? 'bg-cyan-200' : 'bg-cyan-400'}`}
+                  className={`grid grid-cols-6 ${index % 2 === 0 ? 'bg-cyan-200' : 'bg-cyan-400'}`}
                   key={order._id}
                 >
                   <div className="border-2 border-black p-2 text-black">{order.OrderName}</div>

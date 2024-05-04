@@ -4,11 +4,14 @@ const Inventory = () => {
 
     return (  
         <section>
-             <div>
-            <p>Inventory</p>
-            </div>
+             
             <Itemtable/>
+
+
+            
         </section>
+
+        
        
         
     );

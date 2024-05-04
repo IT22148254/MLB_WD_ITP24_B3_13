@@ -17,6 +17,8 @@ import  ReceievedOrders from './Pages/RecievedOrders'; // Adjust the path as nec
 import AddOrderForm from './Pages/PlaceOrder';
 import EditOrderForm from './Pages/EditOrders';
 import Supplierhandling from './Pages/SupplierDashbaord(2)'
+import PlacedOrdersView from './Pages/placedOrders';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -37,10 +39,9 @@ const router = createBrowserRouter(
 
         <Route path="EditOrderForm/:id" element= {<EditOrderForm/>}/>
         <Route path="supDashboard" element= {<SupplierDashboard/>}/>        
-        <Route path="supDashboard2" element= {<Supplierhandling/>}/>        
-
-
-
+        <Route path="supDashboard2" element= {<Supplierhandling/>}/>
+        { <Route path="placedOrders" element= {<PlacedOrdersView/>}/> }
+      
 
       </Route>
     </Route>

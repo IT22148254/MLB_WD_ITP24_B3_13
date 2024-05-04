@@ -1,8 +1,12 @@
 import React from 'react'
 import { Container, Row, Col, Table } from 'reactstrap'
+import { useNavigate } from 'react-router-dom'; 
 import bg from "../Images/bg_main.jpg";
 
 const Supplierhandling = () => {
+
+    const navigate=useNavigate();
+
     const bgStyle = {
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
@@ -18,10 +22,10 @@ const Supplierhandling = () => {
                         <Row className='om_btn'>
                             <Col>
                                 <Container className="flex justify-between" >
-                                    <button className="mr-5 bg-blue-500 py-3 px-8 w-60 pr-5 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300">
+                                    <button className="mr-5 bg-blue-500 py-3 px-8 w-60 pr-5 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/addSupplier")}>
                                         <a><p id='ed'>Add Supplier</p></a>
                                     </button>
-                                    <button className="ml-5 bg-blue-500 py-3 px-8 w-60 pl-5 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300">
+                                    <button className="ml-5 bg-blue-500 py-3 px-8 w-60 pl-5 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/suppliertable")}>
                                         <a><p id='ed'>Supplier List</p></a>
                                     </button>
                                 </Container>
