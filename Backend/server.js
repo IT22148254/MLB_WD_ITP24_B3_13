@@ -29,6 +29,7 @@ connection.once("open", () => {
 });
 
 const __dirname = path.resolve();
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const productRouter = require("./routs/products.js");
 app.use("/product", productRouter);
@@ -50,8 +51,6 @@ app.use("/supplier", supplierRouter);
 
 const uploadRouter = require("./routs/uploadRouts.js");
 app.use("/uploads", uploadRouter);
-
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);
