@@ -77,6 +77,7 @@ const CartScreen = () => {
                       <Button
                         type="button"
                         variant="danger"
+                        style={{backgroundColor:"red",borderWidth:"2px"}}
                         onClick={() => remFromCartHandler(item._id)}
                       >
                         <FaTrash />
@@ -109,6 +110,7 @@ const CartScreen = () => {
                 <Button
                   type="button"
                   variant="success"
+                  style={{backgroundColor:"green",borderWidth:"2px"}}
                   disabled={cartItems.length === 0}
                   onClick={checkoutHandler}
                 >
@@ -121,6 +123,7 @@ const CartScreen = () => {
                   <Button
                     type="button"
                     variant="success"
+                    style={{backgroundColor:"blue",borderWidth:"2px"}}
                     disabled={userInfo === null}
                     onClick={(e) => navigate(`/orderst/myorders/${userInfo._id}`)}
                   >
