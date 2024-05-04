@@ -64,7 +64,7 @@ export default function Allpayments() {
         const doc = new jsPDF();
     
         // set company name
-        const companyName = 'INSTITUTE OF SLIIT';
+        const companyName = 'WaveSync';
         // set current date and time
         const today = new Date();
         const date = today.toLocaleDateString();

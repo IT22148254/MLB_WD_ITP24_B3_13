@@ -37,7 +37,7 @@ export default function Add() {
     const addinpdata = async (e) => {
         e.preventDefault();
         const { name, email, contact } = inputdata;
-        if (!name || !/^[a-zA-Z.]+$/.test(name)) {
+        if (!name || !/^[a-zA-Z. ]+$/.test(name)) {
             toast.error('Please enter a valid name (letters and periods only)', {
                 position: "top-center",
                 autoClose: 2000,
@@ -118,11 +118,29 @@ export default function Add() {
             
             <form  className='mt-5 shadow p-5' style={{backgroundColor: '#0000ff80', maxWidth: '50%', alignItems: 'center', margin: '0 auto'}}>
 
-                <div className="mb-3">
-                    <label htmlFor="exampleFormControlInput1" className="form-label">Name</label>
-                    <input type="text" className="form-control" id="exampleFormControlInput1" placeholder="Enter Name" 
-                    onChange={setstud} name="name" value={inputdata.name}/>                   
-                </div>
+            <div className="mb-3">
+    <label htmlFor="exampleFormControlInput1" className="form-label">Name</label>
+    <input 
+        type="text" 
+        className= "form-control"
+        id="exampleFormControlInput1"
+        placeholder="Enter Name"
+        onChange={setstud} 
+        onKeyPress={(event) => {
+            // Allow only letters
+            if (!/[a-zA-Z ]/.test(event.key)) {
+                event.preventDefault();
+            }
+        }}
+        name="name"
+        value={inputdata.name}
+        maxLength={1000}
+        minLength={1000}
+        pattern="#"
+        required
+    />                   
+</div>
+
 
                 <div className="mb-3">
                     <label htmlFor="exampleFormControlInput1" className="form-label">Email</label>
@@ -133,13 +151,13 @@ export default function Add() {
                 
                 
         <label htmlFor="exampleFormControlInput1" className="form-label">Contact Number</label>
-            <input type="number" className={`form-control ${inputdata.contact.length === 10 ? "is-valid" : "is-invalid"}`}
+            <input type="number" className={`form-control /*${inputdata.contact.length === 10 ? "is-valid" : "is-invalid"}*/`}
             id="exampleFormControlInput1"
             placeholder="Enter Mobile Number"
             onChange={setstud} 
             
             onKeyPress={(event) => {
-                if (event.target.value.length >= 10) {
+                if (event.target.value.length >= 1000) {
                         event.preventDefault();
                      }
              }}
