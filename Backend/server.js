@@ -67,7 +67,7 @@ var Secret_Key = "sk_test_51MjWJsHqyuBHx39JbjE5xUsiXJR4P6D5ICQXsKvtbUvCYuWAPgie2
 
 const stripe = require('stripe')(Secret_Key) 
 
-const port = process.env.PORT || 3001
+const port = 3001
 
 app.use(bodyparser.urlencoded({extended:false})) 
 app.use(bodyparser.json()) 
