@@ -1,6 +1,47 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import {
+  useGetAllOrdersQuery,
+  useRemoveOrderMutation,
+} from "../slices/ordersApiSlice";
+import Loader from "../content/Loader";
+import { toast } from "react-toastify";
 
 const AdminOrdersScreen = () => {
+  const navigate = useNavigate();
+
+  const { data: orders, isLoading, isError, refetch } = useGetAllOrdersQuery();
+
+  const [removeOrder, { isLoading: isRemoving }] = useRemoveOrderMutation();
+
+  const deleteOrderHandler = async (id) => {
+    if (window.confirm("Are you sure you want to delete the order ?")) {
+      try {
+        await removeOrder(id);
+        toast.success("Order deleted successfully");
+        refetch();
+      } catch (error) {
+        toast.error("Order deletion unsuccessful");
+        console.log("Error occurred while deleting the order:", error);
+      }
+    }
+  }
+
+  if (isLoading || isRemoving) {
+    return <Loader />;
+  }
+
+
+  if (isError) {
+    console.log("Error occurred while fetching data:", isError); // Log the error
+    return <div>Error occurred while fetching data</div>;
+  }
+
+  if (!orders) {
+    return <div>No orders found</div>;
+  }
+
   return (
     <>
       <div class="container mx-auto px-4 py-8">
@@ -52,13 +93,13 @@ const AdminOrdersScreen = () => {
                       scope="col"
                       class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Name
+                      Customer
                     </th>
                     <th
                       scope="col"
                       class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Email
+                      Date and Time
                     </th>
                     <th
                       scope="col"
@@ -81,34 +122,65 @@ const AdminOrdersScreen = () => {
                   </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                  <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">Jane Doe</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      jane@example.com
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">Admin</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Active
-                      </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                        Active
-                      </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                      <button class="ml-2 px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
-                        View
-                      </button>
-                      <button class="ml-2 px-4 py-2 font-medium text-white bg-yellow-600 rounded-md hover:bg-yellow-500 focus:outline-none focus:shadow-outline-blue active:bg-yellow-600 transition duration-150 ease-in-out">
-                        Edit
-                      </button>
-                      <button class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out">
-                        Delete
-                      </button>
-                    </td>
-                  </tr>
+                  {orders.map(
+                    (order) => (
+                      (
+                        <tr>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            {order._id}
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            {order.user}
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">{`${order.createdAt.slice(
+                            0,
+                            10
+                          )} at ${order.createdAt.slice(11, 19)}`}</td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            {order.isPaid ? (
+                              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Paid
+                              </span>
+                            ) : (
+                              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                Not Paid
+                              </span>
+                            )}
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            {order.isDelivered ? (
+                              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Delivered
+                              </span>
+                            ) : (
+                              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                Not Delivered
+                              </span>
+                            )}
+                          </td>
+                          <td class="px-6 py-4 whitespace-nowrap">
+                            <button
+                              class="ml-2 px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
+                              onClick={() =>
+                                navigate(`/store/orderst/${order._id}`)
+                              }
+                            >
+                              View
+                            </button>
+                            <button class="ml-2 px-4 py-2 font-medium text-white bg-yellow-600 rounded-md hover:bg-yellow-500 focus:outline-none focus:shadow-outline-blue active:bg-yellow-600 transition duration-150 ease-in-out">
+                              Edit
+                            </button>
+                            <button
+                              class="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
+                              onClick={(e) => deleteOrderHandler(order._id)}
+                            >
+                              Delete
+                            </button>
+                          </td>
+                        </tr>
+                      )
+                    )
+                  )}
                 </tbody>
               </table>
             </div>

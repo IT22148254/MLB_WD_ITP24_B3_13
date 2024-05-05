@@ -133,7 +133,7 @@ const OrderScreen = () => {
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item className="my-2">
-                <Button onClick={generatePDF}>Generate Receipt</Button>
+                <Button className="bg-blue-500" onClick={generatePDF}>Generate Receipt</Button>
               </ListGroup.Item>
             </ListGroup>
           </Card>
