@@ -7,13 +7,14 @@ import { toast } from "react-toastify";
 import {
   useUpdateProductMutation,
   useGetOneProductQuery,
+  useUploadProdImageMutation,
 } from "../slices/productsApiSlice";
 import CurrencyInput from "react-currency-input-field";
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
   const [name, setName] = useState("");
-  const [price, setPrice] = useState('');
+  const [price, setPrice] = useState("");
   const [image, setImage] = useState("");
   const [brand, setBrand] = useState("");
   const [category, setCategory] = useState("");
@@ -25,6 +26,9 @@ const ProductEditScreen = () => {
 
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
+
+  const [uploadProdImage, { isLoading: loadImg }] =
+    useUploadProdImageMutation();
 
   const navigate = useNavigate();
 
@@ -52,8 +56,8 @@ const ProductEditScreen = () => {
 
   const handlePriceChange = (newValue) => {
     //let newValue = e.target.value;
-    if(newValue === ''){
-      newValue = 0
+    if (newValue === "") {
+      newValue = 0;
     }
     if (!validatePrice(newValue)) {
       setErr("Please enter a valid price (e.g., 10 or 10.99)");
@@ -63,6 +67,21 @@ const ProductEditScreen = () => {
     }
     console.log(newValue);
     setPrice(newValue);
+  };
+
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+
+    try {
+      const res = await uploadProdImage(formData).unwrap();
+      toast.success(res.message);
+      console.log(res.image);
+      setImage(res.image);
+    } catch (error) {
+      toast.error("Image upload failed");
+    }
+
   };
 
   const validateForm = () => {
@@ -118,6 +137,8 @@ const ProductEditScreen = () => {
     console.log(error);
     toast.error("Something went wrong");
   } else if (loadingUpdate) {
+    return <Loader />;
+  }else if (loadImg) {
     return <Loader />;
   }
 
@@ -181,8 +202,13 @@ const ProductEditScreen = () => {
             <Form.Label>Image</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Enter image"
-              onChange={(e) => setImage(e.target.value)}
+              value={image}
+              readOnly
+            ></Form.Control>
+            <Form.Control
+              type="file"
+              label="Choose a file"
+              onChange={uploadFileHandler}
             ></Form.Control>
           </Form.Group>
 

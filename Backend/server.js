@@ -1,3 +1,4 @@
+const path = require("path"); 
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyparser = require('body-parser') 
@@ -35,6 +36,8 @@ connection.once("open", () => {
 });
 
 // routes
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+
 const productRouter = require("./routs/products.js");
 app.use("/product", productRouter);
 
@@ -119,5 +122,9 @@ app.listen(port, function(error){
 	if(error) throw error 
 	console.log("Server created Successfully") 
 }) 
+
+
+const uploadRouter = require("./routs/uploadRouts.js");
+app.use("/uploads", uploadRouter);
 
 

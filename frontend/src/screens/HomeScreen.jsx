@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Form, InputGroup } from "react-bootstrap";
+import { Row, Col, Form, InputGroup } from "react-bootstrap";
 import Product from "../content/product";
+import Header from "../content/header";
+import Footer from "../content/Footer";
 // import axios from "axios";
 // import { useState, useEffect } from "react";
 import backgroundImage from "../img/wavesyncBG.jpg";
@@ -29,7 +31,15 @@ const HomeScreen = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div
+      className="h-screen overflow-y-scroll"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <Header />
       {isLoading ? (
         <div style={{ margin: "auto", marginTop: "100px" }}>
           <Loader />
@@ -37,13 +47,7 @@ const HomeScreen = () => {
       ) : isError ? (
         <Message variant="danger">{isError.error}</Message>
       ) : (
-        <div
-          style={{
-            backgroundImage: `url(${backgroundImage})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
+        <div>
           <Row>
             <Col>
               <FormContainer>
@@ -64,14 +68,12 @@ const HomeScreen = () => {
               <Col md={3}>
                 {user.userInfo.AccLevel !== "customer" ? (
                   <center>
-                    <Button
-                      variant="warning"
-                      className="mt-3"
-                      style={{backgroundColor:"#f0ad4e",borderWidth:"2px"}}
+                    <button
+                      className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-3"
                       onClick={(e) => navigate("/store/admin")}
                     >
                       Admin portal
-                    </Button>
+                    </button>
                   </center>
                 ) : (
                   <></>
@@ -79,15 +81,22 @@ const HomeScreen = () => {
               </Col>
             )}
           </Row>
-          <Row style={{ margin: "10px" }}>
-            {products.filter((item) => { return search.toLowerCase() === '' ? item : item.name.toLowerCase().includes(search)}).map((products) => (
-              <Col key={products._id} sm={12} md={6} lg={4} xl={3}>
+          <div className="grid mt-10 mb-10 justify-items-center sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {products
+              .filter((item) => {
+                return search.toLowerCase() === ""
+                  ? item
+                  : item.name.toLowerCase().includes(search);
+              })
+              .map((products) => (
                 <Product product={products} />
-              </Col>
-            ))}
-          </Row>
+              ))}
+          </div>
         </div>
       )}
+      <div className="bg-blue-200">
+        <Footer />
+      </div>
     </div>
   );
 };

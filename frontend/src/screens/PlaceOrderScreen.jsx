@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { Button, Row, Col, ListGroup, Image, Card } from "react-bootstrap";
+import { Button } from "react-bootstrap"; // Remove unnecessary imports from Bootstrap
 import CheckoutSteps from "../content/CheckoutSteps";
 import { toast } from "react-toastify";
 import Message from "../content/Message";
@@ -49,7 +49,7 @@ const PlaceOrderScreen = () => {
         })
       );
 
-      toast.success("Placed order succesfully")
+      toast.success("Placed order successfully");
 
     } catch (error) {
       toast.error("Something went wrong while placing the order");
@@ -61,98 +61,88 @@ const PlaceOrderScreen = () => {
   }
 
   return (
-    <div>
+    <div className="mx-4">
       <CheckoutSteps step1 step2 step3 step4 />
 
-      <Row className="mx-4">
-        <Col md={8}>
-          <ListGroup variant="flush">
-            <ListGroup.Item>
-              <h2>Shipping</h2>
-              <p>
-                <strong>Address : </strong> {cart.shippingAddress.address}
-              </p>
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <strong>Method : </strong> {cart.paymentMethod}
-            </ListGroup.Item>
-            <ListGroup.Item>
-              <h2>Order items : </h2>{" "}
-              {cart.cartItems.length === 0 ? (
-                <Message> No items in the cart </Message>
-              ) : (
-                <ListGroup>
-                  {cart.cartItems.map((item, index) => (
-                    <ListGroup.Item key={index}>
-                      <Row>
-                        <Col md={1}>
-                          {" "}
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fluid
-                            rounded
-                          />{" "}
-                        </Col>
-                        <Col>
-                          <Link to={`/product/${item._id}`}>{item.name}</Link>
-                        </Col>
-                        <Col md={4}>
-                          {" "}
-                          {Number(item.price).toFixed(2)} LKR X {item.quantity}{" "}
-                          = {Number(item.price * item.quantity).toFixed(2)} LKR
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              )}
-            </ListGroup.Item>
-          </ListGroup>
-        </Col>
-        <Col md={4}>
-          <Card>
-            <ListGroup variant="flush">
-              <ListGroup.Item>
-                <h2>Order Summary</h2>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Items price</Col>
-                  <Col>{Number(cart.itemPrice).toFixed(2)} LKR </Col>
-                </Row>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Delivary price</Col>
-                  <Col>{Number(cart.delPrice).toFixed(2)} LKR </Col>
-                </Row>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Row>
-                  <Col>Total price</Col>
-                  <Col>{Number(cart.totPrice).toFixed(2)} LKR </Col>
-                </Row>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                {error && <Message varient="danger">{error}</Message>}
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <Button
-                  type="button"
-                  className="btn-block"
-                  style={{backgroundColor:"blue",borderWidth:"2px"}}
-                  disabled={cart.cartItems.length === 0}
-                  onClick={placeOrderHandler}
-                >
-                  Place order
-                </Button>
-                {isLoading && <Loader />}
-              </ListGroup.Item>
-            </ListGroup>
-          </Card>
-        </Col>
-      </Row>
+      <div className="flex flex-wrap">
+        <div className="md:w-2/3 pr-4">
+          <div className="mb-4">
+            <h2 className="text-2xl font-bold">Shipping</h2>
+            <p className="mt-2">
+              <strong>Address : </strong> {cart.shippingAddress.address}
+            </p>
+          </div>
+          <div className="mb-4">
+            <strong className="font-bold">Method : </strong>{" "}
+            {cart.paymentMethod}
+          </div>
+          <div className="mb-4">
+            <h2 className="text-2xl font-bold">Order items :</h2>{" "}
+            {cart.cartItems.length === 0 ? (
+              <Message>No items in the cart</Message>
+            ) : (
+              <div>
+                {cart.cartItems.map((item, index) => (
+                  <div key={index} className="mb-4 border-b border-gray-200">
+                    <div className="flex items-center">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-16 h-16 object-cover rounded"
+                      />
+                      <Link
+                        to={`/product/${item._id}`}
+                        className="ml-4 text-blue-500 hover:underline"
+                      >
+                        {item.name}
+                      </Link>
+                    </div>
+                    <div className="mt-2">
+                      {Number(item.price).toFixed(2)} LKR X {item.quantity} ={" "}
+                      {Number(item.price * item.quantity).toFixed(2)} LKR
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+        <div className="md:w-1/3">
+          <div className="bg-white rounded-lg shadow-lg p-4">
+            <h2 className="text-2xl font-bold mb-4">Order Summary</h2>
+            <div className="mb-4">
+              <div className="flex justify-between">
+                <span>Items price</span>
+                <span>{Number(cart.itemPrice).toFixed(2)} LKR</span>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between">
+                <span>Delivery price</span>
+                <span>{Number(cart.delPrice).toFixed(2)} LKR</span>
+              </div>
+            </div>
+            <div className="mb-4">
+              <div className="flex justify-between">
+                <span>Total price</span>
+                <span>{Number(cart.totPrice).toFixed(2)} LKR</span>
+              </div>
+            </div>
+            <div className="mb-4">
+              {error && <Message variant="danger">{error}</Message>}
+            </div>
+            <Button
+              type="button"
+              disabled={cart.cartItems.length === 0}
+              onClick={placeOrderHandler}
+              className="w-full bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+            >
+              Place Order
+            </Button>
+            {isLoading && <Loader />}
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
