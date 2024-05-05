@@ -10,10 +10,10 @@ const AdminPortalScreen = () => {
     <center>
       <ListGroup>
         <ListGroup.Item>
-          <Button onClick={(e)=> navigate('/store/admin/items')}>Items</Button>
+          <Button className="bg-blue-500 hover:bg-blue-600" onClick={(e)=> navigate('/store/admin/items')}>Items</Button>
         </ListGroup.Item>
         <ListGroup.Item>
-          <Button onClick={(e)=> navigate('/store/admin/orders')} >Orders</Button>
+          <Button className="bg-blue-500 hover:bg-blue-600" onClick={(e)=> navigate('/store/admin/orders')} >Orders</Button>
         </ListGroup.Item>
       </ListGroup>
     </center>

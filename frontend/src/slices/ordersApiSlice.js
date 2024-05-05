@@ -19,7 +19,26 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       query:(userId) => ({
         url:`/product/orderst/myorders/${userId}`
       }),
-    })
+    }),
+    getAllOrders:builder.query({
+      query:() => ({
+        url:`/product/orderst/`
+      }),
+    }),
+    updatePayment:builder.mutation({
+      query:(data) => ({
+        url:`/product/orderst/${data._id}/pay`,
+        method:"PUT",
+        body:data
+      }),
+    }),
+    updateDelivarry:builder.mutation({
+      query:(data) => ({
+        url:`/product/orderst/${data._id}/deliver`,
+        method:"PUT",
+        body:data
+      }),
+    }),
   }),
 });
 

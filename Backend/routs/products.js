@@ -1,7 +1,7 @@
 const router = require("express").Router();
 let { Product, OrderSt } = require("../models/product");
-const multer = require('multer');
-const path = require('path');
+const multer = require("multer");
+const path = require("path");
 const { admin, protect } = require("../Middleware/authMiddleware");
 
 router.route("/add").post(async (req, res) => {
@@ -165,7 +165,15 @@ router.route("/orderst/add").post(protect, async (req, res) => {
 });
 
 router.route("/orderst/").get(protect, admin, async (req, res) => {
-  res.send("get all orders");
+  //res.send("get all orders");
+
+  await OrderSt.find()
+    .then((orders) => {
+      res.status(200).json(orders);
+    })
+    .catch((err) => {
+      res.status(400).json({ message: `Could not get orders ${err}` });
+    });
 });
 
 router.route("/orderst/get/:id").get(protect, async (req, res) => {
@@ -186,15 +194,63 @@ router.route("/orderst/myorders/:id").get(protect, async (req, res) => {
 });
 
 router.route("/orderst/:id/pay").put(protect, async (req, res) => {
-  res.send("update is paid");
+  //res.send("update is paid");
+  try {
+    const id = req.params.id;
+    const { isPaid, paidAt } = req.body;
+    const result = await OrderSt.findByIdAndUpdate(id, { isPaid, paidAt });
+    if (!result) {
+      return res.status(404).json({ message: "Order not found" });
+    } else {
+      return res.status(200).json({ message: "Order paid successfully" });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: `Order payment unsuccessful ${error}` });
+  }
 });
 
 router.route("/orderst/:id/deliver").put(protect, admin, async (req, res) => {
-  res.send("update is delivered");
+  // res.send("update is delivered");
+
+  try {
+    const id = req.params.id;
+    const { isDelivered, deliveredAt } = req.body;
+    const result = await OrderSt.findByIdAndUpdate(id, {
+      isDelivered,
+      deliveredAt,
+    });
+    if (!result) {
+      return res.status(404).json({ message: "Order not found" });
+    } else {
+      return res.status(200).json({ message: "Order paid successfully" });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: `Order payment unsuccessful ${error}` });
+  }
+});
+
+router.route("/orderst/:id").delete(protect, admin, async (req, res) => {
+  //res.send("delete order");
+
+  try {
+    const id = req.params.id;
+    const result = await OrderSt.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).json({ message: "Order not found" });
+    } else {
+      return res.status(200).json({ message: "Order deleted successfully" });
+    }
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: `Order deletion unsuccessful ${error}` });
+  }
 });
 
 //===========================================================================================================================================
-
-
 
 module.exports = router;
