@@ -25,8 +25,11 @@ const OrderHandling = () => {
                                     <button className="mr-5 bg-blue-500 py-3 px-8 w-60 pr-5 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/ordersform")}>
                                         <a><p id='ed'>Place Order</p></a>
                                     </button>
-                                    <button className="ml-5 bg-blue-500 py-3 px-8 w-60 pl-5 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/placedOrders")}>
+                                    <button className=" bg-blue-500 py-3 px-8 w-60 pl-5 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/placedOrders")}>
                                         <a><p id='ed'>Placed Order</p></a>
+                                    </button>
+                                    <button className="ml-5 bg-blue-500 py-3 px-8 w-60 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/orders")}>
+                                        <a><p id='ed'>Recived Orders</p></a>
                                     </button>
                                 </Container>
                                 <br />
