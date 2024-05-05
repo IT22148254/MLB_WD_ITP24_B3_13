@@ -7,6 +7,7 @@ import { useGetOneProductQuery } from "../slices/productsApiSlice";
 import Loader from "../content/Loader";
 import Message from "../content/Message";
 import { addToCart } from "../slices/cartSlice";
+import Header from "../content/header";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -28,6 +29,8 @@ const ProductScreen = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="container mx-auto px-4 py-8">
       <Link className="btn btn-light my-3" to="/store">
         Go back
@@ -109,6 +112,7 @@ const ProductScreen = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 

@@ -4,6 +4,7 @@ import { FaTrash } from "react-icons/fa";
 import Message from "../content/Message";
 import React from "react";
 import { addToCart, remFromCart } from "../slices/cartSlice";
+import Header from "../content/header";
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -27,6 +28,8 @@ const CartScreen = () => {
   };
 
   return (
+    <>
+    <Header />
     <div className="container mx-auto py-5">
       <div className="md:flex justify-between">
         <div className="md:w-8/12">
@@ -112,6 +115,7 @@ const CartScreen = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
