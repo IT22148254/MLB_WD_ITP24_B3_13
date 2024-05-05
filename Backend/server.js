@@ -63,7 +63,6 @@ const paymentRouter = require("./routes/PaymentRouter.js");
 app.use("/payment", paymentRouter);
 
 //payment method
-const path = require('path') 
 
 var Publishable_Key = "pk_test_51MjWJsHqyuBHx39JVGag9na7VxAeKr77ZNOz82EaXCsF4Zbtpubm6EXH0wanjMNHS0z22sKmO6WggvN8IwEL6k4a00qvEsEBXf"
 var Secret_Key = "sk_test_51MjWJsHqyuBHx39JbjE5xUsiXJR4P6D5ICQXsKvtbUvCYuWAPgie21j28ztOz2JLRCIPzY1sa5zZk6G6vsYI2ett00byGHI1vK"
