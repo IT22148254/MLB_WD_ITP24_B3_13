@@ -2,16 +2,6 @@ import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import {
-  Row,
-  Col,
-  Card,
-  Image,
-  ListGroup,
-  Button,
-  ListGroupItem,
-  Form,
-} from "react-bootstrap";
 import Rating from "../content/rating";
 import { useGetOneProductQuery } from "../slices/productsApiSlice";
 import Loader from "../content/Loader";
@@ -38,102 +28,85 @@ const ProductScreen = () => {
   };
 
   return (
-    <div style={{ margin: "20px", padding: "20px" }}>
+    <div className="container mx-auto px-4 py-8">
       <Link className="btn btn-light my-3" to="/store">
         Go back
       </Link>
 
       {isLoading ? (
-        <div style={{ margin: "auto", marginTop: "100px" }}>
+        <div className="flex justify-center mt-20">
           <Loader />
         </div>
       ) : isError ? (
         <Message variant="danger">{isError.error}</Message>
       ) : (
-        <Row>
-          <Col md={5} sm={12}>
-            <div style={{ maxWidth: "100%", overflow: "hidden" }}>
-              <Image
+        <div className="flex flex-wrap">
+          <div className="md:w-1/3 sm:w-full px-4">
+            <div className="border border-gray-200 p-4 rounded">
+              <ul className="list-none">
+                <li>
+                  <h3 className="text-xl font-bold">{product.name}</h3>
+                </li>
+                <li>
+                  <Rating
+                    value={product.rating}
+                    text={`${product.numReviews} reviews`}
+                  />
+                </li>
+                <li>Price: LKR {product.price}</li>
+                <li>Description: {product.description}</li>
+              </ul>
+            </div>
+          </div>
+          <div className="md:w-1/3 sm:w-full px-4">
+            <div className="max-w-full overflow-hidden">
+              <img
                 src={product.image}
                 alt={product.name}
-                style={{ height: "75vh", width: "100%" }}
+                className="h-auto w-full object-cover"
               />
             </div>
-          </Col>
-          <Col md={4} sm={12}>
-            <ListGroup variant="flush">
-              <ListGroupItem>
-                <h3>{product.name}</h3>
-              </ListGroupItem>
-              <ListGroupItem>
-                <Rating
-                  value={product.rating}
-                  text={`${product.numReviews} reviews`}
-                ></Rating>
-              </ListGroupItem>
-              <ListGroupItem> Price : LKR : {product.price}</ListGroupItem>
-              <ListGroupItem>
-                {" "}
-                Description : {product.description}
-              </ListGroupItem>
-            </ListGroup>
-          </Col>
-          <Col md={3} sm={12}>
-            <Card>
-              <ListGroup variant="flush">
-                <ListGroupItem>
-                  <Row>
-                    <Col>Price:</Col>
-                    <Col>
-                      <strong>LKR : {product.price}</strong>
-                    </Col>
-                  </Row>
-                </ListGroupItem>
-                <ListGroupItem>
-                  <Row>
-                    <Col>Status:</Col>
-                    <Col>
-                      <strong>
-                        {product.countInStock > 0 ? "In stock" : "Out of stock"}
-                      </strong>
-                    </Col>
-                  </Row>
-                </ListGroupItem>
+          </div>
+          <div className="md:w-1/3 sm:w-full px-4">
+            <div className="border border-gray-200 p-4 rounded">
+              <ul className="list-none">
+                <li>
+                  <span className="font-semibold">Price:</span>{" "}
+                  <span>LKR {product.price}</span>
+                </li>
+                <li>
+                  <span className="font-semibold">Status:</span>{" "}
+                  <span>{product.countInStock > 0 ? "In stock" : "Out of stock"}</span>
+                </li>
                 {product.countInStock > 0 && (
-                  <ListGroup.Item>
-                    <Row>
-                      <Col>Quantity</Col>
-                      <Col>
-                        <Form.Control
-                          as="select"
-                          value={qty}
-                          onChange={(e) => setQty(Number(e.target.value))}
-                        >
-                          {[...Array(product.countInStock).keys()].map((x) => (
-                            <option key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </option>
-                          ))}
-                        </Form.Control>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
+                  <li>
+                    <label className="block mb-2">Quantity:</label>
+                    <select
+                      value={qty}
+                      onChange={(e) => setQty(Number(e.target.value))}
+                      className="block w-full border border-gray-300 rounded p-2"
+                    >
+                      {[...Array(product.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </select>
+                  </li>
                 )}
-                <ListGroupItem>
-                  <Button
-                    className="btn-block"
-                    type="button"
-                    disabled={product.countInStock === 0}
+                <li>
+                  <button
                     onClick={addToCartHandler}
+                    disabled={product.countInStock === 0}
+                    className={`btn mt-3 btn-block ${product.countInStock === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-700 text-white'}`}
                   >
-                    {" "}
                     Add to cart
-                  </Button>
-                </ListGroupItem>
-              </ListGroup>
-            </Card>
-          </Col>
-        </Row>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   );

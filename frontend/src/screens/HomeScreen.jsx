@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Form, InputGroup } from "react-bootstrap";
+import { Row, Col, Form, InputGroup } from "react-bootstrap";
 import Product from "../content/product";
 import Header from "../content/header";
 import Footer from "../content/Footer";
@@ -68,14 +68,12 @@ const HomeScreen = () => {
               <Col md={3}>
                 {user.userInfo.AccLevel !== "customer" ? (
                   <center>
-                    <Button
-                      variant="warning"
-                      className="mt-3"
+                    <button
+                      className="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2 px-4 rounded mt-3"
                       onClick={(e) => navigate("/store/admin")}
                     >
-                      {" "}
                       Admin portal
-                    </Button>
+                    </button>
                   </center>
                 ) : (
                   <></>
@@ -96,8 +94,9 @@ const HomeScreen = () => {
           </div>
         </div>
       )}
-
-      <Footer />
+      <div className="bg-blue-200">
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -58,10 +58,10 @@ const LoginScreen = () => {
 
   return (
     <FormContainer>
-      <h1>Sign in</h1>
+      <h1 className="text-3xl font-bold mb-4">Sign in</h1>
 
       {email === "" ? (
-        <Alert varient="info"> Please enter the email </Alert>
+        <Alert variant="info"> Please enter the email </Alert>
       ) : emailError ? (
         <Alert variant="warning"> Invalid email address {emailError} </Alert>
       ) : (
@@ -76,6 +76,7 @@ const LoginScreen = () => {
             placeholder="Enter email"
             value={email}
             onChange={handleEmailChange}
+            className="border border-gray-300 rounded px-3 py-2 w-full"
           ></Form.Control>
         </Form.Group>
 
@@ -88,12 +89,13 @@ const LoginScreen = () => {
             onChange={(e) => {
               setPassword(e.target.value);
             }}
+            className="border border-gray-300 rounded px-3 py-2 w-full"
           ></Form.Control>
         </Form.Group>
         <Button
           type="submit"
           variant="primary"
-          className="mt-2"
+          className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={isLoading || !!emailError}
         >
           Sign in
@@ -104,7 +106,7 @@ const LoginScreen = () => {
         <Col>
           {" "}
           New customer ?{" "}
-          <Link to={redirect ? `/register/redirect=${redirect}` : "/register"}>
+          <Link to={redirect ? `/register/redirect=${redirect}` : "/register"} className="text-blue-500 hover:underline">
             {" "}
             Register{" "}
           </Link>{" "}
