@@ -9,7 +9,7 @@ function product({ product }) {
         <img className="object-cover object-center w-96 h-96 " src={product.image} alt={product.name}  />
         <div className="px-6 py-4">
           <div className="font-bold text-xl mb-2">{product.name}</div>
-          <div className="font-bold text-xl mb-2">LKR : {product.price}</div>
+          <div className="font-bold text-xl mb-2">LKR : {product.price.toFixed(2)}</div>
         </div>
         <div className="px-6 pt-4 pb-2">
           <Rating
