@@ -12,6 +12,12 @@ const employeeSchema = new mongoose.Schema({
   role: { type: String, required: true },
 });
 
+const leaveSchema = new mongoose.Schema({
+  startDate: { type: String, required: true },
+  endDate: { type: String, required: true },
+  reason: { type: String, required: true },
+ 
+});
 const Employee = mongoose.model("Employee", employeeSchema);
-
-module.exports = { Employee };
+const Leave = mongoose.model("Leave", leaveSchema);
+module.exports = { Employee,Leave };
