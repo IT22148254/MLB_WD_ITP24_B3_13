@@ -1,5 +1,5 @@
 import React from "react";
-import LeaveApproval from "./LeaveApproval table";
+import LeaveApproval from "../components/LeaveApproval table";
 
 const leaveSummary = () => {
 

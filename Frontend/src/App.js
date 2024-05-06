@@ -4,7 +4,7 @@ import EmployeeSummary from "./screens/EmployeeSummary";
 import AddEmployee from "./screens/AddEmployee";
 import EditEmployee from "./screens/EditEmployee";
 import SalaryCalculator from "./screens/SalaryCalculator.jsx";
-
+import ApplyLeave from "./components/ApplyLeave.jsx"
 const App = () => {
   return (
     <div className="h-screen">
@@ -14,6 +14,7 @@ const App = () => {
           <Route path="/add" element={<AddEmployee />} />
           <Route path="/edit/:id" element={<EditEmployee />} />
           <Route path="/calculator" element={<SalaryCalculator />} />
+          <Route path="/addleave" element={<ApplyLeave />} />
         </Routes>
       </Router>
     </div>
