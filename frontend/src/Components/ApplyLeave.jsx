@@ -16,7 +16,7 @@ const ApplyLeave = () => {
 
         const leave = {startDate, endDate, reason}
 
-        const response = await fetch('http://localhost:8000/leaves', {
+        const response = await fetch('http://localhost:8000/employee/service/add', {
                     method: 'POST',
                     body: JSON.stringify(leave),
                     headers: {
