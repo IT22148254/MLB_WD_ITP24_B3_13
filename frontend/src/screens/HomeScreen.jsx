@@ -36,6 +36,7 @@ const HomeScreen = () => {
       style={{
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
+        overflow: "hidden",
         backgroundPosition: "center",
       }}
     >

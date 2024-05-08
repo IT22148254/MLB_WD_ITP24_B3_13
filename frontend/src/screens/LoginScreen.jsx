@@ -2,11 +2,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
-import FormContainer from "../content/FormContainer";
-import Loader from "../content/Loader";
 import { useLoginMutation } from "../slices/usersApiSlice";
 import { setCredentials } from "../slices/authSlice";
 import { toast } from "react-toastify";
+import Loader from "../content/Loader";
 import Header from "../content/header";
 
 const LoginScreen = () => {
@@ -59,63 +58,61 @@ const LoginScreen = () => {
 
   return (
     <>
-    <Header />
-    <FormContainer>
-      <h1 className="text-3xl font-bold mb-4">Sign in</h1>
+      <Header />
+      <div className="min-h-screen bg-gray-100 flex justify-center items-center">
+        <div className="max-w-md w-full bg-white p-8 rounded shadow-lg">
+          <h1 className="text-3xl font-bold mb-4 text-center">Sign in</h1>
 
-      {email === "" ? (
-        <Alert variant="info"> Please enter the email </Alert>
-      ) : emailError ? (
-        <Alert variant="warning"> Invalid email address {emailError} </Alert>
-      ) : (
-        <></>
-      )}
+          {email === "" ? (
+            <Alert variant="info"> Please enter the email </Alert>
+          ) : emailError ? (
+            <Alert variant="warning"> Invalid email address {emailError} </Alert>
+          ) : null}
 
-      <Form onSubmit={submitHandler}>
-        <Form.Group controlId="email" className="my-3">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter email"
-            value={email}
-            onChange={handleEmailChange}
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          ></Form.Control>
-        </Form.Group>
+          <Form onSubmit={submitHandler}>
+            <Form.Group controlId="email">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                value={email}
+                onChange={handleEmailChange}
+                className={`border border-gray-300 rounded px-3 py-2 w-full focus:outline-none ${
+                  emailError ? "border-red-500" : ""
+                }`}
+              />
+            </Form.Group>
 
-        <Form.Group controlId="password" className="my-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            className="border border-gray-300 rounded px-3 py-2 w-full"
-          ></Form.Control>
-        </Form.Group>
-        <Button
-          type="submit"
-          variant="primary"
-          className="mt-2 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={isLoading || !!emailError}
-        >
-          Sign in
-        </Button>
-        {isLoading && <Loader />}
-      </Form>
-      <Row className="py-3">
-        <Col>
-          {" "}
-          New customer ?{" "}
-          <Link to={redirect ? `/register/redirect=${redirect}` : "/register"} className="text-blue-500 hover:underline">
-            {" "}
-            Register{" "}
-          </Link>{" "}
-        </Col>
-      </Row>
-    </FormContainer>
+            <Form.Group controlId="password" className="mt-4">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Enter password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none"
+              />
+            </Form.Group>
+            <Button
+              type="submit"
+              variant="primary"
+              className="mt-6 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed w-full"
+              disabled={isLoading || !!emailError}
+            >
+              Sign in
+            </Button>
+            {isLoading && <div className="mt-4 text-center"><Loader /></div>}
+          </Form>
+          <Row className="py-3">
+            <Col className="text-center">
+              New customer?{" "}
+              <Link to={redirect ? `/register/redirect=${redirect}` : "/register"} className="text-blue-500 hover:underline">
+                Register
+              </Link>{" "}
+            </Col>
+          </Row>
+        </div>
+      </div>
     </>
   );
 };
