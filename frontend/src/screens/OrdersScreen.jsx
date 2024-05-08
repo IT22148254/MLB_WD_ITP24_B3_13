@@ -62,7 +62,7 @@ const OrdersScreen = () => {
               </td>
               <td className="px-4 py-2">
                 {order.orderItems.map((item) => (
-                  <div key={item._id}>{item.price} LKR</div>
+                  <div key={item._id}>{`${Number(item.price)} LKR`} </div>
                 ))}
               </td>
               <td className="px-4 py-2">{order.paymentMethod}</td>
@@ -70,7 +70,7 @@ const OrdersScreen = () => {
                 {order.shippingAddress.address}, {order.shippingAddress.city},{" "}
                 {order.shippingAddress.district}
               </td>
-              <td className="px-4 py-2">${order.totalPrice}</td>
+              <td className="px-4 py-2">{Number(order.totalPrice).toFixed(2)} LKR</td>
               <td className="px-4 py-2">{order.isPaid ? "Yes" : "No"}</td>
               <td className="px-4 py-2">{order.isDelivered ? "Yes" : "No"}</td>
               <td className="px-4 py-2">{new Date(order.createdAt).toLocaleString()}</td>
