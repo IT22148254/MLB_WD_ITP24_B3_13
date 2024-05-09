@@ -134,7 +134,7 @@ router.route("/service/add").post((req, res) => {
 
 //Get all Leave
 
-router.route("/service").get((req, res) => {
+router.route("/leaves").get((req, res) => {
   Leave.find()
     .then((result) => {
       res.status(200).json({ result });
