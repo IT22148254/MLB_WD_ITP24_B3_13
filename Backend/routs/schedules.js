@@ -89,7 +89,7 @@ router.route("/coachSchedule/:id").delete(async (req, res) => {
 
 //get one Coach Schedule
 
-router.route("/coachSchedule/get/:id").get(async (req, res) => {
+router.route("/get/:id").get(async (req, res) => {
   try {
     let itemId = req.params.id;
     const result = await CoachSchedule.findById(itemId);

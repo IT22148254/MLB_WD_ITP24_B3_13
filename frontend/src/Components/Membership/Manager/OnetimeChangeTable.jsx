@@ -1,4 +1,3 @@
-// Import the necessary dependencies
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
@@ -45,8 +44,8 @@ const OnetimeChangeTable = () => {
     setFilteredOnetimes(filtered);
   }, [searchInput, onetimes]);
 
-  const handleEdit = (id) => {
-    navigate(`/chngtimeondytbl/${id}`);
+  const handleEdit = (onetime) => {
+    navigate(`/chngtimeondytbl/${onetime._id}`, { state: { onetime } });
   };
 
   const handleDelete = (id) => {
@@ -125,13 +124,13 @@ const OnetimeChangeTable = () => {
 
   // Define the function to handle navigation to the add feedback page
   const handleAddSchedule = () => {
-    navigate("/"); // Navigate to the add feedback page
+    navigate('/changetime')
   };
 
   return (
     <div className="flex h-full justify-center items-center" style={bgStyle}>
-      <div className="bg-black/45 w-4/5 rounded-[50px] py-12 px-12 gap -inset-y-8">
-        <div className="w-full">
+      <div className="bg-black/45 w-4/5 h-3/4 rounded-[50px] py-12 px-12 gap -inset-y-8">
+        {/* <div className="w-full"> */}
           <div
             className="text-4xl text-white font-bold align-top mb-6"
             style={{ WebkitTextStroke: "1px black" }}
@@ -183,7 +182,7 @@ const OnetimeChangeTable = () => {
                   <div className="border-2 border-black p-2">
                     <button
                       className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                      onClick={() => handleEdit(ont._id)}
+                      onClick={() => handleEdit(ont)}
                     >
                       Edit
                     </button>
@@ -201,7 +200,7 @@ const OnetimeChangeTable = () => {
           </div>
           {/* Button to generate feedback report */}
           <button
-            className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
+            className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-13"
             onClick={handleCreateReport}
           >
             Generate schedule Report
@@ -209,12 +208,13 @@ const OnetimeChangeTable = () => {
 
           {/* Button to add feedback */}
           <button
-            className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
+            className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-13"
             onClick={handleAddSchedule}
           >
             Add Schedule
           </button>
-        </div>
+        {/* </div> */}
+        
       </div>
     </div>
   );

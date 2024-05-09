@@ -43,7 +43,8 @@ const ChangeTimeOnDayForm = () => {
                 icon: "success",
             }).then(() => {
                 console.log('new slot added', json)
-                window.location.reload()
+                // window.location.reload()
+                navigate('/chngtimeondytbl')
             })
 
             
@@ -51,9 +52,9 @@ const ChangeTimeOnDayForm = () => {
 
     }
 
-    const handlelist = ()=>{
-        navigate('/chngtimeondytbl')
-    }
+    // const handlelist = ()=>{
+    //     navigate('/chngtimeondytbl')
+    // }
     const bgStyle = {
         backgroundImage: `url(${bg})`,
         backgroundSize: "cover",
@@ -125,7 +126,7 @@ const ChangeTimeOnDayForm = () => {
                         </div>
                         <div className="flex justify-end mt-4 add-promo-row">
                             <div className="add-promo-btns">
-                                <button onClick={handlelist} className='px-4 py-2 font-semibold text-white bg-blue-500 rounded-md mr-[150px] secondary__btn hover:bg-blue-700'>view schedules</button>
+                                {/* <button onClick={handlelist} className='px-4 py-2 font-semibold text-white bg-blue-500 rounded-md mr-[150px] secondary__btn hover:bg-blue-700'>view schedules</button> */}
                                 <button type='submit' className='px-4 py-2 mr-[72px] text-white bg-blue-500 rounded-md fon2t-semibold secondary__btn hover:bg-blue-700'>Submit</button>
                                 <button type='reset' className='px-4 py-2 mr-0 font-semibold text-white bg-red-600 rounded-md primary__btn hover:bg-red-300'>Cancel</button>
                             
