@@ -19,9 +19,8 @@ import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path='/'>
+      <Route path='changetime/'element={<ChangeTimeOnDayForm/>} />
         {/* <Route path='mmdashboard/' element={<MMDashboard />} /> */}
-        <Route index element={<ChangeTimeOnDayForm/>} />
         {/* <Route path='chngtimeondy/' element={<ChangeTimeOnDy />} /> */}
         <Route path='chngtimeondytbl/' element={<OnetimeChangeTable/>}/>
         <Route path='chngtimeondytbl/:id'element={<ChangeOnetimeEdit/>}/>
@@ -33,7 +32,7 @@ const router = createBrowserRouter(
         <Route path="editstandard/:id" element={<EditStandard />} />
         <Route path="testscreen/" element={<TestScreen />} /> */}
       </Route>
-    </Route>
+    
 
 
   )
