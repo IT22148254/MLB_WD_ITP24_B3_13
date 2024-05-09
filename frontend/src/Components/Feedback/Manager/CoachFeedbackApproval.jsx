@@ -5,6 +5,11 @@ import Swal from "sweetalert2";
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
 
+function handleAccept() {
+    toast.success('Feedback Accepted');
+    console.log("feedback accepted")
+  }
+
 const CoachFeedbackApproval = () => {
 
     const ref = useRef(null);
@@ -141,7 +146,7 @@ function handleClick() {
                                 <td >{row.Coach}</td>
                                 <td >{row.Rating}</td>
                                 <td >{row.coachfeedback}</td>
-                                <td><button className='accept_btn 'onClick={handleClick}>Accept</button></td>
+                                <td><button className='accept_btn 'onClick={handleAccept}>Accept</button></td>
                                 <td><button className='reject_btn ' onClick={() => handleInstructorFeedbackDelete(row.id)}>Reject</button></td>
                             </tr>
                             ))}

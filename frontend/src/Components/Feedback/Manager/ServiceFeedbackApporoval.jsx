@@ -7,15 +7,10 @@ import axios from 'axios'
 import Swal from "sweetalert2";
 
 function handleAccept() {
-    Swal.fire({
-        title: "Success",
-        text: "Feedback Approved successfully",
-        icon: "success",
-      }).then(()=>{
-        console.log('new feedback added')
-      })
-
+    toast.success('Feedback Accepted');
+    console.log("feedback accepted")
   }
+
 
 const ServiceFeedbackApproval = () => {
 
