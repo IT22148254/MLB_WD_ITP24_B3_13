@@ -8,6 +8,11 @@ import { RouterProvider, Route, createBrowserRouter, createRoutesFromElements, }
 import TestScreen from './Components/Feedback/TestScreen';
 import ServiceFeedbackTable from './Components/Feedback/User/ServiceFeedbackTable';
 import EditServiceFeedbackForm from './Components/Feedback/User/EditServiceFeedbackForm';
+import Selectoption from './Pages/Selectoption'
+import Coachfeedback from './Components/Feedback/User/CoachFeedbackForm'; 
+
+{/* i chnange from here */}
+// import Selectoption from './Pages/Selectoption'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -17,6 +22,17 @@ const router = createBrowserRouter(
         <Route path ="testscreen/:id" element = {<TestScreen/>}/>
         <Route path="servicetable/" element={<ServiceFeedbackTable/>}/>
         <Route path="editservice/:id" element={<EditServiceFeedbackForm/>}/>
+
+        {/* i chnange from here */}
+
+        <Route path="selectopt/" element={<Selectoption/>}/>
+        <Route path="coachfeedback/" element={<Coachfeedback/>}/>
+
+         
+
+
+
+
       </Route>
     </Route>
 

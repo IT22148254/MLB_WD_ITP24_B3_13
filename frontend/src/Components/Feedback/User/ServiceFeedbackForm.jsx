@@ -89,7 +89,7 @@ const ServiceFeedbackForm = () => {
           className="text-4xl text-white font-bold align-top mb-8"
           style={{ WebkitTextStroke: "1px black" }}
         >
-          Give your feedback
+          Give your feedback on Services
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-y-4">
@@ -107,7 +107,7 @@ const ServiceFeedbackForm = () => {
                 name="name"
                 value={UserName}
                 onChange={(e) => {
-                  const value = e.target.value.replace(/[^a-zA-Z\s]/g, ''); // Allow only letters and spaces
+                  const value = e.target.value.replace(/[^a-zA-Z\s]/g, ''); // Allow only letters and spaces. not allow special characters to print
                   setName(value);
                 }}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
