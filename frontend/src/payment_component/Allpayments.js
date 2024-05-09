@@ -129,8 +129,8 @@ export default function Allpayments() {
                                     <td>{result.email}</td>                                    
                                     <td>{result.contact}</td>
                                     <td>
-                                        <Link className='btn btn-success ms-2' to={`/view/${result._id}`}>View</Link>
-                                        <Link className='btn btn-warning ms-2' to={`/edit/${result._id}`}>Update</Link>
+                                        <Link className='btn btn-success ms-2' to={`/payment/view/${result._id}`}>View</Link>
+                                        <Link className='btn btn-warning ms-2' to={`/payment/edit/${result._id}`}>Update</Link>
                                         <button className='btn btn-danger ms-2'
                                             data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={() => deletestud(result._id)}>Delete</button>
                                     </td>

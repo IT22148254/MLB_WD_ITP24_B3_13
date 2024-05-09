@@ -125,7 +125,7 @@ export default function Edit() {
             progress: undefined,
             });
         setTimeout(() => {
-            navigate('/allpayments');
+            navigate('/payment/all');
           }, 3000);
 
 
@@ -154,7 +154,7 @@ export default function Edit() {
                 <div className='d-flex'>
                          <button className='btn btn-primary' onClick={updatestud}>Update</button>
                          <ToastContainer />
-                         <NavLink className='btn btn-primary ms-auto' to="/allpayments">Back to Home</NavLink>
+                         <NavLink className='btn btn-primary ms-auto' to="/payment/all">Back to Home</NavLink>
                 </div>
               
 
@@ -162,7 +162,7 @@ export default function Edit() {
 
              {/* Bottom photo */}
              <div className="text-center mt-5">
-                <img src="../image/7011023.jpg" alt="Bottom Photo" style={{ maxWidth: '100%', height: '400px' }} />
+                <img src="/image/7011023.jpg" alt="Bottom Photo" style={{ maxWidth: '100%', height: '400px' }} />
             </div>
         </div>
     )

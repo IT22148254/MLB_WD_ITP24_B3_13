@@ -38,9 +38,9 @@ export default function View() {
                 <li className="list-group-item">Email :- {getstud.email}</li>
                 <li className="list-group-item">Mobile Number :- {getstud.contact}</li>
             </ul>
-            <Link className='btn btn-primary mt-5' to="/allpayments">Back</Link>
+            <Link className='btn btn-primary mt-5' to="/payment/all">Back</Link>
             <div className="mt-5">
-                <img src="../image/7011020.jpg" alt="Photo" style={{ maxWidth: '100%', maxHeight: '400px' }}/>
+                <img src="/image/7011020.jpg" alt="Photo" style={{ maxWidth: '100%', maxHeight: '400px' }}/>
             </div> 
         </div>
     )

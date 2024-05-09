@@ -89,7 +89,7 @@ const HomeScreen = () => {
                   ? item
                   : item.name.toLowerCase().includes(search);
               })
-              .map((products) => (
+              .map((products) => ( 
                 <Product product={products} />
               ))}
           </div>
