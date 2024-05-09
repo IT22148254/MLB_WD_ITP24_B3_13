@@ -13,6 +13,8 @@ import TestScreen from './Components/Membership/Manager/TestScreen';
 import ChangeTimeOnDayForm from './Components/Membership/Manager/ChangeOnetimeForm';
 import OnetimeChangeTable from './Components/Membership/Manager/OnetimeChangeTable';
 import ChangeOnetimeEdit from './Components/Membership/Manager/ChangeOnetimeEdit';
+import SceduleTimeSlot from "../src/Pages/OM/SceduleTimeSlot";
+
 import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,9 +25,11 @@ const router = createBrowserRouter(
         {/* <Route path='chngtimeondy/' element={<ChangeTimeOnDy />} /> */}
         <Route path='chngtimeondytbl/' element={<OnetimeChangeTable/>}/>
         <Route path='chngtimeondytbl/:id'element={<ChangeOnetimeEdit/>}/>
+        <Route path='schedule/'element={<SceduleTimeSlot/>}/>
         {/* <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
-        <Route path='editpromo/:id' element={<EditPromoForm/>} />
+        <Route path='
+        ....................................................................................................................................................................................................................................................................................................................................................................' element={<EditPromoForm/>} />
         <Route path="editstandard/:id" element={<EditStandard />} />
         <Route path="testscreen/" element={<TestScreen />} /> */}
       </Route>
