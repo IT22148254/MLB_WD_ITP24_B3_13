@@ -16,6 +16,7 @@ const MemberRegistration = () => {
     const [Email, setEmail] = useState('');
     const [Dob, setDob] = useState(new Date());
     const [formError, setFormError] = useState('');
+    const navigate = useNavigate();
 
     const handleAddressChange = (e) => {
         setAddress(e.target.value);
