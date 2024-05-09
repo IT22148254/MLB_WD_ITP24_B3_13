@@ -265,7 +265,7 @@ router.route("/order/add").post((req, res) => {
 router.route("/order/").get((req, res) => {
   Order.find()
     .then((result) => {
-      res.status(200).json({ result });
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(200).json({ message: "order fetching unsuccessful" });

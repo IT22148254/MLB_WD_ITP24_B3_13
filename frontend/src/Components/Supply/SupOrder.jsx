@@ -153,20 +153,21 @@
 
 
 
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { useNavigate, } from "react-router-dom"
 import { Container } from 'reactstrap'
 import Swal from "sweetalert2";
-
-
+import axios from "axios";
 
 const SupOrder = () => {
 
 
     const[orderID, setorderID] = useState('')
+    const [suppliers, setSuppliers] = useState([]);
     const[Supplier, setSupplier] = useState('')
     const[PrName, setPrName] = useState('')
     const[quantity, setQuantity] = useState(0) 
+
 
     const [error, setError] = useState(null)
 
@@ -197,6 +198,19 @@ const SupOrder = () => {
           })
 
     }}
+
+    useEffect(() => {
+        const fetchSuppliers = async () => {
+          try {
+            const { data } = await axios.get('http://localhost:8070/supplier');
+            setSuppliers(data.result);
+          } catch (error) {
+            console.error('Failed to fetch Suppliers', error);
+          }
+        };
+        fetchSuppliers();
+      }, []);
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -246,9 +260,9 @@ const SupOrder = () => {
                                     <select name="Supplier" id="Name" /*className="dropdown"*/ className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 
                                     text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500" value={Supplier} 
                                     onChange={(e)=>setSupplier(e.target.value)}>
-                                        <option value="Senura Nawanjana" selected>Senura Nawanjana</option>
-                                        <option value="Will Smith"  selected>Will Smith</option>
-                                        <option value="Johnny Depp"  selected>Johnny Depp</option>
+                                         <option value="">Select a supplier </option>
+                                            {suppliers.map(sup => (
+                                             <option key={sup._id} value={sup._id}>{sup.Name}</option>))}
                                     </select>
                                     </div>
                                 </div>
