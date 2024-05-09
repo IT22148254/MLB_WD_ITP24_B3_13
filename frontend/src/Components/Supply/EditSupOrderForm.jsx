@@ -14,13 +14,13 @@ const EditOrderForm = () => {
         height: "100vh",
     };
 
-    const [OrderName, setOrderName] = useState('');
-    const [OrderDate, setOrderDate] = useState('');
-    const [Supplier, setSupplier] = useState('');
+    const[orderID, setorderID] = useState('')
+    const [suppliers, setSuppliers] = useState([]);
+    const[Supplier, setSupplier] = useState('')
+    const[PrName, setPrName] = useState('')
+    const[quantity, setQuantity] = useState(0) 
     const [error, setError] = useState(null);
-    const [nameError, setNameError] = useState('');
-    const [emailError, setEmailError] = useState('');
-    const [phoneError, setPhoneError] = useState('');
+   
     const navigate = useNavigate();
     const { id } = useParams();
 
@@ -40,6 +40,19 @@ const EditOrderForm = () => {
 
         fetchSupplier();
     }, [id]);
+
+    useEffect(() => {
+        const fetchSuppliers = async () => {
+          try {
+            const { data } = await axios.get('http://localhost:8070/supplier');
+            setSuppliers(data.result);
+          } catch (error) {
+            console.error('Failed to fetch Suppliers', error);
+          }
+        };
+        fetchSuppliers();
+      }, []);
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();

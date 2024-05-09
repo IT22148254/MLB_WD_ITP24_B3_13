@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Placedordertable = () => {
   const [orders, setOrders] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -28,7 +30,9 @@ const Placedordertable = () => {
   }, []);
 
   const handleEdit = (id) => {
+
     console.log(`Edit order with id: ${id}`);
+    navigate(`/sup/editorder/${id}`)
     // Handle edit logic
   };
 

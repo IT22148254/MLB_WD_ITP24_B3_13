@@ -15,11 +15,11 @@ import Inventory from './Pages/Inventory';
 import Itemtable from './Components/Supply/Itemtable'; 
 import  ReceievedOrders from './Pages/RecievedOrders'; // Adjust the path as necessary
 import AddOrderForm from './Pages/PlaceOrder';
-import EditOrderForm from './Pages/EditOrders';
 import Supplierhandling from './Pages/SupplierDashbaord(2)'
 import PlacedOrdersView from './Pages/placedOrders';
 import OrderHandling from './Pages/OrderHandling'
 import Invoice from './Pages/Invoice'
+import EditOrderForm from './Components/Supply/EditSupOrderForm';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,6 +30,7 @@ const router = createBrowserRouter(
         {/* <Route path="testscreen/:id" element={<TestScreen/>} /> */}
         <Route path="suppliertable/" element={<SupplierTable/>}/>
         <Route path="editsup/:id" element= {<EditSupplierForm/>}/>
+        <Route path='editorder/:id' element = {<EditOrderForm/>}/>
         
         {/* i change from here */}
 
