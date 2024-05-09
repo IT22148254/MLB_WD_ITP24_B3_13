@@ -162,11 +162,12 @@ import Swal from "sweetalert2";
 
 const SupOrder = () => {
 
+
     const[orderID, setorderID] = useState('')
-    const[supName, setSupName] = useState('')
-    const[prName, setPrName] = useState('')
+    const[Supplier, setSupplier] = useState('')
+    const[PrName, setPrName] = useState('')
     const[quantity, setQuantity] = useState(0) 
-    const[size, setSize] = useState('')
+
     const [error, setError] = useState(null)
 
     const handleQuantity = (e)=>{
@@ -200,7 +201,7 @@ const SupOrder = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const supOrder = {supName, prName, quantity, size}
+        const supOrder = {Supplier, PrName, quantity}
 
                 const response = await fetch('http://localhost:8000/Orders', {
                     method: 'POST',
@@ -219,10 +220,10 @@ const SupOrder = () => {
                 if(response.ok){
 
                     
-                    setSupName('')
+                    setSupplier('')
                     setPrName('')
                     setQuantity(0)
-                    setSize('')
+                    
                     setError(null)
 
                     Swal.fire({
@@ -242,9 +243,9 @@ const SupOrder = () => {
                         <div className="flex flex-col gap-y-4">
                             <div className="flex justify-between items-center">   {/* check this here */}
                                     <label htmlFor="Name" className="text-white rounded-xl flex items-center pl-5 font-bold text-2xl"  style={{ WebkitTextStroke: '1px black' }}>Supplier Name:</label>
-                                    <select name="Supname" id="Name" /*className="dropdown"*/ className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 
-                                    text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500" value={supName} 
-                                    onChange={(e)=>setSupName(e.target.value)}>
+                                    <select name="Supplier" id="Name" /*className="dropdown"*/ className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 
+                                    text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500" value={Supplier} 
+                                    onChange={(e)=>setSupplier(e.target.value)}>
                                         <option value="Senura Nawanjana" selected>Senura Nawanjana</option>
                                         <option value="Will Smith"  selected>Will Smith</option>
                                         <option value="Johnny Depp"  selected>Johnny Depp</option>
@@ -259,7 +260,7 @@ const SupOrder = () => {
                                         name="Details"
                                         className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl 
                                         border-b-2  border-gray-300 focus:outline-none focus:border-green-500"
-                                        value={prName}
+                                        value={PrName}
                                         onChange={(e)=>setPrName(e.target.value)}
                                         required />
                                 </div>
@@ -275,16 +276,7 @@ const SupOrder = () => {
                                         onChange={handleQuantity}
                                         required />
                                         </div>
-                                <div className="flex justify-between items-center">  
-                                    <label for="Size" className="text-white flex items-center pl-5 font-bold text-2xl font-size" style={{ WebkitTextStroke: '1px black' }}>Size:</label>
-                                    <select name="Supname" id="Name" className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold 
-                                    placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500" value={size} onChange={(e)=>setSize(e.target.value)}>
-                                        <option value="Small" selected>Small</option>                 
-                                        <option value="Medium" selected>Medium</option>
-                                        <option value="Large" selected>Large</option>
-                                        {/*Other Options will be build*/}
-                                    </select>
-                                    </div>
+                               
                                 <div className="add-promo-btns">                  
                                     <div className="flex justify-center mt-9">
                                         <button type='reset' className="bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mr-20">Cancel</button>

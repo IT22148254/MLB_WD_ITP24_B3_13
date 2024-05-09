@@ -27,15 +27,15 @@ const orderSchema = new schema({
     required: true,
     ref: "Supplier",
   },
-  OrderName: {
+  PrName: {
     type: String,
     required: true,
   },
-  OrderDate: {
-    type: String,
+  quantity: {
+    type: Number,
     required: true,
   },
-});
+}, {timestamps:true});
 
 const supReportSchema = new schema({
   Category: {

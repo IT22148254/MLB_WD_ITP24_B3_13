@@ -238,12 +238,12 @@ router.route("/report/:id").delete(async (req, res) => {
 //creating a order
 
 router.route("/order/add").post((req, res) => {
-  const { Supplier, OrderName, OrderDate } = req.body;
+  const { Supplier, PrName,quantity} = req.body;
 
   const newOrder = Order({
     Supplier,
-    OrderName,
-    OrderDate,
+    PrName,
+    quantity,
   });
 
   newOrder
@@ -297,10 +297,10 @@ router.route("/order/get/:id").get(async (req, res) => {
 
 router.route("/order/:id").put(async (req, res) => {
   try {
-    const { Supplier, OrderName, OrderDate } = req.body;
+    const { Supplier,PrName,quantity} = req.body;
     const order = await Order.findByIdAndUpdate(
       req.params.id,
-      { Supplier, OrderName, OrderDate },
+      { Supplier,PrName,quantity},
       { new: true }
     );
 
