@@ -11,7 +11,7 @@ const LeaveApproval = () => {
   useEffect(() => {
     const fetchLeaves = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/leaves");
+        const response = await axios.get("http://localhost:8000/epmloyee/service");
         // console.log(response.data);
         setLeaves(response.data);
       } catch (error) {
