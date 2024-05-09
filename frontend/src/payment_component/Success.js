@@ -19,6 +19,7 @@ export default function Success() {
   return (
     <div>
       <center>
+      <button className="pay-button" onClick={() => window.location.href = "http://localhost:3000/view/6628b89792897dfb125200b2"}>Get Payment Bill</button>
         <button className="pay-button" onClick={() => window.location.href = "http://localhost:3000/"}>Home</button>
       </center>
       <ToastContainer />
