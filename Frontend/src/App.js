@@ -19,7 +19,6 @@ const App = () => {
           <Route path="/calculator" element={<SalaryCalculator />} />
           <Route path="/addleave" element={<ApplyLeave />} />
           <Route path="/showleave" element={<LeaveSummary />} />
-
         </Routes>
       </Router>
     </div>
