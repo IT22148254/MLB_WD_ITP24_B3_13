@@ -1,7 +1,7 @@
 import React from "react";
 import LeaveApproval from "../components/LeaveApproval table";
 
-const leaveSummary = () => {
+const LeaveSummary = () => {
 
     return (
         <div className="flex h-full justify-center items-center">
@@ -18,4 +18,4 @@ const leaveSummary = () => {
       );
 }
  
-export default leaveSummary;
+export default LeaveSummary;

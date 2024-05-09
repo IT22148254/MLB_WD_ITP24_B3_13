@@ -2,9 +2,12 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import EmployeeSummary from "./screens/EmployeeSummary";
 import AddEmployee from "./screens/AddEmployee";
+import LeaveSummary from "./screens/LeaveApproval.jsx";
 import EditEmployee from "./screens/EditEmployee";
 import SalaryCalculator from "./screens/SalaryCalculator.jsx";
 import ApplyLeave from "./components/ApplyLeave.jsx"
+
+
 const App = () => {
   return (
     <div className="h-screen">
@@ -15,6 +18,8 @@ const App = () => {
           <Route path="/edit/:id" element={<EditEmployee />} />
           <Route path="/calculator" element={<SalaryCalculator />} />
           <Route path="/addleave" element={<ApplyLeave />} />
+          <Route path="/showleave" element={<LeaveSummary />} />
+
         </Routes>
       </Router>
     </div>
