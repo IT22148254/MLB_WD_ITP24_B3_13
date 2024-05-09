@@ -203,7 +203,7 @@ const SupOrder = () => {
 
         const supOrder = {Supplier, PrName, quantity}
 
-                const response = await fetch('http://localhost:8000/Orders', {
+                const response = await fetch('http://localhost:8070/supplier/order/add', {
                     method: 'POST',
                     body: JSON.stringify(supOrder),
                     headers: {
@@ -223,7 +223,7 @@ const SupOrder = () => {
                     setSupplier('')
                     setPrName('')
                     setQuantity(0)
-                    
+
                     setError(null)
 
                     Swal.fire({
