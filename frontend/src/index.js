@@ -21,6 +21,7 @@ import OrderHandling from './Pages/OrderHandling'
 import Invoice from './Pages/Invoice'
 import EditOrderForm from './Components/Supply/EditSupOrderForm';
 import { ToastContainer } from 'react-toastify';
+import WavesyncHome from './Pages/Home'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -46,6 +47,7 @@ const router = createBrowserRouter(
         <Route path="placedOrders" element= {<PlacedOrdersView/>}/> 
         <Route path="Orderhandling" element= {<OrderHandling/>}/>
         <Route path="Invoice" element= {<Invoice/>}/>
+        <Route path="Home" element= {<WavesyncHome/>}/>
 
 
       
