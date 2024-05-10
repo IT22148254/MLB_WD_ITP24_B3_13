@@ -114,10 +114,10 @@ router.route("/employee/update").put(async (req, res) => {
 //add new leave
 
 router.route("/service/add").post((req, res) => {
-  const { startDate,  endDate,  reason } = req.body;
+  const { startDate,  endDate,  reason ,status } = req.body;
 
   const newLeave = Leave({
-    startDate,  endDate,  reason,
+    startDate,  endDate,  reason,  status
   });
 
   newLeave
@@ -171,25 +171,26 @@ router.route("/service/get/:id").get(async (req, res) => {
 
 //Update Leave
 
-router.route("/:id").put(async (req, res) => {
+// Update Leave
+router.route("/leave/:id").put(async (req, res) => {
   try {
-    const { UserName, Comment, Rating, Email } = req.body;
+    const { status } = req.body;
 
     const leave = await Leave.findByIdAndUpdate(
       req.params.id,
-      { startDate,  endDate,  reason },
+      { status },
       { new: true }
     );
 
     if (!leave) {
-      return res.status(404).json({ message: " leave not found " });
+      return res.status(404).json({ message: "Leave not found" });
     }
 
-    return res.status(200).json({ message: "leave updated successfully" });
+    return res.status(200).json({ message: "Leave updated successfully" });
   } catch (error) {
     return res
       .status(400)
-      .json({ message: `leave update unsuccessful ${error}` });
+      .json({ message: `Leave update unsuccessful ${error}` });
   }
 });
 
@@ -213,5 +214,44 @@ router.route("/leave/:id").delete(async (req, res) => {
   }
 });
 
+// // Reject Leave
+// router.route("/leave/reject/:id").put(async (req, res) => {
+//   try {
+//     const leave = await Leave.findByIdAndUpdate(
+//       req.params.id,
+//       { status: "rejected" },
+//       { new: true }
+//     );
+
+//     if (!leave) {
+//       return res.status(404).json({ message: "Leave not found" });
+//     }
+
+//     return res.status(200).json({ message: "Leave rejected successfully" });
+//   } catch (error) {
+//     return res
+//       .status(400)
+//       .json({ message: `Leave rejection unsuccessful ${error}` });
+//   }
+// });// Approve Leave
+// router.route("/leave/approve/:id").put(async (req, res) => {
+//   try {
+//     const leave = await Leave.findByIdAndUpdate(
+//       req.params.id,
+//       { status: "approved" },
+//       { new: true }
+//     );
+
+//     if (!leave) {
+//       return res.status(404).json({ message: "Leave not found" });
+//     }
+
+//     return res.status(200).json({ message: "Leave approved successfully" });
+//   } catch (error) {
+//     return res
+//       .status(400)
+//       .json({ message: `Leave approval unsuccessful ${error}` });
+//   }
+// });
 
 module.exports = router;
