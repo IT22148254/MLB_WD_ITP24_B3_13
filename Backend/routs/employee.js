@@ -146,7 +146,7 @@ router.route("/leaves").get((req, res) => {
     });
 });
 
-//Get one Service Feedback
+//Get one leave
 
 router.route("/service/get/:id").get(async (req, res) => {
   try {
@@ -214,6 +214,13 @@ router.route("/leave/:id").delete(async (req, res) => {
   }
 });
 
+
+
+module.exports = router;
+
+
+
+
 // // Reject Leave
 // router.route("/leave/reject/:id").put(async (req, res) => {
 //   try {
@@ -253,5 +260,3 @@ router.route("/leave/:id").delete(async (req, res) => {
 //       .json({ message: `Leave approval unsuccessful ${error}` });
 //   }
 // });
-
-module.exports = router;
