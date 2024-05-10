@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import bg from "../../../Images/feedback.jpeg";
 import { useNavigate } from "react-router-dom";
 
-const EditServiceFeedbackForm = () => {
+const CoachFeedbackEditForm = () => {
   const { id } = useParams();
   const [UserName, setName] = useState("");
   const [Email, setEmail] = useState("");
@@ -98,7 +98,7 @@ const EditServiceFeedbackForm = () => {
           className="text-4xl text-white font-bold align-top mb-8"
           style={{ WebkitTextStroke: "1px black" }}
         >
-          <h1 className="title">Edit Your Feedback on  Services</h1>
+          <h1 className="title">Edit Your Feedback on Coach</h1>
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-y-4">
@@ -212,5 +212,5 @@ const EditServiceFeedbackForm = () => {
     );
   };
   
-  export default EditServiceFeedbackForm;
+  export default CoachFeedbackEditForm;
   

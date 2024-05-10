@@ -89,7 +89,7 @@ const Coachfeedback = () => {
     return ( 
         
                 <div className="flex h-full justify-center items-center" style={bgStyle}>
-                <div className="bg-black/45 w-1/2 h-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
+                <div className="bg-black/45 w-1/2 h-2/3 rounded-[50px] py-12 px-14 gap -inset-y-8">
                     <div
                     className="text-4xl text-white font-bold align-top mb-8"
                     style={{ WebkitTextStroke: "1px black" }}
@@ -125,9 +125,9 @@ const Coachfeedback = () => {
                         </div>
                         <div className="flex justify-between items-center"> 
                         <label className="text-white flex items-center pl-5 font-bold text-2xl"
-                style={{ WebkitTextStroke: "1px black" }}>Select Your Coach : </label>
+                           style={{ WebkitTextStroke: "1px black" }}>Select Your Coach : </label>
                         <select className="w-3/5 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
- onChange={(e) => setCoach(e.target.value)} value={Coach} required>
+                           onChange={(e) => setCoach(e.target.value)} value={Coach} required>
                             <option selected disabled >Select</option>
                             <option value="Dinith">Dinith</option>
                             <option value="Buddhina">Buddhina</option>
