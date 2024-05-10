@@ -109,7 +109,12 @@ const EditOrderForm = () => {
     };
 
     return (
-        <form method="POST"  className="space-y-4" onSubmit={handleSubmit}>
+        <section className="h-screen flex justify-center items-center" style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover" }}>
+            <Container>
+                <div className="flex flex-col justify-center items-center h-screen">
+                    <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
+                        <div className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>Edit Supplier</div>
+                        <form method="POST"  className="space-y-4" onSubmit={handleSubmit}>
                         <div className="flex flex-col gap-y-4">
                             <div className="flex justify-between items-center">   {/* check this here */}
                                     <label htmlFor="Name" className="text-white rounded-xl flex items-center pl-5 font-bold text-2xl"  style={{ WebkitTextStroke: '1px black' }}>Supplier Name:</label>
@@ -156,6 +161,11 @@ const EditOrderForm = () => {
                                     {error && <div>{error}</div>}   
                                 </div>
                     </form>
+                    </div>
+                    </div>
+                    </Container>
+                    </section>
+
     );
 };
 
