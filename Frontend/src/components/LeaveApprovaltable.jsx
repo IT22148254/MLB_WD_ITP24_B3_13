@@ -3,6 +3,9 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import bg from "../assets/images/bg_main.jpg";
+
+
 
 const Leave = () => {
   const [leaves, setLeaves] = useState([]);
@@ -67,7 +70,11 @@ const Leave = () => {
     doc.autoTable(columns, rows);
     doc.save('Leave Report.pdf');
   };
-
+  const bgStyle = {
+    backgroundImage: `url(${bg})`,
+    backgroundSize: "cover",
+    height: "100%",
+  };
   return (
     <div
       className="h-screen flex justify-center items-center"
@@ -76,7 +83,7 @@ const Leave = () => {
         backgroundPosition: 'center center',
       }}
     >
-      <div className="flex flex-col justify-center items-center h-screen mt-10 mb-10">
+      <div className="flex h-full justify-center items-center" style={bgStyle}>
         <div className="bg-black/45 h-auto w-4/5 rounded-[50px] py-12 px-14 gap -inset-y-8">
           <p className="text-4xl text-white font-bold mb-4">Leave Table</p>
           <div className="grid grid-cols-5 bg-cyan-400 text-white">
