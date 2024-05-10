@@ -18,6 +18,9 @@ const Leave = () => {
     };
     fetchLeaves();
   }, []);
+  const handleEdit = (id) => {
+    // navigate(`/sup/editsup/${id}`);
+  };
 
   const handleDelete = async (id) => {
     try {
@@ -51,12 +54,14 @@ const Leave = () => {
       { header: 'Reason', dataKey: 'reason' },
       { header: 'Start Date', dataKey: 'startDate' },
       { header: 'End Date', dataKey: 'endDate' },
+      { header: 'Edit', dataKey: 'edit' }, // New column for Edit button
     ];
 
     const rows = leaves.map((leave) => ({
       reason: leave.reason,
       startDate: new Date(leave.startDate).toLocaleDateString(),
       endDate: new Date(leave.endDate).toLocaleDateString(),
+      edit: <button className="bg-blue-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold">Edit</button>, // Edit button for each entry
     }));
 
     doc.autoTable(columns, rows);
@@ -78,6 +83,7 @@ const Leave = () => {
             <div className="border-2 border-black p-3">Reason</div>
             <div className="border-2 border-black p-3">Start Date</div>
             <div className="border-2 border-black p-3">End Date</div>
+            <div className="border-2 border-black p-3">Edit</div> {/* Updated header */}
             <div className="border-2 border-black p-3">Delete</div>
           </div>
           <div
@@ -92,12 +98,18 @@ const Leave = () => {
                 <div className="border-2 border-black p-2 text-black">{leave.reason}</div>
                 <div className="border-2 border-black p-2 text-black">{new Date(leave.startDate).toLocaleDateString()}</div>
                 <div className="border-2 border-black p-2 text-black">{new Date(leave.endDate).toLocaleDateString()}</div>
+                <div className="border-2 border-black p-2">{   <button
+                      className=" border-2 bg-purple-400  border-black rounded-full p-1 px-4 text-white font-bold"
+                      onClick={() => handleEdit(leave._id)}
+                    >
+                     Approve
+                    </button>}</div> {/* Placeholder for Edit button */}
                 <div className="border-2 border-black p-2">
                   <button
-                    className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
+                    className=" border-2 bg-green-600 border-black rounded-full p-1 px-4 text-white font-bold"
                     onClick={() => handleDelete(leave._id)}
                   >
-                    Delete
+                   Reject
                   </button>
                 </div>
               </div>
