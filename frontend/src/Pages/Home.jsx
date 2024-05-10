@@ -23,12 +23,19 @@ const WavesyncHome = () => {
         </div>
       </div>
       <div className="max-w-7xl mx-auto flex flex-col items-center justify-center z-10">
-        <h1 className="text-4xl sm:text-6xl font-bold text-white mb-4" style={fontStyle}>
+        <h1 className=" font-bold text-[200px] text-white mb-4" style={fontStyle}>
           WAVESYNC
         </h1>
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          JOIN With Us
+
+       
+        {/* <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> */}
+        
+        
+        <button className="bg-blue-200 hover:bg-blue-700 text-black font-semibold py-3 px-6 rounded-full uppercase shadow-md transition duration-500 ease-in-out transform hover:scale-110 ring-2 ring-blue-400 ring-opacity-50 ">
+            JOIN With Us    
         </button>
+
+
       </div>
     </div>
   );
