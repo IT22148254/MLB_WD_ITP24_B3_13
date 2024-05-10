@@ -13,16 +13,15 @@ const employeeSchema = new mongoose.Schema({
 });
 
 const leaveSchema = new mongoose.Schema({
-  // emp: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Employee",
-  //   required: true,
-  // },
+
   startDate: { type: String, required: true },
   endDate: { type: String, required: true },
   reason: { type: String, required: true },   
   status: { type: String, required: true }, 
-      
+  // employee: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true }, // Reference to Employee schema
+  employeeName: { type: String, required: true },
+  
+
 });
 const Employee = mongoose.model("Employee", employeeSchema);
 const Leave = mongoose.model("Leave", leaveSchema);

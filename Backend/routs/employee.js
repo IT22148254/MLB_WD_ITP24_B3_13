@@ -2,6 +2,27 @@ const express = require("express");
 const router = express.Router();
 const { Employee ,Leave} = require("../models/employeeModel");
 
+// Get employee by fullName
+router.route("/employee/findByName/:fullName").get(async (req, res) => {
+  const fullName = req.params.fullName;
+
+  if (!fullName) {
+    return res.status(400).json({ error: "Employee full name is required" });
+  }
+
+  try {
+    const employee = await Employee.findOne({ fullName });
+    if (employee) {
+      res.status(200).json(employee);
+    } else {
+      res.status(404).json({ error: "Employee not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+});
+
+
 // Get all employees
 router.route("/employee").get(async (req, res) => {
   try {
@@ -114,10 +135,11 @@ router.route("/employee/update").put(async (req, res) => {
 //add new leave
 
 router.route("/service/add").post((req, res) => {
-  const { startDate,  endDate,  reason ,status } = req.body;
+  const { startDate,  endDate,  reason ,status,employeeName, } = req.body;
 
   const newLeave = Leave({
-    startDate,  endDate,  reason,  status
+    startDate,  endDate,  reason,  status,employeeName,
+   
   });
 
   newLeave
