@@ -28,7 +28,7 @@ const Placedordertable = () => {
     };
     fetchSuppliers();
   }, []);
-
+// 
   const handleEdit = (id) => {
 
     console.log(`Edit order with id: ${id}`);
@@ -74,7 +74,7 @@ const Placedordertable = () => {
         {orders.map((order, index) => (
           <div className={`grid grid-cols-5 ${index % 2 == 0 ? "bg-cyan-200 " : "bg-cyan-400 "}`} key={order._id}>
             <div className="border-2 border-black p-2">
-              {suppliers.find(supplier => supplier.id === order.supplierId)?.Name || 'Unknown Supplier'}
+            {suppliers.filter((sup) => sup._id.includes(order.Supplier)).map((sup) => {return sup.Name;})}
             </div>
             <div className="border-2 border-black p-2">{order.PrName}</div>
             <div className="border-2 border-black p-2">{order.quantity}</div>

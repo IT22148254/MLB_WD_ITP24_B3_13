@@ -27,20 +27,22 @@ const EditOrderForm = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        const fetchSupplier = async () => {
+        const fetchOrder = async () => {
             try {
                 const response = await axios.get(`http://localhost:8070/supplier/order/get/${id}`);
-                const supplier = response.data.supplier;
+                const order = response.data.order
 
-                setPrName(supplier.PrName);
-                setQuantity(supplier.quantity);
-                setSupplier(supplier.Supplier);
+                setPrName(order.PrName);
+                setQuantity(order.quantity);
+                setSupplier(order.Supplier);
+                console.log(response)
             } catch (error) {
                 console.error("Error fetching supplier:", error);
+                
             }
         };
 
-        fetchSupplier();
+        fetchOrder();
     }, [id]);
 
     useEffect(() => {
@@ -92,7 +94,7 @@ const EditOrderForm = () => {
             }).then(() => {
                 console.log('Supplier updated successfully', response.data);
                 setError(null);
-                navigate("/sup/suppliertable");
+                navigate("/sup/placedOrders");
             });
         })
         .catch(error => {
