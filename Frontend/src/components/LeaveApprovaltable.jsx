@@ -25,15 +25,27 @@ const Leave = () => {
     // navigate(`/sup/editsup/${id}`);
   };
 
-  const handleDelete = async (id) => {
-    try {
-      const response = await axios.delete(`http://localhost:8070/leaves/${id}`);
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+
+      const response = await axios.delete(`http://localhost:8070/employee/leave/${id}`);
       if (response.status === 200) {
         Swal.fire({
           title: "Deleted!",
-          text: "Leave has been deleted.",
+          text: "Your file has been deleted.",
           icon: "success",
         }).then(() => {
+          // Refresh the page
           window.location.reload();
         });
       } else {
@@ -46,8 +58,9 @@ const Leave = () => {
     } catch (error) {
       console.error("Error deleting leave:", error);
     }
-  };
-
+  }
+});
+};
   const handleCreateReport = () => {
     const doc = new jsPDF();
     doc.setFontSize(16);
