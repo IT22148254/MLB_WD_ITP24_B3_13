@@ -20,6 +20,7 @@ import PlacedOrdersView from './Pages/placedOrders';
 import OrderHandling from './Pages/OrderHandling'
 import Invoice from './Pages/Invoice'
 import EditOrderForm from './Components/Supply/EditSupOrderForm';
+import { ToastContainer } from 'react-toastify';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -58,6 +59,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <RouterProvider router={router} />
+    <ToastContainer />
   </React.StrictMode>
 );
 
