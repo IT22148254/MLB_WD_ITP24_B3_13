@@ -11,6 +11,7 @@ const ApplyLeave = () => {
   const [endDate, setEndDate] = useState('');
   const [reason, setReason] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -38,11 +39,12 @@ const ApplyLeave = () => {
         icon: "success",
       }).then(() => {
         console.log('new Leave added', json);
-        // Reset form after successful submission (optional)
-        // setStartDate(new Date());
-        // setEndDate(null);
-        // setReason('');
-        // setError(null);
+       
+        setStartDate(new Date());
+        setEndDate(null);
+        setReason('');
+        setError(null);
+        navigate("/showleave");
       });
     }
   };
