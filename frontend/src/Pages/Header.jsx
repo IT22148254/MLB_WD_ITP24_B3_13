@@ -3,7 +3,9 @@ import logo from '../Images/logo.png';
 
 function Header() {
   return (
-    <header className="bg-gray-800 text-white py-4">
+
+    <header class="bg-gradient-to-r from-[#00293b] via-[#00296b] to-[#00293b] py-12 sm:px-16 max-sm:px-8 font-sans tracking-wide">
+      
       <div className="container mx-auto flex justify-center items-center">
         {/* Logo */}
         <img src={logo} alt="Company Logo" className="w-20 h-auto mr-2" />
@@ -36,6 +38,7 @@ function Header() {
           </button>
         </div>
       </div>
+      
     </header>
   );
 }
