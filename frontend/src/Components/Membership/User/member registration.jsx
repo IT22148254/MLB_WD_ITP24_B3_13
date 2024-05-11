@@ -14,46 +14,98 @@ const MemberRegistration = () => {
     const [NIC, setNIC] = useState('');
     const [phone, setPhone] = useState('');
     const [Email, setEmail] = useState('');
-    const [Dob, setDob] = useState(new Date());
+    const [Dob, setDob] = useState(null);
     
-    const [nicerror, setNICError] = useState('')
+    const [nicerror, setNicError] = useState('')
     const [phoneerror, setPhoneError] = useState('')
     const [emailerror, setEmailError] = useState('')
     const navigate = useNavigate();
 
-    const handleAddressChange = (e) => {
-        setAddress(e.target.value);
-      };
+    // const handleAddressChange = (e) => {
+    //     setAddress(e.target.value);
+    //   };
     
-      const handleNICChange = (e) => {
-        const nic = e.target.value;
-        if (/^\d{11}v?$/.test(nic) || /^\d{12}$/.test(nic)) {
-          setFormError('');
-        } else {
-          setFormError('NIC format is incorrect');
+    const handleNicChange = (e) => {
+        const inputValue = e.target.value;
+      
+        // Check if the input length exceeds 12 characters, or if it's empty
+        if (inputValue.length > 12 && inputValue !== '') {
+          setNicError("NIC should be 12 characters or less");
+          return; // Stop further processing
         }
-        setNIC(nic);
+      
+        // Regular expression to validate NIC format
+        const nicRegex = /^(\d{12}|(\d{11}v?))$/;
+      
+        // Test the input against the regular expression
+        if (!nicRegex.test(inputValue)) {
+          setNicError("Please enter a valid NIC");
+        } else {
+          setNicError("");
+        }
+      
+        // Update the NIC state
+        setNIC(inputValue);
       };
-    
-      const handleContactChange = (e) => {
-        const phoneNum = e.target.value;
-        if (/^\d{10}$/.test(phoneNum)) {
-          setFormError('');
+
+      const handlePhoneChange = (e) => {
+        const inputValue = e.target.value;
+      
+        // Check if the input value is empty
+        if (inputValue === '') {
+          setPhoneError('');
         } else {
-          setFormError('Phone number should be 10 digits');
+          // Regular expression to validate contact number format
+          const contactNoRegex = /^\d{10}$/;
+      
+          // Test the input against the regular expression
+          if (!contactNoRegex.test(inputValue)) {
+            setPhoneError(
+              "Contact number should include 10 numbers and contain only digits"
+            );
+          } else {
+            setPhoneError("");
+          }
         }
-        setPhone(phoneNum);
+      
+        // Update the phone state
+        setPhone(inputValue);
       };
 
       const handleEmailChange = (e) => {
-        const EmailValue = e.target.value;
-        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(EmailValue)) {
-          setFormError('');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(e.target.value)) {
+          setEmailError("Please enter a valid email address");
         } else {
-          setFormError('Invalid Email format');
+          setEmailError("");
         }
-        setEmail(EmailValue);
+        setEmail(e.target.value);
       };
+    
+      
+    
+      
+    
+    
+    //   const handleContactChange = (e) => {
+    //     const phoneNum = e.target.value;
+    //     if (/^\d{10}$/.test(phoneNum)) {
+    //       setFormError('');
+    //     } else {
+    //       setFormError('Phone number should be 10 digits');
+    //     }
+    //     setPhone(phoneNum);
+    //   };
+
+    //   const handleEmailChange = (e) => {
+    //     const EmailValue = e.target.value;
+    //     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(EmailValue)) {
+    //       setFormError('');
+    //     } else {
+    //       setFormError('Invalid Email format');
+    //     }
+    //     setEmail(EmailValue);
+    //   };
 
     //   const isFormValid = () => {
     //     return (
@@ -68,9 +120,9 @@ const MemberRegistration = () => {
     //     );
     //   };
 
-      const handleDobChange = (date) => {
-        setDob(date);
-      };
+    //   const handleDobChange = (date) => {
+    //     setDob(date);
+    //   };
 
 
     const handleSubmit = async (e) => {
@@ -176,7 +228,7 @@ const MemberRegistration = () => {
                         <textarea
                             id="Address"
                             value={Address}
-                            onChange={handleAddressChange}
+                            onChange={(e)=>setAddress(e.target.value)}
                         />
                     </div>
                     <div>
@@ -196,18 +248,20 @@ const MemberRegistration = () => {
                             type="text"
                             id="NIC"
                             value={NIC}
-                            onChange={handleNICChange}
+                            onChange={handleNicChange}
                         />
                     </div>
+                    {nicerror && <span style={{ color: 'red' }}>{nicerror}</span>}
                     <div>
                         <label htmlFor="phone">Contact No</label>
                         <input
                             type="number"
                             id="phone"
                             value={phone}
-                            onChange={handleContactChange}
+                            onChange={handlePhoneChange}
                         />
                     </div>
+                    {phoneerror && <span style={{ color: 'red' }}>{phoneerror}</span>}
                     <div>
                         <label htmlFor="Email">Email</label>
                         <input
@@ -217,19 +271,20 @@ const MemberRegistration = () => {
                             onChange={handleEmailChange}
                         />
                     </div>
+                    {emailerror && <span style={{ color: 'red' }}>{emailerror}</span>}
                     <div>
                         <label htmlFor="Dob">Date of Birth</label>
                         <DatePicker
                             id="Dob"
                             selected={Dob}
-                            onChange={handleDobChange}
+                            onChange={(date)=>setDob(date)}
                             dateFormat="dd/MM/yyyy"
                             maxDate={new Date()} // Set maximum selectable date to current date
                         />
                     </div>
                     {/* {formError && <div style={{ color: 'red' }}>{formError}</div>} */}
                     <button type='reset' className='secondary__btn' style={{marginRight: '10px'}}>Cancel</button>
-                    <button type="submit" disabled={!isFormValid()}>
+                    <button type="submit">
                         Submit
                     </button>
                 </form>
