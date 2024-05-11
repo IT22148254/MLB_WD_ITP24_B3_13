@@ -23,7 +23,7 @@ const Selectoption = () => {
     return (  
         <div style={bgStyle}>
         <div className="flex h-full justify-center items-center ">
-        <div className="bg-black/45 w-5/8 h-auto rounded-[50px] py-12 px-14 flex flex-col gap-y-4">
+        <div className=" w-5/8 h-auto bg-black/25 rounded-[50px] py-12 px-14 flex flex-col gap-y-4">
         <p className="text-4xl text-white font-bold mb-8" style={{ WebkitTextStroke: '1px black' }}>Select the option you wish to proceed</p> {/* Removed align-top and mb-0 */}
 
                 

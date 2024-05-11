@@ -9,7 +9,7 @@ import "jspdf-autotable";
 import { Container } from "reactstrap";
 import bg from "../../../Images/feedback.jpeg";
 
-const CoachFeedbackTable = () => {
+const  CoachFeedbackTable = () => {
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
@@ -28,7 +28,7 @@ const CoachFeedbackTable = () => {
     const fetchFeedbacks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8070/feedback/service"
+          "http://localhost:8070/feedback/coach"
         );
         console.log(response);
         setFeedbacks(response.data.result);
@@ -63,7 +63,7 @@ const CoachFeedbackTable = () => {
       if (result.isConfirmed) {
         try {
           const response = await axios.delete(
-            `http://localhost:8070/feedback/service/${id}`
+            `http://localhost:8070/feedback/coach/${id}`
           );
 
           if (response.status === 200) {
@@ -95,7 +95,7 @@ const CoachFeedbackTable = () => {
 
     // add title to the PDF document
     doc.setFontSize(16);
-    doc.text("Coach Feedback Report", 14, 22);
+    doc.text("Service Feedback Report", 14, 22);
 
     // define the table columns
     const columns = [
@@ -103,6 +103,7 @@ const CoachFeedbackTable = () => {
       { header: "Email", dataKey: "Email" },
       { header: "Rating", dataKey: "Rating" },
       { header: "Feedback", dataKey: "Comment" },
+      { header: "Coach", dataKey: "Coach" }, // Add the Coach column
     ];
 
     // define the table rows
@@ -111,13 +112,14 @@ const CoachFeedbackTable = () => {
       Email: feedback.Email,
       Rating: feedback.Rating,
       Comment: feedback.Comment,
+      Coach: feedback.Coach, // Add the Coach field
     }));
 
     // add the table to the PDF document
     doc.autoTable(columns, rows);
 
     // save the PDF file
-    doc.save("CoachFeedbackReport.pdf");
+    doc.save("ServiceFeedbackReport.pdf");
   };
 
   const filterFeedbacks = (feedbacks, searchText) => {
@@ -152,14 +154,13 @@ const CoachFeedbackTable = () => {
             </div>
           </div>
           <div className="grid grid-cols-7 bg-cyan-400">
-            <div className="border-2 border-black p-3">Customer Name</div>
+            <div className="border-2 border-black p-3">Name</div>
             <div className="border-2 border-black p-3">Email</div>
-            <div className="border-2 border-black p-3">Coach Name</div>
             <div className="border-2 border-black p-3">Rating</div>
             <div className="border-2 border-black p-3">Opinion</div>
+            <div className="border-2 border-black p-3">Coach</div>
             <div className="border-2 border-black p-3">Edit</div>
             <div className="border-2 border-black p-3">Delete</div>
-
           </div>
           <div
             className="w-full overflow-auto "
@@ -184,13 +185,13 @@ const CoachFeedbackTable = () => {
                     {feedback.Email}
                   </div>
                   <div className="border-2 border-black p-2">
-                    {feedback.coaname}
-                  </div>            
-                  <div className="border-2 border-black p-2">
                     {feedback.Rating}
                   </div>
                   <div className="border-2 border-black p-2">
                     {feedback.Comment}
+                  </div>
+                  <div className="border-2 border-black p-2">
+                    {feedback.Coach}
                   </div>
                   <div className="border-2 border-black p-2">
                     <button
@@ -201,7 +202,7 @@ const CoachFeedbackTable = () => {
                     </button>
                   </div>
                   <div className="border-2 border-black p-2">
-                  <button
+                    <button
                       className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
                       onClick={() => handleDelete(feedback._id)}
                     >
@@ -224,7 +225,7 @@ const CoachFeedbackTable = () => {
             className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
             onClick={handleAddFeedback}
           >
-            Add Feedback
+            Add coach Feedback
           </button>
         </div>
       </div>
@@ -232,5 +233,4 @@ const CoachFeedbackTable = () => {
   );
 };
 
-export default CoachFeedbackTable;
-
+export default  CoachFeedbackTable;

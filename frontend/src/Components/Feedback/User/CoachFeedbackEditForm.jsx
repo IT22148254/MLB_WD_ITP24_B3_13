@@ -6,12 +6,13 @@ import Swal from "sweetalert2";
 import bg from "../../../Images/feedback.jpeg";
 import { useNavigate } from "react-router-dom";
 
-const CoachFeedbackEditForm = () => {
+const EditServiceFeedbackForm = () => {
   const { id } = useParams();
   const [UserName, setName] = useState("");
   const [Email, setEmail] = useState("");
   const [Rating, setRating] = useState(0);
   const [Comment, setComment] = useState("");
+  const [Coach, setCoach] = useState(""); // New state for coach's name
   const [error, setError] = useState(null);
   const [nameError, setNameError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -21,13 +22,14 @@ const CoachFeedbackEditForm = () => {
     const fetchServiceFeedback = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:8070/feedback/service/get/${id}`
+          `http://localhost:8070/feedback/coach/get/${id}`
         );
-        const feedback = response.data.ServiceFeedBack;
+        const feedback = response.data.CoachFeedBack;
         setName(feedback.UserName);
         setEmail(feedback.Email);
         setRating(feedback.Rating);
         setComment(feedback.Comment);
+        setCoach(feedback.Coach); // Set coach value from fetched data
       } catch (error) {
         console.log("Error fetching service feedback:", error);
       }
@@ -41,10 +43,10 @@ const CoachFeedbackEditForm = () => {
     if (nameError || emailError) {
       return;
     }
-    const ServiceFeedback = { UserName, Email, Rating, Comment };
+    const ServiceFeedback = { UserName, Email, Rating, Comment, Coach }; // Include coach in the feedback object
 
     axios
-      .put(`http://localhost:8070/feedback/service/${id}`, ServiceFeedback)
+      .put(`http://localhost:8070/feedback/coach/${id}`, ServiceFeedback)
       .then((res) => {
         Swal.fire({
           title: "Success",
@@ -53,7 +55,7 @@ const CoachFeedbackEditForm = () => {
         }).then(() => {
           setError(null);
         });
-        navigate("/fbk/servicetable");
+        navigate("/fbk/coachfeedbacktable/");
       })
       .catch((error) => {
         Swal.fire({
@@ -90,6 +92,9 @@ const CoachFeedbackEditForm = () => {
     backgroundSize: "cover",
     height: "100vh",
   };
+
+  // Options for the Coach dropdown
+  const coachOptions = ["chathumi", "rashmika", "nadun", "geethmani", "praboth", "dinith"];// Update with your coach options
 
   return (
     <div className="flex h-full justify-center items-center" style={bgStyle}>
@@ -174,6 +179,34 @@ const CoachFeedbackEditForm = () => {
                   )
                 )}
             </div>
+            {/* Coach dropdown */}
+            <div className="flex justify-between items-center">
+              <label
+                htmlFor="Coach"
+                className="text-white rounded-xl flex items-center pl-5 font-bold text-2xl"
+                style={{ WebkitTextStroke: "1px black" }}
+              >
+                Coach:
+              </label>
+              <select
+                id="Coach"
+                name="Coach"
+                value={Coach}
+                onChange={(e) => setCoach(e.target.value)}
+                className="w-3/5 bg-white/70 h-14 rounded-xl pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                required
+              >
+                <option value="" disabled>
+                  Select Coach
+                </option>
+                {coachOptions.map((coach, index) => (
+                  <option key={index} value={coach}>
+                    {coach}
+                  </option>
+                ))}
+              </select>
+            </div>
+            {/* Rest of the form */}
             <div
               className="w-6/7 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
             >
@@ -195,22 +228,17 @@ const CoachFeedbackEditForm = () => {
               </button>
               <button
                 type="submit"
-                className="bg-blue-500 py-3
-                px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300"
-                >
-                  Edit
-                </button>
-              </div>
-              {error && <div className="error">{error}</div>}
+                className="bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300"
+              >
+                Edit
+              </button>
             </div>
-          </form>
-        </div>
-        {/* <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-16">
-          Edit Feedbacks
-        </button> */}
+            {error && <div className="error">{error}</div>}
+          </div>
+        </form>
       </div>
-    );
-  };
-  
-  export default CoachFeedbackEditForm;
-  
+    </div>
+  );
+};
+
+export default EditServiceFeedbackForm;

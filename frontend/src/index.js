@@ -19,7 +19,9 @@ import CoachFeedbackEditForm from './Components/Feedback/User/CoachFeedbackEditF
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
+      
       <Route path='fbk/'>
+      <Route path="" element={<Selectoption/>}/>
         <Route path='addservice/' element={<ServiceFeedbackForm/>} />
         <Route path ="testscreen/:id" element = {<TestScreen/>}/>
         <Route path="servicetable/" element={<ServiceFeedbackTable/>}/>
@@ -27,7 +29,7 @@ const router = createBrowserRouter(
         
                {/* i chnange from here */}
 
-        <Route path="selectopt/" element={<Selectoption/>}/>
+        
         <Route path="coachfeedback/" element={<Coachfeedback/>}/>
         <Route path="coachfeedbacktable/" element={<CoachFeedbackTable/>}/>
         <Route path="coachfeedbackedit/:id" element={<CoachFeedbackEditForm/>}/>
