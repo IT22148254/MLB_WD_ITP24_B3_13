@@ -1,28 +1,28 @@
-
-import React from 'react'
-import { Container, Row, Col, Table } from 'reactstrap'
+import React from 'react';
+import { Container, Row, Col } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 function MMdashboard() {
     return (
         <>
             <Container>
-                <div className="title code">Membership Manager Dashboard</div>
+                <div style={{ fontSize: '24px', fontWeight: 'bold', color: '#333' }}>Membership Manager Dashboard</div>
                 <br />
-                <Row className='om_btn'>
+                <Row style={{ marginTop: '20px' }}>
                     <Col>
-                        <Container >
-                            <a><p id='ed'>Standard Packages</p></a>
+                        <Container>
+                            <Link className='btn btn-success ms-2' to={`/pkg/addnewpr`}>Standard Packages</Link>
                         </Container>
                     </Col>
                     <Col>
                         <Container>
-                            <a><p id='ed'>Promo Packages</p></a>
+                            <Link className='btn btn-success ms-2' to={`/pkg/addnewpr`}>Promo Packages</Link>
                         </Container>
                     </Col>
                 </Row>
             </Container>
         </>
-    )
+    );
 }
 
 export default MMdashboard;
