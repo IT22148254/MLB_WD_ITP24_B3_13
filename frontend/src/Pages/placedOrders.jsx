@@ -9,7 +9,7 @@
 // }
  
 // export default placedOrders;
-
+import React from "react";
 import Placedordertable from "../Components/Supply/placeordertable";
 import bg from "../Images/bg_main.jpg";
 

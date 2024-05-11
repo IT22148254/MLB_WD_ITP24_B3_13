@@ -13,7 +13,6 @@ const Placedordertable = () => {
       const { data } = await axios.get("http://localhost:8070/supplier/order/");
       setOrders(data);
     };
-
     fetchOrders();
   }, []);
 
@@ -28,18 +27,16 @@ const Placedordertable = () => {
     };
     fetchSuppliers();
   }, []);
-// 
-  const handleEdit = (id) => {
 
+  const handleEdit = (id) => {
     console.log(`Edit order with id: ${id}`);
-    navigate(`/sup/editorder/${id}`)
+    navigate(`/sup/editorder/${id}`);
     // Handle edit logic
   };
 
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(`http://localhost:8070/supplier/order/${id}`);
-
       if (response.status === 200) {
         Swal.fire({
           title: "Deleted!",
@@ -70,11 +67,11 @@ const Placedordertable = () => {
         <div className="border-2 border-black p-3">Edit</div>
         <div className="border-2 border-black p-3">Delete</div>
       </div>
-      <div className="w-full overflow-auto " style={{ maxHeight: "450px", scrollbarWidth: "none", msOverflowStyle: "none" }}>
+      <div className="w-full overflow-auto" style={{ maxHeight: "450px", scrollbarWidth: "none", msOverflowStyle: "none" }}>
         {orders.map((order, index) => (
-          <div className={`grid grid-cols-5 ${index % 2 == 0 ? "bg-cyan-200 " : "bg-cyan-400 "}`} key={order._id}>
+          <div className={`grid grid-cols-5 ${index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "}`} key={order._id}>
             <div className="border-2 border-black p-2">
-            {suppliers.filter((sup) => sup._id.includes(order.Supplier)).map((sup) => {return sup.Name;})}
+              {suppliers.filter((sup) => sup._id.includes(order.Supplier)).map((sup) => sup.Name)}
             </div>
             <div className="border-2 border-black p-2">{order.PrName}</div>
             <div className="border-2 border-black p-2">{order.quantity}</div>

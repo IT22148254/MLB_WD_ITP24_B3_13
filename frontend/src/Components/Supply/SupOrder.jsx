@@ -248,7 +248,7 @@ const SupOrder = () => {
                         console.log('new Order added', json)
                       })
                       
-                    {/*navigate('/promoPackages')*/}
+                    
             }}
 
     return ( 
