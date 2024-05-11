@@ -159,6 +159,7 @@ import { Container } from 'reactstrap'
 import Swal from "sweetalert2";
 import axios from "axios";
 
+
 const SupOrder = () => {
 
 
@@ -167,7 +168,7 @@ const SupOrder = () => {
     const[Supplier, setSupplier] = useState('')
     const[PrName, setPrName] = useState('')
     const[quantity, setQuantity] = useState(0) 
-
+    const navigate = useNavigate();
 
     const [error, setError] = useState(null)
 
@@ -248,7 +249,7 @@ const SupOrder = () => {
                         console.log('new Order added', json)
                       })
                       
-                    
+                      navigate("/sup/placedOrders");
             }}
 
     return ( 
