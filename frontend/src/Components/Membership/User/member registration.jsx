@@ -15,7 +15,10 @@ const MemberRegistration = () => {
     const [phone, setPhone] = useState('');
     const [Email, setEmail] = useState('');
     const [Dob, setDob] = useState(new Date());
-    const [formError, setFormError] = useState('');
+    
+    const [nicerror, setNICError] = useState('')
+    const [phoneerror, setPhoneError] = useState('')
+    const [emailerror, setEmailError] = useState('')
     const navigate = useNavigate();
 
     const handleAddressChange = (e) => {
@@ -25,45 +28,45 @@ const MemberRegistration = () => {
       const handleNICChange = (e) => {
         const nic = e.target.value;
         if (/^\d{11}v?$/.test(nic) || /^\d{12}$/.test(nic)) {
-          setNIC(nic);
           setFormError('');
         } else {
           setFormError('NIC format is incorrect');
         }
+        setNIC(nic);
       };
     
       const handleContactChange = (e) => {
         const phoneNum = e.target.value;
         if (/^\d{10}$/.test(phoneNum)) {
-          setPhone(phoneNum);
           setFormError('');
         } else {
           setFormError('Phone number should be 10 digits');
         }
+        setPhone(phoneNum);
       };
 
       const handleEmailChange = (e) => {
         const EmailValue = e.target.value;
         if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(EmailValue)) {
-          setEmail(EmailValue);
           setFormError('');
         } else {
           setFormError('Invalid Email format');
         }
+        setEmail(EmailValue);
       };
 
-      const isFormValid = () => {
-        return (
-          Fname.trim() !== '' &&
-          Lname.trim() !== '' &&
-          Address.trim() !== '' &&
-          Gender.trim() !== '' &&
-          NIC.trim() !== '' &&
-          phone.trim() !== '' &&
-          Email.trim() !== '' &&
-          Dob !== ''
-        );
-      };
+    //   const isFormValid = () => {
+    //     return (
+    //       Fname.trim() !== '' &&
+    //       Lname.trim() !== '' &&
+    //       Address.trim() !== '' &&
+    //       Gender.trim() !== '' &&
+    //       NIC.trim() !== '' &&
+    //       phone.trim() !== '' &&
+    //       Email.trim() !== '' &&
+    //       Dob !== ''
+    //     );
+    //   };
 
       const handleDobChange = (date) => {
         setDob(date);
@@ -113,7 +116,7 @@ const MemberRegistration = () => {
 
         try {
 
-            const response = await axios.post("http://localhost:8000/register", customer)
+            const response = await axios.post("http://localhost:8070/user/add", customer)
 
             if (response.ok) {
 
@@ -224,7 +227,7 @@ const MemberRegistration = () => {
                             maxDate={new Date()} // Set maximum selectable date to current date
                         />
                     </div>
-                    {formError && <div style={{ color: 'red' }}>{formError}</div>}
+                    {/* {formError && <div style={{ color: 'red' }}>{formError}</div>} */}
                     <button type='reset' className='secondary__btn' style={{marginRight: '10px'}}>Cancel</button>
                     <button type="submit" disabled={!isFormValid()}>
                         Submit

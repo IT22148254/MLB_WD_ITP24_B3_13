@@ -14,11 +14,12 @@ import { ToastContainer } from 'react-toastify';
 import EmailForm from './Components/Membership/Manager/EmailForm';
 import EmailTable from './Components/Membership/Manager/EmailTable';
 import EditEmail from './Components/Membership/Manager/EditEmail';
+import MemberRegistration from './Components/Membership/User/member registration';
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path='/'>
-        <Route index element={<EmailForm/>}/>
+        <Route index element={<MemberRegistration/>}/>
         <Route path="emailtable/" element={<EmailTable/>}/>
         {/* <Route path='mmdashboard/' element={<MMDashboard />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
