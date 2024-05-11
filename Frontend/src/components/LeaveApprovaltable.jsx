@@ -107,6 +107,11 @@ const Leave = () => {
     } catch (error) {
       console.error("Error approving leave:", error);
     }
+
+
+
+
+
   };
 
   const handleEdit = (id) => {

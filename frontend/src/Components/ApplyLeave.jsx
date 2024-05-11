@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container } from 'reactstrap';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Autosuggest from 'react-autosuggest'; // Import Autosuggest component
 import Swal from "sweetalert2";
 import bg from "../assets/images/bg_main.jpg";
 
@@ -11,14 +12,36 @@ const ApplyLeave = () => {
   const [endDate, setEndDate] = useState('');
   const [reason, setReason] = useState('');
   const [status, setStatus] = useState('pending');
-  const [employeeName, setEmployeeName] = useState(''); // New state for employeeName
+  const [employeeNames, setEmployeeNames] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedEmployee, setSelectedEmployee] = useState('');
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchEmployeeNames = async () => {
+      try {
+        const response = await fetch(`http://localhost:8070/employee/employee`);
+        const data = await response.json();
+        if (response.ok) {
+          const names = data.map(employee => employee.fullName);
+          setEmployeeNames(names);
+        } else {
+          setError("Failed to fetch employee names1");
+        }
+      } catch (error) {
+        console.error("Error fetching employee names:", error);
+        setError("Failed to fetch employee names");
+      }
+    };
+
+    fetchEmployeeNames();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const leave = { startDate, endDate, reason, status, employeeName }; // Include employeeName in the leave object
+    const leave = { startDate, endDate, reason, status, employeeName: selectedEmployee };
 
     const response = await fetch('http://localhost:8070/employee/service/add', {
       method: 'POST',
@@ -45,7 +68,7 @@ const ApplyLeave = () => {
         setEndDate(null);
         setReason('');
         setStatus('pending');
-        setEmployeeName(''); // Reset employeeName after successful submission
+        setSelectedEmployee('');
         setError(null);
         navigate("/showleave");
       });
@@ -58,6 +81,43 @@ const ApplyLeave = () => {
     height: "100%",
   };
 
+  // Autosuggest inputProps
+  const inputProps = {
+    placeholder: 'Employee Name',
+    value: selectedEmployee,
+    onChange: (event, { newValue }) => setSelectedEmployee(newValue)
+  };
+
+  // Autosuggest suggestions
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(getSuggestions(value));
+  };
+
+  // Clear suggestions when input is cleared
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([]);
+  };
+
+  // Function to filter suggestions based on input value
+  const getSuggestions = (value) => {
+    const inputValue = value.trim().toLowerCase();
+    const inputLength = inputValue.length;
+
+    return inputLength === 0 ? [] : employeeNames.filter(name =>
+      name.toLowerCase().slice(0, inputLength) === inputValue
+    );
+  };
+
+  // Render suggestion
+  const renderSuggestion = (suggestion) => (
+    <div>
+      {suggestion}
+    </div>
+  );
+
+  // Function to get suggestion value
+  const getSuggestionValue = (suggestion) => suggestion;
+
   return (
     <div className="flex h-full justify-center items-center" style={bgStyle}>
       <div className="bg-black/40 w-1/2 rounded-lg py-12 px-14 flex flex-col gap-y-8">
@@ -66,14 +126,22 @@ const ApplyLeave = () => {
         </div>
 
         <form method="POST" className="add-promo" onSubmit={handleSubmit}>
-          <div className="add-promo-row">
-            <input
-              type="text"
-              placeholder="Employee Name"
-              className="px-3 py-2 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 w-full mb-5"
-              value={employeeName}
-              onChange={(e) => setEmployeeName(e.target.value)}
-              required
+          <div className="add-promo-row mb-5">
+            <Autosuggest
+              suggestions={suggestions}
+              onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+              onSuggestionsClearRequested={onSuggestionsClearRequested}
+              getSuggestionValue={getSuggestionValue}
+              renderSuggestion={renderSuggestion}
+              inputProps={inputProps}
+              theme={{
+                suggestionsList: {
+                  backgroundColor: 'black'
+                },
+                suggestion: {
+                  color: 'white'
+                }
+              }}
             />
           </div>
           <div className="add-promo-row">
@@ -104,7 +172,7 @@ const ApplyLeave = () => {
               required
             />
           </div>
-          <div className="add-promo-row">
+          <div className="add-promo-row mb-6">
             <textarea
               cols="30"
               rows="5"
@@ -119,7 +187,7 @@ const ApplyLeave = () => {
             <button type='reset' className='bg-gray-200 text-gray-700 px-4 py-2 rounded-md hover:bg-gray-300'>
               Cancel
             </button>
-            <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700'>
+            <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-md ml-7 hover:bg-blue-700'>
               Apply
             </button>
           </div>
