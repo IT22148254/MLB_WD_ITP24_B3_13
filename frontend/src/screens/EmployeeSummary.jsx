@@ -11,11 +11,10 @@ const EmployeeSummary = () => {
   const filterEmployees = (employees, searchText) => {
     return employees.filter(
       (employee) =>
-        employee.fullName.toLowerCase().includes(searchText.toLowerCase()) ||
+        employee.fullName.toLowerCase().startsWith(searchText.toLowerCase()) ||
         employee.nic.toLowerCase().includes(searchText.toLowerCase())
     );
   };
-
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
@@ -37,7 +36,7 @@ const EmployeeSummary = () => {
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
-    height: "100%",
+    height: "100vh",
   };
 
   return (
@@ -47,7 +46,7 @@ const EmployeeSummary = () => {
           <p className="text-4xl text-white font-bold">Employee Summary</p>
           <div className="h-9 bg-white/70 w-1/2 rounded-lg">
             <input
-              placeholder="Search (Name, NIC)"
+              placeholder="Search (Full Name, NIC)"
               className="bg-transparent pl-4 placeholder:text-gray-600 w-full h-full border-none active:border-none focus:border-none focus:outline-none"
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
@@ -56,7 +55,7 @@ const EmployeeSummary = () => {
           <div className="">
             <button
               className="bg-cyan-400 rounded-lg p-2 font-bold"
-              onClick={() => navigate("/add")}
+              onClick={() => navigate("/emp/add")}
             >
               Add Employee
             </button>

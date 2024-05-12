@@ -39,6 +39,8 @@ import Report_generate from "./payment_component/Report_generate.js";
 //import './App.css';
 import SalaryCalculator from "./screens/SalaryCalculator.jsx";
 import 'react-toastify/dist/ReactToastify.css';
+import LeaveSummary from "./components/LeaveApprovaltable.jsx";
+import ApplyLeave from "./components/ApplyLeave.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,6 +57,9 @@ const router = createBrowserRouter(
       <Route path="/emp/add" element={<AddEmployee />} />
       <Route path="/emp/edit/:id" element={<EditEmployee />} />
       <Route path="/emp/calculator" element={<SalaryCalculator />} />
+      {/* <Route path="/calculator" element={<SalaryCalculator />} /> */}
+          <Route path="emp/addleave" element={<ApplyLeave />} />
+          <Route path="emp/showleave" element={<LeaveSummary />} />
 
       {/* payment */}
 
