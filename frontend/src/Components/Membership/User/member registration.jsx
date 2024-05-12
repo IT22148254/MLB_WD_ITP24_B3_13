@@ -11,10 +11,12 @@ const MemberRegistration = () => {
     const [Lname, setLname] = useState('');
     const [Address, setAddress] = useState('');
     const [Gender, setGender] = useState('male');
+    const [Password, setPassword] = useState('')
     const [NIC, setNIC] = useState('');
     const [phone, setPhone] = useState('');
     const [Email, setEmail] = useState('');
     const [Dob, setDob] = useState(null);
+    const [passwordError, setPasswordError] = useState('');
     
     const [nicerror, setNicError] = useState('')
     const [phoneerror, setPhoneError] = useState('')
@@ -80,6 +82,17 @@ const MemberRegistration = () => {
           setEmailError("");
         }
         setEmail(e.target.value);
+      };
+
+      const handlePasswordChange = (event) => {
+        const newPassword = event.target.value;
+        setPassword(newPassword);
+    
+        if (newPassword.length > 8) {
+          setPasswordError('Password must be 8 characters or less');
+        } else {
+          setPasswordError('');
+        }
       };
     
       
@@ -189,7 +202,7 @@ const MemberRegistration = () => {
                 setNIC('');
                 setPhone('');
                 setEmail('');
-                setDob(new Date());
+                setDob(null);
             }
 
         } catch (error) {
@@ -221,6 +234,15 @@ const MemberRegistration = () => {
                             id="Lname"
                             value={Lname}
                             onChange={(e) => setLname(e.target.value)}
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="Lname">Password</label>
+                        <input
+                            type="password"
+                            id="Lname"
+                            value={Lname}
+                            onChange={handlePasswordChange}
                         />
                     </div>
                     <div>
