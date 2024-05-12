@@ -5,6 +5,7 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import FormContainer from "../content/FormContainer";
 import CheckoutSteps from "../content/CheckoutSteps";
 import { savePaymentMethod } from "../slices/cartSlice";
+import Add from "../payment_component/Add";
 
 const PaymentScreen = () => {
   const [paymentMethod, setPaymentMethod] = useState("PayPal");
@@ -42,14 +43,15 @@ const PaymentScreen = () => {
                 label="PayPal or Crdit Card"
                 id="PayPal"
                 name="paymentMethod"
-                value="PayPal"
+                value="PayPal / Credit Card"
                 checked
                 onChange={(e) => setPaymentMethod(e.target.value)}
               ></Form.Check>
             </Col>
           </Row>
         </Form.Group>
-        <Button type="submit" variant="primary">
+        <Add />
+        <Button type="submit" variant="primary" style={{marginTop:"20px",marginBottom:"100px"}}>
           {" "}
           Continue{" "}
         </Button>

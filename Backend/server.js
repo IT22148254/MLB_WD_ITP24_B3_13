@@ -8,6 +8,7 @@ require("dotenv").config();
 const app = express();
 const cookieParser = require("cookie-parser");
 
+
 //body parser and url enc
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -84,6 +85,7 @@ app.get('/pay', function(req, res){
 	}) 
 }) 
 
+
 app.post('/payment', function(req, res){ 
 
 	// Moreover you can take more details from user 
@@ -110,6 +112,7 @@ app.post('/payment', function(req, res){
 		}); 
 	}) 
 	.then((charge) => { 
+
 		res.redirect(`http://localhost:3000/success`) // If no error occurs 
 	}) 
 	.catch((err) => { 

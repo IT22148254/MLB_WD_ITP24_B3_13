@@ -1,10 +1,11 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import './Success.css'; // import the CSS file for Success component
+import './Success.css'; // Import the CSS file for Success component
 
 export default function Success() {
   React.useEffect(() => {
+    // Display the success toast message
     toast.success('Payment successful!', {
       position: 'bottom-center',
       autoClose: 3000,
@@ -14,12 +15,17 @@ export default function Success() {
       draggable: true,
       progress: undefined,
     });
+
+    // Navigate back two pages after a delay
+    setTimeout(() => {
+      window.history.go(-2);
+    }, 3000); // Adjust the delay as needed
   }, []);
 
   return (
     <div>
       <center>
-        <button className="pay-button" onClick={() => window.location.href = "http://localhost:3000/"}>Home</button>
+        {/* Content here if needed */}
       </center>
       <ToastContainer />
     </div>
