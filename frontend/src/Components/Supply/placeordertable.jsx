@@ -225,7 +225,7 @@ const PlacedOrderTable = () => {
                     : "Received"}
                 </button>
               </div>
-              <div className="border-2 border-black p-2 justify-items-center">
+              <div className="border-2 border-black p-2 justify-items-center text-center">
                 <input
                   type="checkbox"
                   className={`w-6 h-6 mr-2 cursor-pointer border-2 rounded-md outline-green-600`}
