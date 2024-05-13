@@ -21,7 +21,7 @@ const ScheduleTable = () => {
 
   const [Schedules, setSchedules] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [filteredSchedules, setFilteredSchedules] = useState([]);
+  // const [filteredSchedules, setFilteredSchedules] = useState([]);
 
   useEffect(() => {
     const fetchSchedules = async () => {
@@ -39,13 +39,13 @@ const ScheduleTable = () => {
     fetchSchedules();
   }, []);
 
-  useEffect(() => {
-    const filtered = filterSchedules(Schedules, searchInput);
-    setFilteredSchedules(filtered);
-  }, [searchInput, Schedules]);
+  // useEffect(() => {
+  //   const filtered = filterSchedules(Schedules, searchInput);
+  //   setFilteredSchedules(filtered);
+  // }, [searchInput, Schedules]);
 
   const handleEdit = (onetime) => {
-    navigate(`/chngtimeondytbl/${onetime._id}`, { state: { onetime } });
+    // navigate(`/chngtimeondytbl/${onetime._id}`, { state: { onetime } });
   };
 
   const handleDelete = (id) => {
@@ -61,7 +61,7 @@ const ScheduleTable = () => {
       if (result.isConfirmed) {
         try {
           const response = await axios.delete(
-            `http://localhost:8070/schedule/coachSchedule/${id}`
+            `http://localhost:8070/schedule/customerSchedule/${id}`
           );
 
           if (response.status === 200) {
@@ -93,7 +93,7 @@ const ScheduleTable = () => {
 
     // add title to the PDF document
     doc.setFontSize(16);
-    doc.text("Onetime Change Report", 14, 22);
+    doc.text("Schedule Report", 14, 22);
 
     // define the table columns
     const columns = [
@@ -113,14 +113,15 @@ const ScheduleTable = () => {
     doc.autoTable(columns, rows);
 
     // save the PDF file
-    doc.save("One time Changes.pdf");
+    doc.save("Schedules.pdf");
   };
 
   const filterSchedules = (schs, searchText) => {
     return schs.filter((sch) =>
-      sch.Trainer.toLowerCase().startsWith(searchText.toLowerCase())
+      sch.Trainer && sch.Trainer.toLowerCase().startsWith(searchText.toLowerCase())
     );
   };
+  
 
   // Define the function to handle navigation to the add feedback page
   const handleAddSchedule = () => {
@@ -148,7 +149,7 @@ const ScheduleTable = () => {
             </div>
           </div>
           <div className="grid grid-cols-5 bg-cyan-400">
-            <div className="border-2 border-black p-3">Day</div>
+            <div className="border-2 border-black p-3">Date</div>
             <div className="border-2 border-black p-3">Time Slot</div>
             <div className="border-2 border-black p-3">Section</div>
             <div className="border-2 border-black p-3">Edit</div>
@@ -162,8 +163,8 @@ const ScheduleTable = () => {
               msOverflowStyle: "none",
             }}
           >
-            {filteredSchedules &&
-              filteredSchedules.map((sch, index) => (
+            {Schedules &&
+              Schedules.map((sch, index) => (
                 <div
                   className={`grid grid-cols-5 ${
                     index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
@@ -171,15 +172,15 @@ const ScheduleTable = () => {
                   key={sch._id}
                 >
                   <div className="border-2 border-black p-2">
-                    {sch.Day}
+                    {sch.Date}
                   </div>
                   <div className="border-2 border-black p-2">
                     {sch.TimeSlot}
                   </div>
                   <div className="border-2 border-black p-2">
-                    {sch.Trainer}
+                    {sch.Section}
                   </div>
-                  <div className="border-2 border-black p-2">
+                  {/* <div className="border-2 border-black p-2">
                     <button
                       className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white fsch-bold"
                       onClick={() => handleEdit(sch)}
@@ -194,7 +195,7 @@ const ScheduleTable = () => {
                     >
                       Delete
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               ))}
           </div>

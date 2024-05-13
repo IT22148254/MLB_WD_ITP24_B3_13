@@ -14,7 +14,7 @@ const ScheduleAdd = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const schedule = { TimeSlot, Date, Section }
+        const schedule = { Date, TimeSlot, Section}
 
         const response = await fetch('http://localhost:8070/schedule/customerSchedule/add', {
             method: 'POST',

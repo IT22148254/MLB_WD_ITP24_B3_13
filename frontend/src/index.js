@@ -11,6 +11,7 @@ import EditPromoForm from './Components/Membership/Manager/EditPromoform';
 import EditStandard from './Components/Membership/Manager/EditStandardform'
 import TestScreen from './Components/Membership/Manager/TestScreen';
 import ScheduleAdd from './Components/Membership/Manager/Scheduleadd';
+import ScheduleTable from './Components/Membership/Manager/ScheduleTable';
 
 
 import { ToastContainer } from 'react-toastify';
@@ -29,7 +30,8 @@ const router = createBrowserRouter(
         ....................................................................................................................................................................................................................................................................................................................................................................' element={<EditPromoForm/>} />
         <Route path="editstandard/:id" element={<EditStandard />} /> */}
         {/* <Route path="/" element={<TestScreen />} /> */}
-        <Route path='/' element={<ScheduleAdd/>}/>
+        {/* <Route path='/' element={<ScheduleAdd/>}/> */}
+        <Route path="/" element={<ScheduleTable/>} />
       </Route>
     
 

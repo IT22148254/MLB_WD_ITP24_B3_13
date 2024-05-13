@@ -27,7 +27,7 @@ const TestScreen = () => {
             <ul>
             {/* <li key={pkgs._id}>{pkgs.Name}</li> */}
                 {pkgs.map( (pkg) => (
-                    <li key={pkg._id}>{pkg.Trainer}</li>
+                    <li key={pkg._id}>{pkg.Date}</li>
                 ))}
             </ul>
         </div>
