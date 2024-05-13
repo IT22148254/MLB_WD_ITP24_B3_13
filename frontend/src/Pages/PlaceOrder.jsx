@@ -1,9 +1,4 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { Container } from 'reactstrap'
-import AddOrderForm from  '../Components/Supply/SupOrder'
-
-
+import AddOrderForm from  '../components/Supply/SupOrder'
 
 const PlaceOrderSup = () => {
     

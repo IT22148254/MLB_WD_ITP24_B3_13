@@ -38,24 +38,22 @@ import Success from "./payment_component/Success.js";
 import Report_generate from "./payment_component/Report_generate.js";
 //import './App.css';
 import SalaryCalculator from "./screens/SalaryCalculator.jsx";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import LeaveSummary from "./components/LeaveApprovaltable.jsx";
-import ApplyLeave from "./components/ApplyLeave.jsx"
-import AddSupplierForm from './Components/Supply/AddSupplierForm';
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import SupplierTable from './Components/Supply/Suppliertable';
-import EditSupplierForm from './Components/Supply/EditSupplierForm';
-import SupplierDashboard from './Pages/SupplierDashboard';
-import Inventory from './Pages/Inventory';
-import Itemtable from './Components/Supply/Itemtable'; 
-import  ReceievedOrders from './Pages/RecievedOrders'; // Adjust the path as necessary
-import AddOrderForm from './Pages/PlaceOrder';
-import EditOrderForm from './Pages/EditOrders';
+import ApplyLeave from "./components/ApplyLeave.jsx";
+import AddSupplierForm from "../src/components/Supply/AddSupplierForm.jsx";
+import SupplierTable from "../src/components/Supply/Suppliertable.jsx";
+import EditSupplierForm from "../src/components/Supply/EditSupplierForm.jsx";
+import SupplierDashboard from "./Pages/SupplierDashboard";
+import Inventory from "./Pages/Inventory";
+import ReceievedOrders from './Pages/RecievedOrders.jsx';
+import AddOrderForm from "./Pages/PlaceOrder";
+import EditOrderForm from "./Pages/EditOrders";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/" element={<DefaultScreen/>}  />
+      <Route path="/" element={<DefaultScreen />} />
       <Route path="/store" element={<HomeScreen />} />
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />
@@ -68,8 +66,8 @@ const router = createBrowserRouter(
       <Route path="/emp/edit/:id" element={<EditEmployee />} />
       <Route path="/emp/calculator" element={<SalaryCalculator />} />
       {/* <Route path="/calculator" element={<SalaryCalculator />} /> */}
-          <Route path="emp/addleave" element={<ApplyLeave />} />
-          <Route path="emp/showleave" element={<LeaveSummary />} />
+      <Route path="emp/addleave" element={<ApplyLeave />} />
+      <Route path="emp/showleave" element={<LeaveSummary />} />
 
       {/* payment */}
 
@@ -77,44 +75,44 @@ const router = createBrowserRouter(
       <Route path="/payment/add" element={<Add />} />
       <Route path="/payment/edit/:id" element={<Edit />} />
       <Route path="/payment/all" element={<Allpayments />} />
-      <Route path="/success" element={<Success/>}/>
-      <Route path="/payment/check" element={<Report_generate/>}/>
-
+      <Route path="/success" element={<Success />} />
+      <Route path="/payment/check" element={<Report_generate />} />
 
       {/* supplier */}
 
       <Route path="/sup">
-        <Route path="addSupplier/" element={<AddSupplierForm/>} />
+        <Route path="addSupplier/" element={<AddSupplierForm />} />
 
         {/* <Route path="testscreen/:id" element={<TestScreen/>} /> */}
-        <Route path="suppliertable/" element={<SupplierTable/>}/>
-        <Route path="editsup/:id" element= {<EditSupplierForm/>}/>
-        
+        <Route path="suppliertable/" element={<SupplierTable />} />
+        <Route path="editsup/:id" element={<EditSupplierForm />} />
+
         {/* i change from here */}
 
         {/* <Route path="Inventory/" element={<Itemtable/>}/> */}
-        <Route path="orders/" element= {<ReceievedOrders/>}/>
-        <Route path="ordersform/" element= {<AddOrderForm/>}/>
-        <Route path="Inventory/" element= {<Inventory/>}/>
+        <Route path="orders/" element={<ReceievedOrders />} />
+        <Route path="ordersform/" element={<AddOrderForm />} />
+        <Route path="Inventory/" element={<Inventory />} />
 
-        <Route path="EditOrderForm/:id" element= {<EditOrderForm/>}/>
-        <Route path="supDashboard" element= {<SupplierDashboard/>}/>        
-
+        <Route path="EditOrderForm/:id" element={<EditOrderForm />} />
+        <Route path="supDashboard" element={<SupplierDashboard />} />
       </Route>
-
 
       {/* protcted */}
 
       <Route path="" element={<ProtectedRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />
-        <Route path="store/payment" element={<PaymentScreen/>}/>
-        <Route path="/store/placeorder" element={<PlaceOrderScreen/>}/>
-        <Route path="/store/orderst/:id" element={<OrderScreen/>} />
-        <Route path="/store/admin" element={<AdminPortalScreen/>} />
-        <Route path="/store/admin/items" element={<AdminItemsScreen/>} />
-        <Route path="/store/admin/orders" element={<AdminOrdersScreen/>} />
-        <Route path="/store/admin/item/:id/edit" element={<ProductEditScreen/>}/>
-        <Route  path="/orderst/myorders/:id" element={<OrdersScreen/>} />
+        <Route path="store/payment" element={<PaymentScreen />} />
+        <Route path="/store/placeorder" element={<PlaceOrderScreen />} />
+        <Route path="/store/orderst/:id" element={<OrderScreen />} />
+        <Route path="/store/admin" element={<AdminPortalScreen />} />
+        <Route path="/store/admin/items" element={<AdminItemsScreen />} />
+        <Route path="/store/admin/orders" element={<AdminOrdersScreen />} />
+        <Route
+          path="/store/admin/item/:id/edit"
+          element={<ProductEditScreen />}
+        />
+        <Route path="/orderst/myorders/:id" element={<OrdersScreen />} />
       </Route>
     </Route>
   )
@@ -128,8 +126,6 @@ root.render(
     </Provider>
   </React.StrictMode>
 );
-
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

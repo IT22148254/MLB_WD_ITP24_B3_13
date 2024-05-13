@@ -1,5 +1,5 @@
 import React from "react";
-import Itemtable from "../Components/Supply/Itemtable";
+import Itemtable from "../components/Supply/Itemtable";
 const Inventory = () => {
 
     return (  
