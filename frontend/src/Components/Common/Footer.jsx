@@ -2,7 +2,11 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import * as Icons from 'react-bootstrap-icons'
 import './Footer.css'
+<<<<<<< HEAD
 //import logo from '../../Images/logo.png'
+=======
+import logo from '../../Images/logo.png'
+>>>>>>> origin/chathumi
 const Footer = () => {
 
     const logoStyle ={
@@ -27,7 +31,11 @@ const Footer = () => {
     <div className="container text-center text-md-left">
         <div className="row">
             <div className="col-md-6 mt-md-0 mt-3">
+<<<<<<< HEAD
                 <img alt="Logo" width={98} height={64}/>
+=======
+                <img src={logo} alt="Logo" width={98} height={64}/>
+>>>>>>> origin/chathumi
                 <p style={logoStyle}>WaveSync</p>
                 <p style={{fontSize:"18px"}}>Dive into Excellence with WaveSync</p>
             </div>
