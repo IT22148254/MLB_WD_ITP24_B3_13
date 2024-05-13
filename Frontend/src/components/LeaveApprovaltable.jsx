@@ -79,74 +79,40 @@ const Leave = () => {
     });
   };
 
-  const sendEmail = async (to, subject, message) => {
+  const handleApprove = async (leaveId) => {
     try {
-      const response = await axios.post("http://localhost:8070/api/send-email", {
-        to,
-        subject,
-        message,
-      });
+      const response = await axios.put(
+        `http://localhost:8070/employee/leave/${leaveId}`,
+        { status: "approved" }
+      );
+
       if (response.status === 200) {
-        console.log("Email sent successfully");
-      }
-    } catch (error) {
-      console.error("Error sending email:", error);
-    }
-  };
-
-
-
- // Function to handle leave approval
-const handleApprove = async (leaveId, email) => {
-  try {
-    const response = await axios.put(
-      `http://localhost:8070/employee/leave/${leaveId}`,
-      { status: "approved" }
-    );
-
-    if (response.status === 200) {
-      // Send email to the relevant email address
-      const emailSent = await sendEmail(email, "Leave Approval", "Your leave request has been approved.");
-      
-      if (emailSent) {
-        // Show success message
+        // Handle successful approval
         Swal.fire({
           title: "Success!",
-          text: "Leave approved successfully and email sent.",
+          text: "Leave approved successfully.",
           icon: "success",
         }).then(() => {
           // Refresh the page
           window.location.reload();
         });
       } else {
-        // Show error message if email failed to send
+        // Handle error
         Swal.fire({
           title: "Error!",
-          text: "Failed to send email. Leave approved but email not sent.",
+          text: "Failed to approve the leave.",
           icon: "error",
-        }).then(() => {
-          // Refresh the page
-          window.location.reload();
         });
       }
-    } else {
-      // Show error message
-      Swal.fire({
-        title: "Error!",
-        text: "Failed to approve the leave.",
-        icon: "error",
-      });
+    } catch (error) {
+      console.error("Error approving leave:", error);
     }
-  } catch (error) {
-    console.error("Error approving leave:", error);
-    // Show error message
-    Swal.fire({
-      title: "Error!",
-      text: "Failed to approve the leave.",
-      icon: "error",
-    });
-  }
-};
+
+
+
+
+
+  };
 
   const handleEdit = (id) => {
     // navigate(`/sup/editsup/${id}`);

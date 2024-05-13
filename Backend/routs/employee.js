@@ -1,32 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const { Employee ,Leave} = require("../models/employeeModel");
-const nodemailer = require('nodemailer');
-
-// // Route for sending emails
-// router.post('/api/send-email', (req, res) => {
-//   const { to, subject, message } = req.body;
-
-//   // Configure email options
-//   const mailOptions = {
-//     from: process.env.EMAIL_USER, // Replace with your email address
-//     to,
-//     subject,
-//     text: message,
-//   };
-
-//   // Send email
-//   transporter.sendMail(mailOptions, (error, info) => {
-//     if (error) {
-//       console.error('Error sending email:', error);
-//       res.status(500).send('Error sending email');
-//     } else {
-//       console.log('Email sent:', info.response);
-//       res.status(200).send('Email sent successfully');
-//     }
-//   });
-// });
-
 
 // Get employee by fullName
 router.route("/employee/findByName/:fullName").get(async (req, res) => {
@@ -264,10 +238,6 @@ router.route("/leave/:id").delete(async (req, res) => {
 
 
 
-
-
-
-
 module.exports = router;
 
 
@@ -312,6 +282,3 @@ module.exports = router;
 //       .json({ message: `Leave approval unsuccessful ${error}` });
 //   }
 // });
-
-
-
