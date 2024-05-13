@@ -17,7 +17,7 @@ const PackageDashboard = () => {
     <div style={bgStyle}>
       <div className="flex h-full justify-center items-center ">
         <div className="bg-black/45 w-5/8 h-auto rounded-[50px] py-12 px-14 flex flex-col gap-y-4"> {/* Reduced gap-y */}
-          <p className="text-4xl text-white font-bold mb-8" style={{ WebkitTextStroke: '1px black' }}>Supplier Manager Dashboard</p> {/* Removed align-top and mb-0 */}
+          <p className="text-4xl text-white font-bold mb-8" style={{ WebkitTextStroke: '1px black' }}>Package Manager Dashboard</p> {/* Removed align-top and mb-0 */}
           <Row className='om_btn'>
             <Col>
               <Container className="flex justify-between" >
