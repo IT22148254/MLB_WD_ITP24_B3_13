@@ -25,7 +25,7 @@ const router = createBrowserRouter(
         <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
         <Route path='editpromo/:id' element={<EditPromoForm/>} />
-
+{/* dashboard */}
         <Route path='pkgDashboard/' element={<PackageDashboard/>} />
 
 
