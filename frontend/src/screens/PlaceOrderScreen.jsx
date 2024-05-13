@@ -30,6 +30,8 @@ const PlaceOrderScreen = () => {
   const placeOrderHandler = async () => {
     try {
       console.log(cart.cartItems);
+      console.log('Is Paid:', cart.payment.paid,
+      "---" ,cart.payment.paidAt,);
       const res = await createOrder({
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
@@ -37,6 +39,8 @@ const PlaceOrderScreen = () => {
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.delPrice,
         totalPrice: cart.totPrice,
+        isPaid:cart.payment.paid,
+        paidAt: cart.payment.paidAt,
       }).unwrap();
       console.log(res);
       dispatch(clearCartItems());

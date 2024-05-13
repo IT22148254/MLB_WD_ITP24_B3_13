@@ -16,17 +16,19 @@ const PaymentScreen = () => {
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
-  useEffect( () => {
-    if(!shippingAddress){
-        navigate('/shipping')
+  console.log("Is Paid:", cart.payment.paid, "---", cart.payment.paidAt);
+
+  useEffect(() => {
+    if (!shippingAddress) {
+      navigate("/shipping");
     }
-  } ,[shippingAddress,navigate])
+  }, [shippingAddress, navigate]);
 
   const submitHandler = (e) => {
-    e.preventDefault()
-    dispatch(savePaymentMethod(paymentMethod))
-    navigate('/store/placeorder')
-  }
+    e.preventDefault();
+    dispatch(savePaymentMethod(paymentMethod));
+    navigate("/store/placeorder");
+  };
 
   return (
     <FormContainer>
@@ -44,14 +46,18 @@ const PaymentScreen = () => {
                 id="PayPal"
                 name="paymentMethod"
                 value="PayPal / Credit Card"
-                checked
+                checked={paymentMethod === "PayPal / Credit Card"}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               ></Form.Check>
             </Col>
           </Row>
         </Form.Group>
         <Add />
-        <Button type="submit" variant="primary" style={{marginTop:"20px",marginBottom:"100px"}}>
+        <Button
+          type="submit"
+          variant="primary"
+          style={{ marginTop: "20px", marginBottom: "100px" }}
+        >
           {" "}
           Continue{" "}
         </Button>
