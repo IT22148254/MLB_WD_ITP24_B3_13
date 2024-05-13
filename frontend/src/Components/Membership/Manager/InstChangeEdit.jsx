@@ -73,7 +73,7 @@ const ChangeOnetimeEdit = () => {
     <div className="flex h-full justify-center items-center" style={bgStyle}>
       <div className="bg-black/55  rounded-[50px] w-[700px] py-16 px-16 gap -inset-y-8">
         <div className=" text-white title text-xl font-bold mb-4">
-          Change Time Slot For Oneday
+          Instructor Change
         </div>
         <form method="POST" className="add-promo" onSubmit={handleSubmit}>
           {/* Date input */}

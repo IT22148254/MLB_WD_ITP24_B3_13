@@ -6,10 +6,10 @@ import { Container } from "reactstrap";
 import { useState, useEffect } from "react";
 import bg from "../../../Images/package_bg.jpg";
 
-const ChangeOnetimeEdit = () => {
+const ScheduleEdit = () => {
+    const [Date, setDate] = useState("");
     const [TimeSlot, setTimeSlot] = useState("");
-    const [Day, setDay] = useState("");
-    const [Trainer, setTrainer] = useState("");
+    const [Section, setSection] = useState("");
     const [error, setError] = useState(null);
 
     const { id } = useParams();
@@ -20,8 +20,8 @@ const ChangeOnetimeEdit = () => {
                 const result = await axios.get(`http://localhost:8070/schedule/get/${id}`);
 
                 setTimeSlot(result.data.TimeSlot);
-                setDay(result.data.Day);
-                setTrainer(result.data.Trainer);
+                setDate(result.data.Date);
+                setSection(result.data.Section);
             } catch (error) {
                 setError(error.response.data.message);
                 console.log("Error fetching schedule: ", error);
@@ -40,8 +40,8 @@ const ChangeOnetimeEdit = () => {
         axios
             .put(`http://localhost:8070/schedule/coachSchedule/${id}`, {
                 TimeSlot: TimeSlot,
-                Day: Day,
-                Trainer: Trainer,
+                Date: Date,
+                Section: Section,
             })
             .then((response) => {
                 Swal.fire({
@@ -73,7 +73,7 @@ const ChangeOnetimeEdit = () => {
         <div className="flex h-full justify-center items-center" style={bgStyle}>
             <div className="bg-black/55  rounded-[50px] w-[700px] py-16 px-16 gap -inset-y-8">
                 <div className=" text-white title text-xl font-bold mb-4">
-                    Change Time Slot For Oneday
+                    Add Schedule
                 </div>
                 <form method="POST" className="add-promo" onSubmit={handleSubmit}>
                     {/* Date input */}
@@ -85,8 +85,8 @@ const ChangeOnetimeEdit = () => {
                             type="date"
                             id="Date"
                             name="Date"
-                            value={Day}
-                            onChange={(e) => setDay(e.target.value)}
+                            value={Date}
+                            onChange={(e) => setDate(e.target.value)}
                             className="promoInput border border-gray-300 rounded-md px-3 py-2 w-full"
                             required
                         />
@@ -112,17 +112,17 @@ const ChangeOnetimeEdit = () => {
                             <option value="3.30-5.30">3.30 - 5.30 PM</option>
                         </select>
                     </div>
-                    {/* Trainer input */}
+                    {/* Section input */}
                     <div className="add-promo-row mb-2">
-                        <label htmlFor="Trainer" className="promo-lbl block font-medium mb-1">
-                            New Trainer
+                        <label htmlFor="Section" className="promo-lbl block font-medium mb-1">
+                            New Section
                         </label>
                         <select
-                            name="Trainer"
-                            id="Trainer"
+                            name="Section"
+                            id="Section"
                             className="dropdown border border-gray-300 rounded-md px-3 py-2 w-full"
-                            value={Trainer}
-                            onChange={(e) => setTrainer(e.target.value)}
+                            value={Section}
+                            onChange={(e) => setSection(e.target.value)}
                         >
                             <option value="Senura">Senura</option>
                             <option value="Dinitha">Dinitha</option>
@@ -155,4 +155,4 @@ const ChangeOnetimeEdit = () => {
     );
 };
 
-export default ChangeOnetimeEdit;
+export default ScheduleEdit;

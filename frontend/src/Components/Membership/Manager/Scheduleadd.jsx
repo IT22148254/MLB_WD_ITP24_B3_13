@@ -14,11 +14,11 @@ const ScheduleAdd = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const chngTimeOndy = { TimeSlot, Date, Section }
+        const schedule = { TimeSlot, Date, Section }
 
-        const response = await fetch('http://localhost:8070/schedule/coachSchedule/add', {
+        const response = await fetch('http://localhost:8070/schedule/customerSchedule/add', {
             method: 'POST',
-            body: JSON.stringify(chngTimeOndy),
+            body: JSON.stringify(schedule),
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -138,11 +138,6 @@ const ScheduleAdd = () => {
                 </form>
             </div>
         </div>
-
-
-
-
-
     );
 }
 
