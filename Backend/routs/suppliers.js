@@ -12,11 +12,13 @@ const {Supplier,Order,Report} = require("../models/supplier");
 //add new supplier
 
 router.route("/add").post((req, res) => {
-  const { Name, NIC } = req.body;
+  const { Name, Email, Phone, Address} = req.body;
 
   const newSupplier = Supplier({
     Name,
-    NIC,
+    Email,
+    Phone,
+    Address
   });
 
   newSupplier
@@ -38,7 +40,7 @@ router.route("/add").post((req, res) => {
 router.route("/").get((req, res) => {
   Supplier.find()
     .then((result) => {
-      res.status(200).json({ result });
+      res.status(200).json({result});
     })
     .catch((err) => {
       res.status(200).json({ message: "Sppliers fetching unsuccessful" });
@@ -71,11 +73,17 @@ router.route("/get/:id").get(async (req, res) => {
 
 router.route("/:id").put(async (req, res) => {
   try {
-    const { Name, NIC } = req.body;
+    const { Name, Email, Phone, Address } = req.body;
+    const {id} = req.params;
     const supplier = await Supplier.findByIdAndUpdate(
-      req.params.id,
-      { Name, NIC },
-      { new: true }
+      {_id: id},
+      {
+        Name,
+        Email,
+        Phone,
+        Address
+      }
+
     );
 
     if (!supplier) {

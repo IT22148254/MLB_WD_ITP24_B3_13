@@ -6,10 +6,19 @@ const supplierSchema = new schema({
     type: String,
     required: true,
   },
-  NIC: {
+  Email: {
     type: String,
     required: true,
   },
+  Phone: {
+    type: String,
+    required: true,
+  },
+  Address: {
+    type: String,
+    required: true,
+  },
+  
 });
 
 const orderSchema = new schema({
