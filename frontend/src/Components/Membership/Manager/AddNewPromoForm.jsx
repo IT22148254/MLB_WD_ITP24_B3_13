@@ -87,7 +87,7 @@ const AddNewPromoForm = () => {
     return ( 
         <div className="flex h-full justify-center items-center" style={bgStyle}>
             <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 flex flex-col gap-y-8">
-                <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Add new  Standed  package</p>
+                <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Add new  promo  package</p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex flex-col gap-y-4">
                         <div className="flex justify-between items-center">
