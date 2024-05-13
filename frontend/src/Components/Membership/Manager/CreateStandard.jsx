@@ -8,8 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import bg from "../../../Images/package_bg.jpg";
 
-const AddNewPromoForm = () => {
-    
+const CreateStandard = () => {
     const [Name, setName] = useState('');
     const [Price, setPrice] = useState(0);
     const [Discription, setDiscription] = useState('');
@@ -35,7 +34,7 @@ const AddNewPromoForm = () => {
 
     
 
-    const handlePromoName = (e) => {
+    const handleStdName = (e) => {
         const value = e.target.value;
         const newValue = value.replace(/[^a-zA-Z\s]/g, ''); // Allow only alphabets and spaces
         setName(newValue);
@@ -44,7 +43,7 @@ const AddNewPromoForm = () => {
         }
     };
 
-    const handlePromoDesc = (e) => {
+    const handleStdDesc = (e) => {
         const textValue = e.target.value;
         const wordCount = textValue.split(/\s+/).filter(Boolean).length; // Counting words
         if (wordCount <= maxWords) {
@@ -56,8 +55,10 @@ const AddNewPromoForm = () => {
         e.preventDefault();
 
         try {
-            const promoPk = { Name, Price, Discription, Duration };
-            const response = await axios.post('http://localhost:8070/package/propackage/add', promoPk);
+            const stdPk = { Name, Price, Discription, Duration };
+            const response = await axios.post('http://localhost:8070/package/propackage/add', stdPk
+
+            );
             
             if (response.status === 200) {
                 setName('');
@@ -71,7 +72,7 @@ const AddNewPromoForm = () => {
                 }).then(() => {
                     console.log('New promo added', response.data);
                 });
-                navigate('/pkg/createdpromos');
+                // navigate('/pkg/createdpromos');
             }
         } catch (error) {
             console.error('Error creating promo', error);
@@ -83,11 +84,10 @@ const AddNewPromoForm = () => {
         backgroundSize: "cover",
         height: "100vh",
     };
-    
-    return ( 
+    return (
         <div className="flex h-full justify-center items-center" style={bgStyle}>
             <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 flex flex-col gap-y-8">
-                <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Add new promo package</p>
+                <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Add new Standard package</p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex flex-col gap-y-4">
                         <div className="flex justify-between items-center">
@@ -100,7 +100,7 @@ const AddNewPromoForm = () => {
                                 id="Name"
                                 name="name"
                                 value={Name}
-                                onChange={handlePromoName}      //onChange={(e) => sethandlePromoName.target.value}
+                                onChange={handleStdName}      //onChange={(e) => sethandlePromoName.target.value}
                                 required
                             />
                         </div>
@@ -114,7 +114,7 @@ const AddNewPromoForm = () => {
                                 name="Details"
                                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                 value={Discription}
-                                onChange={handlePromoDesc}
+                                onChange={handleStdDesc}
                                 required  //required
                             />
                         </div>
@@ -162,8 +162,7 @@ const AddNewPromoForm = () => {
                 </form> 
             </div>
         </div>     
-     );
-     
+      );
 }
  
-export default AddNewPromoForm;
+export default CreateStandard;
