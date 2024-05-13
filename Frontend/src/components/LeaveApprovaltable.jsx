@@ -5,7 +5,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import bg from "../assets/images/bg_main.jpg";
 
-const LeaveSummary = () => {
+const Leave = () => {
   const [leaves, setLeaves] = useState([]);
 
   useEffect(() => {
@@ -257,4 +257,4 @@ const LeaveSummary = () => {
   );
 };
 
-export default LeaveSummary;
+export default Leave;

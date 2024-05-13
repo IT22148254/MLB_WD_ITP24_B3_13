@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { Employee } = require("../models/employeeModel");
+const { Employee ,Leave} = require("../models/employeeModel");
+
 // Get employee by fullName
 router.route("/employee/findByName/:fullName").get(async (req, res) => {
   const fullName = req.params.fullName;
