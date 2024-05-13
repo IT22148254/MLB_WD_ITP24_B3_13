@@ -3,23 +3,22 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import AddSupplierForm from './Components/Supply/AddSupplierForm';
+import AddSupplierForm from './components/Supply/AddSupplierForm';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import TestScreen from './Components/Supply/TestScreen';
-import SupplierTable from './Components/Supply/Suppliertable';
-import EditSupplierForm from './Components/Supply/EditSupplierForm';
+import SupplierTable from './components/Supply/Suppliertable';
+import EditSupplierForm from './components/Supply/EditSupplierForm';
 import SupplierDashboard from './Pages/SupplierDashboard';
 import Inventory from './Pages/Inventory';
 
 //i change from here
-import Itemtable from './Components/Supply/Itemtable'; 
+import Itemtable from './components/Supply/Itemtable'; 
 import  ReceievedOrders from './Pages/RecievedOrders'; // Adjust the path as necessary
 import AddOrderForm from './Pages/PlaceOrder';
 import Supplierhandling from './Pages/SupplierDashbaord(2)'
 import PlacedOrdersView from './Pages/placedOrders';
 import OrderHandling from './Pages/OrderHandling'
 import Invoice from './Pages/Invoice'
-import EditOrderForm from './Components/Supply/EditSupOrderForm';
+import EditOrderForm from './components/Supply/EditSupOrderForm';
 import { ToastContainer } from 'react-toastify';
 import WavesyncHome from './Pages/Home'
 import Header from './Pages/Header'
