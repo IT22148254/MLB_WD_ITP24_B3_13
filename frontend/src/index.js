@@ -9,7 +9,7 @@ import AddNewPromoForm from './Components/Membership/Manager/AddNewPromoForm'
 import CreatedPromos from './Components/Membership/Manager/CreatedPromosTable'
 import EditPromoForm from './Components/Membership/Manager/EditPromoform';
 import AddNewStandedForm from './Components/Membership/Manager/AddNewPromoForm'
-import CreatedStanded from './Components/Membership/Manager/CreaterStandedTable'
+import CreatedStanded from './Components/Membership/Manager/CreatedStandedTable'
 import EditStandedForm from './Components/Membership/Manager/EditStandedForm';
 import PackageDashboard from './Components/Membership/Manager/packagedashboard';
 
