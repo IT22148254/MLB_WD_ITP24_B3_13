@@ -111,7 +111,7 @@ export default function Add() {
     return (
         
         
-        <div className='container mt-5' style={{ backgroundImage: `url(${process.env.PUBLIC_URL}/../image/homemale.jpg)`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}>
+        <div className='container mt-5'>
             <center><h4 style={{ color: 'white' }}>Payment</h4>
 
             <div className='underline1'></div></center>
