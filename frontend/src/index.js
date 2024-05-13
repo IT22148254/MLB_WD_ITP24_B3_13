@@ -49,6 +49,9 @@ import Inventory from "./Pages/Inventory";
 import ReceievedOrders from './Pages/RecievedOrders.jsx';
 import AddOrderForm from "./Pages/PlaceOrder";
 import EditOrderForm from "./Pages/EditOrders";
+import PlacedOrdersView from "./Pages/placedOrders.jsx";
+import Supplierhandling from "./Pages/SupplierDashbaord(2)";
+import OrderHandling from "./Pages/OrderHandling";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -86,16 +89,14 @@ const router = createBrowserRouter(
         {/* <Route path="testscreen/:id" element={<TestScreen/>} /> */}
         <Route path="suppliertable/" element={<SupplierTable />} />
         <Route path="editsup/:id" element={<EditSupplierForm />} />
-
-        {/* i change from here */}
-
-        {/* <Route path="Inventory/" element={<Itemtable/>}/> */}
         <Route path="orders/" element={<ReceievedOrders />} />
         <Route path="ordersform/" element={<AddOrderForm />} />
         <Route path="Inventory/" element={<Inventory />} />
-
-        <Route path="EditOrderForm/:id" element={<EditOrderForm />} />
+        <Route path="supDashboard2" element={<Supplierhandling/>}/>
+        <Route path="placedOrders/" element={<PlacedOrdersView/>} />
+        <Route path="editorder/:id" element={<EditOrderForm />} />
         <Route path="supDashboard" element={<SupplierDashboard />} />
+        <Route path="Orderhandling" element={<OrderHandling/>} />
       </Route>
 
       {/* protcted */}
@@ -108,9 +109,7 @@ const router = createBrowserRouter(
         <Route path="/store/admin" element={<AdminPortalScreen />} />
         <Route path="/store/admin/items" element={<AdminItemsScreen />} />
         <Route path="/store/admin/orders" element={<AdminOrdersScreen />} />
-        <Route
-          path="/store/admin/item/:id/edit"
-          element={<ProductEditScreen />}
+        <Route path="/store/admin/item/:id/edit"element={<ProductEditScreen />}
         />
         <Route path="/orderst/myorders/:id" element={<OrdersScreen />} />
       </Route>
