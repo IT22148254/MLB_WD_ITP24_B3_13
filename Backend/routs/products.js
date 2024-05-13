@@ -140,6 +140,8 @@ router.route("/orderst/add").post(protect, async (req, res) => {
     itemPrice,
     shippingPrice,
     totalPrice,
+    isPaid,
+    paidAt,
   } = req.body;
 
   if (orderItems && orderItems.length === 0) {
@@ -157,6 +159,8 @@ router.route("/orderst/add").post(protect, async (req, res) => {
       itemPrice,
       shippingPrice,
       totalPrice,
+      isPaid,
+      paidAt,
     });
 
     await newOrder.save();

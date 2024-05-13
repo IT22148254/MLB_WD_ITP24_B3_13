@@ -30,6 +30,8 @@ const PlaceOrderScreen = () => {
   const placeOrderHandler = async () => {
     try {
       console.log(cart.cartItems);
+      console.log('Is Paid:', cart.payment.paid,
+      "---" ,cart.payment.paidAt,);
       const res = await createOrder({
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
@@ -37,10 +39,12 @@ const PlaceOrderScreen = () => {
         itemsPrice: cart.itemsPrice,
         shippingPrice: cart.delPrice,
         totalPrice: cart.totPrice,
+        isPaid:cart.payment.paid,
+        paidAt: cart.payment.paidAt,
       }).unwrap();
-      console.log(res.data);
+      console.log(res);
       dispatch(clearCartItems());
-      navigate(`/store/orderst/${res.data._id}`);
+      navigate(`/store/orderst/${res._id}`);
 
       cart.cartItems.map((item) =>
         updateProduct({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { useSelector,useDispatch } from 'react-redux';
-import { setPaid } from '../slices/cartSlice';
+import { setPayment } from '../slices/cartSlice';
 import 'react-toastify/dist/ReactToastify.css';
 import './Success.css'; // Import the CSS file for Success component
 
@@ -27,7 +27,7 @@ export default function Success() {
     // Navigate back two pages after a delay
     setTimeout(() => {
       if(cart.cartItems){
-        dispatch(setPaid()); // Set the paid state to true
+        dispatch(setPayment({ paid: true, paidAt: new Date() }));
       }
       window.history.go(-2);
     }, 3000); // Adjust the delay as needed

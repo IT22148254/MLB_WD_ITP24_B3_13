@@ -12,6 +12,8 @@ const OrderScreen = () => {
 
   const { data: order, isLoading, error } = useGetOrderDetailsQuery(orderId);
 
+  console.log(order)
+
   const generatePDF = () => {
     const doc = new jsPDF();
 
@@ -43,6 +45,7 @@ const OrderScreen = () => {
     });
 
     doc.save(`Receipt ${order._id}.pdf`);
+    
   };
 
   return isLoading ? (
