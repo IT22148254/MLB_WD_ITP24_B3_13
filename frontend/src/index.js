@@ -52,15 +52,15 @@ import EditOrderForm from "./Pages/EditOrders";
 import PlacedOrdersView from "./Pages/placedOrders.jsx";
 import Supplierhandling from "./Pages/SupplierDashbaord(2)";
 import OrderHandling from "./Pages/OrderHandling";
-import ServiceFeedbackForm from './Components/Feedback/User/ServiceFeedbackForm';
-import ServiceFeedbackTable from './Components/Feedback/User/ServiceFeedbackTable';
-import EditServiceFeedbackForm from './Components/Feedback/User/EditServiceFeedbackForm';
+import ServiceFeedbackForm from './components/Feedback/User/ServiceFeedbackForm.jsx';
+import ServiceFeedbackTable from './components/Feedback/User/ServiceFeedbackTable.jsx';
+import EditServiceFeedbackForm from './components/Feedback/User/EditServiceFeedbackForm.jsx';
 import Selectoption from './Pages/Selectoption'
-import Coachfeedback from './Components/Feedback/User/CoachFeedbackForm'; 
-import CoachFeedbackTable from './Components/Feedback/User/CoachFeedbackTable';
-import CoachFeedbackEditForm from './Components/Feedback/User/CoachFeedbackEditForm';
-import CoachFeedbackApproval from './Components/Feedback/Manager/CoachFeedbackApproval';
-import ServiceFeedbackApproval from './Components/Feedback/Manager/ServiceFeedbackApproval';
+import Coachfeedback from './components/Feedback/User/CoachFeedbackForm.jsx'; 
+import CoachFeedbackTable from './components/Feedback/User/CoachFeedbackTable.jsx';
+import CoachFeedbackEditForm from './components/Feedback/User/CoachFeedbackEditForm.jsx';
+import CoachFeedbackApproval from './components/Feedback/Manager/CoachFeedbackApproval.jsx';
+import ServiceFeedbackApproval from './components/Feedback/Manager/ServiceFeedbackApproval.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -95,7 +95,6 @@ const router = createBrowserRouter(
       <Route path='fbk/'>
         <Route path="" element={<Selectoption/>}/>
         <Route path='addservice/' element={<ServiceFeedbackForm/>} />
-        <Route path ="testscreen/:id" element = {<TestScreen/>}/>
         <Route path="servicetable/" element={<ServiceFeedbackTable/>}/>
         <Route path="editservice/:id" element={<EditServiceFeedbackForm/>}/>
         <Route path="coachfeedback/" element={<Coachfeedback/>}/>
