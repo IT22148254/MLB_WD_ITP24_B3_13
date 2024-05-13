@@ -1,6 +1,43 @@
 const router = require("express").Router();
-const {Supplier,Order,Report} = require("../models/supplier");
+const {Supplier,Order,Report,Inventry} = require("../models/supplier");
 
+
+
+//
+//add new inventry
+
+router.route("/inv/add").post((req, res) => {
+  const {  PrName, quantity} = req.body;
+
+  const newInventry = Inventry ({
+    PrName,
+    quantity
+  });
+
+  newInventry
+    .save()
+    .then(() => {
+      res.status(201).json({ message: "invetry added successfully" });
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .json({ message: `invetry addition unsuccessful ${err}` });
+    });
+});
+
+
+//get all inventry
+
+router.route("/inv/").get((req, res) => {
+  Inventry.find()
+    .then((result) => {
+      res.status(201).json({result});
+    })
+    .catch((err) => {
+      res.status(201).json({ message: "invetry fetching unsuccessful" });
+    });
+});
 
 
 // ================================================================================================================================================
@@ -336,4 +373,11 @@ router.route("/order/:id").delete(async (req, res) => {
   }
 });
 
+
+
 module.exports = router;
+                                          
+
+
+
+
