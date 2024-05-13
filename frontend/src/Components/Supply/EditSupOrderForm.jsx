@@ -73,6 +73,16 @@ const EditOrderForm = () => {
         toast.error('Input only integers');
         console.log('input only integers')
     }}
+
+    const handlePrChange = (e) => {
+        const inputValue = e.target.value;
+        // Regular expression to allow only alphabetic characters and spaces
+        const regex = /^[a-zA-Z\s]*$/;
+        // If the input value matches the regex, update the state
+        if (regex.test(inputValue)) {
+          setPrName(inputValue);
+        }
+      };
     
 
     const handleSubmit = async (e) => {
@@ -136,7 +146,8 @@ const EditOrderForm = () => {
                                         className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl 
                                         border-b-2  border-gray-300 focus:outline-none focus:border-green-500"
                                         value={PrName}
-                                        onChange={(e)=>setPrName(e.target.value)}
+                                        onChange={handlePrChange}
+                                        // onChange={(e)=>setPrName(e.target.value)}
                                         required />
                                 </div>
                                 <div className="flex justify-between items-center">
