@@ -33,6 +33,7 @@ const router = createBrowserRouter(
         <Route path="coachfeedback/" element={<Coachfeedback/>}/>
         <Route path="coachfeedbacktable/" element={<CoachFeedbackTable/>}/>
         <Route path="coachfeedbackedit/:id" element={<CoachFeedbackEditForm/>}/>
+        <Route path="selectopt/" element={<Selectoption/>}/>
 
       </Route>
     </Route>

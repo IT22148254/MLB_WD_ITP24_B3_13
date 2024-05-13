@@ -95,7 +95,7 @@ const  CoachFeedbackTable = () => {
 
     // add title to the PDF document
     doc.setFontSize(16);
-    doc.text("Service Feedback Report", 14, 22);
+    doc.text("Coach Feedback Report", 14, 22);
 
     // define the table columns
     const columns = [
@@ -119,7 +119,7 @@ const  CoachFeedbackTable = () => {
     doc.autoTable(columns, rows);
 
     // save the PDF file
-    doc.save("ServiceFeedbackReport.pdf");
+    doc.save("CoachFeedbackReport.pdf");
   };
 
   const filterFeedbacks = (feedbacks, searchText) => {
