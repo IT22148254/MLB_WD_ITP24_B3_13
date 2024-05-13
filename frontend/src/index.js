@@ -8,7 +8,7 @@ import MMDashboard from './Pages/Manager/MMDashboard';
 import AddNewPromoForm from './Components/Membership/Manager/AddNewPromoForm'
 import CreatedPromos from './Components/Membership/Manager/CreatedPromosTable'
 import EditPromoForm from './Components/Membership/Manager/EditPromoform';
-import AddNewStandedForm from './Components/Membership/Manager/AddNewPromoForm'
+import AddNewStandedForm from './Components/Membership/Manager/AddNewStandedForm'
 import CreatedStanded from './Components/Membership/Manager/CreatedStandedTable'
 import EditStandedForm from './Components/Membership/Manager/EditStandedForm';
 import PackageDashboard from './Components/Membership/Manager/packagedashboard';

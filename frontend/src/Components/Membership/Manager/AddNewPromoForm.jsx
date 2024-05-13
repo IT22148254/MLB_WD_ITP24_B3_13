@@ -57,7 +57,7 @@ const AddNewPromoForm = () => {
 
         try {
             const promoPk = { Name, Price, Discription, Duration };
-            const response = await axios.post('http://localhost:8070/package/package/add', promoPk);
+            const response = await axios.post('http://localhost:8070/package/propackage/add', promoPk);
             
             if (response.status === 200) {
                 setName('');
