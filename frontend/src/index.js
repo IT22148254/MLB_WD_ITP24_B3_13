@@ -4,7 +4,7 @@ import App from './App';
 import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import MMDashboard from './Pages/Manager/MMDashboard';
+
 import AddNewPromoForm from './Components/Membership/Manager/AddNewPromoForm'
 import CreatedPromos from './Components/Membership/Manager/CreatedPromosTable'
 import EditPromoForm from './Components/Membership/Manager/EditPromoform';
@@ -12,7 +12,9 @@ import AddNewStandedForm from './Components/Membership/Manager/AddNewStandedForm
 import CreatedStanded from './Components/Membership/Manager/CreatedStandedTable'
 import EditStandedForm from './Components/Membership/Manager/EditStandedForm';
 import PackageDashboard from './Components/Membership/Manager/packagedashboard';
-
+import Pay from './Components/Membership/Manager/pay';
+import Pay2 from './Components/Membership/Manager/pay2';
+import Showpromo from './Components/Membership/Manager/showPromo';
 
 
 import TestScreen from './Components/Membership/Manager/TestScreen';
@@ -21,7 +23,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route path='pkg/'>
-        <Route path='mmdashboard/' element={<MMDashboard />} />
+        {/* <Route path='mmdashboard/' element={<MMDashboard />} /> */}
         <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
         <Route path='editpromo/:id' element={<EditPromoForm/>} />
@@ -34,6 +36,23 @@ const router = createBrowserRouter(
         <Route path='editstanded/:id' element={<EditStandedForm/>}/> 
   
           <Route path="testscreen/" element={<TestScreen />} />
+
+
+
+
+
+          <Route path='showpromo/' element={<Showpromo/>} />
+          
+
+
+          <Route path='pay/:id' element={<Pay/>} />
+          <Route path='pay2/:id' element={<Pay2/>} />
+
+
+
+
+
+
 
       </Route>
     </Route>

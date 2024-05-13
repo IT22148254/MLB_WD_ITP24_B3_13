@@ -86,6 +86,7 @@ const CreatedPromosTable = () => {
         // Send functionality remains the same
     };
 
+   
     const handleEdit = (id) => {
         navigate(`/pkg/editpromo/${id}`);
 
