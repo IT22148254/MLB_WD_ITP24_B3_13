@@ -38,9 +38,9 @@ const PlaceOrderScreen = () => {
         shippingPrice: cart.delPrice,
         totalPrice: cart.totPrice,
       }).unwrap();
-      console.log(res);
+      console.log(res.data);
       dispatch(clearCartItems());
-      navigate(`/store/orderst/${res._id}`);
+      navigate(`/store/orderst/${res.data._id}`);
 
       cart.cartItems.map((item) =>
         updateProduct({
