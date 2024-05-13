@@ -10,6 +10,10 @@ const PlacedOrderTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
 
+  const handleCheckboxChange = () => {
+    console.log("Checked");
+  };
+
   useEffect(() => {
     const fetchOrders = async () => {
       const { data } = await axios.get("http://localhost:8070/supplier/order/");
@@ -32,7 +36,8 @@ const PlacedOrderTable = () => {
 
   useEffect(() => {
     // Retrieve received orders from localStorage on component mount
-    const storedReceivedOrders = JSON.parse(localStorage.getItem("receivedOrders")) || [];
+    const storedReceivedOrders =
+      JSON.parse(localStorage.getItem("receivedOrders")) || [];
     setReceivedOrders(storedReceivedOrders);
   }, []);
 
@@ -43,7 +48,9 @@ const PlacedOrderTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:8070/supplier/order/${id}`);
+      const response = await axios.delete(
+        `http://localhost:8070/supplier/order/${id}`
+      );
       if (response.status === 200) {
         Swal.fire({
           title: "Deleted!",
@@ -68,39 +75,47 @@ const PlacedOrderTable = () => {
   const handleReceived = async (order) => {
     try {
       const { PrName, quantity } = order;
-      if (!receivedOrders.some((receivedOrder) => receivedOrder._id === order._id)) {
-        const response = await axios.post('http://localhost:8070/supplier/inv/add', { PrName, quantity });
+      if (
+        !receivedOrders.some((receivedOrder) => receivedOrder._id === order._id)
+      ) {
+        const response = await axios.post(
+          "http://localhost:8070/supplier/inv/add",
+          { PrName, quantity }
+        );
         if (response.status === 201) {
           const updatedReceivedOrders = [...receivedOrders, order];
           setReceivedOrders(updatedReceivedOrders);
           // Store updated received orders in localStorage
-          localStorage.setItem("receivedOrders", JSON.stringify(updatedReceivedOrders));
+          localStorage.setItem(
+            "receivedOrders",
+            JSON.stringify(updatedReceivedOrders)
+          );
           Swal.fire({
-            title: 'Confirmed!',
-            text: 'The product has been confirmed.',
-            icon: 'success',
+            title: "Confirmed!",
+            text: "The product has been confirmed.",
+            icon: "success",
           });
         } else {
           Swal.fire({
-            title: 'Error!',
-            text: 'Failed to confirm the product.',
-            icon: 'error',
+            title: "Error!",
+            text: "Failed to confirm the product.",
+            icon: "error",
           });
         }
       } else {
         Swal.fire({
-          title: 'Error!',
-          text: 'The product has already been confirmed.',
-          icon: 'error',
+          title: "Error!",
+          text: "The product has already been confirmed.",
+          icon: "error",
         });
       }
     } catch (error) {
-      console.error('Error confirming product:', error);
+      console.error("Error confirming product:", error);
     }
   };
 
   // Filter orders based on search term
-  const filteredOrders = orders.filter(order =>
+  const filteredOrders = orders.filter((order) =>
     order.PrName.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
@@ -113,13 +128,14 @@ const PlacedOrderTable = () => {
         onChange={(e) => setSearchTerm(e.target.value)}
         className="p-2 m-2 border border-gray-400 rounded-md"
       />
-      <div className="grid grid-cols-6 bg-cyan-400">
+      <div className="grid grid-cols-7 bg-cyan-400">
         <div className="border-2 border-black p-3">Supplier Name</div>
         <div className="border-2 border-black p-3">Product Name</div>
         <div className="border-2 border-black p-3">Quantity</div>
         <div className="border-2 border-black p-3">Edit</div>
         <div className="border-2 border-black p-3">Delete</div>
         <div className="border-2 border-black p-3">Received</div>
+        <div className="border-2 border-black p-3"></div>
       </div>
       <div
         className="w-full overflow-auto"
@@ -131,7 +147,7 @@ const PlacedOrderTable = () => {
       >
         {filteredOrders.map((order, index) => (
           <div
-            className={`grid grid-cols-6 ${
+            className={`grid grid-cols-7 ${
               index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
             }`}
             key={order._id}
@@ -162,15 +178,28 @@ const PlacedOrderTable = () => {
             <div className="border-2 border-black p-2">
               <button
                 className={`${
-                  receivedOrders.some((receivedOrder) => receivedOrder._id === order._id)
+                  receivedOrders.some(
+                    (receivedOrder) => receivedOrder._id === order._id
+                  )
                     ? "bg-gray-500 cursor-not-allowed"
                     : "bg-green-500"
                 } border-2 border-black rounded-full p-1 px-4 text-white font-bold`}
                 onClick={() => handleReceived(order)}
-                disabled={receivedOrders.some((receivedOrder) => receivedOrder._id === order._id)}
+                disabled={receivedOrders.some(
+                  (receivedOrder) => receivedOrder._id === order._id
+                )}
               >
-                {receivedOrders.some((receivedOrder) => receivedOrder._id === order._id) ? "Confirmed" : "Received"}
+                {receivedOrders.some(
+                  (receivedOrder) => receivedOrder._id === order._id
+                )
+                  ? "Confirmed"
+                  : "Received"}
               </button>
+            </div>
+            <div className="border-2 border-black p-2">
+              <label>
+                <input type="checkbox" onChange={handleCheckboxChange} />
+              </label>
             </div>
           </div>
         ))}
@@ -180,4 +209,3 @@ const PlacedOrderTable = () => {
 };
 
 export default PlacedOrderTable;
-          
