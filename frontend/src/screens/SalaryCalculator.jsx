@@ -7,7 +7,7 @@ const SalaryCalculator = () => {
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
-    height: "100%",
+    height: "100vh",
   };
 
   return (
