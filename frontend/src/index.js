@@ -8,7 +8,13 @@ import MMDashboard from './Pages/Manager/MMDashboard';
 import AddNewPromoForm from './Components/Membership/Manager/AddNewPromoForm'
 import CreatedPromos from './Components/Membership/Manager/CreatedPromosTable'
 import EditPromoForm from './Components/Membership/Manager/EditPromoform';
-import EditStandard from './Components/Membership/Manager/EditStandardform'
+import AddNewStandedForm from './Components/Membership/Manager/AddNewPromoForm'
+import CreatedStanded from './Components/Membership/Manager/CreaterStandedTable'
+import EditStandedForm from './Components/Membership/Manager/EditStandedForm';
+import PackageDashboard from './Components/Membership/Manager/packagedashboard';
+
+
+
 import TestScreen from './Components/Membership/Manager/TestScreen';
 import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter(
@@ -19,8 +25,16 @@ const router = createBrowserRouter(
         <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
         <Route path='editpromo/:id' element={<EditPromoForm/>} />
-        <Route path="editstandard/:id" element={<EditStandard />} />
-        <Route path="testscreen/" element={<TestScreen />} />
+{/* dashboard */}
+        <Route path='pkgDashboard/' element={<PackageDashboard/>} />
+
+
+        <Route path='addnewst/' element={<AddNewStandedForm />} />
+        <Route path='createdstanded/' element={<CreatedStanded />} />
+        <Route path='editstanded/:id' element={<EditStandedForm/>}/> 
+  
+          <Route path="testscreen/" element={<TestScreen />} />
+
       </Route>
     </Route>
 
@@ -40,3 +54,13 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+
+
+
+
+
+
+
+
+
