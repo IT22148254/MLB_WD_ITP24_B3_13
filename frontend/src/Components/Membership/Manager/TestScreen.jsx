@@ -11,7 +11,7 @@ const TestScreen = () => {
     useEffect(() => {
         const fetchPkgs = async () => {
             try {
-                const res = await axios.get("http://localhost:8070/schedule/coachSchedule/");
+                const res = await axios.get("http://localhost:8070/schedule/customerSchedule/");
                 setPkgs(res.data);
                 console.log(res.data);
             } catch (error) {

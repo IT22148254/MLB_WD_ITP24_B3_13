@@ -64,13 +64,13 @@ const ScheduleAdd = () => {
 
 
     // Get today's date in the format yyyy-mm-dd
-    const today = new Date().toISOString().split('T')[0];
+    // const today = new Date().toISOString().split('T')[0];
 
     return (
 
         <div className="flex items-center justify-center h-full" style={bgStyle}>
             <div className="bg-black/55  rounded-[50px] w-[700px] py-16 px-16 gap -inset-y-8">
-                <div className="flex items-center justify-center text-xl font-normal text-white mb-14 title" style={{ fontFamily: 'poppins' }}>Change Time Slot For Oneday</div>
+                <div className="flex items-center justify-center text-xl font-normal text-white mb-14 title" style={{ fontFamily: 'poppins' }}>Add Schedule</div>
                 <form method="POST" className="add-promo" onSubmit={handleSubmit}>
                     <div className="flex items-center mb-12">
                         <label htmlFor="Date" className="w-1/4 py-2 mb-0 mr-4 font-medium text-white">Date : </label>
@@ -82,7 +82,6 @@ const ScheduleAdd = () => {
                             value={Date}
                             onChange={(e) => setDate(e.target.value)}
                             className="w-3/4 px-3 py-2 border-2 border-blue-400 rounded-xl"
-                            min={today}
                             required
                         />
                     </div>
