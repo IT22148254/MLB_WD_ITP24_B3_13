@@ -172,8 +172,7 @@ const EmployeeRegisterForm = () => {
         setEmail("");
         setAddress("");
         setRole("");
-        //navigate("/");
-        return;
+        navigate("/emp/");
       }
     } catch (error) {
       console.error("Error creating employee:", error);

@@ -155,7 +155,7 @@ const EmployeeEditForm = ({ id }) => {
       }
 
       // Navigate away
-      navigate("/");
+      navigate("/emp");
     } catch (error) {
       console.error("Error creating employee:", error);
     }
@@ -303,7 +303,7 @@ const EmployeeEditForm = ({ id }) => {
             setRole("");
 
             // Navigate away
-            navigate("/");
+            navigate("/emp");
           }}
         >
           Cancel
