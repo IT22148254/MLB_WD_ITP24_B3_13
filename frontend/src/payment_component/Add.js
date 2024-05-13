@@ -185,7 +185,7 @@ export default function Add() {
 
              {/* Bottom photo */}
              <div className="text-center mt-5">
-                <img src="../image/7011023.jpg" alt="Bottom Photo" style={{ maxWidth: '100%', height: '250px' }} />
+                <img src="../image/7011023.jpg" alt="Bottom Photo" style={{ maxWidth: '100%', height: '400px' }} />
             </div>
             
         </div>
