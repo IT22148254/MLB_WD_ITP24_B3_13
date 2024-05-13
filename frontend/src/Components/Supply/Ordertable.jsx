@@ -31,10 +31,12 @@ const OrderTable = () => {
   }, [searchInput, orders]);
 
   const filterOrders = (orders, searchText) => {
+    if (!orders) return []; // Check if orders is undefined/null
     return orders.filter((order) =>
       order.OrderName.toLowerCase().startsWith(searchText.toLowerCase())
     );
   };
+  
 
   const handleEdit = (id) => {
     navigate(`/sup/EditOrderForm/${id}`);
