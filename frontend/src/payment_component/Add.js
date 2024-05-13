@@ -116,7 +116,7 @@ export default function Add() {
 
             <div className='underline1'></div></center>
             
-            <form  className='mt-5 shadow p-5' style={{backgroundColor: '#0000ff80', maxWidth: '50%', alignItems: 'center', margin: '0 auto'}}>
+            <form  className='mt-5 shadow p-5' style={{backgroundColor: '#B9EBFF', maxWidth: '50%', alignItems: 'center', margin: '0 auto'}}>
 
             <div className="mb-3">
     <label htmlFor="exampleFormControlInput1" className="form-label">Name</label>
