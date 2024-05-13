@@ -2,8 +2,6 @@ import AddOrderForm from  '../components/Supply/SupOrder'
 import bg from "../Images/bg_main.jpg";
 
 const PlaceOrderSup = () => {
-
-    //background image
     
     const bgStyle = {
         backgroundImage: `url(${bg})`,

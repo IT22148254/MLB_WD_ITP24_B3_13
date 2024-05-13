@@ -1,3 +1,4 @@
+import { Container} from 'reactstrap'
 import OrderTable from '../components/Supply/Ordertable';
 import bg from "../Images/bg_main.jpg";
 
