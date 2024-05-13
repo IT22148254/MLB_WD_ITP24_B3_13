@@ -112,7 +112,7 @@ export default function Add() {
         
         
         <div className='container mt-5'>
-            <center><h4 style={{ color: 'white' }}>Payment</h4>
+            <center><h4 style={{ color: 'Black' }}>Payment</h4>
 
             <div className='underline1'></div></center>
             
