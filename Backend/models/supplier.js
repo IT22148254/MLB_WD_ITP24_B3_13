@@ -1,3 +1,8 @@
+
+
+
+
+///
 const mongoose = require("mongoose");
 const schema = mongoose.Schema;
 
@@ -27,15 +32,15 @@ const orderSchema = new schema({
     required: true,
     ref: "Supplier",
   },
-  OrderName: {
+  PrName: {
     type: String,
     required: true,
   },
-  OrderDate: {
-    type: String,
+  quantity: {
+    type: Number,
     required: true,
   },
-});
+}, {timestamps:true});
 
 const supReportSchema = new schema({
   Category: {
@@ -48,8 +53,26 @@ const supReportSchema = new schema({
   },
 });
 
+const inventrySchema = new schema({
+  PrName: {
+    type: String,
+    required: true,
+  },
+  quantity: {
+    type: Number,
+    required: true,
+  },
+});
+
 const Supplier = mongoose.model("Supplier", supplierSchema);
 const Order = mongoose.model("Order", orderSchema);
 const Report = mongoose.model("Report", supReportSchema);
+const Inventry = mongoose.model("Inventry", inventrySchema);
+module.exports = { Supplier, Order, Report,Inventry };
 
-module.exports = { Supplier, Order, Report };
+
+
+
+
+
+

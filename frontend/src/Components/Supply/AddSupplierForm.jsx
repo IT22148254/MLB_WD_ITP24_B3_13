@@ -139,9 +139,11 @@ const AddSupplierForm = () => {
                                 onChange={handleNameChange}
                                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             />
-                            {nameError && <span className="text-red-500">{nameError}</span>}
+                           
                         </div>
                     </div>
+                    {nameError && <span className="text-red-500 ml-11">{nameError}</span>}
+                  <br></br>
                     <div className="flex justify-between items-center">
                         <label htmlFor="Email" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>Email:</label>
                         <input
@@ -154,8 +156,10 @@ const AddSupplierForm = () => {
                             // onChange={(e)=>setEmail(e.target.value)}
                             required
                         />
-                        {emailError && <span className="text-red-500">{emailError}</span>}
+                       
                     </div>
+                    {emailError && <span className="text-red-500 ml-11">{emailError}</span>}
+                    <br></br>
                     <div className="flex justify-between items-center">
                         <label htmlFor="Phone" className="text-white flex items-center pl-5 font-bold text-2xl" style={{ WebkitTextStroke: '1px black' }}>Contact No:</label>
                         <input
@@ -167,8 +171,10 @@ const AddSupplierForm = () => {
                             className="w-3/5 bg-white/70 e h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             required
                         />
-                        {phoneError && <span className="text-red-500">{phoneError}</span>}
+                        
                     </div>
+                    {phoneError && <span className="text-red-500 ml-11">{phoneError}</span>}
+                    <br></br>
                     <div className="flex justify-between items-center">
                         <label htmlFor="Address" className="text-white flex items-center pl-5 font-bold text-2xl font-size" style={{ WebkitTextStroke: '1px black' }}>Address:</label>
                         <textarea

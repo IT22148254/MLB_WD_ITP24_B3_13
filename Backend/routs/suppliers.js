@@ -1,6 +1,43 @@
 const router = require("express").Router();
-const {Supplier,Order,Report} = require("../models/supplier");
+const {Supplier,Order,Report,Inventry} = require("../models/supplier");
 
+
+
+//
+//add new inventry
+
+router.route("/inv/add").post((req, res) => {
+  const {  PrName, quantity} = req.body;
+
+  const newInventry = Inventry ({
+    PrName,
+    quantity
+  });
+
+  newInventry
+    .save()
+    .then(() => {
+      res.status(201).json({ message: "invetry added successfully" });
+    })
+    .catch((err) => {
+      res
+        .status(400)
+        .json({ message: `invetry addition unsuccessful ${err}` });
+    });
+});
+
+
+//get all inventry
+
+router.route("/inv/").get((req, res) => {
+  Inventry.find()
+    .then((result) => {
+      res.status(201).json({result});
+    })
+    .catch((err) => {
+      res.status(201).json({ message: "invetry fetching unsuccessful" });
+    });
+});
 
 
 // ================================================================================================================================================
@@ -238,12 +275,12 @@ router.route("/report/:id").delete(async (req, res) => {
 //creating a order
 
 router.route("/order/add").post((req, res) => {
-  const { Supplier, OrderName, OrderDate } = req.body;
+  const { Supplier, PrName,quantity} = req.body;
 
   const newOrder = Order({
     Supplier,
-    OrderName,
-    OrderDate,
+    PrName,
+    quantity,
   });
 
   newOrder
@@ -265,7 +302,7 @@ router.route("/order/add").post((req, res) => {
 router.route("/order/").get((req, res) => {
   Order.find()
     .then((result) => {
-      res.status(200).json({ result });
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(200).json({ message: "order fetching unsuccessful" });
@@ -297,10 +334,10 @@ router.route("/order/get/:id").get(async (req, res) => {
 
 router.route("/order/:id").put(async (req, res) => {
   try {
-    const { Supplier, OrderName, OrderDate } = req.body;
+    const { Supplier,PrName,quantity} = req.body;
     const order = await Order.findByIdAndUpdate(
       req.params.id,
-      { Supplier, OrderName, OrderDate },
+      { Supplier,PrName,quantity},
       { new: true }
     );
 
@@ -336,4 +373,11 @@ router.route("/order/:id").delete(async (req, res) => {
   }
 });
 
+
+
 module.exports = router;
+                                          
+
+
+
+
