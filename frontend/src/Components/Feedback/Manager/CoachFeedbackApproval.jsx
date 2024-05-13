@@ -1,29 +1,19 @@
-// Import the necessary dependencies
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
-import Swal from "sweetalert2";
 import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { Container } from "reactstrap";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import bg from "../../../Images/feedback.jpeg";
 
-function handleApprove(){
-
-toast.success("Feedback Approved")
-}
-
-const  CoachFeedbackApproval = () => {
+const CoachFeedbackApproval = () => {
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
     height: "100vh",
   };
-  // Initialize the useNavigate hook
-  let navigate = useNavigate();
 
   const { id } = useParams();
 
@@ -34,14 +24,16 @@ const  CoachFeedbackApproval = () => {
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:8070/feedback/coach"
-        );
-        console.log(response);
-        setFeedbacks(response.data.result);
-        setFilteredFeedbacks(response.data.result);
+        const response = await axios.get("http://localhost:8070/feedback/coach");
+        const storedApprovalStatus = JSON.parse(localStorage.getItem('coachFeedbackApprovalStatus')) || {};
+        const updatedFeedbacks = response.data.result.map(feedback => ({
+          ...feedback,
+          approved: storedApprovalStatus[feedback._id] || false
+        }));
+        setFeedbacks(updatedFeedbacks);
+        setFilteredFeedbacks(updatedFeedbacks);
       } catch (error) {
-        console.error("Failed to fetch employees:", error);
+        console.error("Failed to fetch feedbacks:", error);
       }
     };
 
@@ -53,9 +45,26 @@ const  CoachFeedbackApproval = () => {
     setFilteredFeedbacks(filtered);
   }, [searchInput, feedbacks]);
 
-//   const handleEdit = (id) => {
-//     navigate(`/fbk/coachfeedbackedit/${id}`);
-//   };
+  const handleApprove = async (id) => {
+    try {
+      const response = await axios.put(`http://localhost:8070/feedback/coach/${id}`, { approved: true });
+      if (response.status === 200) {
+        toast.success("Feedback Approved");
+        const updatedFeedbacks = feedbacks.map((feedback) =>
+          feedback._id === id ? { ...feedback, approved: true } : feedback
+        );
+        setFeedbacks(updatedFeedbacks);
+        setFilteredFeedbacks(updatedFeedbacks);
+        const storedApprovalStatus = JSON.parse(localStorage.getItem('coachFeedbackApprovalStatus')) || {};
+        localStorage.setItem('coachFeedbackApprovalStatus', JSON.stringify({ ...storedApprovalStatus, [id]: true }));
+      } else {
+        toast.error("Failed to approve feedback");
+      }
+    } catch (error) {
+      console.error("Error approving feedback:", error);
+      toast.error("Failed to approve feedback");
+    }
+  };
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -69,17 +78,13 @@ const  CoachFeedbackApproval = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         try {
-          const response = await axios.delete(
-            `http://localhost:8070/feedback/coach/${id}`
-          );
-
+          const response = await axios.delete(`http://localhost:8070/feedback/coach/${id}`);
           if (response.status === 200) {
             Swal.fire({
               title: "Deleted!",
               text: "Your file has been deleted.",
               icon: "success",
             }).then(() => {
-              // Refresh the page
               window.location.reload();
             });
           } else {
@@ -90,42 +95,31 @@ const  CoachFeedbackApproval = () => {
             });
           }
         } catch (error) {
-          console.error("Error deleting feeddback:", error);
+          console.error("Error deleting feedback:", error);
         }
       }
     });
   };
 
   const handleCreateReport = () => {
-    // initialize the PDF document
     const doc = new jsPDF();
-
-    // add title to the PDF document
     doc.setFontSize(16);
     doc.text("Coach Feedback Report", 14, 22);
-
-    // define the table columns
     const columns = [
       { header: "Customer Name", dataKey: "UserName" },
       { header: "Email", dataKey: "Email" },
       { header: "Rating", dataKey: "Rating" },
       { header: "Feedback", dataKey: "Comment" },
-      { header: "Coach", dataKey: "Coach" }, // Add the Coach column
+      { header: "Coach", dataKey: "Coach" },
     ];
-
-    // define the table rows
     const rows = filteredFeedbacks.map((feedback) => ({
       UserName: feedback.UserName,
       Email: feedback.Email,
       Rating: feedback.Rating,
       Comment: feedback.Comment,
-      Coach: feedback.Coach, // Add the Coach field
+      Coach: feedback.Coach,
     }));
-
-    // add the table to the PDF document
     doc.autoTable(columns, rows);
-
-    // save the PDF file
     doc.save("CoachFeedbackReport.pdf");
   };
 
@@ -133,11 +127,6 @@ const  CoachFeedbackApproval = () => {
     return feedbacks.filter((feedback) =>
       feedback.UserName.toLowerCase().startsWith(searchText.toLowerCase())
     );
-  };
-
-  // Define the function to handle navigation to the add feedback page
-  const handleAddFeedback = () => {
-    navigate("/fbk/coachfeedback"); // Navigate to the add feedback page
   };
 
   return (
@@ -177,58 +166,54 @@ const  CoachFeedbackApproval = () => {
               msOverflowStyle: "none",
             }}
           >
-            {filteredFeedbacks &&
-              filteredFeedbacks.map((feedback, index) => (
-                <div
-                  className={`grid grid-cols-7 ${
-                    index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
-                  }`}
-                  key={feedback._id}
-                >
-                  <div className="border-2 border-black p-2">
-                    {feedback.UserName}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    {feedback.Email}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    {feedback.Rating}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    {feedback.Comment}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    {feedback.Coach}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    <button
-                      className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                      onClick={handleApprove}
-                    >
-                      Approve
-                    </button>
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    <button
-                      className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                      onClick={() => handleDelete(feedback._id)}
-                    >
-                      Reject
-                    </button>
-                  </div>
+            {filteredFeedbacks.map((feedback, index) => (
+              <div
+                className={`grid grid-cols-7 ${
+                  index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
+                }`}
+                key={feedback._id}
+              >
+                <div className="border-2 border-black p-2">
+                  {feedback.UserName}
                 </div>
-              ))}
+                <div className="border-2 border-black p-2">
+                  {feedback.Email}
+                </div>
+                <div className="border-2 border-black p-2">
+                  {feedback.Rating}
+                </div>
+                <div className="border-2 border-black p-2">
+                  {feedback.Comment}
+                </div>
+                <div className="border-2 border-black p-2">
+                  {feedback.Coach}
+                </div>
+                <div className="border-2 border-black p-2">
+                  <button
+                    disabled={feedback.approved}
+                    className={`border-2 rounded-full p-1 px-4 border-black font-bold ${feedback.approved ? 'bg-green-500 text-white' : 'bg-cyan-400 text-white'}`}
+                    onClick={() => handleApprove(feedback._id)}
+                  >
+                    {feedback.approved ? 'Approved' : 'Approve'}
+                  </button>
+                </div>
+                <div className="border-2 border-black p-2">
+                  <button
+                    className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
+                    onClick={() => handleDelete(feedback._id)}
+                  >
+                    Reject
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
-          {/* Button to generate feedback report */}
           <button
             className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
             onClick={handleCreateReport}
           >
             Generate Feedback Report
           </button>
-
-        
-          
         </div>
       </div>
     </div>
