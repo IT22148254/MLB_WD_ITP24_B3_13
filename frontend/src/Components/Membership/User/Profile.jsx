@@ -5,6 +5,12 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from "react-router-dom";
 const UserProfile = () => {
+    const bgStyle = {
+        backgroundImage: `url(${bg})`,
+        backgroundSize: "cover",
+        height: "100vh",
+    
+      }
     const [Fname, setFname] = useState('');
     const [Lname, setLname] = useState('');
     const [Address, setAddress] = useState('');
@@ -128,110 +134,130 @@ const UserProfile = () => {
     };
 
     return (
-        <section>
-            <Container>
-                <div className="title">Membership</div>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="Fname">First Name</label>
-                        <input
-                            type="text"
-                            id="Fname"
-                            value={Fname}
-                            onChange={(e) => setFname(e.target.value)}
-                            disabled={!editMode} // Disable input when not in edit mode
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="Lname">Last Name</label>
-                        <input
-                            type="text"
-                            id="Lname"
-                            value={Lname}
-                            onChange={(e) => setLname(e.target.value)}
-                            disabled={!editMode} // Disable input when not in edit mode
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="Address">Address</label>
-                        <textarea
-                            id="Address"
-                            value={Address}
-                            onChange={handleAddressChange}
-                            disabled={!editMode} // Disable input when not in edit mode
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="Gender">Gender</label>
+        <div className="flex h-full justify-center items-center" style={bgStyle}>
+      <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
+        <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }} >Registration</p>
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="flex flex-col gap-y-4">
+            <div className="flex justify-between items-center">
+              <input
+                type="text"
+                id="Name"
+                name="First Name"
+                value={Fname}
+                onChange={(e)=>setFname(e.target.value)}
+                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                placeholder="Title"
+                required />
+            </div>
+            <div className="add-promo-row">
+              <input
+                type="text"
+                id="Last Name"
+                name="password"
+                value={Lname}
+                onChange={(e)=>setLname(e.target.value)}
+                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                placeholder="Subject"
+                required />
+            </div>
+            
+            <div className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500">
+              <textarea value={Address} onChange={(e)=>setAddress(e.target.value)} placeholder="Address" className="w-full max-w-full min-w-full"></textarea>
+            </div>
+            <div className="flex items-center mb-12">
                         <select
-                            id="Gender"
+                            id="TimeSlot"
+                            className="w-3/4 px-3 py-2 border-2 border-blue-400 rounded-xl"
                             value={Gender}
+                            placeholder="Gender"
                             onChange={(e) => setGender(e.target.value)}
-                            disabled={!editMode} // Disable input when not in edit mode
                         >
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="8.30-10.30">Male</option>
+                            <option value="10.30-12.30">Female</option>
                         </select>
-                    </div>
-                    <div>
-                        <label htmlFor="NIC">NIC</label>
+              </div>
+              <div className="add-promo-row">
+              <input
+                type="text"
+                id="subject"
+                name="password"
+                value={Password}
+                onChange={handlePasswordChange}
+                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                placeholder="Password"
+                required />
+            </div>
+            <div className="add-promo-row">
+              <input
+                type="text"
+                id="subject"
+                name="password"
+                value={confirmPassword}
+                onChange={handlePasswordChange}
+                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                placeholder="Confirm Password"
+                required />
+            </div>
+            
+            <div className="add-promo-row">
+              <input
+                type="email"
+                id="subject"
+                name="password"
+                value={Email}
+                onChange={handleEmailChange}
+                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                placeholder="Email"
+                required />
+            </div>
+            <div className="add-promo-row">
+              <input
+                type="email"
+                id="subject"
+                name="password"
+                value={phone}
+                onChange={handlePhoneChange}
+                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                placeholder="Contact No"
+                required />
+            </div>
+            <div className="flex items-center mb-12">     
                         <input
-                            type="text"
-                            id="NIC"
-                            value={NIC}
-                            onChange={handleNICChange}
-                            disabled={!editMode} // Disable input when not in edit mode
+                            type="date"
+                            dateFormat="dd/mm/yyyy"
+                            id="Date"
+                            name="Details"
+                            value={Date}
+                            onChange={(e) => setDob(e.target.value)}
+                            className="w-3/4 px-3 py-2 border-2 border-blue-400 rounded-xl"
+                            placeholder="Dob"
+                            required
                         />
                     </div>
-                    <div>
-                        <label htmlFor="phone">Contact No</label>
-                        <input
-                            type="number"
-                            id="phone"
-                            value={phone}
-                            onChange={handleContactChange}
-                            disabled={!editMode} // Disable input when not in edit mode
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="Email">Email</label>
-                        <input
-                            type="Email"
-                            id="Email"
-                            value={Email}
-                            onChange={handleEmailChange}
-                            disabled={!editMode} // Disable input when not in edit mode
-                        />
-                    </div>
-                    <div>
-                        <label htmlFor="Dob">Date of Birth</label>
-                        <DatePicker
-                            id="Dob"
-                            selected={Dob}
-                            onChange={handleDobChange}
-                            dateFormat="dd/MM/yyyy"
-                            maxDate={new Date()} // Set maximum selectable date to current date
-                            disabled={!editMode} // Disable input when not in edit mode
-                        />
-                    </div>
-                    {!editMode ? (
-                        <button type='button' className='secondary__btn' onClick={handleEdit}>
-                            Edit
-                        </button>
-                    ) : (
-                        <>
-                             {formError && <div style={{ color: 'red' }}>{formError}</div>}
-                            <button type="button" className='secondary__btn' onClick={handleCancel}>
-                                Cancel
-                            </button>
-                            <button type="submit" disabled={!isFormValid()}>
-                                Submit
-                            </button>
-                        </>
-                    )}
-                </form>
-            </Container>
-        </section>
+
+
+            <div class="add-promo-row">
+              <div className="add-promo-btns">
+                <div>
+                  {/* <button type='submit' className='primary__btn submit create-btn'>Create</button> */}
+                  <button type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mr-10">Save</button>
+                  <button type='reset' className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 ml-10 ">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
     );
 };
 

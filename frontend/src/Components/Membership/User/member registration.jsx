@@ -106,6 +106,10 @@ const MemberRegistration = () => {
     }
   };
 
+  const handleConfirmPasswordChange = (e)=>{
+    
+  }
+
 
 
 
@@ -288,11 +292,11 @@ const MemberRegistration = () => {
                 type="text"
                 id="subject"
                 name="password"
-                value={Password}
+                value={confirmPassword}
                 onChange={handlePasswordChange}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                           pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                placeholder="Password"
+                placeholder="Confirm Password"
                 required />
             </div>
             
@@ -305,7 +309,7 @@ const MemberRegistration = () => {
                 onChange={handleEmailChange}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                           pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                placeholder="Subject"
+                placeholder="Email"
                 required />
             </div>
             <div className="add-promo-row">
@@ -317,7 +321,7 @@ const MemberRegistration = () => {
                 onChange={handlePhoneChange}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                           pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                placeholder="Subject"
+                placeholder="Contact No"
                 required />
             </div>
             <div className="flex items-center mb-12">     
