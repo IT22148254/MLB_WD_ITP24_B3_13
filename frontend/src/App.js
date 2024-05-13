@@ -1,19 +1,23 @@
-import { Outlet } from 'react-router-dom'
-import React from 'react';
-// import Layout from './Components/Layout/Layout';
-import Footer from './HAF/Footer'
+import React from "react";
+import Header from "./content/header";
+import Footer from "./content/Footer";
+import { Outlet } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function App() {
+const App = () => {
   return (
     <>
-
+      <Header />
       <main>
+      <ToastContainer />
         <div style={{ height: "auto", width: "auto" }}>
           <Outlet />
         </div>
       </main>
+      <Footer />
     </>
   );
-}
+};
 
 export default App;

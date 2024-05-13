@@ -1,3 +1,4 @@
+const path = require("path"); 
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -5,11 +6,17 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 require("dotenv").config();
 const app = express();
+const cookieParser = require("cookie-parser");
+
+//body parser and url enc
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const PORT = process.env.PORT || 8070;
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 const URL = process.env.MONGODB_URL_STORE;
 
@@ -20,6 +27,8 @@ const connection = mongoose.connection;
 connection.once("open", () => {
   console.log("Mongodb connection successful");
 });
+
+app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
 
 const productRouter = require("./routs/products.js");
 app.use("/product", productRouter);
@@ -42,6 +51,8 @@ app.use("/supplier", supplierRouter);
 const emailrouter = require("./routs/email.js")
 app.use("/email", emailrouter)
 
+const uploadRouter = require("./routs/uploadRouts.js");
+app.use("/uploads", uploadRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is up and running on port : ${PORT}`);

@@ -1,45 +1,67 @@
 const router = require("express").Router();
 let User = require("../models/user");
-
+const { generateToken } = require("../utils/generateToken");
+const { admin, protect } = require("../Middleware/authMiddleware");
 // ================================================================================================================================================
 //=================================================================user============================================================================
 // ================================================================================================================================================
 
-
-
 //adding user
 
-router.route("/add").post((req, res) => {
-  const { Fname, Lname, Address, Gender, NIC, Phone, Email, Dob, AccLevel } =
-    req.body;
+router.route("/add").post(async (req, res) => {
+  try {
+    const {
+      Fname,
+      Lname,
+      Address,
+      Gender,
+      NIC,
+      Phone,
+      Email,
+      Password,
+      Dob,
+      AccLevel,
+    } = req.body;
 
-  const newUser = new User({
-    Fname,
-    Lname,
-    Address,
-    Gender,
-    NIC,
-    Phone,
-    Email,
-    Dob,
-    AccLevel,
-  });
+    const existingUser = await User.findOne({ Email });
 
-  newUser
-    .save()
-    .then(() => {
-      res.status(200).json({ message: " User added successfully " });
-    })
-    .catch((err) => {
-      res.status(400).json({ message: `User adding unsuccessful !!! ${err}` });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email is already in use" });
+    }
+
+    const newUser = new User({
+      Fname,
+      Lname,
+      Address,
+      Gender,
+      NIC,
+      Phone,
+      Email,
+      Password,
+      Dob,
+      AccLevel,
     });
+
+    newUser.save();
+    generateToken(res, newUser._id);
+    res.status(200).json({ message: " User added successfully " });
+  } catch (error) {
+    res.status(400).json({ message: `User adding unsuccessful !!! ${error}` });
+  }
+  // newUser
+  //   .save()
+  //   .then(() => {
+  //     res.status(200).json({ message: " User added successfully " });
+  //     generateToken(res, newUser._id);
+  //   })
+  //   .catch((err) => {
+  //     res.status(400).json({ message: `User adding unsuccessful !!! ${err}` });
+  //   });
 });
-
-
 
 //get all user
 
-router.route("/").get((req, res) => {
+router.route("/").get(protect, admin, (req, res) => {
   User.find()
     .then((users) => {
       res.status(200).json(users);
@@ -51,11 +73,9 @@ router.route("/").get((req, res) => {
     });
 });
 
-
-
 //get one user
 
-router.route("/get/:id").get(async (req, res) => {
+router.route("/get/:id").get(protect, async (req, res) => {
   try {
     const userId = req.params.id;
     const user = await User.findById(userId);
@@ -74,15 +94,23 @@ router.route("/get/:id").get(async (req, res) => {
   }
 });
 
-
-
 //update user
 
-router.route("/:id").put(async (req, res) => {
+router.route("/:id").put(protect, async (req, res) => {
   try {
     const uid = req.params.id;
-    const { Fname, Lname, Address, Gender, NIC, Phone, Email, Dob, AccLevel } =
-      req.body;
+    const {
+      Fname,
+      Lname,
+      Address,
+      Gender,
+      NIC,
+      Phone,
+      Email,
+      Password,
+      Dob,
+      AccLevel,
+    } = req.body;
 
     const result = await User.findByIdAndUpdate(
       uid,
@@ -94,6 +122,7 @@ router.route("/:id").put(async (req, res) => {
         NIC,
         Phone,
         Email,
+        Password,
         Dob,
         AccLevel,
       },
@@ -109,10 +138,9 @@ router.route("/:id").put(async (req, res) => {
   }
 });
 
-
 //delete user
 
-router.route("/:id").delete(async (req, res) => {
+router.route("/:id").delete(protect, admin, async (req, res) => {
   try {
     const uid = req.params.id;
 
@@ -127,6 +155,36 @@ router.route("/:id").delete(async (req, res) => {
       .status(400)
       .json({ message: ` User deleted unsuccessfully ${error}` });
   }
+});
+
+//utility routs
+
+//login + create cookie
+
+router.route("/login").post(async (req, res) => {
+  const { email, password } = req.body;
+
+  const user = await User.findOne({ Email: email });
+
+  if (user && (await user.matchPassWord(password))) {
+    generateToken(res, user._id);
+
+    return res.status(200).json({
+      _id: user._id,
+      Fname: user.Fname,
+      Email: user.Email,
+      AccLevel: user.AccLevel,
+    });
+  } else {
+    return res.status(401).json({ message: "Unauthorised access" });
+  }
+});
+
+// logout + clear cookie
+
+router.route("/logout").post(async (req, res) => {
+  res.cookie("jwt", "", { httpOnly: true, expires: new Date(0) });
+  res.status(200).json({ message: "Logged out" });
 });
 
 module.exports = router;
