@@ -21,6 +21,9 @@ const AdminPortalScreen = () => {
         <ListGroup.Item>
           <Button className="bg-blue-500 hover:bg-blue-600" onClick={(e)=> navigate('/sup/supDashboard')} >Supplier</Button>
         </ListGroup.Item>
+        <ListGroup.Item>
+          <Button className="bg-blue-500 hover:bg-blue-600" onClick={(e)=> navigate('/fbk/')} >Feedback</Button>
+        </ListGroup.Item>
       </ListGroup>
     </center>
   );
