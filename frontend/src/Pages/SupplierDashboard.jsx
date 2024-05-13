@@ -24,18 +24,18 @@ const SupplierDashboard = () => {
                 <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/supDashboard2")} >
                   Supplier
                 </button>
-                <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/OrderHandling")}>
+                <button className="ml-5 mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/OrderHandling")}>
                   <a><p id='ed'>Order</p></a>
                 </button>
-              </Container>
-              <br />
-              <Container className="flex justify-between" >
-                <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/Inventory")}>
+              {/* </Container> */}
+              {/* <br /> */}
+              {/* <Container className="flex justify-between" > */}
+                <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/Inventory")}>
                   <a><p id='ed'>Inventory</p></a>
                 </button>
-                <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/Invoice")}>
+                {/* <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/Invoice")}>
                   <a><p id='ed'>Invoices</p></a>
-                </button>
+                </button> */}
               </Container>
             </Col>
           </Row>
