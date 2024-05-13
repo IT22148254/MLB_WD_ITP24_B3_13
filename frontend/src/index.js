@@ -12,6 +12,9 @@ import Selectoption from './Pages/Selectoption'
 import Coachfeedback from './Components/Feedback/User/CoachFeedbackForm'; 
 import CoachFeedbackTable from './Components/Feedback/User/CoachFeedbackTable';
 import CoachFeedbackEditForm from './Components/Feedback/User/CoachFeedbackEditForm';
+import CoachFeedbackApproval from './Components/Feedback/Manager/CoachFeedbackApproval';
+import ServiceFeedbackApproval from './Components/Feedback/Manager/ServiceFeedbackApproval';
+import { ToastContainer } from 'react-toastify';
 
 {/* i chnange from here */}
 // import Selectoption from './Pages/Selectoption'
@@ -34,7 +37,9 @@ const router = createBrowserRouter(
         <Route path="coachfeedbacktable/" element={<CoachFeedbackTable/>}/>
         <Route path="coachfeedbackedit/:id" element={<CoachFeedbackEditForm/>}/>
         <Route path="selectopt/" element={<Selectoption/>}/>
-
+        <Route path="coachfeedbackapprove/" element={<CoachFeedbackApproval/>}/>
+        <Route path="servicefeedbackapprove/" element={<ServiceFeedbackApproval/>}/>
+ 
       </Route>
     </Route>
 
@@ -46,6 +51,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
      <RouterProvider router={router} />
+     <ToastContainer />
   </React.StrictMode>
 );
 

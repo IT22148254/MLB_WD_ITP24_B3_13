@@ -12,11 +12,12 @@ import 'react-toastify/dist/ReactToastify.css';
 import bg from "../../../Images/feedback.jpeg";
 
 function handleApprove(){
-
 toast.success("Feedback Approved")
 }
 
-const  CoachFeedbackApproval = () => {
+
+
+const ServiceFeedbackApproval = () => {
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
@@ -35,7 +36,7 @@ const  CoachFeedbackApproval = () => {
     const fetchFeedbacks = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8070/feedback/coach"
+          "http://localhost:8070/feedback/service"
         );
         console.log(response);
         setFeedbacks(response.data.result);
@@ -54,7 +55,7 @@ const  CoachFeedbackApproval = () => {
   }, [searchInput, feedbacks]);
 
 //   const handleEdit = (id) => {
-//     navigate(`/fbk/coachfeedbackedit/${id}`);
+//     navigate(`/fbk/editservice/${id}`);
 //   };
 
   const handleDelete = (id) => {
@@ -70,7 +71,7 @@ const  CoachFeedbackApproval = () => {
       if (result.isConfirmed) {
         try {
           const response = await axios.delete(
-            `http://localhost:8070/feedback/coach/${id}`
+            `http://localhost:8070/feedback/service/${id}`
           );
 
           if (response.status === 200) {
@@ -102,7 +103,7 @@ const  CoachFeedbackApproval = () => {
 
     // add title to the PDF document
     doc.setFontSize(16);
-    doc.text("Coach Feedback Report", 14, 22);
+    doc.text("Service Feedback Report", 14, 22);
 
     // define the table columns
     const columns = [
@@ -110,7 +111,6 @@ const  CoachFeedbackApproval = () => {
       { header: "Email", dataKey: "Email" },
       { header: "Rating", dataKey: "Rating" },
       { header: "Feedback", dataKey: "Comment" },
-      { header: "Coach", dataKey: "Coach" }, // Add the Coach column
     ];
 
     // define the table rows
@@ -119,14 +119,13 @@ const  CoachFeedbackApproval = () => {
       Email: feedback.Email,
       Rating: feedback.Rating,
       Comment: feedback.Comment,
-      Coach: feedback.Coach, // Add the Coach field
     }));
 
     // add the table to the PDF document
     doc.autoTable(columns, rows);
 
     // save the PDF file
-    doc.save("CoachFeedbackReport.pdf");
+    doc.save("ServiceFeedbackReport.pdf");
   };
 
   const filterFeedbacks = (feedbacks, searchText) => {
@@ -136,9 +135,9 @@ const  CoachFeedbackApproval = () => {
   };
 
   // Define the function to handle navigation to the add feedback page
-  const handleAddFeedback = () => {
-    navigate("/fbk/coachfeedback"); // Navigate to the add feedback page
-  };
+//   const handleAddFeedback = () => {
+//     navigate("/fbk/addservice"); // Navigate to the add feedback page
+//   };
 
   return (
     <div className="flex h-full justify-center items-center" style={bgStyle}>
@@ -148,7 +147,7 @@ const  CoachFeedbackApproval = () => {
             className="text-4xl text-white font-bold align-top mb-6"
             style={{ WebkitTextStroke: "1px black" }}
           >
-            Coach Feedback Approval
+            Service Feedback list
           </div>
           <div className="mb-4">
             <div className="h-9 bg-white/70 w-1/2 rounded-lg">
@@ -160,12 +159,11 @@ const  CoachFeedbackApproval = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-7 bg-cyan-400">
+          <div className="grid grid-cols-6 bg-cyan-400">
             <div className="border-2 border-black p-3">Name</div>
             <div className="border-2 border-black p-3">Email</div>
             <div className="border-2 border-black p-3">Rating</div>
             <div className="border-2 border-black p-3">Opinion</div>
-            <div className="border-2 border-black p-3">Coach</div>
             <div className="border-2 border-black p-3">Approve</div>
             <div className="border-2 border-black p-3">Reject</div>
           </div>
@@ -180,7 +178,7 @@ const  CoachFeedbackApproval = () => {
             {filteredFeedbacks &&
               filteredFeedbacks.map((feedback, index) => (
                 <div
-                  className={`grid grid-cols-7 ${
+                  className={`grid grid-cols-6 ${
                     index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
                   }`}
                   key={feedback._id}
@@ -198,9 +196,6 @@ const  CoachFeedbackApproval = () => {
                     {feedback.Comment}
                   </div>
                   <div className="border-2 border-black p-2">
-                    {feedback.Coach}
-                  </div>
-                  <div className="border-2 border-black p-2">
                     <button
                       className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
                       onClick={handleApprove}
@@ -209,7 +204,7 @@ const  CoachFeedbackApproval = () => {
                     </button>
                   </div>
                   <div className="border-2 border-black p-2">
-                    <button
+                  <button
                       className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
                       onClick={() => handleDelete(feedback._id)}
                     >
@@ -226,13 +221,11 @@ const  CoachFeedbackApproval = () => {
           >
             Generate Feedback Report
           </button>
-
-        
-          
         </div>
       </div>
     </div>
   );
 };
 
-export default CoachFeedbackApproval;
+export default ServiceFeedbackApproval;
+
