@@ -116,11 +116,11 @@ const ScheduleTable = () => {
     doc.save("Schedules.pdf");
   };
 
-  const filterSchedules = (schs, searchText) => {
-    return schs.filter((sch) =>
-      sch.Trainer && sch.Trainer.toLowerCase().startsWith(searchText.toLowerCase())
-    );
-  };
+  // const filterSchedules = (schs, searchText) => {
+  //   return schs.filter((sch) =>
+  //     sch.Trainer && sch.Trainer.toLowerCase().startsWith(searchText.toLowerCase())
+  //   );
+  // };
   
 
   // Define the function to handle navigation to the add feedback page
@@ -180,10 +180,10 @@ const ScheduleTable = () => {
                   <div className="border-2 border-black p-2">
                     {sch.Section}
                   </div>
-                  {/* <div className="border-2 border-black p-2">
+                  <div className="border-2 border-black p-2">
                     <button
                       className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white fsch-bold"
-                      onClick={() => handleEdit(sch)}
+                      onClick={() => handleEdit(sch._id)}
                     >
                       Edit
                     </button>
@@ -195,7 +195,7 @@ const ScheduleTable = () => {
                     >
                       Delete
                     </button>
-                  </div> */}
+                  </div>
                 </div>
               ))}
           </div>
