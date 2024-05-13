@@ -46,7 +46,7 @@ const EditStandedForm = () => {
     useEffect(() => {
         const fetchPackage = async () => {
             try {
-                const response = await axios.get(`http://localhost:8070/package/propackage/get/${id}`);
+                const response = await axios.get(`http://localhost:8070/package/package/get/${id}`);
                 const { data } = response; // Destructure the data property
                 setName(data.Name);
                 setDiscription(data.Discription);
@@ -64,7 +64,7 @@ const EditStandedForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.put(`http://localhost:8070/package/propackage/${id}`, {
+        axios.put(`http://localhost:8070/package/package/${id}`, {
             Name: Name,
             Price: Price,
             Discription: Discription,
@@ -78,7 +78,7 @@ const EditStandedForm = () => {
             }).then(() => {
                 console.log('Promo updated successfully', response.data);
 
-                navigate('/pkg/createdpromos');
+                navigate('/pkg/createdstanded');
             });
 
         })
@@ -102,7 +102,7 @@ const EditStandedForm = () => {
     return (
         <div className="flex h-full justify-center items-center" style={bgStyle}>
             <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 flex flex-col gap-y-4">
-                <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>Edit Promo Package</p>
+                <p className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>Edit Standed Package</p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div className="flex flex-col gap-y-4">
                         <div className="flex justify-between items-center">
