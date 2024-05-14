@@ -49,13 +49,13 @@ const PlacedOrderTable = () => {
     const columns = [
       { header: 'Item Name', dataKey: 'Name' },
       { header: 'Quantity', dataKey: 'Email' },
-      { header: 'Supplieer', dataKey: 'Phone' },
+      { header: 'Supplier', dataKey: 'Phone' },
     ];
 
     const rows = checkedItems.map((sup) => ({
       Name: sup.PrName,
       Email: sup.quantity,
-      Phone: suppliers.filter((s) => s._id.includes(sup.Supplier)).map((s) => s.Name)
+      Phone: suppliers.find((s) => s._id === sup.Supplier)?.Name || ''
     }));
 
     doc.autoTable(columns, rows);
@@ -144,7 +144,8 @@ const PlacedOrderTable = () => {
 
   // Filter orders based on search term
   const filteredOrders = orders.filter((order) =>
-    order.PrName.toLowerCase().startsWith(searchTerm.toLowerCase())
+    suppliers
+      .find((sup) => sup._id === order.Supplier)?.Name.toLowerCase().startsWith(searchTerm.toLowerCase())
   );
 
   return (
@@ -152,7 +153,7 @@ const PlacedOrderTable = () => {
       <div className="w-full">
         <input
           type="text"
-          placeholder="Search by Product Name"
+          placeholder="Search by supplier name"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="p-2 m-2 border border-gray-400 rounded-md"
@@ -182,9 +183,7 @@ const PlacedOrderTable = () => {
               key={order._id}
             >
               <div className="border-2 border-black p-2">
-                {suppliers
-                  .filter((sup) => sup._id.includes(order.Supplier))
-                  .map((sup) => sup.Name)}
+                {suppliers.find((sup) => sup._id === order.Supplier)?.Name || ''}
               </div>
               <div className="border-2 border-black p-2">{order.PrName}</div>
               <div className="border-2 border-black p-2">{order.quantity}</div>
