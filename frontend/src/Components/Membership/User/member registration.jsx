@@ -23,15 +23,16 @@ const MemberRegistration = () => {
   const [Password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [NIC, setNIC] = useState('');
-  const [phone, setPhone] = useState('');
+  const [Phone, setPhone] = useState('');
   const [Email, setEmail] = useState('');
   const [Dob, setDob] = useState(null);
   const [AccLevel, setAccLevel] = useState('customer')
 
-  const [passwordError, setPasswordError] = useState('');
+  const [passworderror, setPasswordError] = useState('');
   const [nicerror, setNicError] = useState('')
   const [phoneerror, setPhoneError] = useState('')
   const [emailerror, setEmailError] = useState('')
+  const [confirmPassworderror, setConfirmPasswordError] = useState('')
   const navigate = useNavigate();
 
   // const handleAddressChange = (e) => {
@@ -63,27 +64,23 @@ const MemberRegistration = () => {
 
   const handlePhoneChange = (e) => {
     const inputValue = e.target.value;
-
-    // Check if the input value is empty
-    if (inputValue === '') {
-      setPhoneError('');
+  
+    // Regular expression to validate contact number format
+    const contactNoRegex = /^\d{0,10}$/; // Allow up to 10 digits
+  
+    // Test the input against the regular expression
+    if (!contactNoRegex.test(inputValue)) {
+      setPhoneError(
+        "Contact number should include up to 10 numbers and contain only digits"
+      );
     } else {
-      // Regular expression to validate contact number format
-      const contactNoRegex = /^\d{10}$/;
-
-      // Test the input against the regular expression
-      if (!contactNoRegex.test(inputValue)) {
-        setPhoneError(
-          "Contact number should include 10 numbers and contain only digits"
-        );
-      } else {
-        setPhoneError("");
-      }
+      setPhoneError("");
     }
-
-    // Update the phone state
+  
     setPhone(inputValue);
   };
+  
+  
 
   const handleEmailChange = (e) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -97,17 +94,30 @@ const MemberRegistration = () => {
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
-    setPassword(newPassword);
 
     if (newPassword.length > 8) {
       setPasswordError('Password must be 8 characters or less');
     } else {
+      setPassword(newPassword);
       setPasswordError('');
     }
   };
 
-  const handleConfirmPasswordChange = (e)=>{
-    
+
+  const handleConfirmPasswordChange = (e) => {
+    const newPassword = e.target.value;
+    setConfirmPassword(newPassword)
+
+    if (Password !== confirmPassword) {
+      setConfirmPasswordError('password does not match')
+    }
+    else {
+      setConfirmPasswordError('')
+    }
+  }
+
+  const handleDobChange =(date)=>{
+    setDob(date)
   }
 
 
@@ -158,7 +168,7 @@ const MemberRegistration = () => {
 
 
     // Passwords match, proceed with form submission
-    const customer = { Fname, Lname, Address, Gender, NIC, phone, Email, Dob, AccLevel }
+    const user = { Fname, Lname, Address, Gender, NIC, Phone, Email, Password, Dob, AccLevel }
 
     // const response = await fetch('http://localhost:8000/register', {
     //   method: 'POST',
@@ -196,7 +206,7 @@ const MemberRegistration = () => {
 
     try {
 
-      const response = await axios.post("http://localhost:8070/user/add", customer)
+      const response = await axios.post("http://localhost:8070/user/add", user)
 
       if (response.ok) {
 
@@ -237,69 +247,55 @@ const MemberRegistration = () => {
             <div className="flex justify-between items-center">
               <input
                 type="text"
-                id="Name"
+                id="Fname"
                 name="First Name"
                 value={Fname}
-                onChange={(e)=>setFname(e.target.value)}
+                onChange={(e) => setFname(e.target.value)}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                           pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                placeholder="Title"
+                placeholder="Fname"
                 required />
             </div>
             <div className="add-promo-row">
               <input
                 type="text"
                 id="Last Name"
-                name="password"
                 value={Lname}
-                onChange={(e)=>setLname(e.target.value)}
+                onChange={(e) => setLname(e.target.value)}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                           pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                placeholder="Subject"
-                required />
-            </div>
-            
-            <div className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
-                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500">
-              <textarea value={Address} onChange={(e)=>setAddress(e.target.value)} placeholder="Address" className="w-full max-w-full min-w-full"></textarea>
-            </div>
-            <div className="flex items-center mb-12">
-                        <select
-                            id="TimeSlot"
-                            className="w-3/4 px-3 py-2 border-2 border-blue-400 rounded-xl"
-                            value={Gender}
-                            placeholder="Gender"
-                            onChange={(e) => setGender(e.target.value)}
-                        >
-                            <option value="8.30-10.30">Male</option>
-                            <option value="10.30-12.30">Female</option>
-                        </select>
-              </div>
-              <div className="add-promo-row">
-              <input
-                type="text"
-                id="subject"
-                name="password"
-                value={Password}
-                onChange={handlePasswordChange}
-                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
-                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                placeholder="Password"
+                placeholder="Lname"
                 required />
             </div>
             <div className="add-promo-row">
               <input
                 type="text"
-                id="subject"
-                name="password"
-                value={confirmPassword}
-                onChange={handlePasswordChange}
+                id="Last Name"
+                value={NIC}
+                onChange={handleNicChange}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                           pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
-                placeholder="Confirm Password"
+                placeholder="NIC"
                 required />
+              {nicerror && <div style={{ color: 'red' }}>{nicerror}</div>}
             </div>
-            
+
+            <div className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500">
+              <textarea value={Address} onChange={(e) => setAddress(e.target.value)} placeholder="Address" className="w-full max-w-full min-w-full"></textarea>
+            </div>
+            <div className="flex items-center mb-12">
+              <select
+                id="TimeSlot"
+                className="w-3/4 px-3 py-2 border-2 border-blue-400 rounded-xl"
+                value={Gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <option value="" disabled>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
             <div className="add-promo-row">
               <input
                 type="email"
@@ -312,38 +308,66 @@ const MemberRegistration = () => {
                 placeholder="Email"
                 required />
             </div>
+            {emailerror && <div style={{ color: 'red' }}>{emailerror}</div>}
             <div className="add-promo-row">
               <input
-                type="email"
+                type="text"
                 id="subject"
                 name="password"
-                value={phone}
+                value={Password}
+                onChange={handlePasswordChange}
+                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                placeholder="Password"
+                required />
+            </div>
+            {passworderror && <div style={{ color: 'orange' }}>{passworderror}</div>}
+            <div className="add-promo-row">
+              <input
+                type="text"
+                id="subject"
+                name="password"
+                value={confirmPassword}
+                onChange={handleConfirmPasswordChange}
+                className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
+                          pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                placeholder="Confirm Password"
+                required />
+            </div>
+            {confirmPassworderror && <div style={{ color: 'red' }}>{confirmPassworderror}</div>}
+            <div className="add-promo-row">
+              <input
+                type="number"
+                id="subject"
+                name="password"
+                value={Phone}
                 onChange={handlePhoneChange}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg 
                           pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                 placeholder="Contact No"
                 required />
             </div>
-            <div className="flex items-center mb-12">     
-                        <input
-                            type="date"
-                            dateFormat="dd/mm/yyyy"
-                            id="Date"
-                            name="Details"
-                            value={Date}
-                            onChange={(e) => setDob(e.target.value)}
-                            className="w-3/4 px-3 py-2 border-2 border-blue-400 rounded-xl"
-                            placeholder="Dob"
-                            required
-                        />
-                    </div>
+            {phoneerror && <div style={{ color: 'orange' }}>{phoneerror}</div>}
+            <div className="flex items-center mb-12">
+              <DatePicker
+                selected={Dob}
+                onChange={handleDobChange}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="DOB"
+                showMonthDropdown
+                showYearDropdown
+                dropdownMode="select"
+                maxDate={new Date()} // Optional: Restrict selection to dates before today
+                popperPlacement="bottom"
+              />
+            </div>
 
 
             <div class="add-promo-row">
               <div className="add-promo-btns">
                 <div>
                   {/* <button type='submit' className='primary__btn submit create-btn'>Create</button> */}
-                  <button type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mr-10">Save</button>
+                  <button type='submit' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mr-10">Register</button>
                   <button type='reset' className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mt-4 ml-10 ">Cancel</button>
                 </div>
               </div>
