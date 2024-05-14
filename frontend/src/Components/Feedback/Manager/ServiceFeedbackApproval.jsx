@@ -196,12 +196,12 @@ const ServiceFeedbackApproval = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-7 bg-cyan-400">
+          <div className="grid grid-cols-6 bg-cyan-400">
             <div className="border-2 border-black p-3">Name</div>
             <div className="border-2 border-black p-3">Email</div>
             <div className="border-2 border-black p-3">Rating</div>
             <div className="border-2 border-black p-3">Opinion</div>
-            <div className="border-2 border-black p-3">Edit</div>
+          
             <div className="border-2 border-black p-3">Delete</div>
             <div className="border-2 border-black p-3">Received</div>
           </div>
@@ -215,7 +215,7 @@ const ServiceFeedbackApproval = () => {
                 {filteredFeedbacks &&
                   filteredFeedbacks.map((feedback, index) => (
                     <div
-                      className={`grid grid-cols-7 ${
+                      className={`grid grid-cols-6 ${
                         index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
                       }`}
                       key={feedback._id}
@@ -224,14 +224,7 @@ const ServiceFeedbackApproval = () => {
                       <div className="border-2 border-black p-2">{feedback.Email}</div>
                       <div className="border-2 border-black p-2">{feedback.Rating}</div>
                       <div className="border-2 border-black p-2">{feedback.Comment}</div>
-                      <div className="border-2 border-black p-2">
-                        <button
-                          className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                          onClick={() => handleEdit(feedback._id)}
-                        >
-                          Edit
-                        </button>
-                      </div>
+                     
                       <div className="border-2 border-black p-2">
                         <button
                           className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
