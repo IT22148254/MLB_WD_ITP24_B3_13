@@ -1,37 +1,34 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useParams } from "react-router-dom";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
-import { Container } from "reactstrap";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import bg from "../../../Images/feedback.jpeg";
 
 const ServiceFeedbackApproval = () => {
-  let navigate = useNavigate();
-  const { id } = useParams();
+  const bgStyle = {
+    backgroundImage: `url(${bg})`,
+    backgroundSize: "cover",
+    height: "100vh",
+  };
 
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [feedbacks, setFeedbacks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [filteredFeedbacks, setFilteredFeedbacks] = useState([]);
+  const [confirmedFeedbacks, setConfirmedFeedbacks] = useState([]);
+  const [clickedFeedbacks, setClickedFeedbacks] = useState([]);
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
       try {
-        const response = await axios.get("http://localhost:8070/feedback/service");
+        const response = await axios.get(
+          "http://localhost:8070/feedback/servicea"
+        );
         setFeedbacks(response.data.result);
         setFilteredFeedbacks(response.data.result);
-        // Fetch approval status from local storage or server and update feedbacks accordingly
-        const storedApprovalStatus = JSON.parse(localStorage.getItem('feedbackApprovalStatus')) || {};
-        const updatedFeedbacks = response.data.result.map(feedback => ({
-          ...feedback,
-          approved: storedApprovalStatus[feedback._id] || false
-        }));
-        setFeedbacks(updatedFeedbacks);
-        setFilteredFeedbacks(updatedFeedbacks);
       } catch (error) {
         console.error("Failed to fetch feedbacks:", error);
       }
@@ -41,39 +38,74 @@ const ServiceFeedbackApproval = () => {
   }, []);
 
   useEffect(() => {
+    // Retrieve confirmed feedback IDs from local storage
+    const storedConfirmedFeedbacks = JSON.parse(localStorage.getItem("confirmedFeedbacks"));
+    if (storedConfirmedFeedbacks) {
+      setConfirmedFeedbacks(storedConfirmedFeedbacks);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Update local storage when confirmed feedback IDs change
+    localStorage.setItem("confirmedFeedbacks", JSON.stringify(confirmedFeedbacks));
+  }, [confirmedFeedbacks]);
+
+  useEffect(() => {
     const filtered = filterFeedbacks(feedbacks, searchInput);
     setFilteredFeedbacks(filtered);
   }, [searchInput, feedbacks]);
 
-  const handleApprove = async (id) => {
+  const handleEdit = (id) => {
+    navigate(`/fbk/editservice/${id}`);
+  };
+
+  const handleDelete = async (id) => {
     try {
-      const response = await axios.put(`http://localhost:8070/feedback/service/${id}`, { approved: true });
+      const response = await axios.delete(
+        `http://localhost:8070/feedback/servicea/${id}`
+      );
+
       if (response.status === 200) {
-        toast.success("Feedback Approved");
-        // Update the local state
-        const updatedFeedbacks = feedbacks.map((feedback) =>
-          feedback._id === id ? { ...feedback, approved: true } : feedback
-        );
-        setFeedbacks(updatedFeedbacks);
-        setFilteredFeedbacks(updatedFeedbacks);
-        // Update local storage
-        const storedApprovalStatus = JSON.parse(localStorage.getItem('feedbackApprovalStatus')) || {};
-        localStorage.setItem('feedbackApprovalStatus', JSON.stringify({ ...storedApprovalStatus, [id]: true }));
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        }).then(() => {
+          window.location.reload();
+        });
       } else {
-        toast.error("Failed to approve feedback");
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to delete the feedback.",
+          icon: "error",
+        });
       }
     } catch (error) {
-      console.error("Error approving feedback:", error);
-      toast.error("Failed to approve feedback");
+      console.error("Error deleting feedback:", error);
     }
   };
 
-  const handleDelete = (id) => {
-    // Function to delete feedback
-  };
-
   const handleCreateReport = () => {
-    // Function to create report
+    const doc = new jsPDF();
+    doc.setFontSize(16);
+    doc.text("Service Feedback Report", 14, 22);
+
+    const columns = [
+      { header: "Customer Name", dataKey: "UserName" },
+      { header: "Email", dataKey: "Email" },
+      { header: "Rating", dataKey: "Rating" },
+      { header: "Feedback", dataKey: "Comment" },
+    ];
+
+    const rows = filteredFeedbacks.map((feedback) => ({
+      UserName: feedback.UserName,
+      Email: feedback.Email,
+      Rating: feedback.Rating,
+      Comment: feedback.Comment,
+    }));
+
+    doc.autoTable(columns, rows);
+    doc.save("ServiceFeedbackReport.pdf");
   };
 
   const filterFeedbacks = (feedbacks, searchText) => {
@@ -82,12 +114,47 @@ const ServiceFeedbackApproval = () => {
     );
   };
 
+  const handleAddFeedback = () => {
+    navigate("/fbk/addservice");
+  };
+
+  const handleReceived = async (id) => {
+    if (!confirmedFeedbacks.includes(id) && !clickedFeedbacks.includes(id)) {
+      try {
+        const response = await axios.post(
+          `http://localhost:8070/feedback/service/add`,
+          filteredFeedbacks.find((feedback) => feedback._id === id)
+        );
+        if (response.status === 200) {
+          setConfirmedFeedbacks([...confirmedFeedbacks, id]);
+          setClickedFeedbacks([...clickedFeedbacks, id]);
+          Swal.fire({
+            title: "Confirmed!",
+            text: "Feedback received successfully.",
+            icon: "success",
+          });
+        }
+      } catch (error) {
+        console.error("Error receiving feedback:", error);
+      }
+    } else {
+      Swal.fire({
+        title: "Already Confirmed!",
+        text: "This feedback has already been confirmed.",
+        icon: "warning",
+      });
+    }
+  };
+
   return (
-    <div className="flex h-full justify-center items-center" style={{ backgroundImage: `url(${bg})`, backgroundSize: "cover", height: "100vh" }}>
+    <div className="flex h-full justify-center items-center" style={bgStyle}>
       <div className="bg-black/45 w-4/5 rounded-[50px] py-12 px-12 gap -inset-y-8">
         <div className="w-full">
-          <div className="text-4xl text-white font-bold align-top mb-6" style={{ WebkitTextStroke: "1px black" }}>
-            Service Feedback list
+          <div
+            className="text-4xl text-white font-bold align-top mb-6"
+            style={{ WebkitTextStroke: "1px black" }}
+          >
+            Service Feedback approval
           </div>
           <div className="mb-4">
             <div className="h-9 bg-white/70 w-1/2 rounded-lg">
@@ -99,54 +166,92 @@ const ServiceFeedbackApproval = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-6 bg-cyan-400">
+          <div className="grid grid-cols-7 bg-cyan-400">
             <div className="border-2 border-black p-3">Name</div>
             <div className="border-2 border-black p-3">Email</div>
             <div className="border-2 border-black p-3">Rating</div>
             <div className="border-2 border-black p-3">Opinion</div>
-            <div className="border-2 border-black p-3">Approve</div>
-            <div className="border-2 border-black p-3">Reject</div>
+            <div className="border-2 border-black p-3">Edit</div>
+            <div className="border-2 border-black p-3">Delete</div>
+            <div className="border-2 border-black p-3">Received</div>
           </div>
-          <div className="w-full overflow-auto " style={{ maxHeight: "450px", scrollbarWidth: "none", msOverflowStyle: "none" }}>
-            {filteredFeedbacks.map((feedback, index) => (
-              <div className={`grid grid-cols-6 ${index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "}`} key={feedback._id}>
-                <div className="border-2 border-black p-2">
-                  {feedback.UserName}
+          <div
+            className="w-full overflow-auto "
+            style={{
+              maxHeight: "450px",
+              scrollbarWidth: "none",
+              msOverflowStyle: "none",
+            }}
+          >
+            {filteredFeedbacks &&
+              filteredFeedbacks.map((feedback, index) => (
+                <div
+                  className={`grid grid-cols-7 ${
+                    index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
+                  }`}
+                  key={feedback._id}
+                >
+                  <div className="border-2 border-black p-2">
+                    {feedback.UserName}
+                  </div>
+                  <div className="border-2 border-black p-2">
+                    {feedback.Email}
+                  </div>
+                  <div className="border-2 border-black p-2">
+                    {feedback.Rating}
+                  </div>
+                  <div className="border-2 border-black p-2">
+                    {feedback.Comment}
+                  </div>
+                  <div className="border-2 border-black p-2">
+                    <button
+                      className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
+                      onClick={() => handleEdit(feedback._id)}
+                    >
+                      Edit
+                    </button>
+                  </div>
+                  <div className="border-2 border-black p-2">
+                    <button
+                      className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
+                      onClick={() => handleDelete(feedback._id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                  <div className="border-2 border-black p-2">
+                    {confirmedFeedbacks.includes(feedback._id) ? (
+                      <button className="bg-green-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold" disabled>
+                        Confirmed
+                      </button>
+                    ) : (
+                      <button
+                        className={`${
+                          clickedFeedbacks.includes(feedback._id)
+                            ? "hidden"
+                            : "bg-blue-500"
+                        } border-2 border-black rounded-full p-1 px-4 text-white font-bold`}
+                        onClick={() => handleReceived(feedback._id)}
+                        disabled={clickedFeedbacks.includes(feedback._id)}
+                      >
+                        {clickedFeedbacks.includes(feedback._id) ? "Received" : "Receive"}
+                      </button>
+                    )}
+                  </div>
                 </div>
-                <div className="border-2 border-black p-2">
-                  {feedback.Email}
-                </div>
-                <div className="border-2 border-black p-2">
-                  {feedback.Rating}
-                </div>
-                <div className="border-2 border-black p-2">
-                  {feedback.Comment}
-                </div>
-                <div className="border-2 border-black p-2">
-                  <button
-                    disabled={feedback.approved}
-                    className={`border-2 rounded-full p-1 px-4 border-black font-bold ${feedback.approved ? 'bg-green-500 text-white' : 'bg-cyan-400 text-white'}`}
-                    onClick={() => handleApprove(feedback._id)}
-                  >
-                    {feedback.approved ? 'Approved' : 'Approve'}
-                  </button>
-                </div>
-                <div className="border-2 border-black p-2">
-                  <button
-                    className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                    onClick={() => handleDelete(feedback._id)}
-                  >
-                    Reject
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
           <button
             className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
             onClick={handleCreateReport}
           >
             Generate Feedback Report
+          </button>
+          <button
+            className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
+            onClick={handleAddFeedback}
+          >
+            Add Feedback
           </button>
         </div>
       </div>
