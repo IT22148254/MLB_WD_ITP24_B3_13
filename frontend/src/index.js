@@ -7,6 +7,7 @@ import reportWebVitals from './reportWebVitals';
 import TestScreen from './Components/Membership/Manager/TestScreen';
 import EmailTable from './Components/Membership/Manager/EmailTable';
 import EditEmail from './Components/Membership/Manager/EditEmail';
+import EmailForm from './Components/Membership/Manager/EmailForm';
 import MemberRegistration from './Components/Membership/User/member registration';
 import "./bootstrap/css/bootstrap.min.css";
 import "./index.css";
@@ -27,6 +28,7 @@ import AdminOrdersScreen from "./screens/AdminOrdersScreen";
 import AdminItemsScreen from "./screens/AdminItemsScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import DefaultScreen from "./screens/DefaultScreen";
+import UserTable from './Components/Membership/Manager/Usertable';
 import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter(
@@ -45,8 +47,10 @@ const router = createBrowserRouter(
         <Route path='editpromo/:id' element={<EditPromoForm/>} />
         <Route path="editstandard/:id" element={<EditStandard />} /> */}
       {/* <Route path="testscreen/" element={<TestScreen />} /> */}
-      <Route path="testscreen/:id" element={<TestScreen />} />
+      <Route path="testscreen/" element={<TestScreen />} />
+      <Route path="addemail/" element={<EmailForm/>}/>
       <Route path="editemail/:id" element={<EditEmail />} />
+      <Route path="usertable/" element={<UserTable/>}/>
 
       <Route path="" element={<ProtectedRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />

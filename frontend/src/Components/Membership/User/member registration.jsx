@@ -5,6 +5,8 @@ import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import bg from '../../../Images/package_bg.jpg';
+import { toast } from 'react-toastify';
+
 
 // Reusable InputField component
 const InputField = ({
@@ -48,7 +50,7 @@ const MemberRegistration = () => {
   const [Fname, setFname] = useState('');
   const [Lname, setLname] = useState('');
   const [Address, setAddress] = useState('');
-  const [Gender, setGender] = useState('male');
+  const [Gender, setGender] = useState('');
   const [Password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [NIC, setNIC] = useState('');
@@ -61,6 +63,7 @@ const MemberRegistration = () => {
   const [phoneError, setPhoneError] = useState('');
   const [emailError, setEmailError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
+  const [passwordMatch, setPasswordMatch] = useState(true);
   const navigate = useNavigate();
 
   const handleNicChange = (e) => {
@@ -87,9 +90,12 @@ const MemberRegistration = () => {
       );
     } else {
       setPhoneError('');
+      if (inputValue.length <= 10) {
+        setPhone(inputValue);
+      }
     }
-    setPhone(inputValue);
   };
+  
 
   const handleEmailChange = (e) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -103,30 +109,82 @@ const MemberRegistration = () => {
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
-    if (newPassword.length > 8) {
-      setPasswordError('Password must be 8 characters or less');
+  
+    // Regular expressions for password requirements
+    const lengthRegex = /.{8,}/; // At least 8 characters long
+    const specialCharRegex = /[^A-Za-z0-9]/; // At least one special character
+    const capitalLetterRegex = /[A-Z]/; // At least one capital letter
+  
+    // Check each requirement and set error messages accordingly
+    if (!lengthRegex.test(newPassword)) {
+      setPasswordError('Password must be 8 characters or more');
+      setPasswordMatch(false); // Password does not match when changing it
+    } else if (!specialCharRegex.test(newPassword)) {
+      setPasswordError('Password must contain at least one special character');
+      setPasswordMatch(false); // Password does not match when changing it
+    } else if (!capitalLetterRegex.test(newPassword)) {
+      setPasswordError('Password must contain at least one capital letter');
+      setPasswordMatch(false); // Password does not match when changing it
     } else {
-      setPassword(newPassword);
       setPasswordError('');
+      setPasswordMatch(newPassword === confirmPassword); // Check if password matches confirm password
     }
+  
+    setPassword(newPassword);
   };
+  
 
-  const handleConfirmPasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setConfirmPassword(newPassword);
-    if (Password !== confirmPassword) {
-      setConfirmPasswordError('Password does not match');
+  const handleConfirmPasswordChange = (event) => {
+    const newConfirmPassword = event.target.value;
+    if (newConfirmPassword !== Password) {
+      setConfirmPasswordError('Passwords do not match');
+      setPasswordMatch(false); // Confirm password does not match when changing it
     } else {
       setConfirmPasswordError('');
+      setPasswordMatch(true); // Password matches confirm password
     }
+    setConfirmPassword(newConfirmPassword);
   };
+  
 
   const handleDobChange = (date) => {
     setDob(date);
   };
 
+  const isFormValid = () => {
+    return (
+      !nicError &&
+      !phoneError &&
+      !emailError &&
+      !passwordError &&
+      !confirmPasswordError &&
+      Fname.trim() !== '' &&
+      Lname.trim() !== '' &&
+      Address.trim() !== '' &&
+      Gender.trim() !== '' &&
+      NIC.trim() !== '' &&
+      Phone.trim() !== '' &&
+      Email.trim() !== '' &&
+      Password.trim() !== '' &&
+      confirmPassword.trim() !== '' &&
+      passwordMatch &&
+      Dob
+    );
+  };
+
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!isFormValid()){
+      Swal.fire({
+        title: 'Error',
+        text: 'Please fill in all fields correctly',
+        icon: 'error',
+      });
+      return; // Exit the function early if the form is not valid
+    }
     const user = {
       Fname,
       Lname,
@@ -141,7 +199,7 @@ const MemberRegistration = () => {
     try {
       const response = await axios.post('http://localhost:8070/user/add', user);
 
-      if (response.status = 200) {
+      if (response.status === 200) {
         Swal.fire({
           title: 'Success',
           text: 'registered successfully',
@@ -234,7 +292,7 @@ const MemberRegistration = () => {
             />
             <InputField
               label="Password"
-              type="text"
+              type="password"
               value={Password}
               onChange={handlePasswordChange}
               placeholder="Password"
@@ -243,7 +301,7 @@ const MemberRegistration = () => {
             />
             <InputField
               label="Confirm Password"
-              type="text"
+              type="password"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
               placeholder="Confirm Password"
@@ -281,6 +339,7 @@ const MemberRegistration = () => {
                   <button
                     type="submit"
                     className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4 mr-10"
+                    disabled={!isFormValid()}
                   >
                     Register
                   </button>

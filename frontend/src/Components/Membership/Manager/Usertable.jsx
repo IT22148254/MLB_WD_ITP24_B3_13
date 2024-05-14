@@ -26,8 +26,8 @@ const UserTable = () => {
   }, [searchInput, users]);
 
   const filterUsers = (users, searchText) => {
-    return users.filter((email) =>
-      email.title.toLowerCase().startsWith(searchText.toLowerCase())
+    return users.filter((user) =>
+      user.Fname.toLowerCase().startsWith(searchText.toLowerCase())
     );
   };
 
@@ -35,19 +35,15 @@ const UserTable = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const res= await axios.get('http://localhost:8070/email/');
+        const res= await axios.get('http://localhost:8070/user/');
         setUsers(res.data);
         console.log(res)
       } catch (error) {
-        console.error('Failed to fetch Suppliers', error);
+        console.error('Failed to fetch Users', error);
       }
     };
     fetchUsers();
   }, []);
-
-  const handleEdit = (id) => {
-    navigate(`/editemail/${id}`);
-  };
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -62,7 +58,7 @@ const UserTable = () => {
       if (result.isConfirmed) {
         try {
           const response = await axios.delete(
-            `http://localhost:8070/email/${id}`
+            `http://localhost:8070/user/${id}`
           );
 
           if (response.status === 200) {
@@ -77,7 +73,7 @@ const UserTable = () => {
           } else {
             Swal.fire({
               title: "Error!",
-              text: "Failed to delete the feedback.",
+              text: "Failed to delete the User.",
               icon: "error",
             });
           }
@@ -98,10 +94,10 @@ const UserTable = () => {
       { header: 'Email', dataKey: 'Email' },
     ];
 
-    const rows = users.map((em) => ({
+    const rows = users.map((us) => ({
       Fname: us.Fname,
       Phone: us.Phone,
-      Email: em.Email,
+      Email: us.Email,
     }));
 
     doc.autoTable(columns, rows);
