@@ -25,13 +25,13 @@ const PackageDashboard = () => {
                   Supplier
                 </button> */}
                 <button className="ml-5 mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/pkg/addnewpr/")}>
-                  <a><p id='ed'>promo package</p></a>
+                  promo package
                 </button>
               {/* </Container> */}
               {/* <br /> */}
               {/* <Container className="flex justify-between" > */}
                 <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/pkg/addnewst/")}>
-                  <a><p id='ed'>standed package</p></a>
+                  standard package
                 </button>
                 {/* <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) => navigate("/sup/Invoice")}>
                   <a><p id='ed'>Invoices</p></a>

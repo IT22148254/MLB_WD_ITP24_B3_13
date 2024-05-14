@@ -197,6 +197,15 @@ const CreatedPromosTable = () => {
                         Generate Report
                     </button>
                 </div>
+                {/* <div>
+                    <button
+                        type="button"
+                        className="bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300"
+                        onClick={handleCreateReport}
+                    >
+                        Add Promo
+                    </button>
+                </div> */}
             </div>
         </div>
     );
