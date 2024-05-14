@@ -18,6 +18,7 @@ const CoachFeedbackApproval = () => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredFeedbacks, setFilteredFeedbacks] = useState([]);
   const [receivedFeedbacks, setReceivedFeedbacks] = useState([]);
+  const [sentFeedbacks, setSentFeedbacks] = useState([]);
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -40,12 +41,18 @@ const CoachFeedbackApproval = () => {
     if (storedReceivedFeedbacks) {
       setReceivedFeedbacks(storedReceivedFeedbacks);
     }
+
+    // Retrieve sent feedback IDs from local storage
+    const storedSentFeedbacks = JSON.parse(localStorage.getItem("sentFeedbacks") || "[]");
+    setSentFeedbacks(storedSentFeedbacks);
   }, []);
 
   useEffect(() => {
     // Update local storage when received feedback IDs change
     localStorage.setItem("receivedFeedbacks", JSON.stringify(receivedFeedbacks));
-  }, [receivedFeedbacks]);
+    // Update local storage when sent feedback IDs change
+    localStorage.setItem("sentFeedbacks", JSON.stringify(sentFeedbacks));
+  }, [receivedFeedbacks, sentFeedbacks]);
 
   const handleEdit = (id) => {
     navigate(`/fbk/coachfeedbackedit/${id}`);
@@ -64,14 +71,16 @@ const CoachFeedbackApproval = () => {
   };
 
   const handleReceived = async (id) => {
-    if (!receivedFeedbacks.includes(id)) {
+    if (!receivedFeedbacks.includes(id) && !sentFeedbacks.includes(id)) {
       try {
+        const feedbackToSend = filteredFeedbacks.find((feedback) => feedback._id === id);
         const response = await axios.post(
           `http://localhost:8070/feedback/coach/add`,
-          filteredFeedbacks.find((feedback) => feedback._id === id)
+          feedbackToSend
         );
         if (response.status === 200) {
           setReceivedFeedbacks([...receivedFeedbacks, id]);
+          setSentFeedbacks([...sentFeedbacks, id]);
           Swal.fire({
             title: "Confirmed!",
             text: "Feedback confirmed successfully.",
@@ -175,37 +184,36 @@ const CoachFeedbackApproval = () => {
                         receivedFeedbacks.includes(feedback._id)
                           ? "bg-green-500"
                           : "bg-blue-500"
-                      }`}
-                      onClick={() => handleReceived(feedback._id)}
-                      disabled={receivedFeedbacks.includes(feedback._id)}
-                    >
-                      {receivedFeedbacks.includes(feedback._id)
+                      }`}onClick={() => handleReceived(feedback._id)}
+                      disabled={receivedFeedbacks.includes(feedback._id) || sentFeedbacks.includes(feedback._id)}
+                      >
+                      {receivedFeedbacks.includes(feedback._id) || sentFeedbacks.includes(feedback._id)
                         ? "Confirmed"
                         : "Received"}
-                    </button>
-                  </div>
-                </div>
-              ))}
-          </div>
-          {/* Button to generate feedback report */}
-          <button
-            className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
-            onClick={handleCreateReport}
-          >
-            Generate Feedback Report
-          </button>
-
-          {/* Button to add feedback */}
-          <button
-            className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
-            onClick={handleAddFeedback}
-          >
-            Add coach Feedback
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default CoachFeedbackApproval;
+                      </button>
+                      </div>
+                      </div>
+                      ))}
+                      </div>
+                      {/* Button to generate feedback report */}
+                      <button
+                      className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
+                      onClick={handleCreateReport}
+                      >
+                      Generate Feedback Report
+                      </button>
+                      
+                      {/* Button to add feedback */}
+                      <button
+                      className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
+                      onClick={handleAddFeedback}
+                      >
+                      Add coach Feedback
+                      </button>
+                      </div>
+                      </div>
+                      </div>
+                      );
+                      };
+                      
+                      export default CoachFeedbackApproval;
