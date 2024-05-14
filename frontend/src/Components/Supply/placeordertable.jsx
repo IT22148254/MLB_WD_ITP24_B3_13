@@ -217,6 +217,7 @@ const PlacedOrderTable = () => {
                     (receivedOrder) => receivedOrder._id === order._id
                   )}
                 >
+                  
                   {receivedOrders.some(
                     (receivedOrder) => receivedOrder._id === order._id
                   )
