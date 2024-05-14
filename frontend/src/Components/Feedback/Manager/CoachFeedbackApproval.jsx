@@ -18,6 +18,7 @@ const CoachFeedbackApproval = () => {
   const [searchInput, setSearchInput] = useState("");
   const [filteredFeedbacks, setFilteredFeedbacks] = useState([]);
   const [receivedFeedbacks, setReceivedFeedbacks] = useState([]);
+  const [clickedFeedbacks, setClickedFeedbacks] = useState([]);
 
   useEffect(() => {
     const fetchFeedbacks = async () => {
@@ -28,31 +29,61 @@ const CoachFeedbackApproval = () => {
         setFeedbacks(response.data.result);
         setFilteredFeedbacks(response.data.result);
       } catch (error) {
-        console.error("Failed to fetch employees:", error);
+        console.error("Failed to fetch feedbacks:", error);
       }
     };
     fetchFeedbacks();
   }, []);
 
   useEffect(() => {
-    // Retrieve received feedback IDs from local storage
-    const storedReceivedFeedbacks = JSON.parse(localStorage.getItem("receivedFeedbacks"));
-    if (storedReceivedFeedbacks) {
-      setReceivedFeedbacks(storedReceivedFeedbacks);
+    // Retrieve clicked feedback IDs from local storage
+    const storedClickedFeedbacks = JSON.parse(localStorage.getItem("clickedFeedbacks"));
+    if (storedClickedFeedbacks) {
+      setClickedFeedbacks(storedClickedFeedbacks);
     }
+
+    // Retrieve sent feedback IDs from local storage
+    const storedSentFeedbackIds = JSON.parse(localStorage.getItem("sentFeedbackIds") || "[]");
   }, []);
 
   useEffect(() => {
-    // Update local storage when received feedback IDs change
-    localStorage.setItem("receivedFeedbacks", JSON.stringify(receivedFeedbacks));
-  }, [receivedFeedbacks]);
+    // Update local storage when clicked feedback IDs change
+    localStorage.setItem("clickedFeedbacks", JSON.stringify(clickedFeedbacks));
+  }, [clickedFeedbacks]);
+
+  useEffect(() => {
+    const filtered = filterFeedbacks(feedbacks, searchInput);
+    setFilteredFeedbacks(filtered);
+  }, [searchInput, feedbacks]);
 
   const handleEdit = (id) => {
     navigate(`/fbk/coachfeedbackedit/${id}`);
   };
 
-  const handleDelete = (id) => {
-    // Your delete logic
+  const handleDelete = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:8070/feedback/servicea/${id}`
+      );
+
+      if (response.status === 200) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        }).then(() => {
+          window.location.reload();
+        });
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to delete the feedback.",
+          icon: "error",
+        });
+      }
+    } catch (error) {
+      console.error("Error deleting feedback:", error);
+    }
   };
 
   const handleCreateReport = () => {
@@ -64,17 +95,39 @@ const CoachFeedbackApproval = () => {
   };
 
   const handleReceived = async (id) => {
-    if (!receivedFeedbacks.includes(id)) {
+    if (!hasBeenClicked(id)) {
       try {
+        const feedbackToSend = filteredFeedbacks.find(
+          (feedback) => feedback._id === id
+        );
+
+        // Check if the feedback has already been sent
+        const sentFeedbackIds = JSON.parse(localStorage.getItem("sentFeedbackIds") || "[]");
+        if (sentFeedbackIds.includes(id)) {
+          Swal.fire({
+            title: "Already Sent!",
+            text: "This feedback has already been sent to the backend.",
+            icon: "warning",
+          });
+          return;
+        }
+
         const response = await axios.post(
           `http://localhost:8070/feedback/coach/add`,
-          filteredFeedbacks.find((feedback) => feedback._id === id)
+          feedbackToSend
         );
         if (response.status === 200) {
-          setReceivedFeedbacks([...receivedFeedbacks, id]);
+          setClickedFeedbacks([...clickedFeedbacks, id]);
+
+          // Store the sent feedback ID in local storage
+          const updatedSentFeedbackIds = [...sentFeedbackIds, id];
+          localStorage.setItem("sentFeedbackIds", JSON.stringify(updatedSentFeedbackIds));
+
+          setReceivedFeedbacks([...receivedFeedbacks, id]); // Update received feedbacks
+          
           Swal.fire({
             title: "Confirmed!",
-            text: "Feedback confirmed successfully.",
+            text: "Feedback received successfully.",
             icon: "success",
           });
         }
@@ -88,6 +141,21 @@ const CoachFeedbackApproval = () => {
         icon: "warning",
       });
     }
+  };
+
+  const hasBeenClicked = (id) => {
+    return clickedFeedbacks.includes(id);
+  };
+
+  const hasSentFeedback = (id) => {
+    const sentFeedbackIds = JSON.parse(localStorage.getItem("sentFeedbackIds") || "[]");
+    return sentFeedbackIds.includes(id);
+  };
+
+  const filterFeedbacks = (feedbacks, searchText) => {
+    return feedbacks.filter((feedback) =>
+      feedback.UserName.toLowerCase().startsWith(searchText.toLowerCase())
+    );
   };
 
   return (
@@ -121,7 +189,7 @@ const CoachFeedbackApproval = () => {
             <div className="border-2 border-black p-3">Received</div>
           </div>
           <div
-            className="w-full overflow-auto "
+            className="w-full overflow-auto"
             style={{
               maxHeight: "450px",
               scrollbarWidth: "none",
@@ -200,7 +268,7 @@ const CoachFeedbackApproval = () => {
             className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
             onClick={handleAddFeedback}
           >
-            Add coach Feedback
+            Add Coach Feedback
           </button>
         </div>
       </div>

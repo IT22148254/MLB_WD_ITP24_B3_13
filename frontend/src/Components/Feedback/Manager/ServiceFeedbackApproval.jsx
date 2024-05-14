@@ -18,7 +18,6 @@ const ServiceFeedbackApproval = () => {
   const [feedbacks, setFeedbacks] = useState([]);
   const [searchInput, setSearchInput] = useState("");
   const [filteredFeedbacks, setFilteredFeedbacks] = useState([]);
-  const [confirmedFeedbacks, setConfirmedFeedbacks] = useState([]);
   const [clickedFeedbacks, setClickedFeedbacks] = useState([]);
 
   useEffect(() => {
@@ -38,17 +37,20 @@ const ServiceFeedbackApproval = () => {
   }, []);
 
   useEffect(() => {
-    // Retrieve confirmed feedback IDs from local storage
-    const storedConfirmedFeedbacks = JSON.parse(localStorage.getItem("confirmedFeedbacks"));
-    if (storedConfirmedFeedbacks) {
-      setConfirmedFeedbacks(storedConfirmedFeedbacks);
+    // Retrieve clicked feedback IDs from local storage
+    const storedClickedFeedbacks = JSON.parse(localStorage.getItem("clickedFeedbacks"));
+    if (storedClickedFeedbacks) {
+      setClickedFeedbacks(storedClickedFeedbacks);
     }
+
+    // Retrieve sent feedback IDs from local storage
+    const storedSentFeedbackIds = JSON.parse(localStorage.getItem("sentFeedbackIds") || "[]");
   }, []);
 
   useEffect(() => {
-    // Update local storage when confirmed feedback IDs change
-    localStorage.setItem("confirmedFeedbacks", JSON.stringify(confirmedFeedbacks));
-  }, [confirmedFeedbacks]);
+    // Update local storage when clicked feedback IDs change
+    localStorage.setItem("clickedFeedbacks", JSON.stringify(clickedFeedbacks));
+  }, [clickedFeedbacks]);
 
   useEffect(() => {
     const filtered = filterFeedbacks(feedbacks, searchInput);
@@ -119,15 +121,34 @@ const ServiceFeedbackApproval = () => {
   };
 
   const handleReceived = async (id) => {
-    if (!confirmedFeedbacks.includes(id) && !clickedFeedbacks.includes(id)) {
+    if (!hasBeenClicked(id)) {
       try {
+        const feedbackToSend = filteredFeedbacks.find(
+          (feedback) => feedback._id === id
+        );
+
+        // Check if the feedback has already been sent
+        const sentFeedbackIds = JSON.parse(localStorage.getItem("sentFeedbackIds") || "[]");
+        if (sentFeedbackIds.includes(id)) {
+          Swal.fire({
+            title: "Already Sent!",
+            text: "This feedback has already been sent to the backend.",
+            icon: "warning",
+          });
+          return;
+        }
+
         const response = await axios.post(
           `http://localhost:8070/feedback/service/add`,
-          filteredFeedbacks.find((feedback) => feedback._id === id)
+          feedbackToSend
         );
         if (response.status === 200) {
-          setConfirmedFeedbacks([...confirmedFeedbacks, id]);
           setClickedFeedbacks([...clickedFeedbacks, id]);
+
+          // Store the sent feedback ID in local storage
+          const updatedSentFeedbackIds = [...sentFeedbackIds, id];
+          localStorage.setItem("sentFeedbackIds", JSON.stringify(updatedSentFeedbackIds));
+
           Swal.fire({
             title: "Confirmed!",
             text: "Feedback received successfully.",
@@ -144,6 +165,15 @@ const ServiceFeedbackApproval = () => {
         icon: "warning",
       });
     }
+  };
+
+  const hasBeenClicked = (id) => {
+    return clickedFeedbacks.includes(id);
+  };
+
+  const hasSentFeedback = (id) => {
+    const sentFeedbackIds = JSON.parse(localStorage.getItem("sentFeedbackIds") || "[]");
+    return sentFeedbackIds.includes(id);
   };
 
   return (
@@ -166,12 +196,12 @@ const ServiceFeedbackApproval = () => {
               />
             </div>
           </div>
-          <div className="grid grid-cols-7 bg-cyan-400">
+          <div className="grid grid-cols-6 bg-cyan-400">
             <div className="border-2 border-black p-3">Name</div>
             <div className="border-2 border-black p-3">Email</div>
             <div className="border-2 border-black p-3">Rating</div>
             <div className="border-2 border-black p-3">Opinion</div>
-            <div className="border-2 border-black p-3">Edit</div>
+          
             <div className="border-2 border-black p-3">Delete</div>
             <div className="border-2 border-black p-3">Received</div>
           </div>
@@ -180,83 +210,68 @@ const ServiceFeedbackApproval = () => {
             style={{
               maxHeight: "450px",
               scrollbarWidth: "none",
-              msOverflowStyle: "none",
-            }}
-          >
-            {filteredFeedbacks &&
-              filteredFeedbacks.map((feedback, index) => (
-                <div
-                  className={`grid grid-cols-7 ${
-                    index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
-                  }`}
-                  key={feedback._id}
-                >
-                  <div className="border-2 border-black p-2">
-                    {feedback.UserName}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    {feedback.Email}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    {feedback.Rating}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    {feedback.Comment}
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    <button
-                      className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                      onClick={() => handleEdit(feedback._id)}
+              msOverflowStyle: "none",}}
+              >
+                {filteredFeedbacks &&
+                  filteredFeedbacks.map((feedback, index) => (
+                    <div
+                      className={`grid grid-cols-6 ${
+                        index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
+                      }`}
+                      key={feedback._id}
                     >
-                      Edit
-                    </button>
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    <button
-                      className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                      onClick={() => handleDelete(feedback._id)}
-                    >
-                      Delete
-                    </button>
-                  </div>
-                  <div className="border-2 border-black p-2">
-                    {confirmedFeedbacks.includes(feedback._id) ? (
-                      <button className="bg-green-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold" disabled>
-                        Confirmed
-                      </button>
-                    ) : (
-                      <button
-                        className={`${
-                          clickedFeedbacks.includes(feedback._id)
-                            ? "hidden"
-                            : "bg-blue-500"
-                        } border-2 border-black rounded-full p-1 px-4 text-white font-bold`}
-                        onClick={() => handleReceived(feedback._id)}
-                        disabled={clickedFeedbacks.includes(feedback._id)}
-                      >
-                        {clickedFeedbacks.includes(feedback._id) ? "Received" : "Receive"}
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
-          </div>
-          <button
-            className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
-            onClick={handleCreateReport}
-          >
-            Generate Feedback Report
-          </button>
-          <button
-            className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
-            onClick={handleAddFeedback}
-          >
-            Add Feedback
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-export default ServiceFeedbackApproval;
+                      <div className="border-2 border-black p-2">{feedback.UserName}</div>
+                      <div className="border-2 border-black p-2">{feedback.Email}</div>
+                      <div className="border-2 border-black p-2">{feedback.Rating}</div>
+                      <div className="border-2 border-black p-2">{feedback.Comment}</div>
+                     
+                      <div className="border-2 border-black p-2">
+                        <button
+                          className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
+                          onClick={() => handleDelete(feedback._id)}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                      <div className="border-2 border-black p-2">
+                        {hasBeenClicked(feedback._id) ? (
+                          <button
+                            className="bg-green-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
+                            disabled
+                          >
+                            Confirmed
+                          </button>
+                        ) : (
+                          <button
+                            className={`bg-blue-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold ${
+                              hasSentFeedback(feedback._id) ? "opacity-50 cursor-not-allowed" : ""
+                            }`}
+                            onClick={() => handleReceived(feedback._id)}
+                            disabled={hasSentFeedback(feedback._id)}
+                          >
+                            {hasSentFeedback(feedback._id) ? "Sent" : "Receive"}
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+              </div>
+              <button
+                className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
+                onClick={handleCreateReport}
+              >
+                Generate Feedback Report
+              </button>
+              <button
+                className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
+                onClick={handleAddFeedback}
+              >
+                Add Feedback
+              </button>
+              </div>
+              </div>
+              </div>
+              );
+              };
+              
+              export default ServiceFeedbackApproval;

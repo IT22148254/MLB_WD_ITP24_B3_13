@@ -14,6 +14,10 @@ import CoachFeedbackTable from './Components/Feedback/User/CoachFeedbackTable';
 import CoachFeedbackEditForm from './Components/Feedback/User/CoachFeedbackEditForm';
 import CoachFeedbackApproval from './Components/Feedback/Manager/CoachFeedbackApproval';
 import ServiceFeedbackApproval from './Components/Feedback/Manager/ServiceFeedbackApproval';
+
+import ShowFeedback from './Components/Feedback/User/ShowFeedback';
+
+
 import { ToastContainer } from 'react-toastify';
 
 {/* i chnange from here */}
@@ -40,6 +44,10 @@ const router = createBrowserRouter(
         <Route path="coachfeedbackapprove/" element={<CoachFeedbackApproval/>}/>
         <Route path="servicefeedbackapprove/" element={<ServiceFeedbackApproval/>}/>
  
+
+        <Route path="ShowFeedback/" element={<ShowFeedback/>}/>
+
+
       </Route>
     </Route>
 
