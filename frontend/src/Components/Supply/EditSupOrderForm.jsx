@@ -123,7 +123,7 @@ const EditOrderForm = () => {
             <Container>
                 <div className="flex flex-col justify-center items-center h-screen">
                     <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">
-                        <div className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>Edit Supplier</div>
+                        <div className="text-4xl text-white font-bold align-top mb-8" style={{ WebkitTextStroke: '1px black' }}>Edit Orders</div>
                         <form method="POST"  className="space-y-4" onSubmit={handleSubmit}>
                         <div className="flex flex-col gap-y-4">
                             <div className="flex justify-between items-center">   {/* check this here */}
