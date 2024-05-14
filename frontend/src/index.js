@@ -14,7 +14,7 @@ import CoachFeedbackTable from './Components/Feedback/User/CoachFeedbackTable';
 import CoachFeedbackEditForm from './Components/Feedback/User/CoachFeedbackEditForm';
 import CoachFeedbackApproval from './Components/Feedback/Manager/CoachFeedbackApproval';
 import ServiceFeedbackApproval from './Components/Feedback/Manager/ServiceFeedbackApproval';
-import ShowFeedback2  from  './Components/Feedback/User/ShowFeedback2'
+
 import ShowFeedback from './Components/Feedback/User/ShowFeedback';
 
 
@@ -44,9 +44,9 @@ const router = createBrowserRouter(
         <Route path="coachfeedbackapprove/" element={<CoachFeedbackApproval/>}/>
         <Route path="servicefeedbackapprove/" element={<ServiceFeedbackApproval/>}/>
  
-
+{/* go to show feedback list */}
         <Route path="ShowFeedback/" element={<ShowFeedback/>}/>
-        <Route path="ShowFeedback2/" element={<ShowFeedback2/>}/>
+      
 
       </Route>
     </Route>
