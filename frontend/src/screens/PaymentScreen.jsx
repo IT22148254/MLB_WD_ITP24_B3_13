@@ -17,6 +17,7 @@ const PaymentScreen = () => {
   const { shippingAddress } = cart;
 
   console.log("Is Paid:", cart.payment.paid, "---", cart.payment.paidAt);
+  console.log(paymentMethod);
 
   useEffect(() => {
     if (!shippingAddress) {
@@ -46,7 +47,6 @@ const PaymentScreen = () => {
                 id="PayPal"
                 name="paymentMethod"
                 value="PayPal / Credit Card"
-                checked={paymentMethod === "PayPal / Credit Card"}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               ></Form.Check>
             </Col>

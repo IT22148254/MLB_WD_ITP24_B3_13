@@ -137,7 +137,7 @@ router.route("/orderst/add").post(protect, async (req, res) => {
     orderItems,
     shippingAddress,
     paymentMethod,
-    itemPrice,
+    itemsPrice,
     shippingPrice,
     totalPrice,
     isPaid,
@@ -156,7 +156,7 @@ router.route("/orderst/add").post(protect, async (req, res) => {
       user: req.user._id,
       shippingAddress,
       paymentMethod,
-      itemPrice,
+      itemsPrice,
       shippingPrice,
       totalPrice,
       isPaid,
@@ -234,6 +234,55 @@ router.route("/orderst/:id/deliver").put(protect, admin, async (req, res) => {
     return res
       .status(400)
       .json({ message: `Order payment unsuccessful ${error}` });
+  }
+});
+
+router.route("/orderst/:id").put(protect, admin, async (req, res) => {
+  //res.send("update order");
+
+  try {
+    const id = req.params.id;
+    const {
+      orderItems,
+      shippingAddress,
+      paymentMethod,
+      itemsPrice,
+      shippingPrice,
+      totalPrice,
+      user,
+      isPaid,
+      paidAt,
+      isDelivered,
+      deliveredAt,
+    } = req.body;
+
+    const result = await OrderSt.findByIdAndUpdate(
+      id,
+      {
+        orderItems,
+        shippingAddress,
+        paymentMethod,
+        itemsPrice,
+        shippingPrice,
+        totalPrice,
+        user,
+        isPaid,
+        paidAt,
+        isDelivered,
+        deliveredAt,
+      },
+      { new: true }
+    );
+
+    if (!result) {
+      return res.status(404).json({ message: "Order not found" });
+    }
+
+    return res.status(200).json(result);
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: `Order update unsuccessful ${error}` });
   }
 });
 

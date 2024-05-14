@@ -1,12 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-//import { useSelector } from "react-redux";
 import {
   useGetAllOrdersQuery,
   useRemoveOrderMutation,
 } from "../slices/ordersApiSlice";
 import Loader from "../content/Loader";
 import { toast } from "react-toastify";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 const AdminOrdersScreen = () => {
   const navigate = useNavigate();
@@ -14,6 +15,17 @@ const AdminOrdersScreen = () => {
   const { data: orders, isLoading, isError, refetch } = useGetAllOrdersQuery();
 
   const [removeOrder, { isLoading: isRemoving }] = useRemoveOrderMutation();
+  const [SearchTerm, setSearchTerm] = useState("");
+  const [filteredOrders, setFilteredOrders] = useState([]);
+
+  // let users;
+  // const getUsers = async () => {
+  //   users = await axios.get("/user/").then((res) => res.data);
+  // };
+  
+  // getUsers();
+
+  // console.log(users);
 
   const deleteOrderHandler = async (id) => {
     if (window.confirm("Are you sure you want to delete the order ?")) {
@@ -27,6 +39,17 @@ const AdminOrdersScreen = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (orders) {
+      const results = orders.filter((order) =>
+        order._id.toLowerCase().includes(SearchTerm.toLowerCase())
+      );
+      setFilteredOrders(results);
+    }
+  }, [orders, SearchTerm]);
+
+  //console.log(filteredOrders);
 
   if (isLoading || isRemoving) {
     return <Loader />;
@@ -64,7 +87,7 @@ const AdminOrdersScreen = () => {
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    console.log("generated report");
+    //console.log("generated report");
   };
 
   const unpaidOrdersCount = orders.filter((order) => !order.isPaid).length;
@@ -79,22 +102,11 @@ const AdminOrdersScreen = () => {
           <div className="relative">
             <input
               type="text"
-              placeholder="Search..."
+              placeholder="Order Id search..."
+              value={SearchTerm}
               className="border border-gray-300 rounded-md py-2 px-4 focus:outline-none focus:ring focus:border-blue-300 w-64"
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
-            <button className="absolute right-0 top-0 mt-2 mr-2">
-              <svg
-                className="h-5 w-5 text-gray-400"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path d="M15 15l5-5m0 0l-5-5m5 5h-13"></path>
-              </svg>
-            </button>
           </div>
 
           <div className="space-x-4">
@@ -161,66 +173,67 @@ const AdminOrdersScreen = () => {
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
-                  {orders.map(
-                    (order) => (
-                      //console.log(order),
-                      (
-                        <tr key={order._id}>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {order._id}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {order.user}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">{`${order.createdAt.slice(
-                            0,
-                            10
-                          )} at ${order.createdAt.slice(11, 19)}`}</td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {order.isPaid ? (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Paid
-                              </span>
-                            ) : (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                Not Paid
-                              </span>
-                            )}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {order.isDelivered ? (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Delivered
-                              </span>
-                            ) : (
-                              <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                Not Delivered
-                              </span>
-                            )}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <button
-                              className="ml-2 px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
-                              onClick={() =>
-                                navigate(`/store/orderst/${order._id}`)
-                              }
-                            >
-                              View
-                            </button>
-                            <button className="ml-2 px-4 py-2 font-medium text-white bg-yellow-600 rounded-md hover:bg-yellow-500 focus:outline-none focus:shadow-outline-blue active:bg-yellow-600 transition duration-150 ease-in-out">
-                              Edit
-                            </button>
-                            <button
-                              className="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
-                              onClick={(e) => deleteOrderHandler(order._id)}
-                            >
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      )
-                    )
-                  )}
+                  {filteredOrders.map((order) => (
+                    //console.log(order),
+                    <tr key={order._id}>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {order._id}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {order.user}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">{`${order.createdAt.slice(
+                        0,
+                        10
+                      )} at ${order.createdAt.slice(11, 19)}`}</td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {order.isPaid ? (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            Paid
+                          </span>
+                        ) : (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                            Not Paid
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        {order.isDelivered ? (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                            Delivered
+                          </span>
+                        ) : (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                            Not Delivered
+                          </span>
+                        )}
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <button
+                          className="ml-2 px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
+                          onClick={() =>
+                            navigate(`/store/orderst/${order._id}`)
+                          }
+                        >
+                          View
+                        </button>
+                        <button
+                          className="ml-2 px-4 py-2 font-medium text-white bg-yellow-600 rounded-md hover:bg-yellow-500 focus:outline-none focus:shadow-outline-blue active:bg-yellow-600 transition duration-150 ease-in-out"
+                          onClick={() =>
+                            navigate(`/store/orderst/ed/${order._id}`)
+                          }
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="ml-2 px-4 py-2 font-medium text-white bg-red-600 rounded-md hover:bg-red-500 focus:outline-none focus:shadow-outline-red active:bg-red-600 transition duration-150 ease-in-out"
+                          onClick={(e) => deleteOrderHandler(order._id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>

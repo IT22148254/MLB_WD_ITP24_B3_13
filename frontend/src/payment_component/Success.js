@@ -13,6 +13,9 @@ export default function Success() {
 
   React.useEffect(() => {
     // Display the success toast message
+    if(cart.cartItems){
+      dispatch(setPayment({ paid: true, paidAt: new Date() }));
+    }
     toast.success('Payment successful!', {
       position: 'bottom-center',
       autoClose: 3000,
@@ -26,9 +29,6 @@ export default function Success() {
 
     // Navigate back two pages after a delay
     setTimeout(() => {
-      if(cart.cartItems){
-        dispatch(setPayment({ paid: true, paidAt: new Date() }));
-      }
       window.history.go(-2);
     }, 3000); // Adjust the delay as needed
   }, []);

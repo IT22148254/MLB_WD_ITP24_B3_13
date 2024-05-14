@@ -61,6 +61,7 @@ import CoachFeedbackTable from './components/Feedback/User/CoachFeedbackTable.js
 import CoachFeedbackEditForm from './components/Feedback/User/CoachFeedbackEditForm.jsx';
 import CoachFeedbackApproval from './components/Feedback/Manager/CoachFeedbackApproval.jsx';
 import ServiceFeedbackApproval from './components/Feedback/Manager/ServiceFeedbackApproval.jsx';
+import EditOrderScreen from "./screens/EditOrderScreen.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -133,9 +134,9 @@ const router = createBrowserRouter(
         <Route path="/store/orderst/:id" element={<OrderScreen />} />
         <Route path="/store/admin" element={<AdminPortalScreen />} />
         <Route path="/store/admin/items" element={<AdminItemsScreen />} />
+        <Route path="/store/orderst/ed/:id" element={<EditOrderScreen />} />
         <Route path="/store/admin/orders" element={<AdminOrdersScreen />} />
-        <Route path="/store/admin/item/:id/edit"element={<ProductEditScreen />}
-        />
+        <Route path="/store/admin/item/:id/edit"element={<ProductEditScreen />}/>
         <Route path="/orderst/myorders/:id" element={<OrdersScreen />} />
       </Route>
     </Route>

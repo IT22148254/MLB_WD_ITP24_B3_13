@@ -36,7 +36,7 @@ const PlaceOrderScreen = () => {
         orderItems: cart.cartItems,
         shippingAddress: cart.shippingAddress,
         paymentMethod: cart.paymentMethod,
-        itemsPrice: cart.itemsPrice,
+        itemsPrice: Number(cart.itemPrice).toFixed(2),
         shippingPrice: cart.delPrice,
         totalPrice: cart.totPrice,
         isPaid:cart.payment.paid,

@@ -19,6 +19,8 @@ const ShippingScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  console.log(cart)
+
   const submitHandler = (e) => {
     e.preventDefault();
 
@@ -28,6 +30,8 @@ const ShippingScreen = () => {
     }
 
     setShowError(false);
+
+    console.log(cart)
 
     dispatch(saveShippingAddress({ address, street, city, district }));
     navigate("/store/payment");

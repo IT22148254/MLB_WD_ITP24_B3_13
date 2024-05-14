@@ -42,6 +42,7 @@ const cartSlice = createSlice({
     },
     clearCartItems: (state, action) => {
       state.cartItems = [];
+      state.payment = {};
       return updateCart(state);
     },
     setPayment: (state, action) => {
