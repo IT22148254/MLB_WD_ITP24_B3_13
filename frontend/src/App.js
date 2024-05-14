@@ -8,14 +8,14 @@ import "react-toastify/dist/ReactToastify.css";
 const App = () => {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main>
       <ToastContainer />
         <div style={{ height: "auto", width: "auto" }}>
           <Outlet />
         </div>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 };
