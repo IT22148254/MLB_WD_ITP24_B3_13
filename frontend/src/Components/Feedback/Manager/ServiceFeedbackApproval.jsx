@@ -57,9 +57,9 @@ const ServiceFeedbackApproval = () => {
     setFilteredFeedbacks(filtered);
   }, [searchInput, feedbacks]);
 
-  const handleEdit = (id) => {
-    navigate(`/fbk/editservice/${id}`);
-  };
+  // const handleEdit = (id) => {
+  //   navigate(`/fbk/editservice/${id}`);
+  // };
 
   const handleDelete = async (id) => {
     try {
@@ -187,14 +187,14 @@ const ServiceFeedbackApproval = () => {
             Service Feedback approval
           </div>
           <div className="mb-4">
-            <div className="h-9 bg-white/70 w-1/2 rounded-lg">
+            {/* <div className="h-9 bg-white/70 w-1/2 rounded-lg">
               <input
                 placeholder="Search by Name"
                 className="bg-transparent pl-4 placeholder:text-gray-600 w-full h-full border-none active:border-none focus:border-none focus:outline-none"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
-            </div>
+            </div> */}
           </div>
           <div className="grid grid-cols-6 bg-cyan-400">
             <div className="border-2 border-black p-3">Name</div>
@@ -230,7 +230,7 @@ const ServiceFeedbackApproval = () => {
                           className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
                           onClick={() => handleDelete(feedback._id)}
                         >
-                          Delete
+                          Reject
                         </button>
                       </div>
                       <div className="border-2 border-black p-2">
@@ -262,12 +262,12 @@ const ServiceFeedbackApproval = () => {
               >
                 Generate Feedback Report
               </button>
-              <button
+              {/* <button
                 className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
                 onClick={handleAddFeedback}
               >
                 Add Feedback
-              </button>
+              </button> */}
               </div>
               </div>
               </div>

@@ -56,14 +56,12 @@ const CoachFeedbackApproval = () => {
     setFilteredFeedbacks(filtered);
   }, [searchInput, feedbacks]);
 
-  const handleEdit = (id) => {
-    navigate(`/fbk/coachfeedbackedit/${id}`);
-  };
+ 
 
   const handleDelete = async (id) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8070/feedback/servicea/${id}`
+        `http://localhost:8070/feedback/coacha/${id}`
       );
 
       if (response.status === 200) {
@@ -147,10 +145,6 @@ const CoachFeedbackApproval = () => {
     return clickedFeedbacks.includes(id);
   };
 
-  const hasSentFeedback = (id) => {
-    const sentFeedbackIds = JSON.parse(localStorage.getItem("sentFeedbackIds") || "[]");
-    return sentFeedbackIds.includes(id);
-  };
 
   const filterFeedbacks = (feedbacks, searchText) => {
     return feedbacks.filter((feedback) =>
@@ -169,22 +163,22 @@ const CoachFeedbackApproval = () => {
             Coach Feedback Approval
           </div>
           <div className="mb-4">
-            <div className="h-9 bg-white/70 w-1/2 rounded-lg">
+            {/* <div className="h-9 bg-white/70 w-1/2 rounded-lg">
               <input
                 placeholder="Search by Name"
                 className="bg-transparent pl-4 placeholder:text-gray-600 w-full h-full border-none active:border-none focus:border-none focus:outline-none"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
-            </div>
+            </div> */}
           </div>
-          <div className="grid grid-cols-8 bg-cyan-400">
+          <div className="grid grid-cols-7 bg-cyan-400">
             <div className="border-2 border-black p-3">Name</div>
             <div className="border-2 border-black p-3">Email</div>
             <div className="border-2 border-black p-3">Rating</div>
             <div className="border-2 border-black p-3">Opinion</div>
             <div className="border-2 border-black p-3">Coach</div>
-            <div className="border-2 border-black p-3">Edit</div>
+          
             <div className="border-2 border-black p-3">Delete</div>
             <div className="border-2 border-black p-3">Received</div>
           </div>
@@ -199,7 +193,7 @@ const CoachFeedbackApproval = () => {
             {filteredFeedbacks &&
               filteredFeedbacks.map((feedback, index) => (
                 <div
-                  className={`grid grid-cols-8 ${
+                  className={`grid grid-cols-7 ${
                     index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
                   }`}
                   key={feedback._id}
@@ -220,20 +214,13 @@ const CoachFeedbackApproval = () => {
                   <div className="border-2 border-black p-2">
                     {feedback.Coach}
                   </div>
-                  <div className="border-2 border-black p-2">
-                    <button
-                      className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-                      onClick={() => handleEdit(feedback._id)}
-                    >
-                      Edit
-                    </button>
-                  </div>
+                  
                   <div className="border-2 border-black p-2">
                     <button
                       className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
                       onClick={() => handleDelete(feedback._id)}
                     >
-                      Delete
+                   Reject
                     </button>
                   </div>
                   {/* Render Received button */}
@@ -257,19 +244,19 @@ const CoachFeedbackApproval = () => {
           </div>
           {/* Button to generate feedback report */}
           <button
-            className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
+            className=" absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
             onClick={handleCreateReport}
           >
             Generate Feedback Report
           </button>
 
           {/* Button to add feedback */}
-          <button
+          {/* <button
             className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
             onClick={handleAddFeedback}
           >
             Add Coach Feedback
-          </button>
+          </button> */}
         </div>
       </div>
     </div>

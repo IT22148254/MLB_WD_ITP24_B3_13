@@ -311,7 +311,7 @@ router.route("/coacha/:id").put(async (req, res) => {
 
 router.route("/coacha/:id").delete(async (req, res) => {
   try {
-    const approvefeedback = await CoachFeedBack.findByIdAndDelete(
+    const approvefeedback = await ApproveFeedBack.findByIdAndDelete(
       req.params.id
     );
 
@@ -430,7 +430,7 @@ router.route("/servicea/:id").delete(async (req, res) => {
       req.params.id
     );
 
-    if (!servicefeedback) {
+    if (!safeedback) {
       return res.status(404).json({ message: "Feedback not found" });
     }
 
