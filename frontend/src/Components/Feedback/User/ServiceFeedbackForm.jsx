@@ -38,7 +38,7 @@ const ServiceFeedbackForm = () => {
     if (!nameError && !emailError) {
       const ServiceFeedback = { UserName, Email, Rating, Comment };
 
-      const response = await fetch("http://localhost:8070/feedback/service/add", {
+      const response = await fetch("http://localhost:8070/feedback/servicea/add", {
         method: "POST",
         body: JSON.stringify(ServiceFeedback),
         headers: {
