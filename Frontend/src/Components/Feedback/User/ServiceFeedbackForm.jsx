@@ -110,7 +110,7 @@ const ServiceFeedbackForm = () => {
           className="text-4xl text-white font-bold align-top mb-8"
           style={{ WebkitTextStroke: "1px black" }}
         >
-          Give your feedback
+            Give your feedback
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-y-4">
@@ -216,11 +216,9 @@ const ServiceFeedbackForm = () => {
           </div>
         </form>
       </div>
-      {/* <button className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-16">
-        Add Feedbacks
-      </button> */}
     </div>
   );
 };
+
 
 export default ServiceFeedbackForm;
