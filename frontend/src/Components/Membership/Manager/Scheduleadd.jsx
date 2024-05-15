@@ -25,12 +25,12 @@ const ScheduleAdd = () => {
         })
         const json = await response.json()
 
-        if (!response.ok) {
+        if (!response.status===200) {
             setError(json.error)
             console.log('error', error)
         }
 
-        if (response.ok) {
+        if (response.status===200) {
 
             setDate('')
             setTimeSlot('')
@@ -44,7 +44,7 @@ const ScheduleAdd = () => {
             }).then(() => {
                 console.log('new slot added', json)
                 // window.location.reload()
-                // navigate('/chngtimeondytbl')
+                navigate('/sch/schedules/')
             })
 
 

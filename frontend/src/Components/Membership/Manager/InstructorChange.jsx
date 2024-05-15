@@ -25,12 +25,12 @@ const InstructorChange = () => {
     })
     const json = await response.json()
 
-    if (!response.ok) {
+    if (!response.status===200) {
       setError(json.error)
       console.log('error', error)
     }
 
-    if (response.ok) {
+    if (response.status===200) {
 
       setDay('')
       setTimeSlot('')
@@ -41,6 +41,7 @@ const InstructorChange = () => {
         title: "Success",
         text: "new slot added successfully",
         icon: "success",
+      
       }).then(() => {
         console.log('new slot added', json)
         // window.location.reload()
