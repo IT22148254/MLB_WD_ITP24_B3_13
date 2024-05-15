@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const FeedBack = require("../models/feedback");
-const { Package, PromoPackage } = require("../models/package");
+const { Package, PromoPackage ,ShowPackage} = require("../models/package");
 
 // ================================================================================================================================================
 //=================================================================Package=========================================================================
@@ -33,7 +33,7 @@ router.route("/package/add").post((req, res) => {
 router.route("/package/").get((req, res) => {
   Package.find()
     .then((result) => {
-      res.status(200).json({ result });
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(400).json({ message: `Packages fetching went wrong ${err}` });
@@ -128,7 +128,7 @@ router.route("/propackage/add").post((req, res) => {
 router.route("/propackage/").get((req, res) => {
   PromoPackage.find()
     .then((result) => {
-      res.status(200).json({ result });
+      res.status(200).json(result);
     })
     .catch((err) => {
       res.status(400).json({ message: `Packages fetching went wrong ${err}` });
@@ -144,7 +144,7 @@ router.route("/propackage/get/:id").get(async (req, res) => {
     if (!pkg) {
       return res.status(404).json({ message: "Package not found" });
     }
-    return res.status(200).json({ pkg });
+    return res.status(200).json(pkg);
   } catch (error) {
     return res
       .status(400)
@@ -192,5 +192,85 @@ router.route("/propackage/:id").delete(async (req, res) => {
       .json({ message: `Packed deleting unsuccessful ${error}` });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// show package
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+router.route("/showpackage/add").post((req, res) => {
+  const { Name, Price, Duration, Discription } = req.body;
+
+  const newPackage = ShowPackage({
+    Name,
+    Price,
+    Duration,
+    Discription,
+  });
+
+  newPackage
+    .save()
+    .then(() => {
+      res.status(200).json({ message: "Package added succesfully" });
+    })
+    .catch((err) => {
+      res.status(400).json({ message: `Package addition unsuccessful ${err}` });
+    });
+});
+
+//get all Packages
+
+router.route("/showpackage/").get((req, res) => {
+  ShowPackage.find()
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      res.status(400).json({ message: `Packages fetching went wrong ${err}` });
+    });
+});
+
+//get one Package
+
+router.route("/showpackage/get/:id").get(async (req, res) => {
+  try {
+    const pkg = await ShowPackage.findById(req.params.id);
+
+    if (!pkg) {
+      return res.status(404).json({ message: "Package not found" });
+    }
+    return res.status(200).json(pkg);
+  } catch (error) {
+    return res
+      .status(400)
+      .json({ message: `Package fetching unsuccessful ${error}` });
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = router;

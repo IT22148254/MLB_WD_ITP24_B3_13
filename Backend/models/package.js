@@ -37,6 +37,33 @@ const promoPackageSchema = new schema({
   },
 });
 
+
+
+
+const showPackageSchema = new schema({
+  Name: {
+    type: String,
+    required: true,
+  },
+  Price: {
+    type: Number,
+    required: true,
+  },
+  Duration: {
+    type: String,
+    required: true,
+  },
+  Discription: {
+    type: String,
+  },
+});
+const ShowPackage=mongoose.model("ShowPackage",showPackageSchema);
 const Package = mongoose.model("Package", packageSchema);
 const PromoPackage = mongoose.model("PromoPackage", promoPackageSchema);
-module.exports = { Package, PromoPackage };
+module.exports = { Package, PromoPackage, ShowPackage };
+
+
+
+
+
+
