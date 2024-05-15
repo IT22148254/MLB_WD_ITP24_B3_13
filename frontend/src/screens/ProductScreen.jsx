@@ -7,7 +7,6 @@ import { useGetOneProductQuery } from "../slices/productsApiSlice";
 import Loader from "../content/Loader";
 import Message from "../content/Message";
 import { addToCart } from "../slices/cartSlice";
-import Header from "../content/header";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();

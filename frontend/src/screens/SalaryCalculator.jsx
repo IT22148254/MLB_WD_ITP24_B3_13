@@ -1,6 +1,5 @@
 import React from "react";
 import bg from "../assets/images/bg_main.jpg";
-import EmployeeRegisterForm from "../components/EmployeeRegisterForm";
 import Calculator from "../components/Calculator";
 
 const SalaryCalculator = () => {

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Button, Form } from "react-bootstrap";
 import {
   useGetOrderDetailsQuery,
   useUpdateOrderMutation,
@@ -13,7 +12,6 @@ const EditOrderScreen = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: order, isLoading, error } = useGetOrderDetailsQuery(id);
-
   const [isPaid, setIsPaid] = useState("");
   const [isDelivered, setIsDelivered] = useState("");
   const [paidAt, setPaidAt] = useState("");
@@ -28,7 +26,6 @@ const EditOrderScreen = () => {
   const [city, setCity] = useState("");
   const [district, setDistrict] = useState("");
   const [street, setStreet] = useState("");
-  const [chngedPrice, setChngedPrice] = useState("");
 
   const formattedDate = (dateString) => {
     const date = new Date(dateString);
@@ -45,8 +42,8 @@ const EditOrderScreen = () => {
       setPaidAt(order.paidAt);
       setDeliveredAt(order.deliveredAt);
       setPaymentMethod(order.paymentMethod);
-      setUser(order.user);
-      setEmail(order.email);
+      setUser(order.user.Fname);
+      setEmail(order.user.Email);
       setItemsPrice(order.itemsPrice);
       setShippingPrice(order.shippingPrice);
       setTotalPrice(order.totalPrice);
@@ -54,7 +51,6 @@ const EditOrderScreen = () => {
       setCity(order.shippingAddress.city);
       setDistrict(order.shippingAddress.district);
       setStreet(order.shippingAddress.street);
-      setChngedPrice(order.shippingPrice);
     }
   }, [order]);
 
@@ -131,12 +127,15 @@ const EditOrderScreen = () => {
             <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
                 <div className="text-gray-600">
-                  <p className="font-medium text-lg">Customer Details</p>
+                  <p className="font-medium text-3xl">Customer Details</p>
+                  <p className="font-medium text-lg mt-4">First name     : {user}</p>
+                  <p className="font-medium text-lg mt-4">Payment method : {paymentMethod}</p>
+                  <p className="font-medium text-lg mt-4">Email address  : {email}</p>
                 </div>
 
                 <div className="lg:col-span-2">
                   <div className="text-gray-600">
-                    <p className="font-medium text-lg">Order Details</p>
+                    <p className="font-medium text-3xl">Order Details</p>
                   </div>
                   <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                     <div className="md:col-span-3">

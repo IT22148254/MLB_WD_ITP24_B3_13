@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import bg from "../assets/images/bg_main.jpg";
-import EmployeeRegisterForm from "../components/EmployeeRegisterForm";
 import EmployeeEditForm from "../components/EmployeeEditForm";
 import { useParams } from "react-router-dom";
 import axios from "axios";
