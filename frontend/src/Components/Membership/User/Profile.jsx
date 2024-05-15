@@ -4,6 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useParams } from "react-router-dom";
+import bg from '../../../Images/package_bg.jpg';
 
 const InputField = ({
   label,

@@ -29,6 +29,7 @@ import AdminItemsScreen from "./screens/AdminItemsScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import DefaultScreen from "./screens/DefaultScreen";
 import UserTable from './Components/Membership/Manager/Usertable';
+import GMDashboard from './Components/Membership/Manager/GM Dashboard';
 import 'react-toastify/dist/ReactToastify.css';
 
 const router = createBrowserRouter(
@@ -51,6 +52,8 @@ const router = createBrowserRouter(
       <Route path="addemail/" element={<EmailForm/>}/>
       <Route path="editemail/:id" element={<EditEmail />} />
       <Route path="usertable/" element={<UserTable/>}/>
+      <Route path="gmdashboard/" element={<GMDashboard/>}/>
+
 
       <Route path="" element={<ProtectedRoute />}>
         <Route path="/shipping" element={<ShippingScreen />} />
