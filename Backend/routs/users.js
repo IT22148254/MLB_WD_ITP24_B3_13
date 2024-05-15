@@ -86,7 +86,7 @@ router.route("/get/:id").get(protect, async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "User fetched successfully", User: user });
+      .json(user);
   } catch (err) {
     return res
       .status(400)

@@ -61,7 +61,7 @@ function Header() {
             {userInfo ? (
               <div className="relative">
                 <button
-                  className="flex items-center space-x-2"
+                  className="text-white flex items-center space-x-2"
                   onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggle dropdown visibility
                 >
                   <FaUser />
@@ -71,8 +71,8 @@ function Header() {
                   <ul className="absolute top-full left-0 bg-gray-800 text-white rounded mt-2">
                     <li>
                       <Link
-                        to="/profile"
-                        className="block py-2 px-4 hover:bg-gray-700"
+                        to="user/profile"
+                        className="block py-2 px-4 hover:bg-gray-700 text-white"
                       >
                         Profile
                       </Link>
@@ -80,7 +80,7 @@ function Header() {
                     <li>
                       <button
                         onClick={logoutHandler}
-                        className="block py-2 px-4 w-full text-left hover:bg-gray-700"
+                        className="block py-2 px-4 w-full text-left hover:bg-gray-700 text-white"
                       >
                         Log out
                       </button>
@@ -88,13 +88,16 @@ function Header() {
                   </ul>
                 )}
               </div>
-            ) : (
-              <Link to="/login" className="flex items-center space-x-2">
+
+            ) :
+             (
+
+              <Link to="/login" className="flex items-center space-x-2 text-white">
                 <FaUser />
                 <span>Log In</span>
               </Link>
             )}
-            <Link to="/cart" className="flex items-center space-x-2">
+            <Link to="/cart" className="flex items-center space-x-2 text-white">
               <FaShoppingCart />
               <span>Cart</span>
               {cartItems.length > 0 && (

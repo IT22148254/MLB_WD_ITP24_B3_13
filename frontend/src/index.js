@@ -73,6 +73,9 @@ import Pay from "./components/Membership/Manager/pay";
 import Pay2 from "./components/Membership/Manager/pay2";
 import Showpromo from "./components/Membership/Manager/showPromo";
 import TestScreen from "./components/Membership/Manager/TestScreen";
+import UserProfile from "./Pages/profile.jsx";
+import UserTable from "./Pages/usertable.jsx";
+import MemberRegistration from "./Pages/Register.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -183,6 +186,14 @@ const router = createBrowserRouter(
         <Route path="pay/:id" element={<Pay />} />
         <Route path="pay2/:id" element={<Pay2 />} />
       </Route>
+
+      <Route path="user/">
+        <Route path="profile/" element={<UserProfile />} />
+        <Route path="usertable/" element={<UserTable/>}/>
+        <Route path="Register/" element={<MemberRegistration/>}/>
+      </Route>
+
+      <Route path="email/"></Route>
     </Route>
   )
 );
