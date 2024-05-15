@@ -22,7 +22,10 @@ const AdminPortalScreen = () => {
           <Button className="bg-blue-500 hover:bg-blue-600" onClick={(e)=> navigate('/sup/supDashboard')} >Supplier</Button>
         </ListGroup.Item>
         <ListGroup.Item>
-          <Button className="bg-blue-500 hover:bg-blue-600" onClick={(e)=> navigate('/fbk/')} >Feedback</Button>
+          <Button className="bg-blue-500 hover:bg-blue-600" onClick={(e)=> navigate('/fbk/selApp')} >Feedback</Button>
+        </ListGroup.Item>
+        <ListGroup.Item>
+          <Button className="bg-blue-500 hover:bg-blue-600" onClick={(e)=> navigate('/payment/all')} >Payment</Button>
         </ListGroup.Item>
       </ListGroup>
     </center>

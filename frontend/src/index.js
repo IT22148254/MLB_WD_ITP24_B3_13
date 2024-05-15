@@ -73,6 +73,8 @@ import Pay from "./components/Membership/Manager/pay";
 import Pay2 from "./components/Membership/Manager/pay2";
 import Showpromo from "./components/Membership/Manager/showPromo";
 import TestScreen from "./components/Membership/Manager/TestScreen";
+import SelectApproval from "./Pages/Selectapproval.jsx"
+import ShowFeedback from "./components/Feedback/User/ShowFeedback.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -105,12 +107,14 @@ const router = createBrowserRouter(
       {/* Feedback */}
 
       <Route path="fbk/">
-        <Route path="" element={<Selectoption />} />
+        <Route path="abtUs/" element={<ShowFeedback />} />
+        <Route path="selApp/" element={<SelectApproval/>} />
         <Route path="addservice/" element={<ServiceFeedbackForm />} />
         <Route path="servicetable/" element={<ServiceFeedbackTable />} />
         <Route path="editservice/:id" element={<EditServiceFeedbackForm />} />
         <Route path="coachfeedback/" element={<Coachfeedback />} />
         <Route path="coachfeedbacktable/" element={<CoachFeedbackTable />} />
+        <Route path="selOpt/" element={<Selectoption />} />
         <Route
           path="coachfeedbackedit/:id"
           element={<CoachFeedbackEditForm />}

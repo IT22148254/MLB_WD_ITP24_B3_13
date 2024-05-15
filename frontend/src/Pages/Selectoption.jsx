@@ -15,7 +15,7 @@ const Selectoption = () => {
     const handleCoachFeedback = () => {
         {/*navigate ('/promoPackages')*/}
     };
-    
+
      const handleServiceFeedback = () => {
     //     //{/*navigate ('/promoPackages')*/}
      };

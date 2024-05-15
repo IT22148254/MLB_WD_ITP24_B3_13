@@ -5,6 +5,7 @@ import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { useParams } from "react-router-dom";
 import bg from "../../../Images/feedback.jpeg";
+import { useSelector } from "react-redux";
 
 const ShowFeedback = () => {
   const bgStyle = {
@@ -17,6 +18,9 @@ const ShowFeedback = () => {
     flexDirection: "column",
     color: "white",
   };
+
+  const user = useSelector((state) => state.auth);
+  console.log(user)
 
   let navigate = useNavigate();
   const { id } = useParams();
@@ -48,7 +52,12 @@ const ShowFeedback = () => {
   }, [searchInput, filteredFeedbacks]);
 
   const handleAddsFeedback = () => {
-    navigate("/fbk/addservice");
+    if(user.userInfo === null ){
+      navigate("/login");
+    }else{
+      navigate("/fbk/selOpt")
+    }
+    
   };
 
   const handleDownloadPDF = () => {
@@ -85,7 +94,11 @@ const ShowFeedback = () => {
   };
 
   const handleAddFeedback = () => {
-    navigate("/fbk/coachfeedback");
+    if(user.userInfo === null ){
+      navigate("/login");
+    }else{
+      navigate("/fbk/selOpt")
+    }
   };
 
   return (

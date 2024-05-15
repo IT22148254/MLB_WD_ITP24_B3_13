@@ -39,8 +39,8 @@ function Header() {
 
           {/* Navigation Links */}
           <nav className=" mx-auto flex m">
-            <a href="#" className="text-white hover:text-gray-400">
-              About Us
+            <a href="/fbk/abtUs" className="text-white hover:text-gray-400">
+              Feedback
             </a>
             <a href="/store" className="text-white hover:text-gray-400 mx-4">
               Shop
