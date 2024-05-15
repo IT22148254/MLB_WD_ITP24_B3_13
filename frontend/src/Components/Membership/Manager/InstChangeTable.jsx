@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { Container } from "reactstrap";
-import bg from "../../../Images/package_bg.jpg";
+import bg from "../../../Images/bg.jpg";
 
 const OnetimeChangeTable = () => {
   const bgStyle = {
@@ -128,31 +128,28 @@ const OnetimeChangeTable = () => {
   };
 
   return (
-    <div className="flex h-full justify-center items-center" style={bgStyle}>
-      <div className="bg-black/45 w-4/5 h-3/4 rounded-[50px] py-12 px-12 gap -inset-y-8">
+    <div className="flex items-center justify-center h-full" style={bgStyle}>
+      <div className="bg-black/40 w-4/5 h-[800px] rounded-[50px] py-12 px-12 gap -inset-y-8">
         {/* <div className="w-full"> */}
-          <div
-            className="text-4xl text-white font-bold align-top mb-6"
-            style={{ WebkitTextStroke: "1px black" }}
-          >
-            One time Changes
+          <div className=" text-xl mb-10 bottom-[508px] left-0 right-[450px] text-center text-white font-normal" style={{ fontFamily: 'poppins' }}>
+            One Time Changes
           </div>
           <div className="mb-4">
-            <div className="h-9 bg-white/70 w-1/2 rounded-lg">
+            <div className="w-1/2 rounded-lg h-9 bg-white/70">
               <input
                 placeholder="Search by Trainer"
-                className="bg-transparent pl-4 placeholder:text-gray-600 w-full h-full border-none active:border-none focus:border-none focus:outline-none"
+                className="w-full h-full pl-4 bg-transparent border-none placeholder:text-gray-600 active:border-none focus:border-none focus:outline-none"
                 value={searchInput}
                 onChange={(e) => setSearchInput(e.target.value)}
               />
             </div>
           </div>
-          <div className="grid grid-cols-5 bg-cyan-400">
-            <div className="border-2 border-black p-3">Day</div>
-            <div className="border-2 border-black p-3">Time Slot</div>
-            <div className="border-2 border-black p-3">Trainer</div>
-            <div className="border-2 border-black p-3">Edit</div>
-            <div className="border-2 border-black p-3">Delete</div>
+          <div className="grid grid-cols-5 bg-cyan-400/85">
+            <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Day</div>
+            <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Time Slot</div>
+            <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Trainer</div>
+            <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Edit</div>
+            <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Delete</div>
           </div>
           <div
             className="w-full overflow-auto "
@@ -166,30 +163,30 @@ const OnetimeChangeTable = () => {
               filteredOnetimes.map((ont, index) => (
                 <div
                   className={`grid grid-cols-5 ${
-                    index % 2 === 0 ? "bg-cyan-200 " : "bg-cyan-400 "
+                    index % 2 === 0 ? "bg-cyan-100/75 " : "bg-cyan-400/85 "
                   }`}
                   key={ont._id}
                 >
-                  <div className="border-2 border-black p-2">
+                  <div className="p-2 border-2 border-black">
                     {ont.Day}
                   </div>
-                  <div className="border-2 border-black p-2">
+                  <div className="p-2 border-2 border-black">
                     {ont.TimeSlot}
                   </div>
-                  <div className="border-2 border-black p-2">
+                  <div className="p-2 border-2 border-black">
                     {ont.Trainer}
                   </div>
-                  <div className="border-2 border-black p-2">
+                  <div className="p-2 border-2 border-black">
                     <button
-                      className="bg-cyan-400 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
+                      className='px-4 py-2 mr-[72px] text-white bg-blue-600 rounded-md fon2t-semibold secondary__btn hover:bg-blue-800'
                       onClick={() => handleEdit(ont)}
                     >
                       Edit
                     </button>
                   </div>
-                  <div className="border-2 border-black p-2">
+                  <div className="p-2 border-2 border-black ">
                   <button
-                      className="bg-red-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
+                      className='px-4 py-2 mr-0 font-semibold text-white bg-red-600 rounded-md primary__btn hover:bg-red-300' 
                       onClick={() => handleDelete(ont._id)}
                     >
                       Delete
@@ -200,17 +197,17 @@ const OnetimeChangeTable = () => {
           </div>
           {/* Button to generate feedback report */}
           <button
-            className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-13"
+            className='absolute  mb-10 bottom-[680px] left-[1400px] right-0 px-4 py-2 mr-[72px] text-white bg-blue-500 rounded-md font-semibold secondary__btn hover:bg-blue-700'
             onClick={handleCreateReport}
-          >
+            style={{ fontFamily: 'poppins' }}>
             Generate schedule Report
           </button>
 
           {/* Button to add feedback */}
           <button
-            className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-13"
+            className=' py-2 px-10  mr-0 font-semibold text-white bg-red-600 rounded-md mt-px-4 primary__btn hover:bg-red-300 mt-[20px]'
             onClick={handleAddSchedule}
-          >
+            style={{ fontFamily: 'poppins' }} >
             Add Schedule
           </button>
         {/* </div> */}

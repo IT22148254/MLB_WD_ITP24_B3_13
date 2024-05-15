@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { Container } from "reactstrap";
 import { useState, useEffect } from "react";
-import bg from "../../../Images/package_bg.jpg";
+import bg from "../../../Images/bg.jpg";
 
 const ScheduleEdit = () => {
   const [TimeSlot, setTimeSlot] = useState("");
@@ -77,15 +77,15 @@ const ScheduleEdit = () => {
   };
 
   return (
-    <div className="flex h-full justify-center items-center" style={bgStyle}>
+    <div className="flex items-center justify-center h-full" style={bgStyle}>
       <div className="bg-black/55  rounded-[50px] w-[700px] py-16 px-16 gap -inset-y-8">
-        <div className=" text-white title text-xl font-bold mb-4">
+        <div className="flex items-center justify-center text-xl font-normal text-white mb-14 title" style={{ fontFamily: 'poppins' }}>
           Instructor Change
         </div>
         <form method="POST" className="add-promo" onSubmit={handleSubmit}>
           {/* Date input */}
-          <div className="add-promo-row mb-2">
-            <label htmlFor="Date" className="promo-lbl block font-medium mb-1">
+          <div className="flex items-center mb-12">
+            <label htmlFor="Date" className="w-1/4 py-2 mb-0 mr-4 font-medium text-white">
               Date
             </label>
             <input
@@ -94,22 +94,22 @@ const ScheduleEdit = () => {
               name="Date"
               value={Date}
               onChange={(e) => setDate(e.target.value)}
-              className="promoInput border border-gray-300 rounded-md px-3 py-2 w-full"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md promoInput"
               required
             />
           </div>
           {/* Time Slot input */}
-          <div className="add-promo-row mb-2">
+          <div className="flex items-center mb-12">
             <label
               htmlFor="TimeSlot"
-              className="promo-lbl block font-medium mb-1"
+              className="w-1/4 py-2 mb-0 mr-4 font-medium text-white"
             >
               Time Slot
             </label>
             <select
               name="TimeSlot"
               id="TimeSlot"
-              className="dropdown border border-gray-300 rounded-md px-3 py-2 w-full"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md dropdown"
               value={TimeSlot}
               onChange={(e) => setTimeSlot(e.target.value)}
             >
@@ -120,17 +120,17 @@ const ScheduleEdit = () => {
             </select>
           </div>
           {/* Section input */}
-          <div className="add-promo-row mb-2">
+          <div className="flex items-center mb-12">
             <label
               htmlFor="Section"
-              className="promo-lbl block font-medium mb-1"
+              className="w-1/4 py-2 mb-0 mr-4 font-medium text-white"
             >
               New Section
             </label>
             <select
               name="Section"
               id="Section"
-              className="dropdown border border-gray-300 rounded-md px-3 py-2 w-full"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md dropdown"
               value={Section}
               onChange={(e) => setSection(e.target.value)}
             >
@@ -139,24 +139,24 @@ const ScheduleEdit = () => {
             </select>
           </div>
           {/* Submit button */}
-          <div className="add-promo-row flex justify-end mt-4">
+          <div className="flex justify-end mt-4 add-promo-row">
             <div className="add-promo-btns">
               <button
                 type="submit"
-                className="secondary__btn mr-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
+                className='px-4 py-2 mr-[72px] text-white bg-blue-500 rounded-md fon2t-semibold secondary__btn hover:bg-blue-700'
               >
                 Submit
               </button>
               <button
                 type="reset"
-                className="primary__btn bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-md"
+                className='px-4 py-2 mr-0 font-semibold text-white bg-red-600 rounded-md primary__btn hover:bg-red-300'
               >
                 Cancel
               </button>
             </div>
           </div>
           {/* Error message */}
-          {error && <div className="error text-red-500 mt-2">{error}</div>}
+          {error && <div className="mt-2 text-red-500 error">{error}</div>}
         </form>
       </div>
     </div>

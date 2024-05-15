@@ -86,6 +86,7 @@ const InstructorChange = () => {
               min={today}
               required
             />
+            
           </div>
           <div className="flex items-center mb-12">
             <label htmlFor="currentslot" className="w-1/4 py-2 mb-0 mr-4 font-medium text-white">
