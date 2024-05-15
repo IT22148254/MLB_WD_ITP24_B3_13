@@ -11,7 +11,7 @@ const ChangeOnetimeEdit = () => {
   const [Day, setDay] = useState("");
   const [Trainer, setTrainer] = useState("");
   const [error, setError] = useState(null);
-
+  let navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,9 +19,9 @@ const ChangeOnetimeEdit = () => {
       try {
         const result =  await axios.get(`http://localhost:8070/schedule/get/${id}`);
 
-        setTimeSlot(result.data.TimeSlot);
-        setDay(result.data.Day);
-        setTrainer(result.data.Trainer);
+        setTimeSlot(result.data.result.TimeSlot);
+        setDay(result.data.result.Day);
+        setTrainer(result.data.result.Trainer);
       } catch (error) {
         setError(error.response.data.message);
         console.log("Error fetching schedule: ", error);
@@ -30,9 +30,9 @@ const ChangeOnetimeEdit = () => {
     fetchonetimes();
   }, [id]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
+  const handleSubmit = () => {
+ 
+    navigate('/sch/schedules/')
     // const scheduleDate = {
       
     // };
