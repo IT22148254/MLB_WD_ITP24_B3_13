@@ -78,14 +78,14 @@ import ShowFeedback from "./components/Feedback/User/ShowFeedback.jsx";
 import UserProfile from "./Pages/profile.jsx";
 import UserTable from "./Pages/usertable.jsx";
 import MemberRegistration from "./Pages/Register.jsx";
-import ScheduleAdd from "./Components/Membership/Manager/Scheduleadd";
-import ScheduleTable from "./Components/Membership/Manager/ScheduleTable";
-import InstructorChange from "./Components/Membership/Manager/InstructorChange.jsx";
-import OnetimeChangeTable from "./Components/Membership/Manager/InstChangeTable.jsx";
-import ChangeOnetimeEdit from "./Components/Membership/Manager/InstChangeEdit.jsx";
-import ScheduleEdit from "./Components/Membership/Manager/Scheduleedit.jsx";
+import ScheduleAdd from "./components/Membership/Manager/Scheduleadd";
+import ScheduleTable from "./components/Membership/Manager/ScheduleTable";
+import InstructorChange from "./components/Membership/Manager/InstructorChange.jsx";
+import OnetimeChangeTable from "./components/Membership/Manager/InstChangeTable.jsx";
+import ChangeOnetimeEdit from "./components/Membership/Manager/InstChangeEdit.jsx";
+import ScheduleEdit from "./components/Membership/Manager/Scheduleedit.jsx";
 import DashbordEx from "./Pages/OM/DashbordEx.jsx";
-import SceduleTimeSlot from "././Pages/OM/SceduleTimeSlot.jsx";
+import SceduleTimeSlot from "./Pages/OM/SceduleTimeSlot.jsx";
 //import MMDashboard from "./Pages/Manager/MMDashboard";
 
 const router = createBrowserRouter(
