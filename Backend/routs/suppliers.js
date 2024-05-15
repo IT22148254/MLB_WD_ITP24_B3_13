@@ -39,6 +39,24 @@ router.route("/inv/").get((req, res) => {
     });
 });
 
+router.route("/inv/:key").get(async(req,res) => {
+  await Inventry.findOne({ PrName: req.params.key,quantity: { $gt: 0 } }).then((result) => {
+    res.status(200).json(result)
+  }).catch((err)=>{
+    res.status(400).json({message:`Something went wrong getting ${req.params.key}` })
+  })
+})
+
+router.route("/inv/:key").put(async(req,res)=>{
+  const name = req.params.key
+  const {quantity} = req.body
+  await Inventry.findOneAndUpdate({PrName: name},{quantity}).then((result) => {
+    res.status(200).json({message:`update success ${name}`})
+  }).catch((err) => {
+    res.status(400).json({message:`Error updating ${name}`})
+  });
+})
+
 
 // ================================================================================================================================================
 //=================================================================Supplier========================================================================

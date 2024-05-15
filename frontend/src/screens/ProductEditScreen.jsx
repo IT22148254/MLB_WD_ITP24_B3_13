@@ -10,6 +10,7 @@ import {
   useUploadProdImageMutation,
 } from "../slices/productsApiSlice";
 import CurrencyInput from "react-currency-input-field";
+import axios from "axios";
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
@@ -21,6 +22,7 @@ const ProductEditScreen = () => {
   const [countInStock, setCountInStock] = useState("");
   const [description, setDescription] = useState("");
   const [err, setErr] = useState("");
+  const [invItm, setInvItm] = useState("");
 
   const { data: product, isLoading, error } = useGetOneProductQuery(productId);
 
@@ -49,10 +51,17 @@ const ProductEditScreen = () => {
     return regex.test(value) || value === "";
   };
 
-  // const handlePriceChange = (value) => {
-  //   //const numericValue = value.replace(/\D/g, '');
-  //   setPrice(value);
-  // };
+  let nm = name.toLowerCase();
+
+  axios
+    .get(`/supplier/inv/${nm}`)
+    .then((response) => {
+      console.log(response.data.quantity);
+      setInvItm(response.data.quantity);
+    })
+    .catch((error) => {
+      console.error("Error fetching inventory:", error);
+    });
 
   const handlePriceChange = (newValue) => {
     //let newValue = e.target.value;
@@ -81,10 +90,10 @@ const ProductEditScreen = () => {
     } catch (error) {
       toast.error("Image upload failed");
     }
-
   };
 
   const validateForm = () => {
+    //const prodINV = fetchInventoryItem()
     if (
       !name ||
       !price ||
@@ -100,6 +109,25 @@ const ProductEditScreen = () => {
       setErr("Price and Stock must be numbers.");
       return false;
     }
+    if (Number(countInStock) > Number(invItm)) {
+      setErr(`Only ${invItm} number of items can be added`);
+      return false;
+    }
+    if (invItm === undefined) {
+      setErr(`0 items in inventory`);
+      return false;
+    }
+
+    const quantity = Number(invItm) - Number(countInStock);
+
+    axios
+      .put(`/supplier/inv/${nm}`, { quantity })
+      .then((response) => {
+        console.log(response.data.message);
+      })
+      .catch((error) => {
+        console.error("Error updating inventory:", error);
+      });
     return true;
   };
 
@@ -138,7 +166,7 @@ const ProductEditScreen = () => {
     toast.error("Something went wrong");
   } else if (loadingUpdate) {
     return <Loader />;
-  }else if (loadImg) {
+  } else if (loadImg) {
     return <Loader />;
   }
 
@@ -200,11 +228,7 @@ const ProductEditScreen = () => {
 
           <Form.Group controlId="image">
             <Form.Label>Image</Form.Label>
-            <Form.Control
-              type="text"
-              value={image}
-              readOnly
-            ></Form.Control>
+            <Form.Control type="text" value={image} readOnly></Form.Control>
             <Form.Control
               type="file"
               label="Choose a file"
@@ -251,7 +275,11 @@ const ProductEditScreen = () => {
               onChange={(e) => setDescription(e.target.value)}
             ></Form.Control>
           </Form.Group>
-          <Button type="submit" style={{backgroundColor:"blue",borderWidth:"2px"}} className="my-2">
+          <Button
+            type="submit"
+            style={{ backgroundColor: "blue", borderWidth: "2px" }}
+            className="my-2"
+          >
             Update
           </Button>
         </Form>

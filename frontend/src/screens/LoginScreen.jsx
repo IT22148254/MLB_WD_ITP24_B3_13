@@ -58,7 +58,6 @@ const LoginScreen = () => {
 
   return (
     <>
-      <Header />
       <div className="min-h-screen bg-gray-100 flex justify-center items-center">
         <div className="max-w-md w-full bg-white p-8 rounded shadow-lg">
           <h1 className="text-3xl font-bold mb-4 text-center">Sign in</h1>

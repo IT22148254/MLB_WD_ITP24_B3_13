@@ -30,7 +30,6 @@ const ProductScreen = () => {
 
   return (
     <>
-    <Header />
     <div className="container mx-auto px-4 py-8">
       <Link className="btn btn-light my-3" to="/store">
         Go back
