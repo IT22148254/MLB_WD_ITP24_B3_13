@@ -9,36 +9,36 @@ import { toast } from 'react-toastify';
 
 
 // Reusable InputField component
-const InputField = ({
-  label,
-  type,
-  value,
-  onChange,
-  placeholder,
-  required,
-  error,
-  ...props
-}) => {
-  const inputStyle =
-    'w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500';
+// const InputField = ({
+//   label,
+//   type,
+//   value,
+//   onChange,
+//   placeholder,
+//   required,
+//   error,
+//   ...props
+// }) => {
+//   const inputStyle =
+//     'w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500';
 
-  return (
-    <div className="add-promo-row">
-      <input
-        type={type}
-        id={label}
-        name={label}
-        value={value}
-        onChange={onChange}
-        className={inputStyle}
-        placeholder={placeholder}
-        required={required}
-        {...props}
-      />
-      {error && <div style={{ color: 'red' }}>{error}</div>}
-    </div>
-  );
-};
+//   return (
+//     <div className="add-promo-row">
+//       <input
+//         type={type}
+//         id={label}
+//         name={label}
+//         value={value}
+//         onChange={onChange}
+//         className={inputStyle}
+//         placeholder={placeholder}
+//         required={required}
+//         {...props}
+//       />
+//       {error && <div style={{ color: 'red' }}>{error}</div>}
+//     </div>
+//   );
+// };
 
 const MemberRegistration = () => {
   const bgStyle = {
@@ -64,6 +64,9 @@ const MemberRegistration = () => {
   const [emailError, setEmailError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const inputStyle =
+    'w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500';
+  const errstyle= {color:'red'}
   const navigate = useNavigate();
 
   const handleNicChange = (e) => {
@@ -95,7 +98,7 @@ const MemberRegistration = () => {
       }
     }
   };
-  
+
 
   const handleEmailChange = (e) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -109,12 +112,12 @@ const MemberRegistration = () => {
 
   const handlePasswordChange = (event) => {
     const newPassword = event.target.value;
-  
+
     // Regular expressions for password requirements
     const lengthRegex = /.{8,}/; // At least 8 characters long
     const specialCharRegex = /[^A-Za-z0-9]/; // At least one special character
     const capitalLetterRegex = /[A-Z]/; // At least one capital letter
-  
+
     // Check each requirement and set error messages accordingly
     if (!lengthRegex.test(newPassword)) {
       setPasswordError('Password must be 8 characters or more');
@@ -129,10 +132,10 @@ const MemberRegistration = () => {
       setPasswordError('');
       setPasswordMatch(newPassword === confirmPassword); // Check if password matches confirm password
     }
-  
+
     setPassword(newPassword);
   };
-  
+
 
   const handleConfirmPasswordChange = (event) => {
     const newConfirmPassword = event.target.value;
@@ -145,7 +148,7 @@ const MemberRegistration = () => {
     }
     setConfirmPassword(newConfirmPassword);
   };
-  
+
 
   const handleDobChange = (date) => {
     setDob(date);
@@ -172,12 +175,12 @@ const MemberRegistration = () => {
     );
   };
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!isFormValid()){
+    if (!isFormValid()) {
       Swal.fire({
         title: 'Error',
         text: 'Please fill in all fields correctly',
@@ -232,31 +235,34 @@ const MemberRegistration = () => {
         </p>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-y-4">
-            <InputField
+            <input
               label="First Name"
               type="text"
               value={Fname}
               onChange={(e) => setFname(e.target.value)}
               placeholder="First Name"
+              className={inputStyle}
               required
             />
-            <InputField
+            <input
               label="Last Name"
               type="text"
               value={Lname}
               onChange={(e) => setLname(e.target.value)}
               placeholder="Last Name"
+              className={inputStyle}
               required
             />
-            <InputField
+            <input
               label="NIC"
               type="text"
               value={NIC}
               onChange={handleNicChange}
               placeholder="NIC"
+              className={inputStyle}
               required
-              error={nicError}
             />
+            {nicError && <div style={errstyle}>{nicError}</div>}
             <div className="add-promo-row">
               <textarea
                 value={Address}
@@ -281,45 +287,45 @@ const MemberRegistration = () => {
                 <option value="Female">Female</option>
               </select>
             </div>
-            <InputField
+            <input
               label="Email"
               type="email"
               value={Email}
               onChange={handleEmailChange}
               placeholder="Email"
+              className={inputStyle}
               required
-              error={emailError}
             />
-            <InputField
+            <input
               label="Password"
               type="password"
               value={Password}
               onChange={handlePasswordChange}
               placeholder="Password"
+              className={inputStyle}
               required
-              error={passwordError}
             />
-            <InputField
+            <input
               label="Confirm Password"
               type="password"
               value={confirmPassword}
               onChange={handleConfirmPasswordChange}
               placeholder="Confirm Password"
+              className={inputStyle}
               required
-              error={confirmPasswordError}
             />
-            <InputField
+            <input
               label="Contact No"
               type="number"
               value={Phone}
               onChange={handlePhoneChange}
               placeholder="Contact No"
+              className={inputStyle}
               required
-              error={phoneError}
             />
             <div className="flex items-center mb-12">
-              <DatePicker                 
-              
+              <DatePicker
+
                 className=" bg-white/70 w-full h-full rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                 selected={Dob}
                 onChange={handleDobChange}
