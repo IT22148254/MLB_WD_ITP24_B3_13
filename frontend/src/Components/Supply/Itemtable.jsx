@@ -56,6 +56,8 @@ const Itemtable = () => {
           >
             <div className="border-2 border-black p-2 ">{productName}</div>
             <div className="border-2 border-black p-2">{totalQuantity}</div>
+
+            
           </div>
         ))}
       </div>

@@ -9,7 +9,7 @@ import TestScreen from './Components/Supply/TestScreen';
 import SupplierTable from './Components/Supply/Suppliertable';
 import EditSupplierForm from './Components/Supply/EditSupplierForm';
 import SupplierDashboard from './Pages/SupplierDashboard';
-import Inventory from './Pages/Inventory';
+import Inventory from './Pages/Inventory'
 
 //i change from here
 import Itemtable from './Components/Supply/Itemtable'; 
@@ -50,10 +50,6 @@ const router = createBrowserRouter(
         <Route path="Invoice" element= {<Invoice/>}/>
         <Route path="Home" element= {<WavesyncHome/>}/>
         <Route path="Header" element= {<Header/>}/>
-
-
-
-      
 
       </Route>
     </Route>
