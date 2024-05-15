@@ -16,7 +16,7 @@ function Header() {
           <a href="#" className="text-white hover:text-gray-400">
             About Us
           </a>
-          <a href="#" className="text-white hover:text-gray-400 mx-4">
+          <a href="/store" className="text-white hover:text-gray-400 mx-4">
             Shop
           </a>
           <a href="#" className="text-white hover:text-gray-400">
