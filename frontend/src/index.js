@@ -12,7 +12,10 @@ import EditStandard from './Components/Membership/Manager/EditStandardform'
 import TestScreen from './Components/Membership/Manager/TestScreen';
 import ScheduleAdd from './Components/Membership/Manager/Scheduleadd';
 import ScheduleTable from './Components/Membership/Manager/ScheduleTable';
-
+import InstructorChange from './Components/Membership/Manager/InstructorChange.jsx';
+import OnetimeChangeTable from "./Components/Membership/Manager/InstChangeTable.jsx"
+import ChangeOnetimeEdit from  "./Components/Membership/Manager/InstChangeEdit.jsx";
+import ScheduleEdit from "./Components/Membership/Manager/Scheduleedit.jsx";
 
 import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter(
@@ -32,9 +35,19 @@ const router = createBrowserRouter(
         {/* <Route path="/" element={<TestScreen />} /> */}
         {/* <Route path='/' element={<ScheduleAdd/>}/> */}
         <Route path="sch/">
+
+
+        <Route path="change/" element={<InstructorChange/>} />
+
+        <Route path="chngtimeondytbl/" element={<OnetimeChangeTable/>} />
+
+        <Route path="chngtimeondytb/:id" element={<ChangeOnetimeEdit/>} />
+          
           <Route path="schedules/" element={<ScheduleTable/>} />
           <Route path="addsch/" element={<ScheduleAdd/>}/>
-        </Route>
+          
+        <Route path="editsch/:id" element={<ScheduleEdit/>} />
+        </Route>hangeOne
       </Route>
     
 

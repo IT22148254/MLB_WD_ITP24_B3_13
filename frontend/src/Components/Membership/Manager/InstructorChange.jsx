@@ -44,7 +44,7 @@ const InstructorChange = () => {
       }).then(() => {
         console.log('new slot added', json)
         // window.location.reload()
-        navigate('/chngtimeondytbl')
+        navigate('/sch/chngtimeondytbl')
       })
 
 

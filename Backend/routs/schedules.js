@@ -22,12 +22,10 @@ router.route("/coachSchedule/add").post((req, res) => {
       res.status(200).json({ message: "Schedule added successfully" });
     })
     .catch((err) => {
-      res
-        .status(400)
-        .json({
-          message: "Something went wrong when adding the Schedule",
-          err,
-        });
+      res.status(400).json({
+        message: "Something went wrong when adding the Schedule",
+        err,
+      });
     });
 });
 
@@ -100,14 +98,13 @@ router.route("/get/:id").get(async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: " Data retreival successfull !!! ", result});
+      .json({ message: " Data retreival successfull !!! ", result });
   } catch (error) {
     return res
       .status(400)
       .json({ message: `Data retreival unsuccessful ${error} ` });
   }
 });
-
 
 // ================================================================================================================================================
 //=================================================================Customer Schedule===============================================================
@@ -116,7 +113,7 @@ router.route("/get/:id").get(async (req, res) => {
 //add new customer Schedule
 
 router.route("/customerSchedule/add").post((req, res) => {
-  const { Date,TimeSlot,Section } = req.body;
+  const { Date, TimeSlot, Section } = req.body;
 
   const newSchedule = new CustomerSchedule({
     Date,
@@ -130,12 +127,10 @@ router.route("/customerSchedule/add").post((req, res) => {
       res.status(200).json({ message: "Schedule added successfully" });
     })
     .catch((err) => {
-      res
-        .status(400)
-        .json({
-          message: "Something went wrong when adding the Schedule",
-          err,
-        });
+      res.status(400).json({
+        message: "Something went wrong when adding the Schedule",
+        err,
+      });
     });
 });
 
@@ -158,11 +153,11 @@ router.route("/customerSchedule/").get((req, res) => {
 router.route("/customerSchedule/:id").put(async (req, res) => {
   try {
     const id = req.params.id;
-    const { Date,TimeSlot, Section } = req.body;
+    const { Date, TimeSlot, Section } = req.body;
 
     const result = await CustomerSchedule.findByIdAndUpdate(
       id,
-      { Date,TimeSlot,Section},
+      { Date, TimeSlot, Section },
       { new: true }
     );
 
@@ -206,16 +201,12 @@ router.route("/customerSchedule/get/:id").get(async (req, res) => {
       return res.status(404).json({ message: " Schedule not found " });
     }
 
-    return res
-      .status(200)
-      .json({ message: " Data retreival successfull !!! ", Item: item });
+    return res.status(200).json(result);
   } catch (error) {
     return res
       .status(400)
       .json({ message: `Data retreival unsuccessful ${error} ` });
   }
 });
-
-
 
 module.exports = router;

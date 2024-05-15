@@ -43,8 +43,8 @@ const ScheduleAdd = () => {
                 icon: "success",
             }).then(() => {
                 console.log('new slot added', json)
-                // window.location.reload()
-                // navigate('/chngtimeondytbl')
+                window.location.reload()
+                navigate('/sch/schedules/')
             })
 
 

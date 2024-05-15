@@ -45,7 +45,7 @@ const OnetimeChangeTable = () => {
   }, [searchInput, onetimes]);
 
   const handleEdit = (onetime) => {
-    navigate(`/chngtimeondytbl/${onetime._id}`, { state: { onetime } });
+    navigate(`/sch/chngtimeondytb/${onetime._id}`, { state: { onetime } });
   };
 
   const handleDelete = (id) => {
