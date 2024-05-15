@@ -62,11 +62,12 @@ import CoachFeedbackEditForm from './components/Feedback/User/CoachFeedbackEditF
 import CoachFeedbackApproval from './components/Feedback/Manager/CoachFeedbackApproval.jsx';
 import ServiceFeedbackApproval from './components/Feedback/Manager/ServiceFeedbackApproval.jsx';
 import EditOrderScreen from "./screens/EditOrderScreen.jsx";
+import Home from "./Pages/Home.jsx"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
-      <Route path="/" element={<DefaultScreen />} />
+      <Route path="/" element={<Home />} />
       <Route path="/store" element={<HomeScreen />} />
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/cart" element={<CartScreen />} />

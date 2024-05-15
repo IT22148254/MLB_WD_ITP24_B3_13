@@ -4,7 +4,7 @@ function Footer() {
   
   return (
     <footer class="bg-gradient-to-r from-[#00293b] via-[#00296b] to-[#00293b] py-12 sm:px-16 max-sm:px-8 font-sans tracking-wide">
-      <div class="max-w-2xl mx-auto text-center">
+      {/* <div class="max-w-2xl mx-auto text-center">
         <div class="bg-[#fff] flex p-1 rounded-full text-left mt-4">
           <input
             type="email"
@@ -18,7 +18,7 @@ function Footer() {
             Subscribe
           </button>
         </div>
-      </div>
+      </div> */}
 
       <hr class="my-12 border-gray-400" />
 

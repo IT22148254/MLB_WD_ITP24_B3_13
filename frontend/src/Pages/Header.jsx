@@ -3,7 +3,7 @@ import logo from '../Images/logo.png';
 
 function Header() {
   return (
-
+    <div>
     <header class="bg-gradient-to-r from-[#00293b] via-[#00296b] to-[#00293b] py-12 sm:px-16 max-sm:px-8 font-sans tracking-wide">
       
       <div className="container mx-auto flex justify-center items-center">
@@ -13,13 +13,13 @@ function Header() {
 
         {/* Navigation Links */}
         <nav className=" mx-auto flex m">
-          <a href="#" className="hover:text-gray-400">
+          <a href="#" className="text-white hover:text-gray-400">
             About Us
           </a>
-          <a href="#" className="hover:text-gray-400 mx-4">
+          <a href="#" className="text-white hover:text-gray-400 mx-4">
             Shop
           </a>
-          <a href="#" className="hover:text-gray-400">
+          <a href="#" className="text-white hover:text-gray-400">
             Packages
           </a>
         </nav>
@@ -40,6 +40,7 @@ function Header() {
       </div>
       
     </header>
+    </div>
   );
 }
 
