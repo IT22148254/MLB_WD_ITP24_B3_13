@@ -16,6 +16,7 @@ import InstructorChange from './Components/Membership/Manager/InstructorChange.j
 import OnetimeChangeTable from "./Components/Membership/Manager/InstChangeTable.jsx"
 import ChangeOnetimeEdit from  "./Components/Membership/Manager/InstChangeEdit.jsx";
 import ScheduleEdit from "./Components/Membership/Manager/Scheduleedit.jsx";
+import DashbordEx from "./Pages/OM/DashbordEx.jsx"
 import SceduleTimeSlot from "././Pages/OM/SceduleTimeSlot.jsx";
 import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter(
@@ -50,6 +51,7 @@ const router = createBrowserRouter(
 
 
         <Route path='schedule/'element={<SceduleTimeSlot/>}/> 
+        <Route path='dashbord/' element={<DashbordEx/>}/>
         </Route>hangeOne
       </Route>
     
