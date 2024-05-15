@@ -56,7 +56,7 @@ const ProductEditScreen = () => {
   axios
     .get(`/supplier/inv/${nm}`)
     .then((response) => {
-      console.log(response.data.quantity);
+      //console.log(response.data.quantity);
       setInvItm(response.data.quantity);
     })
     .catch((error) => {
@@ -85,7 +85,7 @@ const ProductEditScreen = () => {
     try {
       const res = await uploadProdImage(formData).unwrap();
       toast.success(res.message);
-      console.log(res.image);
+      //console.log(res.image);
       setImage(res.image);
     } catch (error) {
       toast.error("Image upload failed");
@@ -123,7 +123,7 @@ const ProductEditScreen = () => {
     axios
       .put(`/supplier/inv/${nm}`, { quantity })
       .then((response) => {
-        console.log(response.data.message);
+        //console.log(response.data.message);
       })
       .catch((error) => {
         console.error("Error updating inventory:", error);
@@ -154,7 +154,7 @@ const ProductEditScreen = () => {
       console.log(error);
     } else {
       toast.success("Succesfully updated the product ");
-      console.log("Successfully updated");
+      //console.log("Successfully updated");
       navigate("/store/admin/items");
     }
   };
@@ -170,7 +170,7 @@ const ProductEditScreen = () => {
     return <Loader />;
   }
 
-  console.log(product);
+  //console.log(product);
 
   return (
     <>
