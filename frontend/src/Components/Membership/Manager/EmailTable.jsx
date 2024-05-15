@@ -89,6 +89,11 @@ const EmailTable = () => {
   };
   const handleCreateReport = () => {
     const doc = new jsPDF();
+
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const pageHeight = doc.internal.pageSize.getHeight();
+
+    const letterhead = 
     doc.setFontSize(16);
     doc.text('Email Details Report', 14, 22);
 
