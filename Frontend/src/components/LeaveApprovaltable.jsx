@@ -185,7 +185,27 @@ const Leave = () => {
     doc.save("Leave Report.pdf");
   };
 
-  
+  const handleSendEmail = async (email, status) => {
+    // Send email using emailjs-com
+    emailjs.send('service_b27z6pc', 'template_9y1j719', { from_status: status, from_email: email }, 'zywfAzWm1IL9W5-Mp')
+      .then((result) => {
+        console.log("Email sent successfully:", result.text);
+        Swal.fire({
+          title: "Success!",
+          text: "Email sent successfully.",
+          icon: "success",
+        });
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to send email.",
+          icon: "error",
+        });
+      });
+  };
+
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
