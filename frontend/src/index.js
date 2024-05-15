@@ -36,7 +36,6 @@ import Edit from "./payment_component/Edit.js";
 import Allpayments from "./payment_component/Allpayments.js";
 import Success from "./payment_component/Success.js";
 import Report_generate from "./payment_component/Report_generate.js";
-//import './App.css';
 import SalaryCalculator from "./screens/SalaryCalculator.jsx";
 import "react-toastify/dist/ReactToastify.css";
 import LeaveSummary from "./components/LeaveApprovaltable.jsx";
@@ -46,23 +45,34 @@ import SupplierTable from "../src/components/Supply/Suppliertable.jsx";
 import EditSupplierForm from "../src/components/Supply/EditSupplierForm.jsx";
 import SupplierDashboard from "./Pages/SupplierDashboard";
 import Inventory from "./Pages/Inventory";
-import ReceievedOrders from './Pages/RecievedOrders.jsx';
+import ReceievedOrders from "./Pages/RecievedOrders.jsx";
 import AddOrderForm from "./Pages/PlaceOrder";
 import EditOrderForm from "./Pages/EditOrders";
 import PlacedOrdersView from "./Pages/placedOrders.jsx";
 import Supplierhandling from "./Pages/SupplierDashbaord(2)";
 import OrderHandling from "./Pages/OrderHandling";
-import ServiceFeedbackForm from './components/Feedback/User/ServiceFeedbackForm.jsx';
-import ServiceFeedbackTable from './components/Feedback/User/ServiceFeedbackTable.jsx';
-import EditServiceFeedbackForm from './components/Feedback/User/EditServiceFeedbackForm.jsx';
-import Selectoption from './Pages/Selectoption'
-import Coachfeedback from './components/Feedback/User/CoachFeedbackForm.jsx'; 
-import CoachFeedbackTable from './components/Feedback/User/CoachFeedbackTable.jsx';
-import CoachFeedbackEditForm from './components/Feedback/User/CoachFeedbackEditForm.jsx';
-import CoachFeedbackApproval from './components/Feedback/Manager/CoachFeedbackApproval.jsx';
-import ServiceFeedbackApproval from './components/Feedback/Manager/ServiceFeedbackApproval.jsx';
+import ServiceFeedbackForm from "./components/Feedback/User/ServiceFeedbackForm.jsx";
+import ServiceFeedbackTable from "./components/Feedback/User/ServiceFeedbackTable.jsx";
+import EditServiceFeedbackForm from "./components/Feedback/User/EditServiceFeedbackForm.jsx";
+import Selectoption from "./Pages/Selectoption";
+import Coachfeedback from "./components/Feedback/User/CoachFeedbackForm.jsx";
+import CoachFeedbackTable from "./components/Feedback/User/CoachFeedbackTable.jsx";
+import CoachFeedbackEditForm from "./components/Feedback/User/CoachFeedbackEditForm.jsx";
+import CoachFeedbackApproval from "./components/Feedback/Manager/CoachFeedbackApproval.jsx";
+import ServiceFeedbackApproval from "./components/Feedback/Manager/ServiceFeedbackApproval.jsx";
 import EditOrderScreen from "./screens/EditOrderScreen.jsx";
-import Home from "./Pages/Home.jsx"
+import Home from "./Pages/Home.jsx";
+import AddNewPromoForm from "./Components/Membership/Manager/AddNewPromoForm";
+import CreatedPromos from "./Components/Membership/Manager/CreatedPromosTable";
+import EditPromoForm from "./Components/Membership/Manager/EditPromoform";
+import AddNewStandedForm from "./Components/Membership/Manager/AddNewStandedForm";
+import CreatedStanded from "./Components/Membership/Manager/CreatedStandedTable";
+import EditStandedForm from "./Components/Membership/Manager/EditStandedForm";
+import PackageDashboard from "./Components/Membership/Manager/packagedashboard";
+import Pay from "./Components/Membership/Manager/pay";
+import Pay2 from "./Components/Membership/Manager/pay2";
+import Showpromo from "./Components/Membership/Manager/showPromo";
+import TestScreen from "./Components/Membership/Manager/TestScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -94,18 +104,26 @@ const router = createBrowserRouter(
 
       {/* Feedback */}
 
-      <Route path='fbk/'>
-        <Route path="" element={<Selectoption/>}/>
-        <Route path='addservice/' element={<ServiceFeedbackForm/>} />
-        <Route path="servicetable/" element={<ServiceFeedbackTable/>}/>
-        <Route path="editservice/:id" element={<EditServiceFeedbackForm/>}/>
-        <Route path="coachfeedback/" element={<Coachfeedback/>}/>
-        <Route path="coachfeedbacktable/" element={<CoachFeedbackTable/>}/>
-        <Route path="coachfeedbackedit/:id" element={<CoachFeedbackEditForm/>}/>
-        <Route path="selectopt/" element={<Selectoption/>}/>
-        <Route path="coachfeedbackapprove/" element={<CoachFeedbackApproval/>}/>
-        <Route path="servicefeedbackapprove/" element={<ServiceFeedbackApproval/>}/>
- 
+      <Route path="fbk/">
+        <Route path="" element={<Selectoption />} />
+        <Route path="addservice/" element={<ServiceFeedbackForm />} />
+        <Route path="servicetable/" element={<ServiceFeedbackTable />} />
+        <Route path="editservice/:id" element={<EditServiceFeedbackForm />} />
+        <Route path="coachfeedback/" element={<Coachfeedback />} />
+        <Route path="coachfeedbacktable/" element={<CoachFeedbackTable />} />
+        <Route
+          path="coachfeedbackedit/:id"
+          element={<CoachFeedbackEditForm />}
+        />
+        <Route path="selectopt/" element={<Selectoption />} />
+        <Route
+          path="coachfeedbackapprove/"
+          element={<CoachFeedbackApproval />}
+        />
+        <Route
+          path="servicefeedbackapprove/"
+          element={<ServiceFeedbackApproval />}
+        />
       </Route>
 
       {/* supplier */}
@@ -119,11 +137,11 @@ const router = createBrowserRouter(
         <Route path="orders/" element={<ReceievedOrders />} />
         <Route path="ordersform/" element={<AddOrderForm />} />
         <Route path="Inventory/" element={<Inventory />} />
-        <Route path="supDashboard2" element={<Supplierhandling/>}/>
-        <Route path="placedOrders/" element={<PlacedOrdersView/>} />
+        <Route path="supDashboard2" element={<Supplierhandling />} />
+        <Route path="placedOrders/" element={<PlacedOrdersView />} />
         <Route path="editorder/:id" element={<EditOrderForm />} />
         <Route path="supDashboard" element={<SupplierDashboard />} />
-        <Route path="Orderhandling" element={<OrderHandling/>} />
+        <Route path="Orderhandling" element={<OrderHandling />} />
       </Route>
 
       {/* protcted */}
@@ -137,8 +155,33 @@ const router = createBrowserRouter(
         <Route path="/store/admin/items" element={<AdminItemsScreen />} />
         <Route path="/store/orderst/ed/:id" element={<EditOrderScreen />} />
         <Route path="/store/admin/orders" element={<AdminOrdersScreen />} />
-        <Route path="/store/admin/item/:id/edit"element={<ProductEditScreen />}/>
+        <Route
+          path="/store/admin/item/:id/edit"
+          element={<ProductEditScreen />}
+        />
         <Route path="/orderst/myorders/:id" element={<OrdersScreen />} />
+      </Route>
+
+      {/* Packages */}
+
+      <Route path="pkg/">
+        {/* <Route path='mmdashboard/' element={<MMDashboard />} /> */}
+        <Route path="addnewpr/" element={<AddNewPromoForm />} />
+        <Route path="createdpromos/" element={<CreatedPromos />} />
+        <Route path="editpromo/:id" element={<EditPromoForm />} />
+        {/* dashboard */}
+        <Route path="pkgDashboard/" element={<PackageDashboard />} />
+
+        <Route path="addnewst/" element={<AddNewStandedForm />} />
+        <Route path="createdstanded/" element={<CreatedStanded />} />
+        <Route path="editstanded/:id" element={<EditStandedForm />} />
+
+        <Route path="testscreen/" element={<TestScreen />} />
+
+        <Route path="showpromo/" element={<Showpromo />} />
+
+        <Route path="pay/:id" element={<Pay />} />
+        <Route path="pay2/:id" element={<Pay2 />} />
       </Route>
     </Route>
   )
@@ -150,88 +193,5 @@ root.render(
     <Provider store={store}>
       <RouterProvider router={router} />
     </Provider>
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
-import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } from 'react-router-dom';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-
-import AddNewPromoForm from './Components/Membership/Manager/AddNewPromoForm'
-import CreatedPromos from './Components/Membership/Manager/CreatedPromosTable'
-import EditPromoForm from './Components/Membership/Manager/EditPromoform';
-import AddNewStandedForm from './Components/Membership/Manager/AddNewStandedForm'
-import CreatedStanded from './Components/Membership/Manager/CreatedStandedTable'
-import EditStandedForm from './Components/Membership/Manager/EditStandedForm';
-import PackageDashboard from './Components/Membership/Manager/packagedashboard';
-import Pay from './Components/Membership/Manager/pay';
-import Pay2 from './Components/Membership/Manager/pay2';
-import Showpromo from './Components/Membership/Manager/showPromo';
-
-
-import TestScreen from './Components/Membership/Manager/TestScreen';
-import { ToastContainer } from 'react-toastify';
-const router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route path="/" element={<App />}>
-      <Route path='pkg/'>
-        {/* <Route path='mmdashboard/' element={<MMDashboard />} /> */}
-        <Route path='addnewpr/' element={<AddNewPromoForm />} />
-        <Route path='createdpromos/' element={<CreatedPromos />} />
-        <Route path='editpromo/:id' element={<EditPromoForm/>} />
-{/* dashboard */}
-        <Route path='pkgDashboard/' element={<PackageDashboard/>} />
-
-
-        <Route path='addnewst/' element={<AddNewStandedForm />} />
-        <Route path='createdstanded/' element={<CreatedStanded />} />
-        <Route path='editstanded/:id' element={<EditStandedForm/>}/> 
-  
-          <Route path="testscreen/" element={<TestScreen />} />
-
-
-
-
-
-          <Route path='showpromo/' element={<Showpromo/>} />
-          
-
-
-          <Route path='pay/:id' element={<Pay/>} />
-          <Route path='pay2/:id' element={<Pay2/>} />
-
-
-
-
-
-
-
-      </Route>
-    </Route>
-
-
-  )
-)
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-    <ToastContainer />
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
-
-
-
-
-
-
-
-
-
-
