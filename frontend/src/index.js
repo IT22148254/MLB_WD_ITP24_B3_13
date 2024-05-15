@@ -62,17 +62,17 @@ import CoachFeedbackApproval from "./components/Feedback/Manager/CoachFeedbackAp
 import ServiceFeedbackApproval from "./components/Feedback/Manager/ServiceFeedbackApproval.jsx";
 import EditOrderScreen from "./screens/EditOrderScreen.jsx";
 import Home from "./Pages/Home.jsx";
-import AddNewPromoForm from "./Components/Membership/Manager/AddNewPromoForm";
-import CreatedPromos from "./Components/Membership/Manager/CreatedPromosTable";
-import EditPromoForm from "./Components/Membership/Manager/EditPromoform";
-import AddNewStandedForm from "./Components/Membership/Manager/AddNewStandedForm";
-import CreatedStanded from "./Components/Membership/Manager/CreatedStandedTable";
-import EditStandedForm from "./Components/Membership/Manager/EditStandedForm";
-import PackageDashboard from "./Components/Membership/Manager/packagedashboard";
-import Pay from "./Components/Membership/Manager/pay";
-import Pay2 from "./Components/Membership/Manager/pay2";
-import Showpromo from "./Components/Membership/Manager/showPromo";
-import TestScreen from "./Components/Membership/Manager/TestScreen";
+import AddNewPromoForm from "./components/Membership/Manager/AddNewPromoForm";
+import CreatedPromos from "./components/Membership/Manager/CreatedPromosTable";
+import EditPromoForm from "./components/Membership/Manager/EditPromoform";
+import AddNewStandedForm from "./components/Membership/Manager/AddNewStandedForm";
+import CreatedStanded from "./components/Membership/Manager/CreatedStandedTable";
+import EditStandedForm from "./components/Membership/Manager/EditStandedForm";
+import PackageDashboard from "./components/Membership/Manager/packagedashboard";
+import Pay from "./components/Membership/Manager/pay";
+import Pay2 from "./components/Membership/Manager/pay2";
+import Showpromo from "./components/Membership/Manager/showPromo";
+import TestScreen from "./components/Membership/Manager/TestScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
