@@ -14,30 +14,32 @@ const Leave = () => {
         const { data } = await axios.get(
           "http://localhost:8070/employee/leaves"
         );
-        const updatedLeaves = await Promise.all(data.result.map(async (leave) => {
-          try {
-            const { data: employeeData } = await axios.get(
-              `http://localhost:8070/employee/employee/findByName/${leave.employeeName}`
-            );
-            return {
-              ...leave,
-              email: employeeData.email || "" // Add employee email to leave data
-            };
-          } catch (error) {
-            console.error("Error fetching employee data:", error);
-            return {
-              ...leave,
-              email: "" // If there's an error, set email to empty string
-            };
-          }
-        }));
+        const updatedLeaves = await Promise.all(
+          data.result.map(async (leave) => {
+            try {
+              const { data: employeeData } = await axios.get(
+                `http://localhost:8070/employee/employee/findByName/${leave.employeeName}`
+              );
+              return {
+                ...leave,
+                email: employeeData.email || "", // Add employee email to leave data
+              };
+            } catch (error) {
+              console.error("Error fetching employee data:", error);
+              return {
+                ...leave,
+                email: "", // If there's an error, set email to an empty string
+              };
+            }
+          })
+        );
         setLeaves(updatedLeaves);
         console.log(updatedLeaves);
       } catch (error) {
         console.error("Failed to fetch Leaves", error);
       }
     };
-    
+
     fetchLeaves();
   }, []);
 
@@ -107,15 +109,6 @@ const Leave = () => {
     } catch (error) {
       console.error("Error approving leave:", error);
     }
-
-
-
-
-
-  };
-
-  const handleEdit = (id) => {
-    // navigate(`/sup/editsup/${id}`);
   };
 
   const handleReject = async (leaveId) => {
@@ -154,26 +147,26 @@ const Leave = () => {
     doc.text("Leave Details Report", 14, 22);
 
     const columns = [
-      { header: "Employee Name", dataKey: "employeeName" }, // New column for employeeName
-      { header: "Email", dataKey: "email" }, // New column for email
+      { header: "Employee Name", dataKey: "employeeName" },
+      { header: "Email", dataKey: "email" },
       { header: "Start Date", dataKey: "startDate" },
       { header: "End Date", dataKey: "endDate" },
       { header: "Status", dataKey: "status" },
-      { header: "Edit", dataKey: "edit" },
+      { header: "Delete", dataKey: "delete" }, // New column for delete button
     ];
 
     const rows = leaves.map((leave) => ({
-      employeeName: leave.employeeName, // Data for employeeName column
-      email: leave.email, // Data for email column
+      employeeName: leave.employeeName,
+      email: leave.email,
       startDate: new Date(leave.startDate).toLocaleDateString(),
       endDate: new Date(leave.endDate).toLocaleDateString(),
       status: leave.status,
-      edit: (
+      delete: (
         <button
-          className="bg-blue-500 border-2 border-black rounded-full p-1 px-4 text-white font-bold"
-          onClick={() => handleEdit(leave._id)}
+          className="border-2 bg-red-600 border-black rounded-full p-1 px-4 text-white font-bold"
+          onClick={() => handleDelete(leave._id)}
         >
-          Edit
+          Delete
         </button>
       ),
     }));
@@ -192,13 +185,14 @@ const Leave = () => {
     <div className="h-screen flex justify-center items-center" style={bgStyle}>
       <div className="bg-black/45 h-auto w-full rounded-[50px] py-12 px-14 gap -inset-y-8">
         <p className="text-4xl text-white font-bold mb-4">Leave Table</p>
-        <div className="grid grid-cols-6 bg-cyan-400 text-white"> {/* Adjust the number of columns */}
-          <div className="border-2 border-black p-3">Employee Name</div> {/* New column for employeeName */}
-          <div className="border-2 border-black p-3">Email</div> {/* New column for email */}
+        <div className="grid grid-cols-7 bg-cyan-400 text-white">
+          <div className="border-2 border-black p-3">Employee Name</div>
+          <div className="border-2 border-black p-3">Email</div>
           <div className="border-2 border-black p-3">Start Date</div>
           <div className="border-2 border-black p-3">End Date</div>
           <div className="border-2 border-black p-3">Status</div>
-          <div className="border-2 border-black p-3">Approve / Reject</div>
+          <div className="border-2 border-black p-3">Actions</div>
+          <div className="border-2 border-black p-3">delete</div>
         </div>
         <div
           className="w-full overflow-auto"
@@ -211,14 +205,16 @@ const Leave = () => {
           {leaves &&
             leaves.map((leave, index) => (
               <div
-                className={`grid grid-cols-6 ${index % 2 === 0 ? "bg-cyan-200" : "bg-cyan-400"}`}
+                className={`grid grid-cols-7 ${
+                  index % 2 === 0 ? "bg-cyan-200" : "bg-cyan-400"
+                }`}
                 key={leave._id}
               >
                 <div className="border-2 border-black p-2 text-black">
-                  {leave.employeeName} {/* Display employeeName */}
+                  {leave.employeeName}
                 </div>
                 <div className="border-2 border-black p-2 text-black">
-                  {leave.email} {/* Display email */}
+                  {leave.email}
                 </div>
                 <div className="border-2 border-black p-2 text-black">
                   {new Date(leave.startDate).toLocaleDateString()}
@@ -237,10 +233,18 @@ const Leave = () => {
                     Approve
                   </button>
                   <button
-                    className="border-2 bg-green-600 border-black rounded-full p-1 px-4 text-white font-bold"
+                    className="border-2 bg-green-600 border-black rounded-full p-1 px-4 text-white font-bold mr-2"
                     onClick={() => handleReject(leave._id)}
                   >
                     Reject
+                  </button>
+                </div>
+                <div className="border-2 border-black p-2">
+                  <button
+                    className="border-2 bg-red-600 border-black rounded-full p-1 px-4 text-white font-bold"
+                    onClick={() => handleDelete(leave._id)}
+                  >
+                    Delete
                   </button>
                 </div>
               </div>
