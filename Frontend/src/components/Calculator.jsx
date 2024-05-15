@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const Calculator = () => {
   const [employeeName, setEmployeeName] = useState("");
   const [employeeNameError, setEmployeeNameError] = useState("");
+  const [employeeNames, setEmployeeNames] = useState([]);
+  const [error, setError] = useState("");
 
   const [basicSalary, setBasicSalary] = useState("");
   const [basicSalaryError, setBasicSalaryError] = useState("");
@@ -24,6 +26,27 @@ const Calculator = () => {
   const [otSalary, setOtSalary] = useState(0);
   // total salary
   const [totalSalary, setTotalSalary] = useState(0);
+
+  useEffect(() => {
+    const fetchEmployeeNames = async () => {
+      try {
+        const response = await fetch(`http://localhost:8070/employee/employee`);
+        const data = await response.json();
+
+        if (response.ok) {
+          const names = data.map((employee) => employee.fullName);
+          setEmployeeNames(names);
+        } else {
+          setError("Failed to fetch employee names");
+        }
+      } catch (error) {
+        console.error("Error fetching employee names:", error);
+        setError("Failed to fetch employee names");
+      }
+    };
+
+    fetchEmployeeNames();
+  }, []);
 
   const handleEmployeeNameChange = (e) => {
     setEmployeeName(e.target.value);
@@ -108,22 +131,29 @@ const Calculator = () => {
         msOverflowStyle: "none",
       }}
     >
+      {error && <p className="text-red-500">{error}</p>}
       <div className="flex flex-row gap-x-2">
         {/* left */}
         <div className="flex flex-col gap-y-3 w-1/2">
           {/* employee name */}
           <div className="flex flex-col gap-y-1">
             <div className={inputContainerStyle}>
-              <input
+              <select
                 className={
                   inputStyle +
                   (employeeNameError &&
                     " outline outline-4 outline-red-800 outline-offset-1")
                 }
-                placeholder="Employee Name *"
                 value={employeeName}
                 onChange={handleEmployeeNameChange}
-              />
+              >
+                <option value="">Select Employee</option>
+                {employeeNames.map((name, index) => (
+                  <option key={index} value={name}>
+                    {name}
+                  </option>
+                ))}
+              </select>
             </div>
             {employeeNameError && (
               <p className="text-red-800 font-bold text-lg">
@@ -177,85 +207,85 @@ const Calculator = () => {
                   inputStyle +
                   (hourlyRateError &&
                     " outline outline-4 outline-red-800 outline-offset-1")
-                }
-                placeholder="OT Hourly Rate (Rs.) *"
-                value={hourlyRate}
-                onChange={handleHourlyRateChange}
-              />
+                  }
+                  placeholder="OT Hourly Rate (Rs.) *"
+                  value={hourlyRate}
+                  onChange={handleHourlyRateChange}
+                />
+              </div>
+              {hourlyRateError && (
+                <p className="text-red-800 font-bold text-lg">
+                  {hourlyRateError}
+                </p>
+              )}
             </div>
-            {hourlyRateError && (
-              <p className="text-red-800 font-bold text-lg">
-                {hourlyRateError}
-              </p>
-            )}
+            {/* monthly bonus */}
+            <div className="flex flex-col gap-y-1">
+              <div className={inputContainerStyle}>
+                <input
+                  className={
+                    inputStyle +
+                    (monthlyBonusError &&
+                      " outline outline-4 outline-red-800 outline-offset-1")
+                  }
+                  placeholder="Monthly Bonus (Rs.) *"
+                  value={monthlyBonus}
+                  onChange={handleMonthlyBonusChange}
+                />
+              </div>
+              {monthlyBonusError && (
+                <p className="text-red-800 font-bold text-lg">
+                  {monthlyBonusError}
+                </p>
+              )}
+            </div>
           </div>
-          {/* monthly bonus */}
-          <div className="flex flex-col gap-y-1">
-            <div className={inputContainerStyle}>
-              <input
-                className={
-                  inputStyle +
-                  (monthlyBonusError &&
-                    " outline outline-4 outline-red-800 outline-offset-1")
-                }
-                placeholder="Monthly Bonus (Rs.) *"
-                value={monthlyBonus}
-                onChange={handleMonthlyBonusChange}
-              />
+          {/* right */}
+          <div className="flex flex-col w-1/2 justify-center gap-y-3">
+            {/* etf */}
+            <div className="flex flex-col gap-y-1 items-center">
+              <div className="flex flex-row items-center justify-between w-3/4">
+                <p className="text-3xl font-bold text-white">ETF:</p>
+                <p className="text-2xl text-white">Rs.{etf}</p>
+              </div>
             </div>
-            {monthlyBonusError && (
-              <p className="text-red-800 font-bold text-lg">
-                {monthlyBonusError}
-              </p>
-            )}
+            {/* epf */}
+            <div className="flex flex-col gap-y-1 items-center">
+              <div className="flex flex-row items-center justify-between w-3/4">
+                <p className="text-3xl font-bold text-white">EPF:</p>
+                <p className="text-2xl text-white">Rs.{epf}</p>
+              </div>
+            </div>
+            {/* ot salary */}
+            <div className="flex flex-col gap-y-1 items-center">
+              <div className="flex flex-row items-center justify-between w-3/4">
+                <p className="text-3xl font-bold text-white">OT Salary:</p>
+                <p className="text-2xl text-white">Rs.{otSalary}</p>
+              </div>
+            </div>
+            {/* total salary */}
+            <div className="flex flex-col gap-y-1 items-center">
+              <div className="flex flex-row items-center justify-between w-3/4">
+                <p className="text-3xl font-bold text-white">Total Salary:</p>
+                <p className="text-2xl text-white">Rs.{totalSalary}</p>
+              </div>
+            </div>
           </div>
         </div>
-        {/* right */}
-        <div className="flex flex-col w-1/2 justify-center gap-y-3">
-          {/* etf */}
-          <div className="flex flex-col gap-y-1 items-center">
-            <div className="flex flex-row items-center justify-between w-3/4">
-              <p className="text-3xl font-bold text-white">ETF:</p>
-              <p className="text-2xl text-white">Rs.{etf}</p>
-            </div>
-          </div>
-          {/* epf */}
-          <div className="flex flex-col gap-y-1 items-center">
-            <div className="flex flex-row items-center justify-between w-3/4">
-              <p className="text-3xl font-bold text-white">EPF:</p>
-              <p className="text-2xl text-white">Rs.{epf}</p>
-            </div>
-          </div>
-          {/* ot salary */}
-          <div className="flex flex-col gap-y-1 items-center">
-            <div className="flex flex-row items-center justify-between w-3/4">
-              <p className="text-3xl font-bold text-white">OT Salary:</p>
-              <p className="text-2xl text-white">Rs.{otSalary}</p>
-            </div>
-          </div>
-          {/* total salary */}
-          <div className="flex flex-col gap-y-1 items-center">
-            <div className="flex flex-row items-center justify-between w-3/4">
-              <p className="text-3xl font-bold text-white">Total Salary:</p>
-              <p className="text-2xl text-white">Rs.{totalSalary}</p>
-            </div>
-          </div>
+  
+        <div className="flex justify-between mt-5">
+          <button
+            className="bg-cyan-400 py-3 px-10 rounded-lg text-lg font-bold"
+            onClick={handleCalculate}
+          >
+            Calculate
+          </button>
+          <button className="bg-red-500 py-3 px-10 rounded-lg text-lg font-bold">
+            Back
+          </button>
         </div>
       </div>
-
-      <div className="flex justify-between mt-5">
-        <button
-          className="bg-cyan-400 py-3 px-10 rounded-lg text-lg font-bold"
-          onClick={handleCalculate}
-        >
-          Calculate
-        </button>
-        <button className="bg-red-500 py-3 px-10 rounded-lg text-lg font-bold">
-          Back
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default Calculator;
+    );
+  };
+  
+  export default Calculator;
