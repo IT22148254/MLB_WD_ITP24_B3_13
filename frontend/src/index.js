@@ -73,7 +73,7 @@ import Pay from "./components/Membership/Manager/pay";
 import Pay2 from "./components/Membership/Manager/pay2";
 import Showpromo from "./components/Membership/Manager/showPromo";
 import TestScreen from "./components/Membership/Manager/TestScreen";
-import SelectApproval from "./Pages/Selectapproval.jsx"
+import SelectApproval from "./Pages/Selectapproval.jsx";
 import ShowFeedback from "./components/Feedback/User/ShowFeedback.jsx";
 import UserProfile from "./Pages/profile.jsx";
 import UserTable from "./Pages/usertable.jsx";
@@ -111,7 +111,7 @@ const router = createBrowserRouter(
 
       <Route path="fbk/">
         <Route path="abtUs/" element={<ShowFeedback />} />
-        <Route path="selApp/" element={<SelectApproval/>} />
+        <Route path="selApp/" element={<SelectApproval />} />
         <Route path="addservice/" element={<ServiceFeedbackForm />} />
         <Route path="servicetable/" element={<ServiceFeedbackTable />} />
         <Route path="editservice/:id" element={<EditServiceFeedbackForm />} />
@@ -193,11 +193,10 @@ const router = createBrowserRouter(
 
       <Route path="user/">
         <Route path="profile/" element={<UserProfile />} />
-        <Route path="usertable/" element={<UserTable/>}/>
-        <Route path="Register/" element={<MemberRegistration/>}/>
+        <Route path="usertable/" element={<UserTable />} />
+        <Route path="Register/" element={<MemberRegistration />} />
+        <Route path="email/"></Route>
       </Route>
-
-      <Route path="email/"></Route>
     </Route>
   )
 );
