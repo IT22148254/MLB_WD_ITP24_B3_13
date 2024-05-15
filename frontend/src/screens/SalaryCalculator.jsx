@@ -1,7 +1,7 @@
 import React from "react";
 import bg from "../assets/images/bg_main.jpg";
-import EmployeeRegisterForm from "../components/EmployeeRegisterForm";
-import Calculator from "../components/Calculator";
+import EmployeeRegisterForm from "../Components/EmployeeRegisterForm";
+import Calculator from "../Components/Calculator";
 
 const SalaryCalculator = () => {
   const bgStyle = {

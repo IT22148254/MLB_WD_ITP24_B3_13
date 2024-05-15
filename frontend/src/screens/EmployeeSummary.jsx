@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import bg from "../assets/images/bg_main.jpg";
-import EmployeeTable from "../components/EmployeeTable";
+import EmployeeTable from "../Components/EmployeeTable";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 

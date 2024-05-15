@@ -1,5 +1,5 @@
 import React from "react";
-import Itemtable from "../components/Supply/Itemtable"
+import Itemtable from "../Components/Supply/Itemtable"
 import bg from "../Images/bg_main.jpg";;
 const Inventory = () => {
 

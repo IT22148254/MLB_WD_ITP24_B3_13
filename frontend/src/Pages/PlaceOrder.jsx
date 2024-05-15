@@ -1,4 +1,4 @@
-import AddOrderForm from  '../components/Supply/SupOrder'
+import AddOrderForm from  '../Components/Supply/SupOrder'
 import bg from "../Images/bg_main.jpg";
 
 const PlaceOrderSup = () => {

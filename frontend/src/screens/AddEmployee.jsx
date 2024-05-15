@@ -1,6 +1,6 @@
 import React from "react";
 import bg from "../assets/images/bg_main.jpg";
-import EmployeeRegisterForm from "../components/EmployeeRegisterForm";
+import EmployeeRegisterForm from "../Components/EmployeeRegisterForm";
 
 const AddEmployee = () => {
   const bgStyle = {

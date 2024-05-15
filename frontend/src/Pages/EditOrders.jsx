@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import EditOrderForm from  '../components/Supply/EditSupOrderForm'
+import EditOrderForm from  '../Components/Supply/EditSupOrderForm'
 
 const EditOrderSup = () => {
 
