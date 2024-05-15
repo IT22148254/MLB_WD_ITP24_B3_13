@@ -15,19 +15,19 @@ const ScheduleEdit = () => {
     const { id } = useParams();
 
     useEffect(() => {
-        const fetchonetimes = async () => {
+        const fetchschedule = async () => {
             try {
-                const result = await axios.get(`http://localhost:8070/schedule/get/${id}`);
-
-                setTimeSlot(result.data.TimeSlot);
-                setDate(result.data.Date);
-                setSection(result.data.Section);
+                const result = await axios.get(`http://localhost:8070/customerSchedule/get/${id}`);
+                const sched = result.json.Item
+                setTimeSlot(sched.TimeSlot);
+                setDate(sched.Date);
+                setSection(sched.Section);
             } catch (error) {
                 setError(error.response.data.message);
                 console.log("Error fetching schedule: ", error);
             }
         };
-        fetchonetimes();
+        fetchschedule();
     }, [id]);
 
     const handleSubmit = (e) => {

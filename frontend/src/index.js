@@ -32,7 +32,7 @@ const router = createBrowserRouter(
         {/* <Route path="/" element={<TestScreen />} /> */}
         {/* <Route path='/' element={<ScheduleAdd/>}/> */}
         <Route path="sch/">
-          <Route path="schdeules/" element={<ScheduleTable/>} />
+          <Route path="schedules/" element={<ScheduleTable/>} />
           <Route path="addsch/" element={<ScheduleAdd/>}/>
         </Route>
       </Route>
