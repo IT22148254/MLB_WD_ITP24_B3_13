@@ -51,7 +51,7 @@ function Header() {
           </nav>
 
           {/* User Authentication Buttons */}
-          <div className="space-x-4">
+          <div className="space-x-4 flex flex-between">
             <button
               className="text-white focus:outline-none md:hidden"
               onClick={() => setIsDropdownOpen(!isDropdownOpen)} // Toggle dropdown visibility
