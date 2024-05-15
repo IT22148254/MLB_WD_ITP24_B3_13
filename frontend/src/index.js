@@ -16,7 +16,7 @@ import InstructorChange from './Components/Membership/Manager/InstructorChange.j
 import OnetimeChangeTable from "./Components/Membership/Manager/InstChangeTable.jsx"
 import ChangeOnetimeEdit from  "./Components/Membership/Manager/InstChangeEdit.jsx";
 import ScheduleEdit from "./Components/Membership/Manager/Scheduleedit.jsx";
-
+import SceduleTimeSlot from "././Pages/OM/SceduleTimeSlot.jsx";
 import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +26,7 @@ const router = createBrowserRouter(
         {/* <Route path='chngtimeondy/' element={<ChangeTimeOnDy />} /> */}
         {/* <Route path='chngtimeondytbl/' element={<OnetimeChangeTable/>}/>
         <Route path='chngtimeondytbl/:id'element={<ChangeOnetimeEdit/>}/>
-        <Route path='schedule/'element={<SceduleTimeSlot/>}/> */}
+        <Route path='schedule/'element={<SceduleTimeSlot/>}/> 
         {/* <Route path='addnewpr/' element={<AddNewPromoForm />} />
         <Route path='createdpromos/' element={<CreatedPromos />} />
         <Route path='
@@ -47,6 +47,9 @@ const router = createBrowserRouter(
           <Route path="addsch/" element={<ScheduleAdd/>}/>
           
         <Route path="editsch/:id" element={<ScheduleEdit/>} />
+
+
+        <Route path='schedule/'element={<SceduleTimeSlot/>}/> 
         </Route>hangeOne
       </Route>
     
