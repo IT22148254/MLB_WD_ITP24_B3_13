@@ -75,13 +75,16 @@ const EditOrderForm = () => {
     }}
 
     const handlePrChange = (e) => {
-        const inputValue = e.target.value;
-        // Regular expression to allow only alphabetic characters and spaces
-        const regex = /^[a-zA-Z\s]*$/;
-        // If the input value matches the regex, update the state
-        if (regex.test(inputValue)) {
-          setPrName(inputValue);
-        }
+        // const inputValue = e.target.value;
+        // // Regular expression to allow only alphabetic characters and spaces
+        // const regex = /^[a-zA-Z\s]*$/;
+        // // If the input value matches the regex, update the state
+        // if (regex.test(inputValue)) {
+        //   setPrName(inputValue);
+            setPrName(e.target.value);
+
+        // }
+
       };
     
 
