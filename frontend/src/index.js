@@ -31,7 +31,10 @@ const router = createBrowserRouter(
         <Route path="editstandard/:id" element={<EditStandard />} /> */}
         {/* <Route path="/" element={<TestScreen />} /> */}
         {/* <Route path='/' element={<ScheduleAdd/>}/> */}
-        <Route path="/" element={<ScheduleTable/>} />
+        <Route path="sch/">
+          <Route path="schdeules/" element={<ScheduleTable/>} />
+          <Route path="addsch/" element={<ScheduleAdd/>}/>
+        </Route>
       </Route>
     
 

@@ -97,16 +97,16 @@ const ScheduleTable = () => {
 
     // define the table columns
     const columns = [
-      { header: "Customer Name", dataKey: "Day" },
-      { header: "Email", dataKey: "TimeSlot" },
-      { header: "Rating", dataKey: "Trainer" },
+      { header: "Day", dataKey: "Day" },
+      { header: "TimeSlot", dataKey: "TimeSlot" },
+      { header: "Trainer", dataKey: "Trainer" },
     ];
 
     // define the table rows
     const rows = Schedules.map((sch) => ({
-      Day: sch.Day,
+      Day: sch.Date,
       TimeSlot: sch.TimeSlot,
-      Trainer: sch.Trainer,
+      Trainer: sch.Section,
     }));
 
     // add the table to the PDF document
