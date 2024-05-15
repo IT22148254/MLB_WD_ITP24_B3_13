@@ -29,7 +29,6 @@ const CartScreen = () => {
 
   return (
     <>
-    <Header />
     <div className="container mx-auto py-5">
       <div className="md:flex justify-between">
         <div className="md:w-8/12">
@@ -78,7 +77,7 @@ const CartScreen = () => {
             </ul>
           )}
         </div>
-        <div className="md:w-4/12 mx-3">
+        <div className="md:w-4/12 mx-3 my-8">
           <div className="bg-gray-100 p-6 rounded-lg">
             <h2 className="text-xl font-semibold mb-4">
               Sub-Total ({cartItems.reduce((acc, item) => acc + item.quantity, 0)}) items

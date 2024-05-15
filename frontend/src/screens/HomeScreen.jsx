@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Row, Col, Form, InputGroup } from "react-bootstrap";
 import Product from "../content/product";
-import Header from "../content/header";
+// import Header from "../content/header";
 import Footer from "../content/Footer";
 // import axios from "axios";
 // import { useState, useEffect } from "react";
@@ -40,7 +40,7 @@ const HomeScreen = () => {
         backgroundPosition: "center",
       }}
     >
-      <Header />
+      {/* <Header /> */}
       {isLoading ? (
         <div style={{ margin: "auto", marginTop: "100px" }}>
           <Loader />
