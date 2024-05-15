@@ -38,7 +38,7 @@ const ServiceFeedbackForm = () => {
     if (!nameError && !emailError) {
       const ServiceFeedback = { UserName, Email, Rating, Comment };
 
-      const response = await fetch("http://localhost:8070/feedback/service/add", {
+      const response = await fetch("http://localhost:8070/feedback/servicea/add", {
         method: "POST",
         body: JSON.stringify(ServiceFeedback),
         headers: {
@@ -76,27 +76,6 @@ const ServiceFeedbackForm = () => {
     }
   };
 
-  const validateName = (name) => {
-    const nameRegex = /^[a-zA-Z ]+$/;
-    if (!nameRegex.test(name)) {
-      setNameError("Name should contain only letters and spaces");
-    } else {
-      setNameError("");
-    }
-  };
-
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      setEmailError("Invalid email format");
-    } else {
-      setEmailError("");
-
-
-      navigate("/sup");
-    }
-  };
-
   const bgStyle = {
     backgroundImage: `url(${bg})`,
     backgroundSize: "cover",
@@ -110,7 +89,7 @@ const ServiceFeedbackForm = () => {
           className="text-4xl text-white font-bold align-top mb-8"
           style={{ WebkitTextStroke: "1px black" }}
         >
-            Give your feedback
+          Give your feedback on Services
         </div>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <div className="flex flex-col gap-y-4">
@@ -128,8 +107,8 @@ const ServiceFeedbackForm = () => {
                 name="name"
                 value={UserName}
                 onChange={(e) => {
-                  setName(e.target.value);
-                  validateName(e.target.value);
+                  const value = e.target.value.replace(/[^a-zA-Z\s]/g, ''); // Allow only letters and spaces. not allow special characters to print
+                  setName(value);
                 }}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                 required
@@ -149,10 +128,7 @@ const ServiceFeedbackForm = () => {
                 id="Email"
                 name="Email"
                 value={Email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  validateEmail(e.target.value);
-                }}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-3/5 bg-white/70 h-14 rounded-xl placeholder-text-black placeholder-font-semibold placeholder-text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                 required
               />

@@ -39,7 +39,7 @@ const Coachfeedback = () => {
     if (!nameError && !emailError) {
       const ServiceFeedback = { UserName, Email, Rating, Comment, Coach }; // Include coach in the feedback object
 
-      const response = await fetch("http://localhost:8070/feedback/coach/add", {
+      const response = await fetch("http://localhost:8070/feedback/coacha/add", {
         method: "POST",
         body: JSON.stringify(ServiceFeedback),
         headers: {
