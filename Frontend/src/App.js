@@ -6,6 +6,7 @@ import LeaveSummary from "./screens/LeaveApproval.jsx";
 import EditEmployee from "./screens/EditEmployee";
 import SalaryCalculator from "./screens/SalaryCalculator.jsx";
 import ApplyLeave from "./components/ApplyLeave.jsx"
+import ContactUs from "./components/Eeeee.jsx"
 
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/calculator" element={<SalaryCalculator />} />
           <Route path="/addleave" element={<ApplyLeave />} />
           <Route path="/showleave" element={<LeaveSummary />} />
+          <Route path="/e" element={<ContactUs/>} />
         </Routes>
       </Router>
     </div>
