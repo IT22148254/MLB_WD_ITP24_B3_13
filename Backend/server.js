@@ -63,6 +63,9 @@ app.use("/employee", employeeRoutes);
 const paymentRouter = require("./routes/PaymentRouter.js");
 app.use("/payment", paymentRouter);
 
+const emailrouter = require("./routs/email.js")
+app.use("/email",emailrouter)
+
 //payment method
 
 var Publishable_Key = "pk_test_51MjWJsHqyuBHx39JVGag9na7VxAeKr77ZNOz82EaXCsF4Zbtpubm6EXH0wanjMNHS0z22sKmO6WggvN8IwEL6k4a00qvEsEBXf"

@@ -72,16 +72,60 @@ const EditOrderScreen = () => {
     totalPrice,
   };
 
+  const validateForm = () => {
+    let isValid = true;
+  
+    if (!shippingPrice || !totalPrice || !address || !city || !district || !street) {
+      isValid = false;
+      toast.error("Please fill in all required fields.");
+      return isValid;
+    }
+  
+    if (isNaN(shippingPrice) || isNaN(totalPrice) || shippingPrice < 0 || totalPrice < 0) {
+      isValid = false;
+      toast.error("Please enter a valid shipping price and total price.");
+      return isValid;
+    }
+  
+    const regex = /^[A-Za-z\s]+$/;
+  
+    if (!regex.test(city)) {
+      isValid = false;
+      toast.error("City should contain only letters and spaces.");
+      return isValid;
+    }
+  
+    if (!regex.test(district)) {
+      isValid = false;
+      toast.error("District should contain only letters and spaces.");
+      return isValid;
+    }
+  
+    if (!regex.test(street)) {
+      isValid = false;
+      toast.error("Street should contain only letters and spaces.");
+      return isValid;
+    }
+  
+    return isValid;
+  };
+  
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    const result = await updateOrder(updatedOrder);
-    if (result.error) {
-      console.log(error);
-      toast.error("Something went wrong");
-    } else {
-      toast.success("Succesfully updated the order ");
+
+    const isValid = validateForm();
+
+    if (isValid) {
+      const result = await updateOrder(updatedOrder);
+      if (result.error) {
+        console.log(error);
+        toast.error("Something went wrong");
+      } else {
+        toast.success("Successfully updated the order");
+      }
+      navigate("/store/admin/orders");
     }
-    navigate("/store/admin/orders");
   };
 
   //console.log(totalPrice);

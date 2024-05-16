@@ -112,9 +112,9 @@ const AdminOrdersScreen = () => {
           </div>
 
           <div className="space-x-4">
-            <button className="bg-green-400 hover:bg-green-500 rounded-lg h-10 w-36 text-center">
+            {/* <button className="bg-green-400 hover:bg-green-500 rounded-lg h-10 w-36 text-center">
               Generate Report
-            </button>
+            </button> */}
             <button
               className="bg-blue-400 hover:bg-blue-500 rounded-lg h-10 w-36 text-center"
               onClick={(e) => reportHandler()}
