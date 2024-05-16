@@ -88,30 +88,28 @@ const EmailTable = () => {
     });
   };
   const handleCreateReport = () => {
-    const doc = new jsPDF();
-
-    const pageWidth = doc.internal.pageSize.getWidth();
-    const pageHeight = doc.internal.pageSize.getHeight();
-
-    const letterhead = 
-    doc.setFontSize(16);
-    doc.text('Email Details Report', 14, 22);
-
-    const columns = [
-      { header: 'Title', dataKey: 'title' },
-      { header: 'Subject', dataKey: 'subject' },
-      { header: 'Content', dataKey: 'content' },
-    ];
-
-    const rows = emails.map((em) => ({
-      title: em.title,
-      subject: em.subject,
-      content: em.content,
-    }));
-
-    doc.autoTable(columns, rows);
-    doc.save('Email Report.pdf');
+    // Generate CSV content
+    let csvContent = "Title,Subject,Content\n";
+    emails.forEach((em) => {
+      csvContent += `${em.title},${em.subject},${em.content}\n`;
+    });
+  
+    // Create a Blob object for the CSV content
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+  
+    // Create a temporary anchor element to trigger the download
+    const link = document.createElement('a');
+    if (link.download !== undefined) {
+      const url = URL.createObjectURL(blob);
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'EmailReport.csv');
+      link.style.visibility = 'hidden';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
+  
 
   return (
    
