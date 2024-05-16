@@ -3,10 +3,15 @@ import { Container } from "reactstrap";
 import bgImage from "../../Images/bg.jpg";
 import TimeSlotImage from "..//../Images/bg123.jpg";
 
-import buttonImage1 from "../../Images/ed.png";
-import buttonImage2 from "../../Images/el.png";
-import buttonImage3 from "../../Images/ic.png";
-import buttonImage4 from "../../Images/pr.png";
+import buttonImage1 from "../../Images/pm.png";
+import buttonImage2 from "../../Images/fm.png";
+import buttonImage3 from "../../Images/mm.png";
+import buttonImage4 from "../../Images/ppm.png";
+import buttonImage1 from "../../Images/ssm.png";
+import buttonImage2 from "../../Images/om.png";
+import buttonImage3 from "../../Images/sm.png";
+import buttonImage4 from "../../Images/spm.png";
+
 
 
 const SceduleTimeSlot = () => {
