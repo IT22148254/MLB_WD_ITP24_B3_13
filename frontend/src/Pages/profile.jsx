@@ -153,11 +153,11 @@ const UserProfile = () => {
 
     const isFormValid = () => {
         // return (
-        //     !nicError &&
-        //     !phoneError &&
-        //     !emailError &&
-        //     !passwordError &&
-        //     !confirmPasswordError &&
+            // !nicError &&
+            // !phoneError &&
+            // !emailError &&
+            // !passwordError &&
+            // !confirmPasswordError &&
         //     Fname.trim() !== '' &&
         //     Lname.trim() !== '' &&
         //     Address.trim() !== '' &&
@@ -293,6 +293,7 @@ const UserProfile = () => {
                         <input
                             label="NIC"
                             type="text"
+                            className="w-3/5 bg-white/70 h-14 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                             value={userdata.NIC}
                             onChange={handleNicChange}
                             placeholder="NIC"
@@ -310,7 +311,7 @@ const UserProfile = () => {
                             <select
                                 id="TimeSlot"
                                 // className="select-style"
-                                className="w-3/5 bg-white/70 h-19 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                                className="w-3/5 bg-white/70 h-11 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg  text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
 
                                 value={userdata.Gender}
                                 onChange={(e) => setGender(e.target.value)}
@@ -355,7 +356,7 @@ const UserProfile = () => {
                         <div className="flex items-center mb-12">
                             <DatePicker
 
-                                className=" bg-white/70 w-full h-full rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
+                                className=" bg-bg/70 w-[490px] h-11 rounded-xl placeholder:text-black placeholder:font-semibold placeholder:text-lg pl-5 text-xl border-b-2 border-gray-300 focus:outline-none focus:border-green-500"
                                 selected={userdata.Dob}
                                 onChange={handleDobChange}
                                 dateFormat="yyyy-MM-dd"
