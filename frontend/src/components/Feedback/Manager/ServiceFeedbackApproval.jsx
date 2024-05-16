@@ -256,12 +256,12 @@ const ServiceFeedbackApproval = () => {
                     </div>
                   ))}
               </div>
-              {/* <button
+              { <button
                 className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
                 onClick={handleCreateReport}
               >
                 Generate Feedback Report
-              </button> */}
+              </button> }
               {/* <button
                 className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
                 onClick={handleAddFeedback}
