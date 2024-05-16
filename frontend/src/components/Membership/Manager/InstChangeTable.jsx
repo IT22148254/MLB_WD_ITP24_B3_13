@@ -88,12 +88,18 @@ const OnetimeChangeTable = () => {
   };
 
   const handleCreateReport = () => {
-    // initialize the PDF document
     const doc = new jsPDF();
 
-    // add title to the PDF document
-    doc.setFontSize(16);
-    doc.text("Onetime Change Report", 14, 22);
+    const companyName = "WaveSync";
+    const today = new Date();
+    const date = today.toLocaleDateString();
+    const time = today.toLocaleTimeString();
+
+    doc.text(
+      `${companyName} \nEmployee report generated on : ${date} at ${time}`,
+      14,
+      20
+    );
 
     // define the table columns
     const columns = [
@@ -110,7 +116,11 @@ const OnetimeChangeTable = () => {
     }));
 
     // add the table to the PDF document
-    doc.autoTable(columns, rows);
+    doc.autoTable({startY:50,columns, body:onetimes.map((ont) => [
+      ont.Day,
+      ont.TimeSlot,
+      ont.Trainer,
+    ]),});
 
     // save the PDF file
     doc.save("One time Changes.pdf");

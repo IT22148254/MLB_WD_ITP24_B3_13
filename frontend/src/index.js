@@ -90,6 +90,7 @@ import EmailForm from "./components/Membership/Manager/EmailForm.jsx";
 import EditEmail from "./components/Membership/Manager/EditEmail.jsx";
 import GMDashboard from "./components/Membership/Manager/GM Dashboard.jsx";
 import EmailTable from "./components/Membership/Manager/EmailTable.jsx";
+import DashboardEx from "./Pages/OM/DashbordEx.jsx"
 
 //import MMDashboard from "./Pages/Manager/MMDashboard";
 
@@ -172,7 +173,8 @@ const router = createBrowserRouter(
         <Route path="store/payment" element={<PaymentScreen />} />
         <Route path="/store/placeorder" element={<PlaceOrderScreen />} />
         <Route path="/store/orderst/:id" element={<OrderScreen />} />
-        <Route path="/store/admin" element={<AdminPortalScreen />} />
+        <Route path="/store/admins" element={<AdminPortalScreen />} />
+        <Route path="/store/admin" element={<DashboardEx />} />
         <Route path="/store/admin/items" element={<AdminItemsScreen />} />
         <Route path="/store/orderst/ed/:id" element={<EditOrderScreen />} />
         <Route path="/store/admin/orders" element={<AdminOrdersScreen />} />

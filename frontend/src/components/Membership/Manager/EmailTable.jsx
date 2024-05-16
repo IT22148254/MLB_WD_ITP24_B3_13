@@ -46,7 +46,7 @@ const EmailTable = () => {
   }, []);
 
   const handleEdit = (id) => {
-    navigate(`/user/editemail/${id}`);
+    navigate(`/editemail/${id}`);
   };
 
   const handleDelete = (id) => {
@@ -89,8 +89,15 @@ const EmailTable = () => {
   };
   const handleCreateReport = () => {
     const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text('Email Details Report', 14, 22);
+    
+    const companyName = 'WaveSync'
+    const today = new Date();
+    const date = today.toLocaleDateString();
+    const time = today.toLocaleTimeString();
+
+    doc.text(
+      `${companyName} \nEmail report generated on: ${date} at ${time}`, 14, 20
+    );
 
     const columns = [
       { header: 'Title', dataKey: 'title' },
@@ -107,6 +114,7 @@ const EmailTable = () => {
     doc.autoTable(columns, rows);
     doc.save('Email Report.pdf');
   };
+  
 
   return (
    

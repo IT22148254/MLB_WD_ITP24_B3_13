@@ -107,7 +107,7 @@ const InstructorChange = () => {
           </div>
           <div className="flex items-center mb-12">
             <label htmlFor="Price" className="w-1/4 py-2 mb-0 mr-4 font-medium text-white">
-              New Time Slot :
+              Trainer :
             </label>
             <select
               name="TimeSlot"
