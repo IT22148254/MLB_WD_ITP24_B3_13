@@ -79,8 +79,13 @@ const SupplierTable = () => {
 
   const handleCreateReport = () => {
     const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text('Supplier Details Report', 14, 22);
+    
+    const cn = "WaveSync";
+    const today = new Date();
+    const date = today.toLocaleDateString();
+    const time = today.toLocaleTimeString();
+
+    doc.text(`${cn} \nSupply report generated on : ${date} at ${time} `,14,20);
 
     const columns = [
       { header: 'Supplier Name', dataKey: 'Name' },
@@ -96,7 +101,12 @@ const SupplierTable = () => {
       Address: sup.Address,
     }));
 
-    doc.autoTable(columns, rows);
+    doc.autoTable({startY:50,columns, body:filteredSuppliers.map((sup) => [
+      sup.Name,
+      sup.Email,
+      sup.Phone,
+      sup.Address,
+    ]),});
     doc.save('Supplier Report.pdf');
   };
 

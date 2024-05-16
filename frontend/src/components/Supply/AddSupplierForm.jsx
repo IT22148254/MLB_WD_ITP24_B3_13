@@ -123,6 +123,8 @@ const AddSupplierForm = () => {
         }
     };
 
+    
+
     return (
         <div className="flex h-full justify-center items-center" style={bgStyle}>
             <div className="bg-black/45 w-1/2 rounded-[50px] py-12 px-14 gap -inset-y-8">

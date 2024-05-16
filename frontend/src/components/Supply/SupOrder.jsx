@@ -11,7 +11,7 @@ const SupOrder = () => {
     const [suppliers, setSuppliers] = useState([]);
     const[Supplier, setSupplier] = useState('')
     const[PrName, setPrName] = useState('')
-    const[quantity, setQuantity] = useState(0) 
+    const[quantity, setQuantity] = useState(0) //if want to start in 1 change useState(1)
     const navigate = useNavigate();
 
     const [error, setError] = useState(null)
