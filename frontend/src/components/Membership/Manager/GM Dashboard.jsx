@@ -31,10 +31,10 @@ const GMDashboard = () => {
                 
                
                         <div className="flex justify-between" >
-                            <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) =>navigate ("/usertable")} >
+                            <button className="mr-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) =>navigate ("/user/usertable")} >
                             Customer Handling
                             </button>
-                            <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) =>navigate ("/addemail")}>
+                            <button className="ml-5 bg-blue-500 py-3 px-8 w-40 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300" onClick={ (e) =>navigate ("/user/addemail")}>
                             Email handling
                             </button>
                         </div>

@@ -86,6 +86,11 @@ import ChangeOnetimeEdit from "./components/Membership/Manager/InstChangeEdit.js
 import ScheduleEdit from "./components/Membership/Manager/Scheduleedit.jsx";
 import DashbordEx from "./Pages/OM/DashbordEx.jsx";
 import SceduleTimeSlot from "./Pages/OM/SceduleTimeSlot.jsx";
+import EmailForm from "./components/Membership/Manager/EmailForm.jsx";
+import EditEmail from "./components/Membership/Manager/EditEmail.jsx";
+import GMDashboard from "./components/Membership/Manager/GM Dashboard.jsx";
+import EmailTable from "./components/Membership/Manager/EmailTable.jsx";
+
 //import MMDashboard from "./Pages/Manager/MMDashboard";
 
 const router = createBrowserRouter(
@@ -206,7 +211,10 @@ const router = createBrowserRouter(
         <Route path="profile/" element={<UserProfile />} />
         <Route path="usertable/" element={<UserTable />} />
         <Route path="Register/" element={<MemberRegistration />} />
-        <Route path="email/"></Route>
+        <Route path="emailtable/" element={<EmailTable />} />
+        <Route path="addemail/" element={<EmailForm />} />
+        <Route path="editemail/:id/" element={<EditEmail />} />
+        <Route path="gmdashboard/" element={<GMDashboard />} />
       </Route>
 
       {/* schedule */}

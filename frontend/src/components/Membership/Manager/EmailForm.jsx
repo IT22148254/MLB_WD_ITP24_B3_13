@@ -55,7 +55,7 @@ const EmailForm = () => {
 
 
     const viewEmail = () => {
-        navigate('/emailtable')
+        navigate('/user/emailtable')
     }
 
 

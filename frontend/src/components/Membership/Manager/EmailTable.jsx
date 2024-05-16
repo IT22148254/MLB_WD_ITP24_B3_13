@@ -46,7 +46,7 @@ const EmailTable = () => {
   }, []);
 
   const handleEdit = (id) => {
-    navigate(`/editemail/${id}`);
+    navigate(`/user/editemail/${id}`);
   };
 
   const handleDelete = (id) => {
