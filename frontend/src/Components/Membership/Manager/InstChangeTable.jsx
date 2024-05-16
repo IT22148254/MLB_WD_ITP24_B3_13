@@ -132,7 +132,7 @@ const OnetimeChangeTable = () => {
       <div className="bg-black/40 w-4/5 h-[800px] rounded-[50px] py-12 px-12 gap -inset-y-8">
         {/* <div className="w-full"> */}
           <div className=" text-xl mb-10 bottom-[508px] left-0 right-[450px] text-center text-white font-normal" style={{ fontFamily: 'poppins' }}>
-            One Time Changes
+            Instructor Changes
           </div>
           <div className="mb-4">
             <div className="w-1/2 rounded-lg h-9 bg-white/70">
@@ -147,7 +147,7 @@ const OnetimeChangeTable = () => {
           <div className="grid grid-cols-5 bg-cyan-400/85">
             <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Day</div>
             <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Time Slot</div>
-            <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Trainer</div>
+            <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Instructor</div>
             <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Edit</div>
             <div className="p-3 text-center border-2 border-black" style={{ fontFamily: 'poppins' }}>Delete</div>
           </div>

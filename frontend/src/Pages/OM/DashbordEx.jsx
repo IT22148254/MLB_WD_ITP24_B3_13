@@ -3,14 +3,14 @@ import { Container } from "reactstrap";
 import bgImage from "../../Images/bg.jpg";
 import TimeSlotImage from "..//../Images/bg123.jpg";
 
-import buttonImage1 from "../../Images/pm.png";
+import buttonImage1 from "../../Images/sm.png";
 import buttonImage2 from "../../Images/fm.png";
 import buttonImage3 from "../../Images/mm.png";
 import buttonImage4 from "../../Images/ppm.png";
-import buttonImage1 from "../../Images/ssm.png";
-import buttonImage2 from "../../Images/om.png";
-import buttonImage3 from "../../Images/sm.png";
-import buttonImage4 from "../../Images/spm.png";
+import buttonImage5 from "../../Images/ssm.png";
+import buttonImage6 from "../../Images/om.png";
+import buttonImage7 from "../../Images/sm.png";
+import buttonImage8 from "../../Images/spm.png";
 
 
 
@@ -20,37 +20,36 @@ const SceduleTimeSlot = () => {
       <div className="relative flex items-center justify-center w-2/3 h-full mx-auto">
         <img src={TimeSlotImage} alt="Time Slot" />
         <section>
-  <div className="absolute top-0 bottom-[400px] right-0 flex items-center left-[650px]">
-    <button className="flex flex-col items-center">
-      <img src={buttonImage1} alt="button" className="h-[200px] w-[200px]" />
-      <p className="absolute text-xl bottom-[120px] left-0 right-[450px] text-center text-white font-normal" style={{ fontFamily: 'poppins' }}>
-        Employee Details
+  <div className="absolute top-0 bottom-[560px] right-0 flex items-center left-[660px]">
+    <button className="flex flex-col items-center ">
+      <img src={buttonImage1} alt="button" className="h-[80px] w-[80px] " />
+      <p className="absolute text-base  bottom-[80px] left-0 right-[650px] justify-center text-white font-normal" style={{ fontFamily: 'poppins' }}>
+        Sales Management
       </p>
     </button>
   </div>
 
-  <div className="absolute top-0 bottom-[400px] right-0 flex items-center left-[1000px]">
+  <div className="absolute top-0 bottom-[220px] right-0 flex items-center left-[640px]">
     <button className="flex flex-col items-center">
-      <img src={buttonImage2} alt="button" className="h-[200px] w-[200px]" />
-      <p className="absolute text-xl bottom-[122px] left-0 right-[25px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
-        Employee Leave Request
+      <img src={buttonImage2} alt="button" className="h-[120px] w-[120px]" />
+      <p className="absolute text-base  bottom-[242px] left-0 right-[650px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
+        Feedback Management
       </p>
     </button>
   </div>
 
-  <div className="absolute top-[650px] bottom-[380px] right-0 flex items-center left-[650px]">
+  <div className="absolute top-[500px] bottom-[1px] right-0 flex  left-[640px]">
     <button className="flex flex-col items-center">
-      <img src={buttonImage3} alt="button" className="h-[200px] w-[200px]" />
-      <p className="absolute text-xl top-[110px] bottom-0 left-0 right-[450px] text-center text-white font-normal" style={{ fontFamily: 'poppins' }}>
-        Instructor Change Request
-      </p>
+      <img src={buttonImage3} alt="button" className="h-[120px] w-[120px]" />
+      <p className="absolute text-base  bottom-[280px] left-0 right-[700px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
+        Employee Management</p>
     </button>
   </div>
 
-  <div className="absolute top-[650px] bottom-[380px] right-0 flex items-center left-[1000px]">
+  <div className="absolute top-[670px] bottom-[1px] right-0 flex  left-[640px]">
     <button className="flex flex-col items-center">
-      <img src={buttonImage4} alt="button" className="h-[200px] w-[200px]" />
-      <p className="absolute text-xl bottom-0 top-[110px] left-0 right-[120px] text-center text-white font-normal" style={{ fontFamily: 'poppins' }}>
+      <img src={buttonImage4} alt="button" className="h-[120px] w-[120px]" />
+      <p className="absolute text-base  bottom-[100px] left-0 right-[700px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
         Promo Package Request
       </p>
     </button>

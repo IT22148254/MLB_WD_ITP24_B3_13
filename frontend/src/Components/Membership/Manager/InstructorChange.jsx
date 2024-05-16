@@ -25,12 +25,12 @@ const InstructorChange = () => {
     })
     const json = await response.json()
 
-    if (!response.status===200) {
+    if (!response.status==200) {
       setError(json.error)
       console.log('error', error)
     }
 
-    if (response.status===200) {
+    if (response.status==200) {
 
       setDay('')
       setTimeSlot('')
@@ -107,7 +107,7 @@ const InstructorChange = () => {
           </div>
           <div className="flex items-center mb-12">
             <label htmlFor="Price" className="w-1/4 py-2 mb-0 mr-4 font-medium text-white">
-              New Time Slot :
+              Instructor Name : 
             </label>
             <select
               name="TimeSlot"
