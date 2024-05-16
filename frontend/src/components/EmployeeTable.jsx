@@ -56,6 +56,11 @@ const EmployeeTable = ({ employees }) => {
       }
     });
   };
+    const leaver = () => {
+
+      navigate(`/emp/showleave/`);
+    }
+      
 
   const handleCreateReport = () => {
     const doc = new jsPDF();
@@ -122,6 +127,9 @@ const EmployeeTable = ({ employees }) => {
       </button>
       <button className="mr-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={handleCreateReport}>
         Generate Report
+      </button>
+      <button className="mr-20 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onClick={leaver}>
+        leave requests
       </button>
     </div>
     </div>
