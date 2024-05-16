@@ -64,8 +64,17 @@ const EmployeeTable = ({ employees }) => {
 
   const handleCreateReport = () => {
     const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text('Employee Report', 14, 22);
+
+    const companyName = "WaveSync";
+    const today = new Date();
+    const date = today.toLocaleDateString();
+    const time = today.toLocaleTimeString();
+
+    doc.text(
+      `${companyName} \nEmployee report generated on : ${date} at ${time}`,
+      14,
+      20
+    );
 
     const columns = [
       { header: 'Full Name', dataKey: 'fullName' },
@@ -85,7 +94,14 @@ const EmployeeTable = ({ employees }) => {
       address: employee.address
     }));
 
-    doc.autoTable(columns, rows);
+    doc.autoTable({startY: 50,columns, body: employees.map((employee) => [
+      employee.fullName,
+      employee.nic,
+      employee.gender,
+      employee.contactNo,
+      employee.email,
+      employee.address
+    ]),});
     doc.save('Employee Report.pdf');
   };
 
