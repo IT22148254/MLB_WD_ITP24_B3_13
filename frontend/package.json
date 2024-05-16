@@ -13,6 +13,8 @@
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "ejs": "^3.1.10",
+    "emailjs": "^4.0.3",
+    "emailjs-com": "^3.2.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
     "mongoose": "^8.3.3",
