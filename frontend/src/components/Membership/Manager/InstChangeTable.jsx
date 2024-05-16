@@ -124,7 +124,7 @@ const OnetimeChangeTable = () => {
 
   // Define the function to handle navigation to the add feedback page
   const handleAddSchedule = () => {
-    navigate('/changetime')
+    navigate('/sch/addsch')
   };
 
   return (

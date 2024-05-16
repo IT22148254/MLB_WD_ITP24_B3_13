@@ -3,10 +3,12 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom'; // Import useParams
 import bg from '../../../Images/package_bg.jpg';
 import './styles/editPromos.css';
+import { useNavigate } from 'react-router-dom';
 
 const Pay2 = () => {
     const { id } = useParams(); // Get id from URL
     const [pkg, setPkg] = useState(null);
+    const navigate = useNavigate()
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,8 +23,9 @@ const Pay2 = () => {
     }, [id]); // Add id to dependency array
 
     const handlePay = () => {
-        // Add your pay logic here
-        console.log('Payment processing...');
+        localStorage.setItem('pkg',id)
+        //console.log(localStorage.getItem('pkg'))
+        navigate('/payment/add')
     };
 
     const bgStyle = {

@@ -150,10 +150,27 @@ const EmployeeRegisterForm = () => {
         role,
       };
 
+      const userDat = {
+        Fname:fullName,
+        NIC:nic,
+        Gender:gender,
+        Phone:Number(contactNo),
+        Dob:dob,
+        Email:email,
+        AccLevel:role,
+        Address:address,
+        Password:"0000"
+      }
+
       const response = await axios.post(
         "http://localhost:8070/employee/employee/create",
         employeeData
       );
+
+      const res = await axios.post("/user/add",userDat)
+
+      if (res.status === 200) {
+        toast.success("Successfully created user")}
 
       if (response.status === 200) {
         toast.success("Successfully created")

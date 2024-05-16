@@ -78,15 +78,18 @@ router.route("/").get(protect, admin, (req, res) => {
 router.route("/get/:id").get(protect, async (req, res) => {
   try {
     const userId = req.params.id;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate([
+      { path: "Package", select: "Name Duration" },
+      { path: "PrPackage", select: "Name Duration" },
+      { path: "CustomerSchedule", select: "Date TimeSlot" },
+      { path: "CoachSchedule", select: "Day TimeSlot" },
+    ]);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    return res
-      .status(200)
-      .json(user);
+    return res.status(200).json(user);
   } catch (err) {
     return res
       .status(400)
@@ -110,6 +113,10 @@ router.route("/:id").put(protect, async (req, res) => {
       Password,
       Dob,
       AccLevel,
+      Package,
+      PrPackage,
+      CustomerSchedule,
+      CoachSchedule,
     } = req.body;
 
     const result = await User.findByIdAndUpdate(
@@ -125,6 +132,10 @@ router.route("/:id").put(protect, async (req, res) => {
         Password,
         Dob,
         AccLevel,
+        Package,
+        PrPackage,
+        CustomerSchedule,
+        CoachSchedule,
       },
       { new: true }
     );

@@ -4,18 +4,74 @@ import { useSelector,useDispatch } from 'react-redux';
 import { setPayment } from '../slices/cartSlice';
 import 'react-toastify/dist/ReactToastify.css';
 import './Success.css'; // Import the CSS file for Success component
+import axios from 'axios';
+import { clearCartItems } from '../slices/cartSlice';
 
 export default function Success() {
 
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
-  
+  const auth = useSelector((state) => state.auth);
+
+  const id = auth.userInfo._id
 
   React.useEffect(() => {
-    // Display the success toast message
-    if(cart.cartItems){
+    
+    const pkg = localStorage.getItem('pkg')
+
+    if(cart.cartItems && pkg === null){
       dispatch(setPayment({ paid: true, paidAt: new Date() }));
+  
+      setTimeout(() => {
+        window.history.go(-2);
+      }, 3000); 
+
     }
+
+    if(pkg !== null){
+      console.log(pkg)
+
+      axios
+      .put(`/user/${id}`, { Package:pkg,PrPackage:pkg })
+      .then((response) => {
+        console.log(id)
+
+        dispatch(clearCartItems());
+
+        localStorage.removeItem('pkg')
+    
+        setTimeout(() => {
+          window.history.go(-3);
+        }, 3000); 
+
+      })
+      .catch((error) => {
+        console.error("Error updating inventory:", error);
+      });
+    }
+
+    if(cart.cartItems && pkg !== null){
+      console.log(pkg)
+
+      axios
+      .put(`/user/${id}`, { Package:pkg,PrPackage:pkg })
+      .then((response) => {
+        //console.log(id)
+
+        dispatch(clearCartItems());
+
+        localStorage.removeItem('pkg')
+    
+        setTimeout(() => {
+          window.history.go(-3);
+        }, 3000); 
+
+      })
+      .catch((error) => {
+        console.error("Error updating inventory:", error);
+      });
+    }
+
     toast.success('Payment successful!', {
       position: 'bottom-center',
       autoClose: 3000,
@@ -26,11 +82,7 @@ export default function Success() {
       progress: undefined,
     });
 
-
-    // Navigate back two pages after a delay
-    setTimeout(() => {
-      window.history.go(-2);
-    }, 3000); // Adjust the delay as needed
+    
   }, []);
 
   return (

@@ -9,7 +9,6 @@ const userSchema = new schema({
   },
   Lname: {
     type: String,
-    required: true,
   },
   Address: {
     type: String,
@@ -43,6 +42,26 @@ const userSchema = new schema({
     type: String,
     required: true,
     default: "customer",
+  },
+  Package: {
+    type: schema.Types.ObjectId,
+    default: "",
+    ref: "Package",
+  },
+  PrPackage: {
+    type: schema.Types.ObjectId,
+    default: "",
+    ref: "PromoPackage",
+  },
+  CustomerSchedule: {
+    type: schema.Types.ObjectId,
+    default: "",
+    ref: "CustomerSchedule",
+  },
+  CoachSchedule: {
+    type: schema.Types.ObjectId,
+    default: "",
+    ref: "CoachSchedule",
   },
 });
 

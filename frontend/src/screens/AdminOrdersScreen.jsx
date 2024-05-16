@@ -27,6 +27,8 @@ const AdminOrdersScreen = () => {
 
   // console.log(users);
 
+  console.log(orders)
+
   const deleteOrderHandler = async (id) => {
     if (window.confirm("Are you sure you want to delete the order ?")) {
       try {

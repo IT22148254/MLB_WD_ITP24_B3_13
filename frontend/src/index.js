@@ -200,12 +200,16 @@ const router = createBrowserRouter(
         <Route path="pay2/:id" element={<Pay2 />} />
       </Route>
 
+      {/* user */}
+
       <Route path="user/">
         <Route path="profile/" element={<UserProfile />} />
         <Route path="usertable/" element={<UserTable />} />
         <Route path="Register/" element={<MemberRegistration />} />
         <Route path="email/"></Route>
       </Route>
+
+      {/* schedule */}
 
       <Route path="sch/">
         <Route path="change/" element={<InstructorChange />} />

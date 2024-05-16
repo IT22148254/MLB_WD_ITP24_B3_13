@@ -50,6 +50,9 @@ const cartSlice = createSlice({
       state.payment = { ...state.payment, paid, paidAt };
       return updateCart(state);
     },
+    clearPayment:(state,action)=>{
+      state.payment = {};
+    }
   },
 });
 
