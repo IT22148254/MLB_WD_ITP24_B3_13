@@ -85,7 +85,36 @@ const CoachFeedbackApproval = () => {
   };
 
   const handleCreateReport = () => {
-    // Your report generation logic
+    // initialize the PDF document
+    const doc = new jsPDF();
+
+    // add title to the PDF document
+    doc.setFontSize(16);
+    doc.text("Coach Feedback Report", 14, 22);
+
+    // define the table columns
+    const columns = [
+      { header: "Customer Name", dataKey: "UserName" },
+      { header: "Email", dataKey: "Email" },
+      { header: "Rating", dataKey: "Rating" },
+      { header: "Feedback", dataKey: "Comment" },
+      { header: "Coach", dataKey: "Coach" }, // Add the Coach column
+    ];
+
+    // define the table rows
+    const rows = filteredFeedbacks.map((feedback) => ({
+      UserName: feedback.UserName,
+      Email: feedback.Email,
+      Rating: feedback.Rating,
+      Comment: feedback.Comment,
+      Coach: feedback.Coach, // Add the Coach field
+    }));
+
+    // add the table to the PDF document
+    doc.autoTable(columns, rows);
+
+    // save the PDF file
+    doc.save("CoachFeedbackReport.pdf");
   };
 
   const handleAddFeedback = () => {
@@ -243,12 +272,12 @@ const CoachFeedbackApproval = () => {
               ))}
           </div>
           {/* Button to generate feedback report */}
-          {/* <button
+          { <button
             className=" absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
             onClick={handleCreateReport}
           >
             Generate Feedback Report
-          </button> */}
+          </button> }
 
           {/* Button to add feedback */}
           {/* <button
