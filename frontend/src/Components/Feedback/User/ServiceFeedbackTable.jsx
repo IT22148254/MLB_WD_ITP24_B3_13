@@ -120,6 +120,7 @@ const ServiceFeedbackTable = () => {
     doc.save("ServiceFeedbackReport.pdf");
   };
 
+  //search
   const filterFeedbacks = (feedbacks, searchText) => {
     return feedbacks.filter((feedback) =>
       feedback.UserName.toLowerCase().startsWith(searchText.toLowerCase())

@@ -89,8 +89,18 @@ const ServiceFeedbackApproval = () => {
 
   const handleCreateReport = () => {
     const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text("Service Feedback Report", 14, 22);
+
+    const companyName = "WaveSync"
+    const today = new Date();
+    const date = today.toLocaleDateString();
+    const time = today.toLocaleTimeString();
+
+    // doc.setFontSize(10);
+    doc.text(
+      `${companyName} \nService report generated on : ${date} at ${time}`,
+      14, 
+      20
+    );
 
     const columns = [
       { header: "Customer Name", dataKey: "UserName" },
@@ -99,14 +109,12 @@ const ServiceFeedbackApproval = () => {
       { header: "Feedback", dataKey: "Comment" },
     ];
 
-    const rows = filteredFeedbacks.map((feedback) => ({
-      UserName: feedback.UserName,
-      Email: feedback.Email,
-      Rating: feedback.Rating,
-      Comment: feedback.Comment,
-    }));
-
-    doc.autoTable(columns, rows);
+    doc.autoTable({startY:50,columns, body:filteredFeedbacks.map((feedback) => [
+      feedback.UserName,
+      feedback.Email,
+      feedback.Rating,
+      feedback.Comment,
+    ]),});
     doc.save("ServiceFeedbackReport.pdf");
   };
 
@@ -256,12 +264,12 @@ const ServiceFeedbackApproval = () => {
                     </div>
                   ))}
               </div>
-              <button
+              { <button
                 className="absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
                 onClick={handleCreateReport}
               >
                 Generate Feedback Report
-              </button>
+              </button> }
               {/* <button
                 className="absolute bottom-4 left-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9 "
                 onClick={handleAddFeedback}

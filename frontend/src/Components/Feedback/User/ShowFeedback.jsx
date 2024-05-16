@@ -48,7 +48,7 @@ const ShowFeedback = () => {
   }, [searchInput, filteredFeedbacks]);
 
   const handleAddsFeedback = () => {
-    navigate("/fbk/addservice");
+    navigate("/fbk/selectopt");
   };
 
   const handleDownloadPDF = () => {
@@ -85,7 +85,7 @@ const ShowFeedback = () => {
   };
 
   const handleAddFeedback = () => {
-    navigate("/fbk/coachfeedback");
+    navigate("/fbk/selectopt");
   };
 
   return (

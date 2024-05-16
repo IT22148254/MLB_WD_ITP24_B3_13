@@ -85,8 +85,43 @@ const CoachFeedbackApproval = () => {
   };
 
   const handleCreateReport = () => {
-    // Your report generation logic
-  };
+    // Initialize the PDF document
+    const doc = new jsPDF();
+
+    // Add title and header to the PDF document
+    const companyName = "WaveSync";
+    const today = new Date();
+    const date = today.toLocaleDateString();
+    const time = today.toLocaleTimeString();
+
+    doc.setFontSize(16);
+    doc.text(`${companyName} \nCoach Feedback Report \nGenerated on: ${date} at ${time}`, 14, 22);
+
+    // Define the table columns, including the new Coach column
+    const columns = [
+      { header: "Customer Name", dataKey: "UserName" },
+      { header: "Email", dataKey: "Email" },
+      { header: "Rating", dataKey: "Rating" },
+      { header: "Feedback", dataKey: "Comment" },
+      { header: "Coach", dataKey: "Coach" },
+    ];
+
+    // Define the table rows
+    const rows = filteredFeedbacks.map((feedback) => ({
+      UserName: feedback.UserName,
+      Email: feedback.Email,
+      Rating: feedback.Rating,
+      Comment: feedback.Comment,
+      Coach: feedback.Coach,
+    }));
+
+    // Add the table to the PDF document
+    doc.autoTable({ startY: 30, columns, body: rows });
+
+    // Save the PDF file
+    doc.save("CoachFeedbackReport.pdf");
+};
+
 
   const handleAddFeedback = () => {
     navigate("/fbk/coachfeedback");
@@ -243,12 +278,12 @@ const CoachFeedbackApproval = () => {
               ))}
           </div>
           {/* Button to generate feedback report */}
-          <button
+          { <button
             className=" absolute bottom-4 right-1/4 transform -translate-x-1/2 bg-blue-500 py-3 px-8 rounded-lg text-lg font-bold hover:bg-blue-700 transition duration-300 mb-9"
             onClick={handleCreateReport}
           >
             Generate Feedback Report
-          </button>
+          </button> }
 
           {/* Button to add feedback */}
           {/* <button
