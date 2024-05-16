@@ -96,8 +96,17 @@ const CreatedPromosTable = () => {
 
   const handleCreateReport = () => {
     const doc = new jsPDF();
-    doc.setFontSize(16);
-    doc.text("Promo Package Report", 14, 22);
+    const companyName = "WaveSync";
+    const today = new Date()
+
+    const date = today.toLocaleDateString()
+    const tm = today.toLocaleTimeString()
+
+    doc.text(
+    `${companyName} \nPackage report generated on ${date} at ${tm} `,
+      14,
+      20
+    );
     const columns = [
       { header: "Package Name", dataKey: "Name" },
       { header: "Description", dataKey: "Discription" },
@@ -110,7 +119,12 @@ const CreatedPromosTable = () => {
       Price: promo.Price,
       Duration: promo.Duration,
     }));
-    doc.autoTable(columns, rows);
+    doc.autoTable({startY:50,columns,body:promos.map((promo) => [
+      promo.Name,
+      promo.Discription,
+      promo.Price,
+      promo.Duration,
+    ]),});
     doc.save("Promo Package report.pdf");
     // Create report functionality remains the same
   };
