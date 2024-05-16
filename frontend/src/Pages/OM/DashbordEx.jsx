@@ -5,11 +5,11 @@ import TimeSlotImage from "..//../Images/bg123.jpg";
 
 import buttonImage1 from "../../Images/sm.png";
 import buttonImage2 from "../../Images/fm.png";
-import buttonImage3 from "../../Images/mm.png";
+import buttonImage3 from "../../Images/ic.png";
 import buttonImage4 from "../../Images/ppm.png";
 import buttonImage5 from "../../Images/ssm.png";
 import buttonImage6 from "../../Images/om.png";
-import buttonImage7 from "../../Images/sm.png";
+import buttonImage7 from "../../Images/ed.png";
 import buttonImage8 from "../../Images/spm.png";
 
 
@@ -20,7 +20,7 @@ const SceduleTimeSlot = () => {
       <div className="relative flex items-center justify-center w-2/3 h-full mx-auto">
         <img src={TimeSlotImage} alt="Time Slot" />
         <section>
-  <div className="absolute top-0 bottom-[560px] right-0 flex items-center left-[660px]">
+  <div className="absolute top-0 bottom-[570px] right-0 flex items-center left-[660px]">
     <button className="flex flex-col items-center ">
       <img src={buttonImage1} alt="button" className="h-[80px] w-[80px] " />
       <p className="absolute text-base  bottom-[80px] left-0 right-[650px] justify-center text-white font-normal" style={{ fontFamily: 'poppins' }}>
@@ -29,28 +29,63 @@ const SceduleTimeSlot = () => {
     </button>
   </div>
 
-  <div className="absolute top-0 bottom-[220px] right-0 flex items-center left-[640px]">
+  <div className="absolute top-0 bottom-[230px] right-0 flex items-center left-[640px]">
     <button className="flex flex-col items-center">
-      <img src={buttonImage2} alt="button" className="h-[120px] w-[120px]" />
+      <img src={buttonImage2} alt="button" className="h-[100px] w-[100px]" />
       <p className="absolute text-base  bottom-[242px] left-0 right-[650px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
         Feedback Management
       </p>
     </button>
   </div>
 
-  <div className="absolute top-[500px] bottom-[1px] right-0 flex  left-[640px]">
+  <div className="absolute top-[480px] bottom-[1px] right-0 flex  left-[640px]">
     <button className="flex flex-col items-center">
-      <img src={buttonImage3} alt="button" className="h-[120px] w-[120px]" />
-      <p className="absolute text-base  bottom-[280px] left-0 right-[700px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
+      <img src={buttonImage3} alt="button" className="h-[100px] w-[100px]" />
+      <p className="absolute text-base  bottom-[300px] left-0 right-[700px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
+        Schedule Management</p>
+    </button>
+  </div>
+
+  <div className="absolute top-[655px] bottom-[1px] right-0 flex  left-[640px]">
+    <button className="flex flex-col items-center">
+      <img src={buttonImage4} alt="button" className="h-[100px] w-[100px]" />
+      <p className="absolute text-base  bottom-[120px] left-0 right-[550px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
+        Package Management
+      </p>
+    </button>
+  </div>
+  
+  <div className="absolute top-0 bottom-[570px] right-0 flex items-center left-[1000px]">
+    <button className="flex flex-col items-center ">
+      <img src={buttonImage5} alt="button" className="h-[100px] w-[100px] " />
+      <p className="absolute text-base  bottom-[80px] left-0 right-[650px] justify-center text-white font-normal" style={{ fontFamily: 'poppins' }}>
+        Supply Manager
+      </p>
+    </button>
+  </div>
+
+  <div className="absolute top-0 bottom-[230px] right-0 flex items-center left-[1000px]">
+    <button className="flex flex-col items-center">
+      <img src={buttonImage6} alt="button" className="h-[100px] w-[100px]" />
+      <p className="absolute text-base  bottom-[242px] left-0 right-[650px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
+        Operation Manager
+      </p>
+    </button>
+  </div>
+
+  <div className="absolute top-[480px] bottom-[1px] right-0 flex  left-[1000px]">
+    <button className="flex flex-col items-center">
+      <img src={buttonImage7} alt="button" className="h-[100px] w-[100px]" />
+      <p className="absolute text-base  bottom-[300px] left-0 right-[700px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
         Employee Management</p>
     </button>
   </div>
 
-  <div className="absolute top-[670px] bottom-[1px] right-0 flex  left-[640px]">
+  <div className="absolute top-[655px] bottom-[1px] right-0 flex  left-[1000px]">
     <button className="flex flex-col items-center">
-      <img src={buttonImage4} alt="button" className="h-[120px] w-[120px]" />
-      <p className="absolute text-base  bottom-[100px] left-0 right-[700px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
-        Promo Package Request
+      <img src={buttonImage8} alt="button" className="h-[100px] w-[100px]" />
+      <p className="absolute text-base  bottom-[120px] left-0 right-[550px] text-white font-normal" style={{ fontFamily: 'poppins' }}>
+        Payement Management
       </p>
     </button>
   </div>
