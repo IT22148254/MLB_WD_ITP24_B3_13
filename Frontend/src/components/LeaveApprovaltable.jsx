@@ -24,12 +24,14 @@ const Leave = () => {
               return {
                 ...leave,
                 email: employeeData.email || "", // Add employee email to leave data
+                emailSent: false, // Initial state for emailSent
               };
             } catch (error) {
               console.error("Error fetching employee data:", error);
               return {
                 ...leave,
                 email: "", // If there's an error, set email to an empty string
+                emailSent: false,
               };
             }
           })
@@ -157,7 +159,7 @@ const Leave = () => {
       { header: "Send Email", dataKey: "sendEmail" }, // New column for send email button
     ];
 
-    const rows = leaves.map((leave) => ({
+    const rows = leaves.map((leave, index) => ({
       employeeName: leave.employeeName,
       email: leave.email,
       startDate: new Date(leave.startDate).toLocaleDateString(),
@@ -173,10 +175,11 @@ const Leave = () => {
       ),
       sendEmail: (
         <button
-          className="border-2 bg-green-600 border-black rounded-full p-1 px-4 text-white font-bold"
-          onClick={() => handleSendEmail(leave.email, leave.status)} // Pass email and status to handleSendEmail
+          className={leave.emailSent ? "border-2 bg-gray-400 border-black rounded-full p-1 px-4 text-white font-bold" : "border-2 bg-green-600 border-black rounded-full p-1 px-4 text-white font-bold"}
+          onClick={() => handleSendEmail(leave.email, leave.status, index)}
+          disabled={leave.emailSent}
         >
-          Send Email
+          {leave.emailSent ? "Email Sent" : "Send Email"}
         </button>
       ),
     }));
@@ -185,25 +188,43 @@ const Leave = () => {
     doc.save("Leave Report.pdf");
   };
 
-  const handleSendEmail = async (email, status) => {
-    // Send email using emailjs-com
-    emailjs.send('service_b27z6pc', 'template_9y1j719', { from_status: status, from_email: email }, 'zywfAzWm1IL9W5-Mp')
-      .then((result) => {
-        console.log("Email sent successfully:", result.text);
+  const handleSendEmail = async (email, status, index) => {
+    try {
+      // Send email using emailjs-com
+      const response = await emailjs.send(
+        'service_b27z6pc',
+        'template_9y1j719',
+        { from_status: status, from_email: email },
+        'zywfAzWm1IL9W5-Mp'
+      );
+
+      if (response.status === 200) {
+        console.log("Email sent successfully:", response.text);
         Swal.fire({
           title: "Success!",
           text: "Email sent successfully.",
           icon: "success",
         });
-      })
-      .catch((error) => {
-        console.error("Error sending email:", error);
+        // Update the specific button state
+        const updatedLeaves = [...leaves];
+        updatedLeaves[index].emailSent = true;
+        setLeaves(updatedLeaves);
+      } else {
+        console.error("Error sending email:", response.text);
         Swal.fire({
           title: "Error!",
           text: "Failed to send email.",
           icon: "error",
         });
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to send email.",
+        icon: "error",
       });
+    }
   };
 
   const bgStyle = {
@@ -281,10 +302,11 @@ const Leave = () => {
                 </div>
                 <div className="border-2 border-black p-2">
                   <button
-                    className="border-2 bg-green-600 border-black rounded-full p-1 px-4 text-white font-bold"
-                    onClick={() => handleSendEmail(leave.email, leave.status)}
+                    className={leave.emailSent ? "border-2 bg-gray-400 border-black rounded-full p-1 px-4 text-white font-bold" : "border-2 bg-green-600 border-black rounded-full p-1 px-4 text-white font-bold"}
+                    onClick={() => handleSendEmail(leave.email, leave.status, index)}
+                    disabled={leave.emailSent}
                   >
-                    Send Email
+                    {leave.emailSent ? "Email Sent" : "Send Email"}
                   </button>
                 </div> {/* New button for sending email */}
               </div>
