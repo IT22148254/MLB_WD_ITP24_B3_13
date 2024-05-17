@@ -151,13 +151,13 @@ export default function Add() {
                 
                 
         <label htmlFor="exampleFormControlInput1" className="form-label">Contact Number</label>
-            <input type="number" className={`form-control /*${inputdata.contact.length === 10 ? "is-valid" : "is-invalid"}*/`}
+            <input type="number" className={`form-control ${inputdata.contact.length === 10 ? "is-valid" : "is-invalid"}`}
             id="exampleFormControlInput1"
             placeholder="Enter Mobile Number"
             onChange={setstud} 
             
             onKeyPress={(event) => {
-                if (event.target.value.length >= 1000) {
+                if (event.target.value.length >= 10) {
                         event.preventDefault();
                      }
              }}
