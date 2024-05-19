@@ -51,8 +51,9 @@ const EmployeeRegisterForm = () => {
 
   const handleDobChange = (value) => {
     const today = new Date();
-    if (value > today) {
-      setDobError("Date of birth cannot be a future date");
+    const eighteenYearsAgo = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    if (value > eighteenYearsAgo) {
+      setDobError("Date of birth cannot be a 18 date");
     } else {
       setDobError("");
     }

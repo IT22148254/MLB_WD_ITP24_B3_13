@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-
+import React, { useState, useEffect } from  "react";    
+   
 const Calculator = () => {
   const [employeeName, setEmployeeName] = useState("");
   const [employeeNameError, setEmployeeNameError] = useState("");
@@ -106,7 +106,7 @@ const Calculator = () => {
       const otHoursNum = parseFloat(otHours);
       const monthlyBonusNum = parseFloat(monthlyBonus);
 
-      const epfNum = basicSalaryNum * 0.12;
+      const epfNum = basicSalaryNum * 0.20;
       const etfNum = basicSalaryNum * 0.03;
       const otSalaryNum = hourlyRateNum * otHoursNum;
       const totalSalaryNum =
